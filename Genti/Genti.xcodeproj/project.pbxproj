@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
-		C073BD492BCBE5FA00130BAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* ContentView.swift */; };
+		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
 		C073BD4E2BCBE5FC00130BAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4D2BCBE5FC00130BAD /* Preview Assets.xcassets */; };
 		C073BD582BCBE5FC00130BAD /* GentiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD572BCBE5FC00130BAD /* GentiTests.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
-		C073BD482BCBE5FA00130BAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C073BD4D2BCBE5FC00130BAD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C073BD532BCBE5FC00130BAD /* GentiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GentiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				C073BD462BCBE5FA00130BAD /* GentiApp.swift */,
-				C073BD482BCBE5FA00130BAD /* ContentView.swift */,
+				C073BD482BCBE5FA00130BAD /* LoginView.swift */,
 				C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */,
 				C073BD4C2BCBE5FC00130BAD /* Preview Content */,
 			);
@@ -257,7 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C073BD492BCBE5FA00130BAD /* ContentView.swift in Sources */,
+				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
