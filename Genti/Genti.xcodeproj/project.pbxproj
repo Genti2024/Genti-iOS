@@ -14,6 +14,9 @@
 		C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD0C2BD0F94F00FAADC1 /* ProfileView.swift */; };
 		C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */; };
 		C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */; };
+		C02BFD152BD10FF400FAADC1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */; };
+		C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */; };
+		C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD192BD1106200FAADC1 /* Constants.swift */; };
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
 		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
@@ -48,6 +51,8 @@
 		C02BFD0C2BD0F94F00FAADC1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstGeneratorView.swift; sourceTree = "<group>"; };
 		C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorView.swift; sourceTree = "<group>"; };
+		C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
+		C02BFD192BD1106200FAADC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -65,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C02BFD152BD10FF400FAADC1 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +166,15 @@
 			path = Generator;
 			sourceTree = "<group>";
 		};
+		C02BFD162BD1101600FAADC1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */,
+				C02BFD192BD1106200FAADC1 /* Constants.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		C073BD3A2BCBE5FA00130BAD = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +198,7 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C02BFD162BD1101600FAADC1 /* Shared */,
 				C02BFD0E2BD0F95C00FAADC1 /* Generator */,
 				C02BFD0B2BD0F94200FAADC1 /* Profile */,
 				C02BFD082BD0F91100FAADC1 /* Home */,
@@ -236,6 +252,9 @@
 			dependencies = (
 			);
 			name = Genti;
+			packageProductDependencies = (
+				C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */,
+			);
 			productName = Genti;
 			productReference = C073BD432BCBE5FA00130BAD /* Genti.app */;
 			productType = "com.apple.product-type.application";
@@ -308,6 +327,9 @@
 				Base,
 			);
 			mainGroup = C073BD3A2BCBE5FA00130BAD;
+			packageReferences = (
+				C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = C073BD442BCBE5FA00130BAD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -351,8 +373,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
+				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
+				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
 				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
@@ -447,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -504,7 +528,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -530,6 +554,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -537,9 +562,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimscastle.Genti;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -559,6 +588,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,9 +596,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimscastle.Genti;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -688,6 +722,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C073BD3B2BCBE5FA00130BAD /* Project object */;
 }
