@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFCFC2BD0EAB000FAADC1 /* GentiTabView.swift */; };
+		C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD012BD0F71A00FAADC1 /* CustomTabView.swift */; };
+		C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD042BD0F7B500FAADC1 /* Tab.swift */; };
+		C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD092BD0F93700FAADC1 /* HomeView.swift */; };
+		C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD0C2BD0F94F00FAADC1 /* ProfileView.swift */; };
+		C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */; };
+		C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */; };
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
 		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
@@ -34,6 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C02BFCFC2BD0EAB000FAADC1 /* GentiTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiTabView.swift; sourceTree = "<group>"; };
+		C02BFD012BD0F71A00FAADC1 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		C02BFD042BD0F7B500FAADC1 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		C02BFD092BD0F93700FAADC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C02BFD0C2BD0F94F00FAADC1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstGeneratorView.swift; sourceTree = "<group>"; };
+		C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorView.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -71,6 +85,81 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C02BFCFE2BD0F67700FAADC1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C073BD482BCBE5FA00130BAD /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		C02BFCFF2BD0F70000FAADC1 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD032BD0F7A400FAADC1 /* Model */,
+				C02BFD002BD0F71100FAADC1 /* Components */,
+				C02BFCFC2BD0EAB000FAADC1 /* GentiTabView.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		C02BFD002BD0F71100FAADC1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD012BD0F71A00FAADC1 /* CustomTabView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C02BFD032BD0F7A400FAADC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD042BD0F7B500FAADC1 /* Tab.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C02BFD062BD0F7CF00FAADC1 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		C02BFD072BD0F7D800FAADC1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C073BD462BCBE5FA00130BAD /* GentiApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C02BFD082BD0F91100FAADC1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD092BD0F93700FAADC1 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C02BFD0B2BD0F94200FAADC1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD0C2BD0F94F00FAADC1 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		C02BFD0E2BD0F95C00FAADC1 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
+				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
 		C073BD3A2BCBE5FA00130BAD = {
 			isa = PBXGroup;
 			children = (
@@ -94,9 +183,13 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
-				C073BD462BCBE5FA00130BAD /* GentiApp.swift */,
-				C073BD482BCBE5FA00130BAD /* LoginView.swift */,
-				C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */,
+				C02BFD0E2BD0F95C00FAADC1 /* Generator */,
+				C02BFD0B2BD0F94200FAADC1 /* Profile */,
+				C02BFD082BD0F91100FAADC1 /* Home */,
+				C02BFD072BD0F7D800FAADC1 /* App */,
+				C02BFD062BD0F7CF00FAADC1 /* DesignSystem */,
+				C02BFCFF2BD0F70000FAADC1 /* Tab */,
+				C02BFCFE2BD0F67700FAADC1 /* Login */,
 				C073BD4C2BCBE5FC00130BAD /* Preview Content */,
 			);
 			path = Genti;
@@ -258,7 +351,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
+				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
+				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
+				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
+				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
+				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
+				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
+				C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

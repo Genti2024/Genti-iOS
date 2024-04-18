@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Genti_LOGO.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

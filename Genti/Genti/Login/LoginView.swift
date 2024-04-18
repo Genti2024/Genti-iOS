@@ -32,7 +32,7 @@ struct LoginView: View {
                         
                     } //:VSTACK
                     
-                    VStack(alignment: .center, spacing: 22) {
+                    VStack(alignment: .center, spacing: 10) {
                         Image("Kakao_Login")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -49,7 +49,6 @@ struct LoginView: View {
                     y: geometry.size.height*0.58
                 )
             })
-
         } //:ZSTACK
     }
 }
