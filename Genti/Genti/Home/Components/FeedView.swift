@@ -38,14 +38,6 @@ struct FeedView: View {
         .animation(.bouncy(duration: 0.2), value: isLike)
     }
     
-    func height(for text: String, in size: CGSize) -> CGFloat {
-        let font = UIFont.systemFont(ofSize: 14)
-        let attributedText = NSAttributedString(string: text, attributes: [.font: font])
-        let constraintRect = CGSize(width: size.width, height: .greatestFiniteMagnitude)
-        let boundingBox = attributedText.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
-        return boundingBox.height
-    }
-    
     private var feedHeader: some View {
         HStack(spacing: 14) {
             ImageLoaderView(urlString: profileImage)
@@ -73,11 +65,11 @@ struct FeedView: View {
             Text(description)
                 .font(.system(size: 14))
                 .readingFrame { frame in
-                    let totalHeight = self.height(for: description, in: frame.size)
-                    let oneHeight = self.height(for: "1", in: frame.size)
-                    if totalHeight > (oneHeight * 2) {
-                        self.isOver = true
-                    }
+                    self.isOver = isOver(
+                        for: description,
+                        in: frame.size,
+                        lines: 2
+                    )
                 }
                 .lineLimit(isExpaned ? nil : 2)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,6 +116,26 @@ struct FeedView: View {
     private func tap() {
         isLike.toggle()
         likeCount += isLike ? 1 : -1
+    }
+}
+
+private extension FeedView {
+    func isOver(for text: String, in size: CGSize, lines: Int) -> Bool {
+        let totalHeight = self.height(for: text, in: size)
+        let oneHeight = self.height(for: "1", in: size)
+        if totalHeight > (oneHeight * CGFloat(lines)) {
+            return true
+        }
+        return false
+    }
+    
+    
+    func height(for text: String, in size: CGSize) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: 14)
+        let attributedText = NSAttributedString(string: text, attributes: [.font: font])
+        let constraintRect = CGSize(width: size.width, height: .greatestFiniteMagnitude)
+        let boundingBox = attributedText.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        return boundingBox.height
     }
 }
 
