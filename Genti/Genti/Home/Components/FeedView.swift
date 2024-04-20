@@ -12,7 +12,7 @@ struct FeedView: View {
     var profileImage: String = Constants.randomImage
     var userName: String = "i_am_GenTi"
     var mainImage: String = "SampleImage32"
-    var description: String = Constants.text(length: 50)
+    var description: String = Constants.text(length: 55)
     
     @State var likeCount: Int = 123
     @State private var isLike: Bool = false
@@ -45,6 +45,7 @@ struct FeedView: View {
                 .clipShape(Circle())
             
             Text("\(userName)")
+                .pretendard(.small)
         } //:HSTACK
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 12)
@@ -52,7 +53,7 @@ struct FeedView: View {
     
     private func isOverButton() -> some View {
         Text("더보기")
-            .font(.system(size: 14))
+            .pretendard(.small)
             .bold()
             .foregroundStyle(.gentiGreen)
             .frame(width: 57, alignment: .trailing)
@@ -85,11 +86,11 @@ struct FeedView: View {
                 }
             
             Text("\(likeCount)명이 좋아합니다.")
-                .bold()
+                .pretendard(.number)
                 .font(.caption)
             
             Text(description)
-                .font(.system(size: 14))
+                .pretendard(.small)
                 .readingFrame { frame in
                     self.isOver = isOver(
                         for: description,
@@ -135,7 +136,7 @@ private extension FeedView {
     
     
     func height(for text: String, in size: CGSize) -> CGFloat {
-        let font = UIFont.systemFont(ofSize: 14)
+        let font = UIFont(name: "Pretendard-Medium", size: 14)!
         let attributedText = NSAttributedString(string: text, attributes: [.font: font])
         let constraintRect = CGSize(width: size.width, height: .greatestFiniteMagnitude)
         let boundingBox = attributedText.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
@@ -152,7 +153,7 @@ private extension FeedView {
         ScrollView {
             VStack(spacing: 10) {
                 FeedView()
-                FeedView(description: Constants.text(length: 20))
+                FeedView(description: Constants.text(length: 100))
                 FeedView(mainImage: "SampleImage23")
             }
         }

@@ -20,6 +20,13 @@
 		C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */; };
 		C02BFD212BD1DB8600FAADC1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD202BD1DB8600FAADC1 /* FeedView.swift */; };
 		C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67B92BD374BA004DD995 /* Feed.swift */; };
+		C02D67C12BD37C74004DD995 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67BC2BD37C73004DD995 /* Pretendard-Light.otf */; };
+		C02D67C22BD37C74004DD995 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67BD2BD37C74004DD995 /* Pretendard-SemiBold.otf */; };
+		C02D67C32BD37C74004DD995 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67BE2BD37C74004DD995 /* Pretendard-Regular.otf */; };
+		C02D67C42BD37C74004DD995 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67BF2BD37C74004DD995 /* Pretendard-Medium.otf */; };
+		C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67C02BD37C74004DD995 /* Pretendard-Bold.otf */; };
+		C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67C62BD37CB8004DD995 /* Font+.swift */; };
+		C02D67CA2BD381FC004DD995 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67C92BD381FC004DD995 /* Text+.swift */; };
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
 		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
@@ -59,6 +66,14 @@
 		C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameLeader.swift; sourceTree = "<group>"; };
 		C02BFD202BD1DB8600FAADC1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		C02D67B92BD374BA004DD995 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		C02D67BC2BD37C73004DD995 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		C02D67BD2BD37C74004DD995 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		C02D67BE2BD37C74004DD995 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		C02D67BF2BD37C74004DD995 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		C02D67C02BD37C74004DD995 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		C02D67C62BD37CB8004DD995 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		C02D67C82BD38038004DD995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C02D67C92BD381FC004DD995 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -134,6 +149,9 @@
 		C02BFD062BD0F7CF00FAADC1 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				C02D67C62BD37CB8004DD995 /* Font+.swift */,
+				C02D67C92BD381FC004DD995 /* Text+.swift */,
+				C02D67BB2BD37C68004DD995 /* Fonts */,
 				C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */,
 			);
 			path = DesignSystem;
@@ -200,6 +218,18 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C02D67BB2BD37C68004DD995 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C02D67C02BD37C74004DD995 /* Pretendard-Bold.otf */,
+				C02D67BC2BD37C73004DD995 /* Pretendard-Light.otf */,
+				C02D67BF2BD37C74004DD995 /* Pretendard-Medium.otf */,
+				C02D67BE2BD37C74004DD995 /* Pretendard-Regular.otf */,
+				C02D67BD2BD37C74004DD995 /* Pretendard-SemiBold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C073BD3A2BCBE5FA00130BAD = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +253,7 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C02D67C82BD38038004DD995 /* Info.plist */,
 				C02BFD162BD1101600FAADC1 /* Shared */,
 				C02BFD0E2BD0F95C00FAADC1 /* Generator */,
 				C02BFD0B2BD0F94200FAADC1 /* Profile */,
@@ -373,6 +404,11 @@
 			files = (
 				C073BD4E2BCBE5FC00130BAD /* Preview Assets.xcassets in Resources */,
 				C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */,
+				C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */,
+				C02D67C32BD37C74004DD995 /* Pretendard-Regular.otf in Resources */,
+				C02D67C12BD37C74004DD995 /* Pretendard-Light.otf in Resources */,
+				C02D67C22BD37C74004DD995 /* Pretendard-SemiBold.otf in Resources */,
+				C02D67C42BD37C74004DD995 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +439,8 @@
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */,
+				C02D67CA2BD381FC004DD995 /* Text+.swift in Sources */,
+				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
 				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
@@ -577,6 +615,7 @@
 				DEVELOPMENT_TEAM = Z225784MRD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Genti/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -611,6 +650,7 @@
 				DEVELOPMENT_TEAM = Z225784MRD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Genti/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
