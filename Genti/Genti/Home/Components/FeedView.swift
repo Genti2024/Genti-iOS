@@ -23,10 +23,10 @@ struct FeedView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            feedHeader
+            feedHeaderView()
             /// 추후 url로 수정
-            feedImageView
-            feedDetail
+            feedImageView()
+            feedDetailView()
             
         } //:VSTACK
         .padding(.vertical, 12)
@@ -38,7 +38,7 @@ struct FeedView: View {
         .animation(.bouncy(duration: 0.2), value: isLike)
     }
     
-    private var feedHeader: some View {
+    private func feedHeaderView() -> some View {
         HStack(spacing: 14) {
             ImageLoaderView(urlString: profileImage)
                 .frame(width: 30, height: 30)
@@ -50,7 +50,7 @@ struct FeedView: View {
         .padding(.horizontal, 12)
     }
     
-    private var feedDetail: some View {
+    private func feedDetailView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
             
             Image(isLike ? "Like_fill" : "Like_empty")
@@ -104,7 +104,7 @@ struct FeedView: View {
         .padding(.horizontal, 12)
     }
     
-    private var feedImageView: some View {
+    private func feedImageView() -> some View {
         Image(mainImage)
             .resizable()
             .aspectRatio(contentMode: .fit)

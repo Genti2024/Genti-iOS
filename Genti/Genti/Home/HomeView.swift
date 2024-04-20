@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    var feeds: [Feed] = Feed.mocks
     @State private var scrollViewOffset: CGFloat  = 0
     var body: some View {
         ZStack {
@@ -17,8 +18,8 @@ struct HomeView: View {
             }
             ScrollView {
                 VStack(spacing: 18) {
-                    header
-                    feed
+                    headerView()
+                    feedView()
                 } //:VSTACK
                 .padding(.bottom, 120)
                 .background(.backgroundWhite)
@@ -26,26 +27,23 @@ struct HomeView: View {
             .scrollIndicators(.hidden)
             
             if scrollViewOffset < 20 {
-                uploadButton
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                    .padding(.top, 80)
-                    .padding(.trailing, 20)
+                uploadButton()
                     .transition(AnyTransition(.move(edge: .top).combined(with: .opacity)))
             }
         }
         .ignoresSafeArea()
-        .safeAreaInset(edge: .top) {
+        .overlay(alignment: .top) {
             if scrollViewOffset < 20 {
                 Rectangle()
                     .frame(height: 0)
                     .background(.backgroundWhite)
+                    .transition(.fade)
             }
         }
         .animation(.snappy, value: scrollViewOffset)
-
     }
     
-    private var header: some View {
+    private func headerView() -> some View {
         ZStack(alignment: .bottom) {
             Image("Home_navigationBG")
             HStack {
@@ -54,7 +52,7 @@ struct HomeView: View {
                 Image("Upload")
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        print("업로드버튼이 눌림")
+                        print("업로드버튼 눌림")
                     }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -66,16 +64,23 @@ struct HomeView: View {
         }
     }
     
-    private var feed: some View {
+    private func feedView() -> some View {
         LazyVStack(spacing: 18) {
-            ForEach(0..<10) { _ in
-                FeedView()
+            ForEach(feeds) {
+                FeedView(
+                    profileImage: $0.profileImage,
+                    userName: $0.userName,
+                    mainImage: $0.mainImage,
+                    description: $0.description,
+                    likeCount: Int.random(in: 1...100)) {
+                        
+                    }
                     .padding(.horizontal, 16)
             }
         }
     }
     
-    private var uploadButton: some View {
+    private func uploadButton() -> some View {
         Image("Upload_Stroke")
             .frame(width: 60, height: 60)
             .background(.ultraThinMaterial)
@@ -83,6 +88,9 @@ struct HomeView: View {
             .onTapGesture {
                 print("업로드버튼 눌림")
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(.top, 80)
+            .padding(.trailing, 20)
     }
 }
 
