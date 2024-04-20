@@ -50,6 +50,32 @@ struct FeedView: View {
         .padding(.horizontal, 12)
     }
     
+    private func isOverButton() -> some View {
+        Text("더보기")
+            .font(.system(size: 14))
+            .bold()
+            .foregroundStyle(.gentiGreen)
+            .frame(width: 57, alignment: .trailing)
+            .background(
+                LinearGradient(
+                    colors: [
+                        .backgroundWhite.opacity(0),
+                        .backgroundWhite.opacity(1),
+                        .backgroundWhite.opacity(1),
+                        .backgroundWhite.opacity(1),
+                        .backgroundWhite.opacity(1)
+                    ],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                
+            )
+            .onTapGesture {
+                isExpaned.toggle()
+            }
+            .opacity(isExpaned ? 0 : 1)
+    }
+    
     private func feedDetailView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
             
@@ -75,29 +101,7 @@ struct FeedView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .overlay(alignment: .bottomTrailing) {
                     if isOver {
-                        Text("더보기")
-                            .font(.system(size: 14))
-                            .bold()
-                            .foregroundStyle(.gentiGreen)
-                            .frame(width: 57, alignment: .trailing)
-                            .background(
-                                LinearGradient(
-                                    colors: [
-                                        .backgroundWhite.opacity(0),
-                                        .backgroundWhite.opacity(1),
-                                        .backgroundWhite.opacity(1),
-                                        .backgroundWhite.opacity(1),
-                                        .backgroundWhite.opacity(1)
-                                    ],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                                
-                            )
-                            .onTapGesture {
-                                isExpaned.toggle()
-                            }
-                            .opacity(isExpaned ? 0 : 1)
+                        isOverButton()
                     }
                 }
         } //:VSTACK
