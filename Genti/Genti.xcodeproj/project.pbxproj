@@ -17,6 +17,9 @@
 		C02BFD152BD10FF400FAADC1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */; };
 		C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */; };
 		C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD192BD1106200FAADC1 /* Constants.swift */; };
+		C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */; };
+		C02BFD212BD1DB8600FAADC1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD202BD1DB8600FAADC1 /* FeedView.swift */; };
+		C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67B92BD374BA004DD995 /* Feed.swift */; };
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
 		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
@@ -53,6 +56,9 @@
 		C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorView.swift; sourceTree = "<group>"; };
 		C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		C02BFD192BD1106200FAADC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameLeader.swift; sourceTree = "<group>"; };
+		C02BFD202BD1DB8600FAADC1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		C02D67B92BD374BA004DD995 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -144,6 +150,8 @@
 		C02BFD082BD0F91100FAADC1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C02D67B82BD374B2004DD995 /* Model */,
+				C02BFD1F2BD1DB7C00FAADC1 /* Components */,
 				C02BFD092BD0F93700FAADC1 /* HomeView.swift */,
 			);
 			path = Home;
@@ -171,8 +179,25 @@
 			children = (
 				C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */,
 				C02BFD192BD1106200FAADC1 /* Constants.swift */,
+				C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		C02BFD1F2BD1DB7C00FAADC1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C02BFD202BD1DB8600FAADC1 /* FeedView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C02D67B82BD374B2004DD995 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C02D67B92BD374BA004DD995 /* Feed.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C073BD3A2BCBE5FA00130BAD = {
@@ -375,12 +400,15 @@
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
+				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
+				C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
 				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
+				C02BFD212BD1DB8600FAADC1 /* FeedView.swift in Sources */,
 				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
 				C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */,
 			);
