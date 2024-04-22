@@ -34,6 +34,9 @@
 		C073BD582BCBE5FC00130BAD /* GentiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD572BCBE5FC00130BAD /* GentiTests.swift */; };
 		C073BD622BCBE5FC00130BAD /* GentiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD612BCBE5FC00130BAD /* GentiUITests.swift */; };
 		C073BD642BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */; };
+		C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2412BD617630052D59F /* PhotoAngle.swift */; };
+		C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2432BD617840052D59F /* PhotoFrame.swift */; };
+		C086A2462BD6199D0052D59F /* ExampleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2452BD6199D0052D59F /* ExampleImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,9 @@
 		C073BD5D2BCBE5FC00130BAD /* GentiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GentiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD612BCBE5FC00130BAD /* GentiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiUITests.swift; sourceTree = "<group>"; };
 		C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C086A2412BD617630052D59F /* PhotoAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAngle.swift; sourceTree = "<group>"; };
+		C086A2432BD617840052D59F /* PhotoFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrame.swift; sourceTree = "<group>"; };
+		C086A2452BD6199D0052D59F /* ExampleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +192,7 @@
 		C02BFD0E2BD0F95C00FAADC1 /* Generator */ = {
 			isa = PBXGroup;
 			children = (
+				C086A2402BD617550052D59F /* Models */,
 				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
 				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
 			);
@@ -290,6 +297,16 @@
 				C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */,
 			);
 			path = GentiUITests;
+			sourceTree = "<group>";
+		};
+		C086A2402BD617550052D59F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C086A2412BD617630052D59F /* PhotoAngle.swift */,
+				C086A2432BD617840052D59F /* PhotoFrame.swift */,
+				C086A2452BD6199D0052D59F /* ExampleImage.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,13 +455,16 @@
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
+				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
 				C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */,
 				C02D67CA2BD381FC004DD995 /* Text+.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
+				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
 				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
+				C086A2462BD6199D0052D59F /* ExampleImage.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
 				C02BFD212BD1DB8600FAADC1 /* FeedView.swift in Sources */,
 				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
