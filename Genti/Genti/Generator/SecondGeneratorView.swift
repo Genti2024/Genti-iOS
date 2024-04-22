@@ -48,6 +48,7 @@ struct SecondGeneratorView: View {
                     .padding(.top, 43)
             } //:VSTACK
         } //:ZSTACK
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func navigationView() -> some View {
@@ -89,6 +90,7 @@ struct SecondGeneratorView: View {
     private func angleSelectView() -> some View {
         VStack(spacing: 13) {
             Text("카메라 앵글을 골라주세요📷")
+                .foregroundStyle(.black)
                 .pretendard(.normal)
             
             VStack(spacing: 7) {
@@ -131,6 +133,7 @@ struct SecondGeneratorView: View {
         VStack(spacing: 13) {
             Text("프레임을 골라주세요")
                 .pretendard(.normal)
+                .foregroundStyle(.black)
             
             VStack(spacing: 7) {
                 HStack(spacing: 9) {
