@@ -8,14 +8,10 @@
 import SwiftUI
 
 struct FirstGeneratorView: View {
+    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     
-    @FocusState private var isFocused: Bool
     var onXmarkPressed: (() -> Void)? = nil
-    
-    @State private var photoDescription: String = ""
-    @State private var referenceImage: Image? = nil
-    
-    @State private var showPhotoPicker: Bool = false
+    @FocusState var isFocused: Bool
     
     var body: some View {
         NavigationStack {
@@ -28,7 +24,7 @@ struct FirstGeneratorView: View {
                     GeneratorNavigationView()
                         .padding(.horizontal, 24)
                     
-                    GeneratorHeaderView(step: 2)
+                    GeneratorHeaderView(step: 1)
                         .padding(.top, 10)
                 
                     inpuTextView()
@@ -50,10 +46,11 @@ struct FirstGeneratorView: View {
             .onTapGesture {
                 isFocused = false
             }
-            .fullScreenCover(isPresented: $showPhotoPicker) {
+            .fullScreenCover(isPresented: $viewModel.showPhotoPicker) {
                 Text("포토피커")
             }
         }
+        .environmentObject(viewModel)
     }
     
     private func nextButton() -> some View {
@@ -62,14 +59,14 @@ struct FirstGeneratorView: View {
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
-                .foregroundStyle(!photoDescription.isEmpty ? .white : .black)
+                .foregroundStyle(viewModel.descriptionIsEmpty ? .white : .black)
                 .frame(height: 50)
                 .frame(maxWidth: .infinity)
-                .background(!photoDescription.isEmpty ? .green1 : .gray5)
+                .background(viewModel.descriptionIsEmpty ? .green1 : .gray5)
                 .clipShape(.rect(cornerRadius: 10))
         }
         .buttonStyle(.plain)
-        .disabled(photoDescription.isEmpty)
+        .disabled(!viewModel.descriptionIsEmpty)
     }
     
     private func addImageView() -> some View {
@@ -78,7 +75,7 @@ struct FirstGeneratorView: View {
                 .pretendard(.normal)
                 .foregroundStyle(.black)
             
-            Image("AddImage")
+            Image("AddImageIcon")
                 .resizable()
                 .frame(width: 29, height: 29)
                 .padding(.top, 28)
@@ -86,7 +83,7 @@ struct FirstGeneratorView: View {
                 .padding(.horizontal, 20)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    showPhotoPicker = true
+                    viewModel.showPhotoPicker = true
                 }
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
@@ -110,7 +107,7 @@ struct FirstGeneratorView: View {
     
     private func descriptionTextEditor() -> some View {
         ZStack {
-            TextEditor(text: $photoDescription)
+            TextEditor(text: viewModel.textEditorLimit)
                 .pretendard(.description)
                 .foregroundStyle(.black)
                 .scrollContentBackground(.hidden)
@@ -123,15 +120,11 @@ struct FirstGeneratorView: View {
                         .stroke(.gray5, lineWidth: 1)
                 )
                 .focused($isFocused)
-                .onReceive(photoDescription.publisher.collect()) {
-                    // 글자 수를 제한하는 로직
-                    self.photoDescription = String($0.prefix(200))
-                }
                 .onAppear {
                     isFocused = true
                 }
-            
-            if photoDescription.isEmpty {
+
+            if !viewModel.descriptionIsEmpty {
                 Text("ex) 잔디밭에 앉아서 과잠을 입고 막걸리를 먹는 모습을 만들어줘\n\n* 구체적인 지명을 지정하는 것은 불가능해요!")
                 .pretendard(.small)
                 .foregroundStyle(.gray7)
