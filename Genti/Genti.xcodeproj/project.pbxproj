@@ -37,6 +37,8 @@
 		C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2412BD617630052D59F /* PhotoAngle.swift */; };
 		C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2432BD617840052D59F /* PhotoFrame.swift */; };
 		C086A2462BD6199D0052D59F /* ExampleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2452BD6199D0052D59F /* ExampleImage.swift */; };
+		C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateCompleteView.swift */; };
+		C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2492BD6319B0052D59F /* SafeAreaInset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		C086A2412BD617630052D59F /* PhotoAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAngle.swift; sourceTree = "<group>"; };
 		C086A2432BD617840052D59F /* PhotoFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrame.swift; sourceTree = "<group>"; };
 		C086A2452BD6199D0052D59F /* ExampleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleImage.swift; sourceTree = "<group>"; };
+		C086A2472BD62A960052D59F /* GenerateCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCompleteView.swift; sourceTree = "<group>"; };
+		C086A2492BD6319B0052D59F /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,7 @@
 				C086A2402BD617550052D59F /* Models */,
 				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
 				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
+				C086A2472BD62A960052D59F /* GenerateCompleteView.swift */,
 			);
 			path = Generator;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 				C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */,
 				C02BFD192BD1106200FAADC1 /* Constants.swift */,
 				C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */,
+				C086A2492BD6319B0052D59F /* SafeAreaInset.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -454,12 +460,14 @@
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
+				C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
 				C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */,
 				C02D67CA2BD381FC004DD995 /* Text+.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
+				C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */,
 				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
 				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
