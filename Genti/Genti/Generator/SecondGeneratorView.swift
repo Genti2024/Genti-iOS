@@ -25,10 +25,10 @@ struct SecondGeneratorView: View {
                 .ignoresSafeArea()
             // Content
             VStack(spacing: 0) {
-                navigationView()
+                GeneratorNavigationView()
                     .padding(.horizontal, 24)
                 
-                headerView()
+                GeneratorHeaderView(step: 2)
                     .padding(.top, 10)
                 
                 
@@ -44,47 +44,11 @@ struct SecondGeneratorView: View {
                 nextButton()
                     .padding(.horizontal, 28)
 
-                exampleImageView()
+                GeneratorExampleView()
                     .padding(.top, 43)
             } //:VSTACK
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)
-    }
-    
-    private func navigationView() -> some View {
-        HStack {
-            Image("Back_empty")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 29, height: 29)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    print("백버튼이 눌림")
-                }
-            Spacer()
-            Image("Xmark_empty")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 29, height: 29)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    print("닫기버튼이 눌림")
-                }
-        } //:HSTACK
-    }
-    
-    private func headerView() -> some View {
-        VStack(alignment: .center, spacing: 13) {
-            Image("Genti_LOGO")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 38)
-            
-            ProgressView(value: 2, total: 3)
-                .frame(width: 83, height: 3)
-                .background(.gray5)
-                .tint(.gentiGreen)
-        } //:VSTACK
     }
     
     private func angleSelectView() -> some View {
@@ -186,29 +150,6 @@ struct SecondGeneratorView: View {
         }
         .buttonStyle(.plain)
         .disabled(!angleAndFrameSelected)
-    }
-    
-    private func exampleImageView() -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("예시 사진을 참고해보세요")
-                .pretendard(.description)
-                .foregroundStyle(.black)
-                .padding(.horizontal, 28)
-            
-            ScrollView(.horizontal) {
-                HStack(spacing: 8) {
-                    ForEach(ExampleImage.mocks, id: \.id) { image in
-                        Image(image.imageName)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 150)
-
-                    }
-                } //:HSTACK
-                .padding(.horizontal, 28)
-            } //:SCROLL
-            .scrollIndicators(.hidden)
-        } //:VSTACK
     }
 }
 

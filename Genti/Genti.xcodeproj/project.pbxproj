@@ -39,6 +39,9 @@
 		C086A2462BD6199D0052D59F /* ExampleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2452BD6199D0052D59F /* ExampleImage.swift */; };
 		C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateCompleteView.swift */; };
 		C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2492BD6319B0052D59F /* SafeAreaInset.swift */; };
+		C0B1F6102BDDE786003DFDD9 /* GeneratorNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */; };
+		C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */; };
+		C0B1F6142BDDEA2B003DFDD9 /* GeneratorExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6132BDDEA2B003DFDD9 /* GeneratorExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +97,9 @@
 		C086A2452BD6199D0052D59F /* ExampleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleImage.swift; sourceTree = "<group>"; };
 		C086A2472BD62A960052D59F /* GenerateCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCompleteView.swift; sourceTree = "<group>"; };
 		C086A2492BD6319B0052D59F /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
+		C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationView.swift; sourceTree = "<group>"; };
+		C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
+		C0B1F6132BDDEA2B003DFDD9 /* GeneratorExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +202,7 @@
 		C02BFD0E2BD0F95C00FAADC1 /* Generator */ = {
 			isa = PBXGroup;
 			children = (
+				C0B1F60E2BDDE76B003DFDD9 /* Components */,
 				C086A2402BD617550052D59F /* Models */,
 				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
 				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
@@ -313,6 +320,16 @@
 				C086A2452BD6199D0052D59F /* ExampleImage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C0B1F60E2BDDE76B003DFDD9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */,
+				C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */,
+				C0B1F6132BDDEA2B003DFDD9 /* GeneratorExampleView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,8 +475,11 @@
 			files = (
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
+				C0B1F6102BDDE786003DFDD9 /* GeneratorNavigationView.swift in Sources */,
+				C0B1F6142BDDEA2B003DFDD9 /* GeneratorExampleView.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
+				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
 				C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
