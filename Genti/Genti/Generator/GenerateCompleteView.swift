@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GenerateCompleteView: View {
-    
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
+
     var userName: String = "i_am_GenTi"
     
     var body: some View {
@@ -28,7 +27,7 @@ struct GenerateCompleteView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 60)
-                        .padding(.top, safeAreaInsets.top + 44)
+                        .padding(.top, 44)
                     
                     
                     VStack {
@@ -79,10 +78,9 @@ struct GenerateCompleteView: View {
                         .clipShape(.rect(cornerRadius: 10))
                 }
                 .padding(.horizontal, 31)
-                .padding(.bottom, safeAreaInsets.bottom + 25)
+                .padding(.bottom, 25)
                 .buttonStyle(.plain)
             } //:VSTACK
-            .ignoresSafeArea(edges: [.bottom, .top])
         } //:ZSTACK
     }
 }
