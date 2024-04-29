@@ -36,13 +36,13 @@ struct FirstGeneratorView: View {
                             .padding(.top, 44)
 
                         Spacer()
-                            .frame(minHeight: 10, maxHeight: 80)
+                            .frame(minHeight: 10)
                         
                         nextButton()
                             .padding(.horizontal, 28)
      
                         Spacer()
-                            .frame(minWidth: 10, maxHeight: 43)
+                            .frame(minHeight: 10, maxHeight: 43)
                         
                         GeneratorExampleView()
                             .frame(height: 170)
@@ -98,7 +98,21 @@ struct FirstGeneratorView: View {
             } else {
                 PHAssetImageView(from: viewModel.referenceImage!.asset)
                     .frame(width: 100, height: 100)
+                    .overlay(alignment: .topTrailing) {
+                        Image("ImageRemoveButton")
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                            .padding(4)
+                            .background(.black.opacity(0.001))
+                            .onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    viewModel.removeReferenceImage()
+                                }
+
+                            }
+                    }
                     .padding(.vertical, 20)
+
             }
 
             

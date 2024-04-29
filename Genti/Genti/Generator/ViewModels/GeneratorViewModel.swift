@@ -30,6 +30,10 @@ final class GeneratorViewModel: ObservableObject {
         self.referenceImage = asset
     }
     
+    func removeReferenceImage() {
+        self.referenceImage = nil
+    }
+    
     
     // secondView
     @Published var selectedAngle: PhotoAngle? = nil
