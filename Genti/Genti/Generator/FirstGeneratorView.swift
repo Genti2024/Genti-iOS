@@ -8,6 +8,13 @@
 import SwiftUI
 import Combine
 
+extension CGFloat {
+    static func height(ratio: CGFloat) -> CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        return screenHeight * ratio
+    }
+}
+
 struct FirstGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
     @FocusState var isFocused: Bool
@@ -33,19 +40,18 @@ struct FirstGeneratorView: View {
                             .padding(.top, 32)
                         
                         addImageView()
-                            .padding(.top, 44)
+                            .padding(.top, .height(ratio: 0.05))
 
-                        Spacer()
-                            .frame(minHeight: 10)
+                        Spacer(minLength: 0)
                         
                         nextButton()
                             .padding(.horizontal, 28)
      
                         Spacer()
-                            .frame(minHeight: 10, maxHeight: 43)
+                            .frame(height: .height(ratio: 0.05))
                         
                         GeneratorExampleView()
-                            .frame(height: 170)
+                            .frame(maxHeight: .height(ratio: 0.21))
                     } //:VSTACK
                 }
                 .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -83,21 +89,20 @@ struct FirstGeneratorView: View {
             Text("참고사진이 있다면 추가해주세요")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
+                .padding(.bottom, 5)
             
             if viewModel.referenceImage == nil {
                 Image("AddImageIcon")
                     .resizable()
                     .frame(width: 29, height: 29)
-                    .padding(.top, 28)
-                    .padding(.bottom, 8)
-                    .padding(.horizontal, 20)
+                    .padding((CGFloat.height(ratio: 0.13)-29)/2)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
                         viewModel.showPhotoPicker = true
                     }
             } else {
                 PHAssetImageView(from: viewModel.referenceImage!.asset)
-                    .frame(width: 100, height: 100)
+                    .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
                     .overlay(alignment: .topTrailing) {
                         Image("ImageRemoveButton")
                             .resizable()
@@ -111,14 +116,13 @@ struct FirstGeneratorView: View {
 
                             }
                     }
-                    .padding(.vertical, 20)
-
             }
 
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
                 .foregroundStyle(.gray3)
+                .padding(.top, 5)
         } //:VSTACK
     }
     
