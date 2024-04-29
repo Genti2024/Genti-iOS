@@ -58,7 +58,6 @@ struct SecondGeneratorView: View {
                 .pretendard(.normal)
             
             VStack(spacing: 7) {
-
                 HStack(spacing: 9) {
                     ForEach(PhotoAngle.selections, id: \.self) { angle in
                         Image(angle.image)

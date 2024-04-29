@@ -23,75 +23,87 @@ struct PopupImagePickerView: View {
                 .ignoresSafeArea()
             // Content
             VStack(spacing: 0) {
-                HStack {
-                    Text("\(imagePickerModel.limit)장의 이미지를 선택해주세요")
-                        .pretendard(.headline4)
-                        .foregroundStyle(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Button {
-                        // Action
-//                        imagePickerModel.removeAll()
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.title2)
-                            .foregroundStyle(.black)
-                    }
-                } //:HSTACK
-                .padding([.horizontal, .top])
-                .padding(.bottom, 10)
+                headerView()
+                    .padding([.horizontal, .top])
+                    .padding(.bottom, 10)
                 
-                ScrollViewWithOnScrollChanged {
-                    LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 10), count: 3)) {
-                        ForEach(imagePickerModel.fetchedImages) { imageAsset in
-                            gridContent(imageAsset: imageAsset)
-                                .aspectRatio(1, contentMode: .fit)
-                                .readingFrame { frame in
-                                    guard imagePickerModel.cellHeight == 0 else { return }
-                                    imagePickerModel.cellHeight = frame.height
-                                }
-                        }
-                    }
-
-                } onScrollChanged: { origin in
-                    if imagePickerModel.scrollViewHeight > origin.y {
-                        self.imagePickerModel.getPhotosWithPagination()
-                    }
-                }
-                .padding(.horizontal, 10)
-                .onReadSize({ size in
-                    self.imagePickerModel.scrollViewHeight = size.height
-                })
+                albumImageScrollView()
             } //:VSTACK
             
-            Button {
-                // Action
-                self.generatorViewModel.setImageAsset(asset: imagePickerModel.selectedImages[0])
-//                self.imagePickerModel.removeAll()
-                dismiss()
-            } label: {
-                Text("\(imagePickerModel.selectedImageCount)/\(imagePickerModel.limit)추가하기")
-                    .pretendard(.headline4)
-                    .foregroundStyle(imagePickerModel.isReachLimit ? .white : .black)
-                    .padding(.horizontal, 50)
-                    .padding(.vertical, 15)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(imagePickerModel.isReachLimit ? .green1 : .gray5)
-                    )
-                    .padding(.bottom, 10)
-                    
-            }
-            .disabled(!imagePickerModel.isReachLimit)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            selectButton()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
         } //:ZSTACK
     }
+}
+
+private extension PopupImagePickerView {
+    func albumImageScrollView() -> some View {
+        ScrollViewWithOnScrollChanged {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 10), count: 3)) {
+                ForEach(imagePickerModel.fetchedImages) { imageAsset in
+                    albumImage(from: imageAsset)
+                        .aspectRatio(1, contentMode: .fit)
+                        .readingFrame { frame in
+                            guard imagePickerModel.cellHeight == 0 else { return }
+                            imagePickerModel.cellHeight = frame.height
+                        }
+                }
+            }
+
+        } onScrollChanged: { origin in
+            if imagePickerModel.scrollViewHeight > origin.y {
+                self.imagePickerModel.getPhotosWithPagination()
+            }
+        }
+        .padding(.horizontal, 10)
+        .onReadSize({ size in
+            self.imagePickerModel.scrollViewHeight = size.height
+        })
+    }
     
-    func gridContent(imageAsset: ImageAsset) -> some View {
+    func selectButton() -> some View {
+        Button {
+            // Action
+            self.generatorViewModel.setImageAsset(asset: imagePickerModel.selectedImages[0])
+            dismiss()
+        } label: {
+            Text("\(imagePickerModel.selectedImageCount)/\(imagePickerModel.limit)추가하기")
+                .pretendard(.headline4)
+                .foregroundStyle(imagePickerModel.isReachLimit ? .white : .black)
+                .padding(.horizontal, 50)
+                .padding(.vertical, 15)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(imagePickerModel.isReachLimit ? .green1 : .gray5)
+                )
+                .padding(.bottom, 10)
+                
+        }
+        .disabled(!imagePickerModel.isReachLimit)
+    }
+    
+    func headerView() -> some View {
+        HStack {
+            Text("\(imagePickerModel.limit)장의 이미지를 선택해주세요")
+                .pretendard(.headline4)
+                .foregroundStyle(.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Button {
+                // Action
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.title2)
+                    .foregroundStyle(.black)
+            }
+        } //:HSTACK
+    }
+    
+    func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
-                ImageView(from: imageAsset.asset)
+                PHAssetImageView(from: imageAsset.asset)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)

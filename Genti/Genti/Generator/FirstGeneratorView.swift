@@ -96,7 +96,7 @@ struct FirstGeneratorView: View {
                         viewModel.showPhotoPicker = true
                     }
             } else {
-                ImageView(from: viewModel.referenceImage!.asset)
+                PHAssetImageView(from: viewModel.referenceImage!.asset)
                     .frame(width: 100, height: 100)
                     .padding(.vertical, 20)
             }

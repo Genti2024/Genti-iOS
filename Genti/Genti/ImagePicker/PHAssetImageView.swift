@@ -1,20 +1,34 @@
 //
-//  PHImageAssetView.swift
+//  PHAssetImageView.swift
 //  Genti
 //
-//  Created by uiskim on 4/28/24.
+//  Created by uiskim on 4/29/24.
 //
 
 import SwiftUI
 import Photos
-import PhotosUI
 
 struct PHAssetImageView: View {
     @StateObject private var imageLoader = AssetImageLoader()
     let asset: PHAsset
-    let size: CGSize
+    
+    init(from asset: PHAsset) {
+        self.asset = asset
+    }
     
     var body: some View {
+        GeometryReader(content: { geometry in
+            let scale = UIScreen.main.scale
+            let width = geometry.size.width * scale
+            let height = geometry.size.height * scale
+            let imageSize = CGSize(width: width, height: height)
+            imageViewFromAsset(size: imageSize)
+        })
+        .clipped()
+        .contentShape(Rectangle())
+    }
+    
+    func imageViewFromAsset(size: CGSize) -> some View {
         Group {
             if let uiImage = imageLoader.image {
                 Image(uiImage: uiImage)
@@ -32,3 +46,4 @@ struct PHAssetImageView: View {
         }
     }
 }
+
