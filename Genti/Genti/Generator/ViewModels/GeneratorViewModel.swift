@@ -29,4 +29,13 @@ final class GeneratorViewModel: ObservableObject {
     func setImageAsset(asset: ImageAsset) {
         self.referenceImage = asset
     }
+    
+    
+    // secondView
+    @Published var selectedAngle: PhotoAngle? = nil
+    @Published var selectedFrame: PhotoFrame? = nil
+    
+    var angleAndFrameSelected: Bool {
+        return selectedAngle != nil && selectedFrame != nil
+    }
 }

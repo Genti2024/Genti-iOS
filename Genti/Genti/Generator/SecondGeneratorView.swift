@@ -9,13 +9,8 @@ import SwiftUI
 
 struct SecondGeneratorView: View {
     
-    @State private var selectedAngle: PhotoAngle? = nil
-    @State private var selectedFrame: PhotoFrame? = nil
-    
-    var angleAndFrameSelected: Bool {
-        return selectedAngle != nil && selectedFrame != nil
-    }
-    
+    @EnvironmentObject var viewModel: GeneratorViewModel
+
     var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
@@ -65,7 +60,7 @@ struct SecondGeneratorView: View {
                             .aspectRatio(1, contentMode: .fit)
                             .frame(maxWidth: .infinity)
                             .overlay {
-                                if selectedAngle == angle {
+                                if viewModel.selectedAngle == angle {
                                     Rectangle()
                                         .stroke(lineWidth: 2)
                                         .foregroundStyle(.green1)
@@ -73,19 +68,19 @@ struct SecondGeneratorView: View {
 
                             }
                             .onTapGesture {
-                                selectedAngle = angle
+                                viewModel.selectedAngle = angle
                             }
                     }
                 } //:HSTACK
                 HStack(spacing: 4) {
                     Text("앵글은 자유롭게 맡길래요")
                         .pretendard(.description)
-                        .foregroundStyle(selectedAngle == .free ? .green1 : .gray3)
-                    Image(selectedAngle == .free ? PhotoAngle.freeSelectedImage : PhotoAngle.free.image)
+                        .foregroundStyle(viewModel.selectedAngle == .free ? .green1 : .gray3)
+                    Image(viewModel.selectedAngle == .free ? PhotoAngle.freeSelectedImage : PhotoAngle.free.image)
                 } //:HSTACK
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    selectedAngle = .free
+                    viewModel.selectedAngle = .free
                 }
             } //:VSTACK
             
@@ -106,7 +101,7 @@ struct SecondGeneratorView: View {
                             .aspectRatio(1, contentMode: .fit)
                             .frame(maxWidth: .infinity)
                             .overlay {
-                                if selectedFrame == frame {
+                                if viewModel.selectedFrame == frame {
                                     Rectangle()
                                         .stroke(lineWidth: 2)
                                         .foregroundStyle(.green1)
@@ -114,19 +109,19 @@ struct SecondGeneratorView: View {
 
                             }
                             .onTapGesture {
-                                selectedFrame = frame
+                                viewModel.selectedFrame = frame
                             }
                     }
                 } //:HSTACK
                 HStack(spacing: 4) {
                     Text("프레임은 자유롭게 맡길래요")
                         .pretendard(.description)
-                        .foregroundStyle(selectedFrame == .free ? .green1 : .gray3)
-                    Image(selectedFrame == .free ? PhotoFrame.freeSelectedImage : PhotoAngle.free.image)
+                        .foregroundStyle(viewModel.selectedFrame == .free ? .green1 : .gray3)
+                    Image(viewModel.selectedFrame == .free ? PhotoFrame.freeSelectedImage : PhotoAngle.free.image)
                 } //:HSTACK
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    selectedFrame = .free
+                    viewModel.selectedFrame = .free
                 }
             } //:VSTACK
             
@@ -136,19 +131,19 @@ struct SecondGeneratorView: View {
     private func nextButton() -> some View {
         Button {
             // Action
-            print("angle = \(String(describing: selectedAngle))")
-            print("frame = \(String(describing: selectedFrame))")
+            print("angle = \(String(describing: viewModel.selectedAngle))")
+            print("frame = \(String(describing: viewModel.selectedFrame))")
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
-                .foregroundStyle(angleAndFrameSelected ? .white : .black)
+                .foregroundStyle(viewModel.angleAndFrameSelected ? .white : .black)
                 .frame(height: 50)
                 .frame(maxWidth: .infinity)
-                .background(angleAndFrameSelected ? .green1 : .gray5)
+                .background(viewModel.angleAndFrameSelected ? .green1 : .gray5)
                 .clipShape(.rect(cornerRadius: 10))
         }
         .buttonStyle(.plain)
-        .disabled(!angleAndFrameSelected)
+        .disabled(!viewModel.angleAndFrameSelected)
     }
 }
 
