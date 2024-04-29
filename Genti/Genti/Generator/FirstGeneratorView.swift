@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FirstGeneratorView: View {
-    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
+    @EnvironmentObject var viewModel: GeneratorViewModel
     
     var onXmarkPressed: (() -> Void)? = nil
     @FocusState var isFocused: Bool
@@ -20,42 +21,51 @@ struct FirstGeneratorView: View {
                 Color.backgroundWhite
                     .ignoresSafeArea()
                 // Content
-                VStack(spacing: 0) {
-                    GeneratorNavigationView()
-                        .padding(.horizontal, 24)
+                GeometryReader { _ in
+                    VStack(spacing: 0) {
+                        GeneratorNavigationView()
+                            .padding(.horizontal, 24)
+                        
+                        GeneratorHeaderView(step: 1)
+                            .padding(.top, 10)
                     
-                    GeneratorHeaderView(step: 1)
-                        .padding(.top, 10)
-                
-                    inpuTextView()
-                        .padding(.top, 32)
-                    
-                    addImageView()
-                        .padding(.top, 44)
+                        inpuTextView()
+                            .padding(.top, 32)
+                        
+                        addImageView()
+                            .padding(.top, 44)
 
-                    Spacer()
-                    
-                    nextButton()
-                        .padding(.horizontal, 28)
-                    
-                    GeneratorExampleView()
-                        .padding(.top, 43)
-                    
-                } //:VSTACK
+                        Spacer()
+                            .frame(minHeight: 10, maxHeight: 80)
+                        
+                        nextButton()
+                            .padding(.horizontal, 28)
+     
+                        Spacer()
+                            .frame(minWidth: 10, maxHeight: 43)
+                        
+                        GeneratorExampleView()
+                            .frame(height: 170)
+                    } //:VSTACK
+                }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+
             } //:ZSTACK
+            .focused($isFocused)
             .onTapGesture {
                 isFocused = false
             }
             .fullScreenCover(isPresented: $viewModel.showPhotoPicker) {
-                Text("포토피커")
+                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1))
             }
         }
-        .environmentObject(viewModel)
+
     }
     
     private func nextButton() -> some View {
         Button {
             // Action
+            self.viewModel.showPhotoPicker = true
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
@@ -75,16 +85,23 @@ struct FirstGeneratorView: View {
                 .pretendard(.normal)
                 .foregroundStyle(.black)
             
-            Image("AddImageIcon")
-                .resizable()
-                .frame(width: 29, height: 29)
-                .padding(.top, 28)
-                .padding(.bottom, 8)
-                .padding(.horizontal, 20)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    viewModel.showPhotoPicker = true
-                }
+            if viewModel.referenceImage == nil {
+                Image("AddImageIcon")
+                    .resizable()
+                    .frame(width: 29, height: 29)
+                    .padding(.top, 28)
+                    .padding(.bottom, 8)
+                    .padding(.horizontal, 20)
+                    .background(.black.opacity(0.001))
+                    .onTapGesture {
+                        viewModel.showPhotoPicker = true
+                    }
+            } else {
+                ImageView(from: viewModel.referenceImage!.asset)
+                    .frame(width: 100, height: 100)
+                    .padding(.vertical, 20)
+            }
+
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
@@ -119,7 +136,6 @@ struct FirstGeneratorView: View {
                         .fill(.gray6)
                         .stroke(.gray5, lineWidth: 1)
                 )
-                .focused($isFocused)
                 .onAppear {
                     isFocused = true
                 }
@@ -142,5 +158,5 @@ struct FirstGeneratorView: View {
 
 #Preview {
     FirstGeneratorView()
+        .environmentObject(GeneratorViewModel())
 }
-

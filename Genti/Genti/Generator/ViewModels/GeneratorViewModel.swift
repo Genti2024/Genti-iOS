@@ -11,7 +11,7 @@ import Combine
 final class GeneratorViewModel: ObservableObject {
     // firstView
     @Published var photoDescription: String = ""
-    @Published var referenceImage: Image? = nil
+    @Published var referenceImage: ImageAsset? = nil
     @Published var showPhotoPicker: Bool = false
     
     var descriptionIsEmpty: Bool {
@@ -24,5 +24,9 @@ final class GeneratorViewModel: ObservableObject {
         return self.photoDescription
     } set: {
         self.photoDescription = String($0.prefix(20))
+    }
+    
+    func setImageAsset(asset: ImageAsset) {
+        self.referenceImage = asset
     }
 }

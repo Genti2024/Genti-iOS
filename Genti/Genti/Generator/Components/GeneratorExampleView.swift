@@ -21,7 +21,7 @@ struct GeneratorExampleView: View {
                         Image(image.imageName)
                             .resizable()
                             .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 150)
+                            .frame(width: 158)
                     }
                 } //:HSTACK
                 .padding(.horizontal, 28)
