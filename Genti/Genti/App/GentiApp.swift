@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct GentiApp: App {
+    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     var body: some Scene {
         WindowGroup {
-            GenerateCompleteView()
+            
+            FirstGeneratorView()
+                .environmentObject(viewModel)
         }
     }
 }

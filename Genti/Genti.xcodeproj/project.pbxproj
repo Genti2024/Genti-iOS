@@ -17,7 +17,6 @@
 		C02BFD152BD10FF400FAADC1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */; };
 		C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */; };
 		C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD192BD1106200FAADC1 /* Constants.swift */; };
-		C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */; };
 		C02BFD212BD1DB8600FAADC1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD202BD1DB8600FAADC1 /* FeedView.swift */; };
 		C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67B92BD374BA004DD995 /* Feed.swift */; };
 		C02D67C12BD37C74004DD995 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67BC2BD37C73004DD995 /* Pretendard-Light.otf */; };
@@ -39,6 +38,14 @@
 		C086A2462BD6199D0052D59F /* ExampleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2452BD6199D0052D59F /* ExampleImage.swift */; };
 		C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateCompleteView.swift */; };
 		C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2492BD6319B0052D59F /* SafeAreaInset.swift */; };
+		C086C2092BDE118900E25D71 /* PHImageAssetPHAssetImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2082BDE118900E25D71 /* PHImageAssetPHAssetImageView.swift */; };
+		C086C20B2BDE11CD00E25D71 /* PopupImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C20A2BDE11CD00E25D71 /* PopupImagePickerView.swift */; };
+		C086C20E2BDE11E100E25D71 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C086C20D2BDE11E100E25D71 /* SwiftfulUI */; };
+		C086C2102BDE11F800E25D71 /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C20F2BDE11F800E25D71 /* ImagePickerViewModel.swift */; };
+		C086C2122BDE121900E25D71 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2112BDE121900E25D71 /* AlbumService.swift */; };
+		C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2132BDE122B00E25D71 /* ImageAsset.swift */; };
+		C086C2162BDE124B00E25D71 /* AssetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2152BDE124B00E25D71 /* AssetImageLoader.swift */; };
+		C086C2192BDF154000E25D71 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2182BDF154000E25D71 /* ImageView.swift */; };
 		C0B1F6102BDDE786003DFDD9 /* GeneratorNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */; };
 		C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */; };
 		C0B1F6142BDDEA2B003DFDD9 /* GeneratorExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6132BDDEA2B003DFDD9 /* GeneratorExampleView.swift */; };
@@ -73,7 +80,6 @@
 		C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorView.swift; sourceTree = "<group>"; };
 		C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderView.swift; sourceTree = "<group>"; };
 		C02BFD192BD1106200FAADC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameLeader.swift; sourceTree = "<group>"; };
 		C02BFD202BD1DB8600FAADC1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		C02D67B92BD374BA004DD995 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		C02D67BC2BD37C73004DD995 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -99,6 +105,13 @@
 		C086A2452BD6199D0052D59F /* ExampleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleImage.swift; sourceTree = "<group>"; };
 		C086A2472BD62A960052D59F /* GenerateCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCompleteView.swift; sourceTree = "<group>"; };
 		C086A2492BD6319B0052D59F /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
+		C086C2082BDE118900E25D71 /* PHImageAssetPHAssetImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHImageAssetPHAssetImageView.swift; sourceTree = "<group>"; };
+		C086C20A2BDE11CD00E25D71 /* PopupImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupImagePickerView.swift; sourceTree = "<group>"; };
+		C086C20F2BDE11F800E25D71 /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
+		C086C2112BDE121900E25D71 /* AlbumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
+		C086C2132BDE122B00E25D71 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		C086C2152BDE124B00E25D71 /* AssetImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImageLoader.swift; sourceTree = "<group>"; };
+		C086C2182BDF154000E25D71 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationView.swift; sourceTree = "<group>"; };
 		C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
 		C0B1F6132BDDEA2B003DFDD9 /* GeneratorExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorExampleView.swift; sourceTree = "<group>"; };
@@ -111,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C086C20E2BDE11E100E25D71 /* SwiftfulUI in Frameworks */,
 				C02BFD152BD10FF400FAADC1 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +225,7 @@
 				C0B1F60E2BDDE76B003DFDD9 /* Components */,
 				C086A2402BD617550052D59F /* Models */,
 				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
+				C086C20A2BDE11CD00E25D71 /* PopupImagePickerView.swift */,
 				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
 				C086A2472BD62A960052D59F /* GenerateCompleteView.swift */,
 			);
@@ -222,7 +237,6 @@
 			children = (
 				C02BFD172BD1102A00FAADC1 /* ImageLoaderView.swift */,
 				C02BFD192BD1106200FAADC1 /* Constants.swift */,
-				C02BFD1B2BD1139800FAADC1 /* FrameLeader.swift */,
 				C086A2492BD6319B0052D59F /* SafeAreaInset.swift */,
 			);
 			path = Shared;
@@ -280,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				C02D67C82BD38038004DD995 /* Info.plist */,
+				C086C2072BDE113900E25D71 /* ImagePicker */,
 				C02BFD162BD1101600FAADC1 /* Shared */,
 				C02BFD0E2BD0F95C00FAADC1 /* Generator */,
 				C02BFD0B2BD0F94200FAADC1 /* Profile */,
@@ -328,6 +343,43 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C086C2072BDE113900E25D71 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				C086C21B2BDF1B5800E25D71 /* Services */,
+				C086C21A2BDF1B4F00E25D71 /* ViewModels */,
+				C086C2172BDF14CF00E25D71 /* Model */,
+				C086C2082BDE118900E25D71 /* PHImageAssetPHAssetImageView.swift */,
+				C086C2182BDF154000E25D71 /* ImageView.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		C086C2172BDF14CF00E25D71 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C086C2132BDE122B00E25D71 /* ImageAsset.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C086C21A2BDF1B4F00E25D71 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C086C20F2BDE11F800E25D71 /* ImagePickerViewModel.swift */,
+				C086C2152BDE124B00E25D71 /* AssetImageLoader.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C086C21B2BDF1B5800E25D71 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C086C2112BDE121900E25D71 /* AlbumService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		C0B1F60E2BDDE76B003DFDD9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +416,7 @@
 			name = Genti;
 			packageProductDependencies = (
 				C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */,
+				C086C20D2BDE11E100E25D71 /* SwiftfulUI */,
 			);
 			productName = Genti;
 			productReference = C073BD432BCBE5FA00130BAD /* Genti.app */;
@@ -439,6 +492,7 @@
 			mainGroup = C073BD3A2BCBE5FA00130BAD;
 			packageReferences = (
 				C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				C086C20C2BDE11E100E25D71 /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
 			);
 			productRefGroup = C073BD442BCBE5FA00130BAD /* Products */;
 			projectDirPath = "";
@@ -488,25 +542,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
+				C086C2102BDE11F800E25D71 /* ImagePickerViewModel.swift in Sources */,
+				C086C20B2BDE11CD00E25D71 /* PopupImagePickerView.swift in Sources */,
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
 				C0B1F6102BDDE786003DFDD9 /* GeneratorNavigationView.swift in Sources */,
 				C0B1F6142BDDEA2B003DFDD9 /* GeneratorExampleView.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
+				C086C2192BDF154000E25D71 /* ImageView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
 				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
+				C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */,
 				C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */,
+				C086C2162BDE124B00E25D71 /* AssetImageLoader.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
-				C02BFD1C2BD1139800FAADC1 /* FrameLeader.swift in Sources */,
 				C02D67CA2BD381FC004DD995 /* Text+.swift in Sources */,
 				C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
 				C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */,
 				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
+				C086C2092BDE118900E25D71 /* PHImageAssetPHAssetImageView.swift in Sources */,
 				C02BFD0A2BD0F93700FAADC1 /* HomeView.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
+				C086C2122BDE121900E25D71 /* AlbumService.swift in Sources */,
 				C0B1F6162BDDF858003DFDD9 /* TextEditor+.swift in Sources */,
 				C086A2462BD6199D0052D59F /* ExampleImage.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
@@ -680,6 +740,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "접근";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -715,6 +776,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "접근";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -864,6 +926,14 @@
 				minimumVersion = 3.0.2;
 			};
 		};
+		C086C20C2BDE11E100E25D71 /* XCRemoteSwiftPackageReference "SwiftfulUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -871,6 +941,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		C086C20D2BDE11E100E25D71 /* SwiftfulUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C086C20C2BDE11E100E25D71 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
+			productName = SwiftfulUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
