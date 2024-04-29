@@ -11,38 +11,32 @@ import Photos
 import SwiftfulUI
 
 struct PopupImagePickerView: View {
-    @State private var scrollViewHeight: CGFloat = 0
-    @State private var cellHeight: CGFloat = 0
+
     @ObservedObject var imagePickerModel: ImagePickerViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @Environment(\.dismiss) private var dismiss
     
-
-    var onEnd: (() -> Void)? = nil
-    var onSelect: (([PHAsset]) -> Void)? = nil
-    
     var body: some View {
         ZStack {
             // Background Color
-            Color.black
+            Color.backgroundWhite
                 .ignoresSafeArea()
             // Content
             VStack(spacing: 0) {
                 HStack {
-                    Text("Select Images")
-                        .bold()
-                        .font(.callout)
+                    Text("\(imagePickerModel.limit)장의 이미지를 선택해주세요")
+                        .pretendard(.headline4)
                         .foregroundStyle(.black)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Button {
                         // Action
-                        onEnd?()
+//                        imagePickerModel.removeAll()
                         dismiss()
                     } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title3)
-                            .foregroundStyle(.primary)
+                        Image(systemName: "xmark")
+                            .font(.title2)
+                            .foregroundStyle(.black)
                     }
                 } //:HSTACK
                 .padding([.horizontal, .top])
@@ -54,32 +48,39 @@ struct PopupImagePickerView: View {
                             gridContent(imageAsset: imageAsset)
                                 .aspectRatio(1, contentMode: .fit)
                                 .readingFrame { frame in
-                                    guard cellHeight == 0 else { return }
-                                    cellHeight = frame.height
+                                    guard imagePickerModel.cellHeight == 0 else { return }
+                                    imagePickerModel.cellHeight = frame.height
                                 }
                         }
                     }
 
                 } onScrollChanged: { origin in
-                    if scrollViewHeight > origin.y {
+                    if imagePickerModel.scrollViewHeight > origin.y {
                         self.imagePickerModel.getPhotosWithPagination()
                     }
                 }
                 .padding(.horizontal, 10)
                 .onReadSize({ size in
-                    self.scrollViewHeight = size.height
+                    self.imagePickerModel.scrollViewHeight = size.height
                 })
             } //:VSTACK
             
             Button {
                 // Action
                 self.generatorViewModel.setImageAsset(asset: imagePickerModel.selectedImages[0])
+//                self.imagePickerModel.removeAll()
                 dismiss()
             } label: {
-                Text("추가하기")
-                    .foregroundStyle(.white)
-                    .padding()
-                    .background(.red)
+                Text("\(imagePickerModel.selectedImageCount)/\(imagePickerModel.limit)추가하기")
+                    .pretendard(.headline4)
+                    .foregroundStyle(imagePickerModel.isReachLimit ? .white : .black)
+                    .padding(.horizontal, 50)
+                    .padding(.vertical, 15)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(imagePickerModel.isReachLimit ? .green1 : .gray5)
+                    )
+                    .padding(.bottom, 10)
                     
             }
             .disabled(!imagePickerModel.isReachLimit)
@@ -104,7 +105,7 @@ struct PopupImagePickerView: View {
                         asset.id == imageAsset.id
                     }) {
                         Circle()
-                            .fill(.blue)
+                            .fill(.gentiGreen)
                         Text("\(imagePickerModel.selectedImages[index].assetIndex + 1)")
                             .font(.caption2.bold())
                             .foregroundStyle(.white)

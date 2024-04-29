@@ -10,10 +10,10 @@ import Combine
 
 struct FirstGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
-    
-    var onXmarkPressed: (() -> Void)? = nil
     @FocusState var isFocused: Bool
     
+    var onXmarkPressed: (() -> Void)? = nil
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -65,7 +65,6 @@ struct FirstGeneratorView: View {
     private func nextButton() -> some View {
         Button {
             // Action
-            self.viewModel.showPhotoPicker = true
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)

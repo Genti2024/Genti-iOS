@@ -10,6 +10,8 @@ import PhotosUI
 import Combine
 
 final class ImagePickerViewModel: ObservableObject {
+    @Published var scrollViewHeight: CGFloat = 0
+    @Published var cellHeight: CGFloat = 0
     @Published var fetchedImages: [ImageAsset] = []
     @Published var selectedImages: [ImageAsset] = []
     @Published var isReachLimit: Bool = false
@@ -35,13 +37,17 @@ final class ImagePickerViewModel: ObservableObject {
             
         
     }
+    
+    var selectedImageCount: Int {
+        return selectedImages.count
+    }
   
     func fetchImages(indexSet: IndexSet) -> [ImageAsset] {
         return albumService.fetchAssets(from: indexSet)
             .map { ImageAsset(asset: $0) }
     }
 
-    public func getPhotosWithPagination() {
+    func getPhotosWithPagination() {
         isLoading = true
         let endIndex = min(currentIndex + fetchLimit, albumService.count)
         let indexSet = IndexSet(currentIndex..<endIndex)
@@ -54,5 +60,9 @@ final class ImagePickerViewModel: ObservableObject {
                 self.isLoading = false
             }
         }
+    }
+    
+    func removeAll() {
+        self.selectedImages.removeAll()
     }
 }

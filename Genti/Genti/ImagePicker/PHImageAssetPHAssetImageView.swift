@@ -21,7 +21,9 @@ struct PHAssetImageView: View {
                     .resizable()
                     .scaledToFill()
             } else {
-                Text("Loading")
+                Text("Loading...")
+                    .pretendard(.description)
+                    .foregroundStyle(.black)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
