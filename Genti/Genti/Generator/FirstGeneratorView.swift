@@ -8,13 +8,6 @@
 import SwiftUI
 import Combine
 
-extension CGFloat {
-    static func height(ratio: CGFloat) -> CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        return screenHeight * ratio
-    }
-}
-
 struct FirstGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
     @FocusState var isFocused: Bool
