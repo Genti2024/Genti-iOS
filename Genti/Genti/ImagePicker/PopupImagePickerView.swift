@@ -129,7 +129,7 @@ private extension PopupImagePickerView {
                 
                 if let _ = imagePickerModel.isSelected(from: imageAsset) {
                     Rectangle()
-                        .strokeBorder(.gentiGreen, style: .init(lineWidth: 2))
+                        .strokeBorder(.green1, style: .init(lineWidth: 2))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }

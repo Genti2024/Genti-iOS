@@ -65,8 +65,7 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.selectedAngle == angle {
                                     Rectangle()
-                                        .stroke(lineWidth: 2)
-                                        .foregroundStyle(.green1)
+                                        .strokeBorder(.green1, style: .init(lineWidth:2))
                                 }
 
                             }
@@ -106,8 +105,7 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.selectedFrame == frame {
                                     Rectangle()
-                                        .stroke(lineWidth: 2)
-                                        .foregroundStyle(.green1)
+                                        .strokeBorder(.green1, style: .init(lineWidth:2))
                                 }
 
                             }
