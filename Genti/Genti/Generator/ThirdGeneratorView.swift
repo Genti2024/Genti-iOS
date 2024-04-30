@@ -36,10 +36,11 @@ struct ThirdGeneratorView: View {
                         .padding(.top, .height(ratio: 0.02))
                 } //:VSTACK
             } //:ZSTACK
-            .fullScreenCover(isPresented: $viewModel.showPhotoPicker) {
+            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 3), pickerType: .faces)
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func cautionScrollView() -> some View {
@@ -148,7 +149,7 @@ struct ThirdGeneratorView: View {
                     .padding((CGFloat.height(ratio: 0.14)-29)/2)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPicker = true
+                        viewModel.showPhotoPickerWhenThirdView = true
                     }
             } else {
                 VStack(spacing: 0) {
@@ -161,7 +162,7 @@ struct ThirdGeneratorView: View {
                     } //:HSTACK
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPicker = true
+                        viewModel.showPhotoPickerWhenFirstView = true
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
@@ -178,8 +179,8 @@ struct ThirdGeneratorView: View {
     }
     
     private func nextButton() -> some View {
-        Button {
-            // Action
+        NavigationLink {
+            GenerateCompleteView()
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
@@ -189,7 +190,6 @@ struct ThirdGeneratorView: View {
                 .background(viewModel.descriptionIsEmpty ? .green1 : .gray5)
                 .clipShape(.rect(cornerRadius: 10))
         }
-        .buttonStyle(.plain)
         .disabled(!viewModel.descriptionIsEmpty)
     }
 }

@@ -12,7 +12,7 @@ final class GeneratorViewModel: ObservableObject {
     // firstView
     @Published var photoDescription: String = ""
     @Published var referenceImage: ImageAsset? = nil
-    @Published var showPhotoPicker: Bool = false
+    @Published var showPhotoPickerWhenFirstView: Bool = false
     
     var descriptionIsEmpty: Bool {
         return !photoDescription.isEmpty
@@ -44,6 +44,7 @@ final class GeneratorViewModel: ObservableObject {
     }
     
     // thirdView
+    @Published var showPhotoPickerWhenThirdView: Bool = false
     @Published var faceImages: [ImageAsset] = []
     
     var faceImagesIsEmpty: Bool {

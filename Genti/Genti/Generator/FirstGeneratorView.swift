@@ -39,22 +39,21 @@ struct FirstGeneratorView: View {
                         
                         nextButton()
                             .padding(.horizontal, 28)
-     
-                        Spacer()
-                            .frame(height: .height(ratio: 0.05))
+    
                         
                         GeneratorExampleView()
                             .frame(maxHeight: .height(ratio: 0.21))
+                            .padding(.top, .height(ratio: 0.05))
                     } //:VSTACK
                 }
                 .ignoresSafeArea(.keyboard, edges: .bottom)
 
             } //:ZSTACK
-            .focused($isFocused)
             .onTapGesture {
                 isFocused = false
             }
-            .fullScreenCover(isPresented: $viewModel.showPhotoPicker) {
+            .focused($isFocused)
+            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1), pickerType: .reference)
             }
         }
@@ -62,8 +61,8 @@ struct FirstGeneratorView: View {
     }
     
     private func nextButton() -> some View {
-        Button {
-            // Action
+        NavigationLink {
+            SecondGeneratorView()
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
@@ -73,7 +72,6 @@ struct FirstGeneratorView: View {
                 .background(viewModel.descriptionIsEmpty ? .green1 : .gray5)
                 .clipShape(.rect(cornerRadius: 10))
         }
-        .buttonStyle(.plain)
         .disabled(!viewModel.descriptionIsEmpty)
     }
     
@@ -91,7 +89,7 @@ struct FirstGeneratorView: View {
                     .padding((CGFloat.height(ratio: 0.13)-29)/2)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPicker = true
+                        viewModel.showPhotoPickerWhenFirstView = true
                     }
             } else {
                 PHAssetImageView(from: viewModel.referenceImage!.asset)
@@ -106,11 +104,9 @@ struct FirstGeneratorView: View {
                                 withAnimation(.easeInOut) {
                                     viewModel.removeReferenceImage()
                                 }
-
                             }
                     }
             }
-
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
