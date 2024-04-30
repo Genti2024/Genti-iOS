@@ -21,7 +21,7 @@ struct PHAssetImageView: View {
             let scale = UIScreen.main.scale
             let width = geometry.size.width * scale
             let height = geometry.size.height * scale
-            let imageSize = CGSize(width: width, height: height)
+            let imageSize = CGSize(width: width*0.8, height: height*0.8)
             imageViewFromAsset(size: imageSize)
         })
         .clipped()

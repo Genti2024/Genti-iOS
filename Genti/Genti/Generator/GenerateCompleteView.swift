@@ -82,7 +82,7 @@ struct GenerateCompleteView: View {
                             .clipShape(.rect(cornerRadius: 10))
                     }
                     .padding(.horizontal, 31)
-                    .padding(.bottom, 25)
+                    .padding(.bottom, .height(ratio: 0.03))
                     .buttonStyle(.plain)
                 } //:VSTACK
             } //:ZSTACK
