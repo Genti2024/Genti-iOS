@@ -13,7 +13,7 @@ struct GentiApp: App {
     var body: some Scene {
         WindowGroup {
             
-            FirstGeneratorView()
+            ThirdGeneratorView()
                 .environmentObject(viewModel)
         }
     }

@@ -55,7 +55,7 @@ struct FirstGeneratorView: View {
                 isFocused = false
             }
             .fullScreenCover(isPresented: $viewModel.showPhotoPicker) {
-                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1))
+                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1), pickerType: .reference)
             }
         }
 

@@ -26,7 +26,7 @@ final class GeneratorViewModel: ObservableObject {
         self.photoDescription = String($0.prefix(20))
     }
     
-    func setImageAsset(asset: ImageAsset) {
+    func setReferenceImageAsset(asset: ImageAsset) {
         self.referenceImage = asset
     }
     
@@ -41,5 +41,16 @@ final class GeneratorViewModel: ObservableObject {
     
     var angleAndFrameSelected: Bool {
         return selectedAngle != nil && selectedFrame != nil
+    }
+    
+    // thirdView
+    @Published var faceImages: [ImageAsset] = []
+    
+    var faceImagesIsEmpty: Bool {
+        return faceImages.isEmpty
+    }
+    
+    func setFaceImageAsses(assets: [ImageAsset]) {
+        self.faceImages = assets
     }
 }

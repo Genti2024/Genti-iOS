@@ -10,11 +10,17 @@ import Photos
 
 import SwiftfulUI
 
+enum ImagePickerType {
+    case reference, faces
+}
+
 struct PopupImagePickerView: View {
 
     @ObservedObject var imagePickerModel: ImagePickerViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @Environment(\.dismiss) private var dismiss
+    let pickerType: ImagePickerType
+    
     
     var body: some View {
         ZStack {
@@ -65,7 +71,13 @@ private extension PopupImagePickerView {
     func selectButton() -> some View {
         Button {
             // Action
-            self.generatorViewModel.setImageAsset(asset: imagePickerModel.selectedImages[0])
+            switch pickerType {
+            case .faces:
+                self.generatorViewModel.setFaceImageAsses(assets: imagePickerModel.selectedImages)
+            case .reference:
+                self.generatorViewModel.setReferenceImageAsset(asset: imagePickerModel.selectedImages[0])
+            }
+            
             dismiss()
         } label: {
             Text("\(imagePickerModel.selectedImageCount)/\(imagePickerModel.limit)추가하기")
