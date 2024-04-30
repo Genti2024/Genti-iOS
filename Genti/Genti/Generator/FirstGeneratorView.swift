@@ -11,7 +11,7 @@ import Combine
 struct FirstGeneratorView: View {
     @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     @FocusState var isFocused: Bool
-    
+
     var onXmarkPressed: (() -> Void)? = nil
 
     var body: some View {
@@ -23,7 +23,7 @@ struct FirstGeneratorView: View {
                 // Content
                 GeometryReader { _ in
                     VStack(spacing: 0) {
-                        GeneratorNavigationView(onXmarkPressed: onXmarkPressed)
+                        GeneratorNavigationView(onXmarkPressed: onXmarkPressed, isFirst: true)
                             .padding(.horizontal, 24)
                         
                         GeneratorHeaderView(step: 1)
