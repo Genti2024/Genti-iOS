@@ -12,4 +12,9 @@ extension CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         return screenHeight * ratio
     }
+    
+    static func width(ratio: CGFloat) -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        return screenWidth * ratio
+    }
 }
