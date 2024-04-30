@@ -10,7 +10,7 @@ import SwiftUI
 struct ThirdGeneratorView: View {
     
     @EnvironmentObject var viewModel: GeneratorViewModel
-    
+    var onXmarkPressed: (() -> Void)? = nil
     var body: some View {
         NavigationStack {
             ZStack {
@@ -19,7 +19,7 @@ struct ThirdGeneratorView: View {
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    GeneratorNavigationView()
+                    GeneratorNavigationView(onXmarkPressed: onXmarkPressed)
                         .padding(.horizontal, 24)
                     
                     GeneratorHeaderView(step: 3)
@@ -29,6 +29,7 @@ struct ThirdGeneratorView: View {
                         .padding(.top, .height(ratio: 0.048))
                     
                     cautionScrollView()
+                        .padding(.top, .height(ratio: 0.02))
 
                     nextButton()
                         .padding(.horizontal, 28)
@@ -54,6 +55,7 @@ struct ThirdGeneratorView: View {
                         .foregroundStyle(.gray1)
                 } //:HSTACK
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 30)
                 
                 Spacer()
                     .frame(height: 8)
@@ -61,6 +63,7 @@ struct ThirdGeneratorView: View {
                 ForEach(Caution.texts, id: \.self) { text in
                     BulletText(text: text)
                 }
+                .padding(.horizontal, 30)
                 
                 Spacer()
                     .frame(height: 18)
@@ -123,21 +126,21 @@ struct ThirdGeneratorView: View {
                 } //:VSTACK
                 
             } //:VSTACK
-            .padding(.vertical, 30)
+            .padding(.vertical, 20)
         }
         .overlay {
             VStack {
                 LinearGradient(colors: [.backgroundWhite, .backgroundWhite.opacity(0)], startPoint: .top, endPoint: .bottom)
-                    .frame(height: 30)
+                    .frame(height: 20)
                 Spacer()
                 LinearGradient(colors: [.backgroundWhite, .backgroundWhite.opacity(0)], startPoint: .bottom, endPoint: .top)
-                    .frame(height: 30)
+                    .frame(height: 20)
             }
         }
     }
     
     private func imageUploadView() -> some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 8) {
             Text("사진 생성에 이용할 얼굴 3장을 업로드해주세요")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
@@ -162,7 +165,7 @@ struct ThirdGeneratorView: View {
                     } //:HSTACK
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPickerWhenFirstView = true
+                        viewModel.showPhotoPickerWhenThirdView = true
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
@@ -172,15 +175,15 @@ struct ThirdGeneratorView: View {
                         }
                     } //:HSTACK
                 } //:VSTACK
-                .frame(height: .height(ratio: 0.14))
                 .padding(.horizontal, 39)
             }
         } //:VSTACK
+        .frame(height: .height(ratio: 0.17))
     }
     
     private func nextButton() -> some View {
         NavigationLink {
-            GenerateCompleteView()
+            GenerateCompleteView(onXmarkPressed: onXmarkPressed)
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)

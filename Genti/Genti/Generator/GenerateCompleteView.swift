@@ -10,7 +10,7 @@ import SwiftUI
 struct GenerateCompleteView: View {
     
     @EnvironmentObject var viewModel: GeneratorViewModel
-
+    var onXmarkPressed: (() -> Void)? = nil
     var userName: String = "i_am_GenTi"
     
     var body: some View {
@@ -71,6 +71,7 @@ struct GenerateCompleteView: View {
                     
                     Button {
                         // Action
+                        onXmarkPressed?()
                     } label: {
                         Text("피드로 돌아가기")
                             .pretendard(.headline1)

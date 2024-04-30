@@ -21,7 +21,7 @@ struct SecondGeneratorView: View {
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    GeneratorNavigationView()
+                    GeneratorNavigationView(onXmarkPressed: onXmarkPressed)
                         .padding(.horizontal, 24)
                     
                     GeneratorHeaderView(step: 2)
@@ -133,7 +133,7 @@ struct SecondGeneratorView: View {
     
     private func nextButton() -> some View {
         NavigationLink {
-            ThirdGeneratorView()
+            ThirdGeneratorView(onXmarkPressed: onXmarkPressed)
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)

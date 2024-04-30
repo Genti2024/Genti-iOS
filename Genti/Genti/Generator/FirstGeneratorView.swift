@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct FirstGeneratorView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
+    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     @FocusState var isFocused: Bool
     
     var onXmarkPressed: (() -> Void)? = nil
@@ -23,7 +23,7 @@ struct FirstGeneratorView: View {
                 // Content
                 GeometryReader { _ in
                     VStack(spacing: 0) {
-                        GeneratorNavigationView()
+                        GeneratorNavigationView(onXmarkPressed: onXmarkPressed)
                             .padding(.horizontal, 24)
                         
                         GeneratorHeaderView(step: 1)
@@ -47,7 +47,7 @@ struct FirstGeneratorView: View {
                     } //:VSTACK
                 }
                 .ignoresSafeArea(.keyboard, edges: .bottom)
-
+                
             } //:ZSTACK
             .onTapGesture {
                 isFocused = false
@@ -55,14 +55,15 @@ struct FirstGeneratorView: View {
             .focused($isFocused)
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1), pickerType: .reference)
+
             }
         }
-
+        .environmentObject(viewModel)
     }
     
     private func nextButton() -> some View {
         NavigationLink {
-            SecondGeneratorView()
+            SecondGeneratorView(onXmarkPressed: onXmarkPressed)
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
@@ -131,7 +132,7 @@ struct FirstGeneratorView: View {
     private func descriptionTextEditor() -> some View {
         ZStack {
             TextEditor(text: viewModel.textEditorLimit)
-                .pretendard(.description)
+                .pretendard(.number)
                 .foregroundStyle(.black)
                 .scrollContentBackground(.hidden)
                 .background(.gray6)
