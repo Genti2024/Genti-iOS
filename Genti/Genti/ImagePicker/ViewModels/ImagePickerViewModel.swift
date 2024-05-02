@@ -21,6 +21,14 @@ final class ImagePickerViewModel: ObservableObject {
     private let fetchLimit = 40
     private var isLoading = false
     
+    
+    func isSelected(from imageAsset: ImageAsset) -> Int? {
+        guard let index = self.selectedImages.firstIndex(where: { asset in
+            asset.id == imageAsset.id
+        }) else { return nil}
+        return index
+    }
+    
     private var cancellables: Set<AnyCancellable> = []
     
     let albumService: AlbumService

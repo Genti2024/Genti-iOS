@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GentiTabView: View {
-    
+//    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     @State private var currentTab: Tab = .home
     @State private var showPhotoGenView: Bool = false
     
@@ -30,6 +30,7 @@ struct GentiTabView: View {
             FirstGeneratorView {
                 showPhotoGenView.toggle()
             }
+//            .environmentObject(viewModel)
         }
     }
 }

@@ -47,6 +47,7 @@ struct FeedView: View {
             
             Text("\(userName)")
                 .pretendard(.small)
+                .foregroundStyle(.black)
         } //:HSTACK
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 12)
@@ -88,10 +89,12 @@ struct FeedView: View {
             
             Text("\(likeCount)명이 좋아합니다.")
                 .pretendard(.number)
+                .foregroundStyle(.black)
                 .font(.caption)
             
             Text(description)
                 .pretendard(.small)
+                .foregroundStyle(.black)
                 .readingFrame { frame in
                     self.isOver = isOver(
                         for: description,

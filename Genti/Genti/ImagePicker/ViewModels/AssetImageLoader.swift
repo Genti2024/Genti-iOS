@@ -20,7 +20,8 @@ final class AssetImageLoader: ObservableObject {
         self.imageRequsetOptions = {
             let options = PHImageRequestOptions()
             options.isSynchronous = false
-            options.deliveryMode = .highQualityFormat
+            options.resizeMode = .fast
+            options.deliveryMode = .opportunistic
             options.isNetworkAccessAllowed = true
             return options
         }()

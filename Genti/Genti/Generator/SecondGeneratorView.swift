@@ -14,35 +14,38 @@ struct SecondGeneratorView: View {
     var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
-        ZStack {
-            // Background Color
-            Color.backgroundWhite
-                .ignoresSafeArea()
-            // Content
-            VStack(spacing: 0) {
-                GeneratorNavigationView()
-                    .padding(.horizontal, 24)
-                
-                GeneratorHeaderView(step: 2)
-                    .padding(.top, 10)
-                
-                
-                VStack(spacing: 14) {
-                    angleSelectView()
-                    frameSelectView()
-                } //:VSTACK
-                .padding(.horizontal, 16)
-                .padding(.top, 25)
-                
-                Spacer()
-                
-                nextButton()
-                    .padding(.horizontal, 28)
+        NavigationStack {
+            ZStack {
+                // Background Color
+                Color.backgroundWhite
+                    .ignoresSafeArea()
+                // Content
+                VStack(spacing: 0) {
+                    GeneratorNavigationView(onXmarkPressed: onXmarkPressed)
+                        .padding(.horizontal, 24)
+                    
+                    GeneratorHeaderView(step: 2)
+                        .padding(.top, 10)
+                    
+                    
+                    VStack(spacing: 14) {
+                        angleSelectView()
+                        frameSelectView()
+                    } //:VSTACK
+                    .padding(.horizontal, 16)
+                    .padding(.top, 25)
+                    
+                    Spacer()
+                    
+                    nextButton()
+                        .padding(.horizontal, 28)
 
-                GeneratorExampleView()
-                    .padding(.top, 43)
-            } //:VSTACK
-        } //:ZSTACK
+                    GeneratorExampleView()
+                        .frame(maxHeight: .height(ratio: 0.21))
+                        .padding(.top, .height(ratio: 0.05))
+                } //:VSTACK
+            } //:ZSTACK
+        }
         .toolbar(.hidden, for: .navigationBar)
     }
     
@@ -62,8 +65,7 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.selectedAngle == angle {
                                     Rectangle()
-                                        .stroke(lineWidth: 2)
-                                        .foregroundStyle(.green1)
+                                        .strokeBorder(.green1, style: .init(lineWidth:2))
                                 }
 
                             }
@@ -103,8 +105,7 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.selectedFrame == frame {
                                     Rectangle()
-                                        .stroke(lineWidth: 2)
-                                        .foregroundStyle(.green1)
+                                        .strokeBorder(.green1, style: .init(lineWidth:2))
                                 }
 
                             }
@@ -129,10 +130,8 @@ struct SecondGeneratorView: View {
     }
     
     private func nextButton() -> some View {
-        Button {
-            // Action
-            print("angle = \(String(describing: viewModel.selectedAngle))")
-            print("frame = \(String(describing: viewModel.selectedFrame))")
+        NavigationLink {
+            ThirdGeneratorView(onXmarkPressed: onXmarkPressed)
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
@@ -142,11 +141,11 @@ struct SecondGeneratorView: View {
                 .background(viewModel.angleAndFrameSelected ? .green1 : .gray5)
                 .clipShape(.rect(cornerRadius: 10))
         }
-        .buttonStyle(.plain)
         .disabled(!viewModel.angleAndFrameSelected)
     }
 }
 
 #Preview {
     SecondGeneratorView()
+        .environmentObject(GeneratorViewModel())
 }

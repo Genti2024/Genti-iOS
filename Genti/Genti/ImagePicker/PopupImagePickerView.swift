@@ -15,6 +15,7 @@ struct PopupImagePickerView: View {
     @ObservedObject var imagePickerModel: ImagePickerViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @Environment(\.dismiss) private var dismiss
+    let pickerType: ImagePickerType
     
     var body: some View {
         ZStack {
@@ -32,6 +33,7 @@ struct PopupImagePickerView: View {
             
             selectButton()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, .height(ratio: 0.03))
             
         } //:ZSTACK
     }
@@ -40,7 +42,7 @@ struct PopupImagePickerView: View {
 private extension PopupImagePickerView {
     func albumImageScrollView() -> some View {
         ScrollViewWithOnScrollChanged {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 10), count: 3)) {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 3), count: 3), spacing: 3) {
                 ForEach(imagePickerModel.fetchedImages) { imageAsset in
                     albumImage(from: imageAsset)
                         .aspectRatio(1, contentMode: .fit)
@@ -56,7 +58,6 @@ private extension PopupImagePickerView {
                 self.imagePickerModel.getPhotosWithPagination()
             }
         }
-        .padding(.horizontal, 10)
         .onReadSize({ size in
             self.imagePickerModel.scrollViewHeight = size.height
         })
@@ -65,20 +66,23 @@ private extension PopupImagePickerView {
     func selectButton() -> some View {
         Button {
             // Action
-            self.generatorViewModel.setImageAsset(asset: imagePickerModel.selectedImages[0])
+            switch pickerType {
+            case .faces:
+                self.generatorViewModel.setFaceImageAsses(assets: imagePickerModel.selectedImages)
+            case .reference:
+                self.generatorViewModel.setReferenceImageAsset(asset: imagePickerModel.selectedImages[0])
+            }
             dismiss()
         } label: {
-            Text("\(imagePickerModel.selectedImageCount)/\(imagePickerModel.limit)추가하기")
+            Text("\(imagePickerModel.selectedImageCount) / \(imagePickerModel.limit) 장의 사진 추가하기")
                 .pretendard(.headline4)
-                .foregroundStyle(imagePickerModel.isReachLimit ? .white : .black)
-                .padding(.horizontal, 50)
-                .padding(.vertical, 15)
+                .foregroundStyle(.white)
+                .padding(.horizontal, 25)
+                .padding(.vertical, 12)
                 .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(imagePickerModel.isReachLimit ? .green1 : .gray5)
+                    Capsule()
+                        .fill(imagePickerModel.isReachLimit ? .green1 : .gray3)
                 )
-                .padding(.bottom, 10)
-                
         }
         .disabled(!imagePickerModel.isReachLimit)
     }
@@ -89,16 +93,14 @@ private extension PopupImagePickerView {
                 .pretendard(.headline4)
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
             Button {
-                // Action
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
                     .font(.title2)
                     .foregroundStyle(.black)
             }
-        } //:HSTACK
+        }
     }
     
     func albumImage(from imageAsset: ImageAsset) -> some View {
@@ -113,37 +115,54 @@ private extension PopupImagePickerView {
                     Circle()
                         .stroke(.white, lineWidth: 1)
                     
-                    if let index = imagePickerModel.selectedImages.firstIndex(where: { asset in
-                        asset.id == imageAsset.id
-                    }) {
+                    if let index = imagePickerModel.isSelected(from: imageAsset) {
                         Circle()
                             .fill(.gentiGreen)
                         Text("\(imagePickerModel.selectedImages[index].assetIndex + 1)")
                             .font(.caption2.bold())
                             .foregroundStyle(.white)
                     }
-                    
                 }
                 .frame(width: 15, height: 15)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .padding(4)
+                .padding(6)
+                
+                if let _ = imagePickerModel.isSelected(from: imageAsset) {
+                    Rectangle()
+                        .strokeBorder(.green1, style: .init(lineWidth: 2))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
             .onTapGesture {
                 withAnimation(.easeInOut) {
-                    if let index = imagePickerModel.selectedImages.firstIndex(where: { asset in
-                        return asset.id == imageAsset.id
-                    }) {
-                        imagePickerModel.selectedImages.remove(at: index)
-                        imagePickerModel.selectedImages.enumerated().forEach { item in
-                            imagePickerModel.selectedImages[item.offset].assetIndex = item.offset
-                        }
-                    } else {
-                        guard !imagePickerModel.isReachLimit else { return }
-                        var newAsset = imageAsset
-                        newAsset.assetIndex = imagePickerModel.selectedImages.count
-                        imagePickerModel.selectedImages.append(newAsset)
-                    }
+                    updateImageSelection(for: imageAsset)
                 }
             }
+    }
+    
+    func updateImageSelection(for imageAsset: ImageAsset) {
+        if let index = imagePickerModel.isSelected(from: imageAsset) {
+            removeImage(at: index)
+        } else {
+            addImage(imageAsset)
+        }
+    }
+
+    func removeImage(at index: Int) {
+        imagePickerModel.selectedImages.remove(at: index)
+        updateAssetIndices()
+    }
+
+    func addImage(_ imageAsset: ImageAsset) {
+        guard !imagePickerModel.isReachLimit else { return }
+        var newAsset = imageAsset
+        newAsset.assetIndex = imagePickerModel.selectedImages.count
+        imagePickerModel.selectedImages.append(newAsset)
+    }
+
+    func updateAssetIndices() {
+        for index in imagePickerModel.selectedImages.indices {
+            imagePickerModel.selectedImages[index].assetIndex = index
+        }
     }
 }

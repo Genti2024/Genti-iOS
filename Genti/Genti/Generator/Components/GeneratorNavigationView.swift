@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GeneratorNavigationView: View {
-    
-    var onBackButtonPressed: (() -> Void)? = nil
+    @Environment(\.dismiss) private var dismiss
     var onXmarkPressed: (() -> Void)? = nil
     var isFirst: Bool = false
     
@@ -21,7 +20,7 @@ struct GeneratorNavigationView: View {
                 .frame(width: 29, height: 29)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    onBackButtonPressed?()
+                    dismiss()
                 }
                 .opacity(isFirst ? 0 : 1)
             Spacer()

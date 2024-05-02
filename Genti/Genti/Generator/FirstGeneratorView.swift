@@ -9,9 +9,9 @@ import SwiftUI
 import Combine
 
 struct FirstGeneratorView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
+    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     @FocusState var isFocused: Bool
-    
+
     var onXmarkPressed: (() -> Void)? = nil
 
     var body: some View {
@@ -23,7 +23,7 @@ struct FirstGeneratorView: View {
                 // Content
                 GeometryReader { _ in
                     VStack(spacing: 0) {
-                        GeneratorNavigationView()
+                        GeneratorNavigationView(onXmarkPressed: onXmarkPressed, isFirst: true)
                             .padding(.horizontal, 24)
                         
                         GeneratorHeaderView(step: 1)
@@ -33,38 +33,37 @@ struct FirstGeneratorView: View {
                             .padding(.top, 32)
                         
                         addImageView()
-                            .padding(.top, 44)
+                            .padding(.top, .height(ratio: 0.05))
 
-                        Spacer()
-                            .frame(minHeight: 10)
+                        Spacer(minLength: 0)
                         
                         nextButton()
                             .padding(.horizontal, 28)
-     
-                        Spacer()
-                            .frame(minHeight: 10, maxHeight: 43)
+    
                         
                         GeneratorExampleView()
-                            .frame(height: 170)
+                            .frame(maxHeight: .height(ratio: 0.21))
+                            .padding(.top, .height(ratio: 0.05))
                     } //:VSTACK
                 }
                 .ignoresSafeArea(.keyboard, edges: .bottom)
-
+                
             } //:ZSTACK
-            .focused($isFocused)
             .onTapGesture {
                 isFocused = false
             }
-            .fullScreenCover(isPresented: $viewModel.showPhotoPicker) {
-                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1))
+            .focused($isFocused)
+            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
+                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 1), pickerType: .reference)
+
             }
         }
-
+        .environmentObject(viewModel)
     }
     
     private func nextButton() -> some View {
-        Button {
-            // Action
+        NavigationLink {
+            SecondGeneratorView(onXmarkPressed: onXmarkPressed)
         } label: {
             Text("다음으로")
                 .pretendard(.headline1)
@@ -74,7 +73,6 @@ struct FirstGeneratorView: View {
                 .background(viewModel.descriptionIsEmpty ? .green1 : .gray5)
                 .clipShape(.rect(cornerRadius: 10))
         }
-        .buttonStyle(.plain)
         .disabled(!viewModel.descriptionIsEmpty)
     }
     
@@ -83,21 +81,20 @@ struct FirstGeneratorView: View {
             Text("참고사진이 있다면 추가해주세요")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
+                .padding(.bottom, 5)
             
             if viewModel.referenceImage == nil {
                 Image("AddImageIcon")
                     .resizable()
                     .frame(width: 29, height: 29)
-                    .padding(.top, 28)
-                    .padding(.bottom, 8)
-                    .padding(.horizontal, 20)
+                    .padding((CGFloat.height(ratio: 0.13)-29)/2)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPicker = true
+                        viewModel.showPhotoPickerWhenFirstView = true
                     }
             } else {
                 PHAssetImageView(from: viewModel.referenceImage!.asset)
-                    .frame(width: 100, height: 100)
+                    .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
                     .overlay(alignment: .topTrailing) {
                         Image("ImageRemoveButton")
                             .resizable()
@@ -108,17 +105,14 @@ struct FirstGeneratorView: View {
                                 withAnimation(.easeInOut) {
                                     viewModel.removeReferenceImage()
                                 }
-
                             }
                     }
-                    .padding(.vertical, 20)
-
             }
-
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
                 .foregroundStyle(.gray3)
+                .padding(.top, 5)
         } //:VSTACK
     }
     
@@ -138,7 +132,7 @@ struct FirstGeneratorView: View {
     private func descriptionTextEditor() -> some View {
         ZStack {
             TextEditor(text: viewModel.textEditorLimit)
-                .pretendard(.description)
+                .pretendard(.number)
                 .foregroundStyle(.black)
                 .scrollContentBackground(.hidden)
                 .background(.gray6)
