@@ -7,23 +7,18 @@
 
 import SwiftUI
 import Photos
+import Combine
 
 struct PHAssetImageView: View {
     @StateObject private var imageLoader = AssetImageLoader()
-    let asset: PHAsset
-    
-    init(from asset: PHAsset) {
-        self.asset = asset
-    }
+    @State var asset: PHAsset
     
     var body: some View {
-        GeometryReader(content: { geometry in
-            let scale = UIScreen.main.scale
-            let width = geometry.size.width * scale
-            let height = geometry.size.height * scale
-            let imageSize = CGSize(width: width*0.8, height: height*0.8)
+        GeometryReader { geometry in
+            let scale = UIScreen.main.scale * 0.8
+            let imageSize = CGSize(width: geometry.size.width * scale, height: geometry.size.height * scale)
             imageViewFromAsset(size: imageSize)
-        })
+        }
         .clipped()
         .contentShape(Rectangle())
     }
@@ -41,8 +36,8 @@ struct PHAssetImageView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
-        .onChange(of: asset, initial: true) { _, newValue in
-            imageLoader.loadImage(for: newValue, size: size)
+        .onAppear {
+            imageLoader.loadImage(for: asset, size: size)
         }
     }
 }

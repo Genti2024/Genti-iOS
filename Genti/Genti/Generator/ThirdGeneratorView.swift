@@ -171,7 +171,7 @@ struct ThirdGeneratorView: View {
                     
                     HStack(spacing: 8) {
                         ForEach(viewModel.faceImages) { imageAsset in
-                            PHAssetImageView(from: imageAsset.asset)
+                            PHAssetImageView(asset: imageAsset.asset)
                         }
                     } //:HSTACK
                 } //:VSTACK

@@ -105,7 +105,7 @@ private extension PopupImagePickerView {
     
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
-                PHAssetImageView(from: imageAsset.asset)
+                PHAssetImageView(asset: imageAsset.asset)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)

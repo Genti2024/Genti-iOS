@@ -83,37 +83,42 @@ struct FirstGeneratorView: View {
                 .foregroundStyle(.black)
                 .padding(.bottom, 5)
             
-            if viewModel.referenceImage == nil {
-                Image("AddImageIcon")
-                    .resizable()
-                    .frame(width: 29, height: 29)
-                    .padding((CGFloat.height(ratio: 0.13)-29)/2)
-                    .background(.black.opacity(0.001))
-                    .onTapGesture {
-                        viewModel.showPhotoPickerWhenFirstView = true
-                    }
-            } else {
-                PHAssetImageView(from: viewModel.referenceImage!.asset)
-                    .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
-                    .overlay(alignment: .topTrailing) {
-                        Image("ImageRemoveButton")
-                            .resizable()
-                            .frame(width: 15, height: 15)
-                            .padding(4)
-                            .background(.black.opacity(0.001))
-                            .onTapGesture {
-                                withAnimation(.easeInOut) {
-                                    viewModel.removeReferenceImage()
-                                }
-                            }
-                    }
-            }
+            referenceImage()
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
                 .foregroundStyle(.gray3)
                 .padding(.top, 5)
         } //:VSTACK
+    }
+    
+    @ViewBuilder
+    private func referenceImage() -> some View {
+        if let referenceImage = viewModel.referenceImage?.asset {
+            PHAssetImageView(asset: referenceImage)
+                .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
+                .overlay(alignment: .topTrailing) {
+                    Image("ImageRemoveButton")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                        .padding(4)
+                        .background(.black.opacity(0.001))
+                        .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                viewModel.removeReferenceImage()
+                            }
+                        }
+                }
+        } else {
+            Image("AddImageIcon")
+                .resizable()
+                .frame(width: 29, height: 29)
+                .padding((CGFloat.height(ratio: 0.13)-29)/2)
+                .background(.black.opacity(0.001))
+                .onTapGesture {
+                    viewModel.showPhotoPickerWhenFirstView = true
+                }
+        }
     }
     
     private func inpuTextView() -> some View {
