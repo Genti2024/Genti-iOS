@@ -78,8 +78,4 @@ final class ImagePickerViewModel: ObservableObject {
     private func reachLastIndex(to endIndex: Int) -> Bool {
         return currentIndex < endIndex
     }
-    
-    deinit {
-        print("ImagePickerViewModel deinit")
-    }
 }
