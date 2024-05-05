@@ -37,8 +37,9 @@ struct SecondGeneratorView: View {
                     
                     Spacer()
                     
-                    nextButton()
-                        .padding(.horizontal, 28)
+                    GeneratorNavigationButton(isActive: viewModel.angleAndFrameSelected) {
+                        ThirdGeneratorView(onXmarkPressed: onXmarkPressed)
+                    }
 
                     GeneratorExampleView()
                         .frame(maxHeight: .height(ratio: 0.21))
@@ -125,23 +126,7 @@ struct SecondGeneratorView: View {
                     viewModel.selectedFrame = .free
                 }
             } //:VSTACK
-            
         } //:VSTACK
-    }
-    
-    private func nextButton() -> some View {
-        NavigationLink {
-            ThirdGeneratorView(onXmarkPressed: onXmarkPressed)
-        } label: {
-            Text("다음으로")
-                .pretendard(.headline1)
-                .foregroundStyle(viewModel.angleAndFrameSelected ? .white : .black)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(viewModel.angleAndFrameSelected ? .green1 : .gray5)
-                .clipShape(.rect(cornerRadius: 10))
-        }
-        .disabled(!viewModel.angleAndFrameSelected)
     }
 }
 

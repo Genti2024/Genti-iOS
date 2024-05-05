@@ -6,26 +6,18 @@
 //
 
 import SwiftUI
-import Combine
 
 final class GeneratorViewModel: ObservableObject {
+
     // firstView
-    @Published var photoDescription: String = ""
     @Published var referenceImage: ImageAsset? = nil
     @Published var showPhotoPickerWhenFirstView: Bool = false
+    @Published var photoDescription: String = ""
     
-    var descriptionIsEmpty: Bool {
+    var isEmpty: Bool {
         return !photoDescription.isEmpty
     }
-    
-    private var cancellables: Set<AnyCancellable> = []
-    
-    lazy var textEditorLimit: Binding<String> = .init {
-        return self.photoDescription
-    } set: {
-        self.photoDescription = String($0.prefix(20))
-    }
-    
+
     func setReferenceImageAsset(asset: ImageAsset) {
         self.referenceImage = asset
     }
@@ -33,7 +25,6 @@ final class GeneratorViewModel: ObservableObject {
     func removeReferenceImage() {
         self.referenceImage = nil
     }
-    
     
     // secondView
     @Published var selectedAngle: PhotoAngle? = nil
@@ -47,11 +38,11 @@ final class GeneratorViewModel: ObservableObject {
     @Published var showPhotoPickerWhenThirdView: Bool = false
     @Published var faceImages: [ImageAsset] = []
     
-    var faceImagesIsEmpty: Bool {
-        return faceImages.isEmpty
+    var facesIsEmpty: Bool {
+        return !faceImages.isEmpty
     }
     
-    func setFaceImageAsses(assets: [ImageAsset]) {
+    func setFaceImageAssets(assets: [ImageAsset]) {
         self.faceImages = assets
     }
 }
