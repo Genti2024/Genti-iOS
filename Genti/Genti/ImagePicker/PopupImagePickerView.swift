@@ -36,7 +36,11 @@ struct PopupImagePickerView: View {
                 .padding(.bottom, .height(ratio: 0.03))
             
         } //:ZSTACK
+        .onDisappear(perform: {
+            imagePickerModel.removeAll()
+        })
     }
+
 }
 
 private extension PopupImagePickerView {
@@ -46,16 +50,18 @@ private extension PopupImagePickerView {
                 ForEach(imagePickerModel.fetchedImages) { imageAsset in
                     albumImage(from: imageAsset)
                         .aspectRatio(1, contentMode: .fit)
-                        .readingFrame { frame in
-                            guard imagePickerModel.cellHeight == 0 else { return }
-                            imagePickerModel.cellHeight = frame.height
-                        }
+                }
+            }
+            .readingFrame { frame in
+                if imagePickerModel.contentSize != frame.height {
+                    imagePickerModel.contentSize = frame.height
                 }
             }
 
         } onScrollChanged: { origin in
-            if imagePickerModel.scrollViewHeight > origin.y {
-                self.imagePickerModel.getPhotosWithPagination()
+            let height = imagePickerModel.scrollViewHeight
+            if height > imagePickerModel.contentSize + origin.y {
+                self.imagePickerModel.getPhotos()
             }
         }
         .onReadSize({ size in
@@ -68,7 +74,7 @@ private extension PopupImagePickerView {
             // Action
             switch pickerType {
             case .faces:
-                self.generatorViewModel.setFaceImageAsses(assets: imagePickerModel.selectedImages)
+                self.generatorViewModel.setFaceImageAssets(assets: imagePickerModel.selectedImages)
             case .reference:
                 self.generatorViewModel.setReferenceImageAsset(asset: imagePickerModel.selectedImages[0])
             }
@@ -105,6 +111,7 @@ private extension PopupImagePickerView {
     
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
+                
                 PHAssetImageView(asset: imageAsset.asset)
                 
                 ZStack {

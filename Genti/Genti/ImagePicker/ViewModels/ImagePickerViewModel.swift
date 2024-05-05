@@ -6,71 +6,80 @@
 //
 
 import SwiftUI
-import PhotosUI
 import Combine
+import PhotosUI
 
 final class ImagePickerViewModel: ObservableObject {
-    @Published var scrollViewHeight: CGFloat = 0
-    @Published var cellHeight: CGFloat = 0
-    @Published var fetchedImages: [ImageAsset] = []
-    @Published var selectedImages: [ImageAsset] = []
-    @Published var isReachLimit: Bool = false
-    var limit: Int
-    
-    private var currentIndex = 0
-    private let fetchLimit = 40
-    private var isLoading = false
-    
-    
-    func isSelected(from imageAsset: ImageAsset) -> Int? {
-        guard let index = self.selectedImages.firstIndex(where: { asset in
-            asset.id == imageAsset.id
-        }) else { return nil}
-        return index
-    }
-    
-    private var cancellables: Set<AnyCancellable> = []
-    
-    let albumService: AlbumService
-    
-    init(albumService: AlbumService, limitCount: Int) {
-        self.albumService = albumService
-        self.limit = limitCount
-        getPhotosWithPagination()
-        
-        $selectedImages
-            .map { $0.count == self.limit }
-            .sink { self.isReachLimit = $0 }
-            .store(in: &cancellables)
-            
-        
-    }
-    
-    var selectedImageCount: Int {
-        return selectedImages.count
-    }
-  
-    func fetchImages(indexSet: IndexSet) -> [ImageAsset] {
-        return albumService.fetchAssets(from: indexSet)
-            .map { ImageAsset(asset: $0) }
-    }
 
-    func getPhotosWithPagination() {
-        isLoading = true
-        let endIndex = min(currentIndex + fetchLimit, albumService.count)
-        let indexSet = IndexSet(currentIndex..<endIndex)
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            let assets = self.fetchImages(indexSet: indexSet)
-            DispatchQueue.main.async {
-                self.fetchedImages.append(contentsOf: assets)
-                self.currentIndex = endIndex
-                self.isLoading = false
-            }
+    @Published var scrollViewHeight: CGFloat = 0
+    @Published var contentSize: CGFloat = 0
+    @Published var fetchedImages: [ImageAsset] = []
+    @Published var isReachLimit: Bool = false
+    @Published var selectedImages: [ImageAsset] = [] {
+        didSet {
+            isReachLimit = selectedImages.count == limit
         }
     }
     
+    private let fetchTrigger = PassthroughSubject<Void, Never>()
+    private var currentIndex = 0
+    private let fetchLimit = 50
+    private var isLoading: Bool = false
+    private var cancellables = Set<AnyCancellable>()
+    
+    private let albumService: AlbumService = AlbumServiceImpl()
+    let limit: Int
+    
+    init(limitCount: Int) {
+        self.limit = limitCount
+        setupBindings()
+    }
+    
+    var selectedImageCount: Int {
+        selectedImages.count
+    }
+
+    func getPhotos() {
+        fetchTrigger.send()
+    }
+    
+    func isSelected(from imageAsset: ImageAsset) -> Int? {
+        selectedImages.firstIndex { $0.id == imageAsset.id }
+    }
+    
     func removeAll() {
-        self.selectedImages.removeAll()
+        selectedImages.removeAll()
+    }
+    
+    private func setupBindings() {
+        fetchTrigger
+            .filter { [weak self] in self?.isLoading == false }
+            .handleEvents(receiveOutput: { [weak self] in self?.isLoading = true })
+            .compactMap { [weak self] in self?.getNextIndexSet() }
+            .compactMap { [weak self] in self?.albumService.convertAlbumToImageAsset(indexSet: $0) }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.fetchedImages.append(contentsOf: $0)
+                self?.currentIndex += $0.count
+                self?.isLoading = false
+            }
+            .store(in: &cancellables)
+    }
+
+    private func getNextIndexSet() -> IndexSet? {
+        let endIndex = min(currentIndex + fetchLimit, albumService.count)
+        guard reachLastIndex(to: endIndex) else {
+            isLoading = false
+            return nil
+        }
+        return IndexSet(currentIndex..<endIndex)
+    }
+    
+    private func reachLastIndex(to endIndex: Int) -> Bool {
+        return currentIndex < endIndex
+    }
+    
+    deinit {
+        print("ImagePickerViewModel deinit")
     }
 }
