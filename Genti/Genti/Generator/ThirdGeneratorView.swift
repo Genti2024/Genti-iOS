@@ -31,10 +31,12 @@ struct ThirdGeneratorView: View {
                     cautionScrollView()
                         .padding(.top, .height(ratio: 0.02))
 
-                    nextButton()
-                        .padding(.horizontal, 28)
-                        .padding(.bottom, .height(ratio: 0.03))
-                        .padding(.top, .height(ratio: 0.02))
+                    GeneratorNavigationButton(isActive: viewModel.facesIsEmpty) {
+                        GenerateCompleteView(onXmarkPressed: onXmarkPressed)
+                    }
+                    .padding(.bottom, .height(ratio: 0.03))
+                    .padding(.top, .height(ratio: 0.02))
+                    
                 } //:VSTACK
             } //:ZSTACK
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
@@ -145,7 +147,7 @@ struct ThirdGeneratorView: View {
                 .pretendard(.normal)
                 .foregroundStyle(.black)
             
-            if viewModel.faceImagesIsEmpty {
+            if !viewModel.facesIsEmpty {
                 Image("AddImageIcon")
                     .resizable()
                     .frame(width: 29, height: 29)
@@ -179,21 +181,6 @@ struct ThirdGeneratorView: View {
             }
         } //:VSTACK
         .frame(height: .height(ratio: 0.17))
-    }
-    
-    private func nextButton() -> some View {
-        NavigationLink {
-            GenerateCompleteView(onXmarkPressed: onXmarkPressed)
-        } label: {
-            Text("다음으로")
-                .pretendard(.headline1)
-                .foregroundStyle(viewModel.descriptionIsEmpty ? .white : .black)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(viewModel.descriptionIsEmpty ? .green1 : .gray5)
-                .clipShape(.rect(cornerRadius: 10))
-        }
-        .disabled(!viewModel.descriptionIsEmpty)
     }
 }
 

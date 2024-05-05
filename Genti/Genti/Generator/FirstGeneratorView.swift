@@ -11,9 +11,9 @@ import Combine
 struct FirstGeneratorView: View {
     @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     @FocusState var isFocused: Bool
-
+    
     var onXmarkPressed: (() -> Void)? = nil
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -28,18 +28,19 @@ struct FirstGeneratorView: View {
                         
                         GeneratorHeaderView(step: 1)
                             .padding(.top, 10)
-                    
+                        
                         inpuTextView()
                             .padding(.top, 32)
                         
                         addImageView()
                             .padding(.top, .height(ratio: 0.05))
-
+                        
                         Spacer(minLength: 0)
                         
-                        nextButton()
-                            .padding(.horizontal, 28)
-    
+                        GeneratorNavigationButton(isActive: viewModel.isEmpty) {
+                            SecondGeneratorView(onXmarkPressed: onXmarkPressed)
+                        }
+                        
                         
                         GeneratorExampleView()
                             .frame(maxHeight: .height(ratio: 0.21))
@@ -58,7 +59,7 @@ struct FirstGeneratorView: View {
             .focused($isFocused)
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
-
+                
             }
         }
         .environmentObject(viewModel)
@@ -92,23 +93,6 @@ struct FirstGeneratorView: View {
                 .padding(.top, 5)
         } //:VSTACK
     }
-    
-    private func nextButton() -> some View {
-        NavigationLink {
-            SecondGeneratorView(onXmarkPressed: onXmarkPressed)
-        } label: {
-            Text("다음으로")
-                .pretendard(.headline1)
-                .foregroundStyle(viewModel.descriptionIsEmpty ? .white : .black)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(viewModel.descriptionIsEmpty ? .green1 : .gray5)
-                .clipShape(.rect(cornerRadius: 10))
-        }
-        .disabled(!viewModel.descriptionIsEmpty)
-    }
-    
-    
     
     @ViewBuilder
     private func referenceImage() -> some View {
@@ -154,17 +138,17 @@ struct FirstGeneratorView: View {
                         .fill(.gray6)
                         .stroke(.gray5, lineWidth: 1)
                 )
-
-            if !viewModel.descriptionIsEmpty {
+            
+            if !viewModel.isEmpty {
                 Text("ex) 잔디밭에 앉아서 과잠을 입고 막걸리를 먹는 모습을 만들어줘\n\n* 구체적인 지명을 지정하는 것은 불가능해요!")
-                .pretendard(.small)
-                .foregroundStyle(.gray7)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 11)
-                .onTapGesture {
-                    isFocused = true
-                }
+                    .pretendard(.small)
+                    .foregroundStyle(.gray7)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 11)
+                    .onTapGesture {
+                        isFocused = true
+                    }
             }
         }
         .frame(height: 94)
