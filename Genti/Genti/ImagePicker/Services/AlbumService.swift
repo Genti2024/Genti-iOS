@@ -35,8 +35,4 @@ final class AlbumServiceImpl: AlbumService {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         album = PHAsset.fetchAssets(with: .image, options: options)
     }
-    
-    deinit {
-        print("앨범서비스끝")
-    }
 }
