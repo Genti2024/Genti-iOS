@@ -147,7 +147,7 @@ struct ThirdGeneratorView: View {
                 .pretendard(.normal)
                 .foregroundStyle(.black)
             
-            if !viewModel.facesIsEmpty {
+            if viewModel.facesIsEmpty {
                 Image("AddImageIcon")
                     .resizable()
                     .frame(width: 29, height: 29)

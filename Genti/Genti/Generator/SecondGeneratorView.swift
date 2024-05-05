@@ -37,7 +37,7 @@ struct SecondGeneratorView: View {
                     
                     Spacer()
                     
-                    GeneratorNavigationButton(isActive: viewModel.angleAndFrameSelected) {
+                    GeneratorNavigationButton(isActive: viewModel.angleOrFrameIsEmpty) {
                         ThirdGeneratorView(onXmarkPressed: onXmarkPressed)
                     }
 

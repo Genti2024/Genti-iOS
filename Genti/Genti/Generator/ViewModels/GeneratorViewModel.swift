@@ -15,7 +15,7 @@ final class GeneratorViewModel: ObservableObject {
     @Published var photoDescription: String = ""
     
     var isEmpty: Bool {
-        return !photoDescription.isEmpty
+        return photoDescription.isEmpty
     }
 
     func setReferenceImageAsset(asset: ImageAsset) {
@@ -30,8 +30,8 @@ final class GeneratorViewModel: ObservableObject {
     @Published var selectedAngle: PhotoAngle? = nil
     @Published var selectedFrame: PhotoFrame? = nil
     
-    var angleAndFrameSelected: Bool {
-        return selectedAngle != nil && selectedFrame != nil
+    var angleOrFrameIsEmpty: Bool {
+        return selectedAngle == nil || selectedFrame == nil
     }
     
     // thirdView
@@ -39,7 +39,7 @@ final class GeneratorViewModel: ObservableObject {
     @Published var faceImages: [ImageAsset] = []
     
     var facesIsEmpty: Bool {
-        return !faceImages.isEmpty
+        return faceImages.isEmpty
     }
     
     func setFaceImageAssets(assets: [ImageAsset]) {

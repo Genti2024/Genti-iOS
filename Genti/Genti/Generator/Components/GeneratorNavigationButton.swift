@@ -25,13 +25,13 @@ struct GeneratorNavigationButton<Content>: View where Content: View {
         } label: {
             Text(title)
                 .pretendard(.headline1)
-                .foregroundStyle(isActive ? .white : .black)
+                .foregroundStyle(isActive ? .black : .white)
                 .frame(height: 50)
                 .frame(maxWidth: .infinity)
-                .background(isActive ? .green1 : .gray5)
+                .background(isActive ? .gray5 : .green1)
                 .clipShape(.rect(cornerRadius: 10))
         }
-        .disabled(!isActive)
+        .disabled(isActive)
         .padding(.horizontal, 28)
     }
     

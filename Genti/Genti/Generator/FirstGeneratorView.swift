@@ -139,7 +139,7 @@ struct FirstGeneratorView: View {
                         .stroke(.gray5, lineWidth: 1)
                 )
             
-            if !viewModel.isEmpty {
+            if viewModel.isEmpty {
                 Text("ex) 잔디밭에 앉아서 과잠을 입고 막걸리를 먹는 모습을 만들어줘\n\n* 구체적인 지명을 지정하는 것은 불가능해요!")
                     .pretendard(.small)
                     .foregroundStyle(.gray7)
