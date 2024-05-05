@@ -38,7 +38,7 @@ struct ThirdGeneratorView: View {
                 } //:VSTACK
             } //:ZSTACK
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
-                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(albumService: AlbumService(), limitCount: 3), pickerType: .faces)
+                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 3), pickerType: .faces)
             }
         }
         .toolbar(.hidden, for: .navigationBar)

@@ -5,29 +5,38 @@
 //  Created by uiskim on 4/28/24.
 //
 
-import SwiftUI
 import PhotosUI
+import SwiftUI
 
-final class AlbumService {
-    let result: PHFetchResult<PHAsset>
+protocol AlbumService {
+    var count: Int { get }
+    func convertAlbumToImageAsset(indexSet: IndexSet) -> [ImageAsset]
+}
+
+final class AlbumServiceImpl: AlbumService {
+    private var album: PHFetchResult<PHAsset> = PHFetchResult<PHAsset>()
     
     init() {
+        fetchAlbum()
+    }
+    
+    var count: Int { album.count }
+    
+    func convertAlbumToImageAsset(indexSet: IndexSet) -> [ImageAsset] {
+        return indexSet
+            .compactMap { album.object(at: $0) }
+            .map { ImageAsset(asset: $0) }
+    }
+    
+    private func fetchAlbum() {
         let options = PHFetchOptions()
         options.includeHiddenAssets = false
         options.includeAssetSourceTypes = [.typeUserLibrary]
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        self.result = PHAsset.fetchAssets(with: .image, options: options)
+        album = PHAsset.fetchAssets(with: .image, options: options)
     }
     
-    var count: Int {
-        return result.count
-    }
-    
-    func fetchAssets(from indexSet: IndexSet) -> [PHAsset] {
-        var assets = [PHAsset]()
-        result.enumerateObjects(at: indexSet) { asset, _, _ in
-            assets.append(asset)
-        }
-        return assets
+    deinit {
+        print("앨범서비스끝")
     }
 }
