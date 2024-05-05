@@ -7,38 +7,41 @@
 
 import SwiftUI
 import Photos
-import Combine
 
 struct PHAssetImageView: View {
-    @StateObject private var imageLoader = AssetImageLoader()
-    @State var asset: PHAsset
-    
+    @StateObject var viewModel: PHAssetImageViewModel = PHAssetImageViewModel()
+    var asset: PHAsset
+
     var body: some View {
         GeometryReader { geometry in
-            let scale = UIScreen.main.scale * 0.8
-            let imageSize = CGSize(width: geometry.size.width * scale, height: geometry.size.height * scale)
-            imageViewFromAsset(size: imageSize)
+            let size = calculatedSize(for: geometry)
+            imageView(using: size)
+                .onAppear {
+                    viewModel.loadImage(for: asset, size: size)
+                }
         }
         .clipped()
         .contentShape(Rectangle())
+
     }
-    
-    func imageViewFromAsset(size: CGSize) -> some View {
+
+    private func imageView(using size: CGSize) -> some View {
         Group {
-            if let uiImage = imageLoader.image {
+            if let uiImage = viewModel.image {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
             } else {
-                Text("Loading...")
-                    .pretendard(.description)
-                    .foregroundStyle(.black)
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(1.5)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
-        .onAppear {
-            imageLoader.loadImage(for: asset, size: size)
-        }
+    }
+
+    private func calculatedSize(for geometry: GeometryProxy) -> CGSize {
+        let scale = UIScreen.main.scale * 0.8
+        return CGSize(width: geometry.size.width * scale, height: geometry.size.height * scale)
     }
 }
-
