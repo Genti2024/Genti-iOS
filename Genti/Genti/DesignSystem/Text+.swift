@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Text {
+extension View {
     func pretendard(_ font: Font.PretendardType) -> some View {
         return self.font(font.value)
     }
