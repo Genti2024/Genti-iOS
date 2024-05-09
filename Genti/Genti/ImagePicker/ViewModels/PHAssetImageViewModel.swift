@@ -40,4 +40,8 @@ class PHAssetImageViewModel: ObservableObject {
             }
         }
     }
+    
+    func cancel() {
+        self.imageManager.stopCachingImagesForAllAssets()
+    }
 }

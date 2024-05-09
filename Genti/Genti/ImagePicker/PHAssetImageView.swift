@@ -19,6 +19,9 @@ struct PHAssetImageView: View {
                 .onAppear {
                     viewModel.loadImage(for: asset, size: size)
                 }
+                .onDisappear {
+                    viewModel.cancel()
+                }
         }
         .clipped()
         .contentShape(Rectangle())
