@@ -17,6 +17,7 @@ struct GentiTabView: View {
                 HomeView()
                     .tag(Tab.home)
                 
+                
                 FirstGeneratorView()
                     .tag(Tab.generator)
                 

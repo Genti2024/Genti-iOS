@@ -12,7 +12,7 @@ struct GentiApp: App {
     
     var body: some Scene {
         WindowGroup {
-            GentiTabView()
+            LoginView()
         }
     }
 }

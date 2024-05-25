@@ -23,7 +23,7 @@ struct FirstGeneratorView: View {
     var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             ZStack {
                 // Background Color
                 Color.backgroundWhite
@@ -44,14 +44,20 @@ struct FirstGeneratorView: View {
                         
                         addImageView()
                         
-                        NavigationLink("Second", value: "Second")
-                        GeneratorNavigationButton(isActive: viewModel.isEmpty) {
+                        NavigationLink {
                             SecondGeneratorView()
-                            
+                                .environmentObject(viewModel)
+                        } label: {
+                            Text("두번째")
                         }
-                        .padding(.top, 70)
-                        .padding(.bottom, 32)
-                        
+
+//                        GeneratorNavigationButton(isActive: viewModel.isEmpty) {
+//                            
+//                            
+//                        }
+//                        .padding(.top, 70)
+//                        .padding(.bottom, 32)
+//                        
                         
                     } //:VSTACK
                 }
@@ -69,8 +75,8 @@ struct FirstGeneratorView: View {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
                 
             }
-        }
-        .environmentObject(viewModel)
+//        }
+//        .environmentObject(viewModel)
     }
     
     private func randomDescriptionView() -> some View {
