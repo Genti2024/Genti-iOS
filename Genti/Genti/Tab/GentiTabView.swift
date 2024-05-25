@@ -28,10 +28,11 @@ struct GentiTabView: View {
         } //:ZSTACK
         .ignoresSafeArea(.keyboard)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in
+            self.currentTab = .home
             self.showCompleteView.toggle()
         }
         .fullScreenCover(isPresented: $showCompleteView, onDismiss: {
-            self.currentTab = .home
+//            self.currentTab = .home
         }, content: {
             GenerateCompleteView()
         })

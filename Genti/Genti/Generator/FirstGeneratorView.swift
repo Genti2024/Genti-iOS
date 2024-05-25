@@ -44,8 +44,9 @@ struct FirstGeneratorView: View {
                         
                         addImageView()
                         
+                        NavigationLink("Second", value: "Second")
                         GeneratorNavigationButton(isActive: viewModel.isEmpty) {
-                            SecondGeneratorView(onXmarkPressed: onXmarkPressed)
+                            SecondGeneratorView()
                             
                         }
                         .padding(.top, 70)

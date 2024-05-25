@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ThirdGeneratorView: View {
-    
     @EnvironmentObject var viewModel: GeneratorViewModel
-    var onXmarkPressed: (() -> Void)? = nil
     var body: some View {
         NavigationStack {
             ZStack {

@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct SecondGeneratorView: View {
-    
     @EnvironmentObject var viewModel: GeneratorViewModel
-
-    var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
         NavigationStack {
@@ -35,7 +32,7 @@ struct SecondGeneratorView: View {
                     Spacer()
                     
                     GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-                        ThirdGeneratorView(onXmarkPressed: onXmarkPressed)
+                        ThirdGeneratorView()
                     }
                     .padding(.bottom, 32)
 

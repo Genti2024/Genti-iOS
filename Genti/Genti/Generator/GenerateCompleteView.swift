@@ -70,7 +70,7 @@ struct GenerateCompleteView: View {
                     
                     Button {
                         // Action
-                        xmarkPressed?()
+//                        xmarkPressed?()
                         self.dismiss()
                     } label: {
                         Text("피드로 돌아가기")
