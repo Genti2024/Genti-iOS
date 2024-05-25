@@ -2,95 +2,86 @@
 //  HomeView.swift
 //  Genti
 //
-//  Created by uiskim on 4/18/24.
+//  Created by uiskim on 5/25/24.
 //
 
 import SwiftUI
 
 struct HomeView: View {
-    var feeds: [Feed] = Feed.mocks
-    @State private var scrollViewOffset: CGFloat  = 0
+    @State private var logoHidden: Bool = false
+    
     var body: some View {
         ZStack {
-            VStack {
-                Color.green3
-                Color.backgroundWhite
-            }
-            ScrollView {
-                VStack(spacing: 18) {
-                    headerView()
-                    feedView()
-                } //:VSTACK
-                .padding(.bottom, 120)
-                .background(.backgroundWhite)
-            } //: SCROLLVIEW
-            .scrollIndicators(.hidden)
-            
-            if scrollViewOffset < 20 {
-                uploadButton()
-                    .transition(AnyTransition(.move(edge: .top).combined(with: .opacity)))
-            }
-        }
-        .ignoresSafeArea()
-        .overlay(alignment: .top) {
-            if scrollViewOffset < 20 {
-                Rectangle()
-                    .frame(height: 0)
-                    .background(.backgroundWhite)
-                    .transition(.fade)
-            }
-        }
-        .animation(.snappy, value: scrollViewOffset)
-    }
-    
-    private func headerView() -> some View {
-        ZStack(alignment: .bottom) {
-            Image("Home_navigationBG")
-            HStack {
-                Image("Genti_logo_black")
-                Spacer()
-                Image("Upload")
-                    .background(.black.opacity(0.001))
-                    .onTapGesture {
-                        print("업로드버튼 눌림")
+            // Background Color
+            Color.backgroundWhite
+                .ignoresSafeArea()
+            // Content
+            ZStack {
+                VStack {
+                    VStack {
+                        Spacer()
+                        Image("Genti_logo_green")
+                            .frame(height: 23)
+                            .aspectRatio(contentMode: .fill)
                     }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 28)
-            .padding(.bottom, 10)
-            .readingFrame { frame in
-                scrollViewOffset = frame.minY
-            }
-        }
-    }
-    
-    private func feedView() -> some View {
-        LazyVStack(spacing: 18) {
-            ForEach(feeds) {
-                FeedView(
-                    profileImage: $0.profileImage,
-                    userName: $0.userName,
-                    mainImage: $0.mainImage,
-                    description: $0.description,
-                    likeCount: Int.random(in: 1...100)) {
-                        
+                    .frame(height: 37)
+                    ScrollView {
+                        VStack {
+                            Spacer()
+                                .frame(height: 12)
+                            Text("젠플루엔서들이 만든 사진이에요")
+                                .pretendard(.normal)
+                                .foregroundStyle(.black)
+                                .frame(height: 22)
+                            Text("젠플루언서란?")
+                                .pretendard(.number)
+                                .foregroundStyle(.gentiGreen)
+                                .underline()
+                                .frame(height: 16)
+                            Spacer()
+                                .frame(height: 20)
+                            Text("*여러분이 만든 사진은 자동으로 업로드 되지 않아요")
+                                .foregroundStyle(.gray2)
+                                .pretendard(.description)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 16)
+                                .padding(.bottom, 13)
+                                .background {
+                                    LinearGradient(colors: [.gentiGreen.opacity(0), .gentiGreen.opacity(1)], startPoint: .top, endPoint: .bottom)
+                                }
+                                .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+                        }
+                        VStack(spacing: 0) {
+                            FeedView()
+                            FeedView(description: Constants.text(length: 100))
+                            FeedView(description: Constants.text(length: 50))
+                            FeedView(description: Constants.text(length: 100))
+                            FeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
+                            FeedView()
+                            FeedView(description: Constants.text(length: 100))
+                            FeedView(description: Constants.text(length: 50))
+                            FeedView(description: Constants.text(length: 100))
+                            FeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
+                            
+                        } //:VSTACK
+                        .readingFrame { frame in
+                            withAnimation {
+                                self.logoHidden = frame.origin.y < 165 ? true : false
+                            }
+
+                        }
                     }
-                    .padding(.horizontal, 16)
-            }
-        }
-    }
-    
-    private func uploadButton() -> some View {
-        Image("Upload_Stroke")
-            .frame(width: 60, height: 60)
-            .background(.ultraThinMaterial)
-            .clipShape(Circle())
-            .onTapGesture {
-                print("업로드버튼 눌림")
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(.top, 80)
-            .padding(.trailing, 20)
+                }
+                
+                if !self.logoHidden {
+                    Image("Sparks")
+                        .padding(.leading, 15)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                }
+
+            } //:ZSTACK
+
+        } //:ZSTACK
     }
 }
 
