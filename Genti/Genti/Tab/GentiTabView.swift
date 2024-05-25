@@ -10,7 +10,6 @@ import SwiftUI
 struct GentiTabView: View {
 
     @State private var currentTab: Tab = .home
-    @State private var showPhotoGenView: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -18,20 +17,15 @@ struct GentiTabView: View {
                 HomeView()
                     .tag(Tab.home)
                 
+                FirstGeneratorView()
+                    .tag(Tab.generator)
+                
                 ProfileView()
                     .tag(Tab.profile)
             }
             
-            CustomTabView(selectedTab: $currentTab) {
-                showPhotoGenView.toggle()
-            }
+            CustomTabView(selectedTab: $currentTab)
         } //:ZSTACK
-        .fullScreenCover(isPresented: $showPhotoGenView) {
-            FirstGeneratorView {
-                showPhotoGenView.toggle()
-            }
-        }
-
     }
 }
 

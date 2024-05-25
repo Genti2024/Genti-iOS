@@ -8,5 +8,5 @@
 import Foundation
 
 enum Tab {
-    case home, profile
+    case home, generator ,profile
 }
