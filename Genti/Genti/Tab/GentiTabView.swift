@@ -18,6 +18,7 @@ struct GentiTabView: View {
                     .tag(Tab.home)
                 
                 // MARK: - 4. 가운데 아래 카메라 버튼을 누르면 FirstGeneratorView가 나타남
+                // firstGeneratorView는 들어가보시면 navigationstack으로 감쌌습니다
                 FirstGeneratorView()
                     .tag(Tab.generator)
                 
