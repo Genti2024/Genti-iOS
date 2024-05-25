@@ -8,6 +8,8 @@
 import SwiftUI
 import Combine
 
+
+// MARK: - 5. 사진생성의 첫번째 flow이기때문에 해당 view를 다시 navigationstack으로 감쌈
 struct FirstGeneratorView: View {
     @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     private let randomDescription: [String] = [
@@ -23,7 +25,7 @@ struct FirstGeneratorView: View {
     var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
-//        NavigationStack {
+        NavigationStack {
             ZStack {
                 // Background Color
                 Color.backgroundWhite
@@ -44,6 +46,10 @@ struct FirstGeneratorView: View {
                         
                         addImageView()
                         
+                        // MARK: - 6. 두번째 생성뷰에 viewmodel을 주입해주고 push함
+                        // 그런데 여기서 tabview위로 push되는 문제가 발생했습니다
+                        // 원하는 그림은 tabview는 그대로있고 FirstGeneratorView와 SecondGeneratorView 그리고 thirdGeneratorView가 하나의 flow로 navigation이동하는거였는데
+                        // loginview를 navigation stack으로 연결한 후에 그부분이 잘 구현되지 않아 질문드립니다
                         NavigationLink {
                             SecondGeneratorView()
                                 .environmentObject(viewModel)
@@ -75,8 +81,7 @@ struct FirstGeneratorView: View {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
                 
             }
-//        }
-//        .environmentObject(viewModel)
+        }
     }
     
     private func randomDescriptionView() -> some View {

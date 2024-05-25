@@ -17,7 +17,7 @@ struct GentiTabView: View {
                 HomeView()
                     .tag(Tab.home)
                 
-                
+                // MARK: - 4. 가운데 아래 카메라 버튼을 누르면 FirstGeneratorView가 나타남
                 FirstGeneratorView()
                     .tag(Tab.generator)
                 
