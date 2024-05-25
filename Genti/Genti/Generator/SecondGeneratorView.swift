@@ -33,6 +33,7 @@ struct SecondGeneratorView: View {
                     
                     GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
                         ThirdGeneratorView()
+                            .environmentObject(viewModel)
                     }
                     .padding(.bottom, 32)
 
