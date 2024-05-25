@@ -10,8 +10,16 @@ import Combine
 
 struct FirstGeneratorView: View {
     @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
-    @FocusState var isFocused: Bool
+    private let randomDescription: [String] = [
+        "프랑스 야경을 즐기는 모습을 그려주세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.1",
+        "프랑스 야경을 즐기는 모습을 그려주세모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.2",
+        "프랑스 야경을 즐기는 모습을 그려. 항공점퍼를 입고주세요. 항공점퍼를 입고. 항공점퍼를 입고 테라스에 서 있는 모습이에요.3",
+        "프랑스 야경을 즐기는 모습을 그려주모습을 그려주세요. 항공점퍼를 입고 테라스세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.4",
+    ]
     
+    @State private var currentIndex: Int = 0
+    
+    @FocusState var isFocused: Bool
     var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
@@ -23,8 +31,6 @@ struct FirstGeneratorView: View {
                 // Content
                 GeometryReader { _ in
                     VStack(spacing: 0) {
-                        GeneratorNavigationView(onXmarkPressed: onXmarkPressed, isFirst: true)
-                            .padding(.horizontal, 24)
                         
                         GeneratorHeaderView(step: 1)
                             .padding(.top, 10)
@@ -32,22 +38,23 @@ struct FirstGeneratorView: View {
                         inpuTextView()
                             .padding(.top, 32)
                         
-                        addImageView()
-                            .padding(.top, .height(ratio: 0.05))
+                        randomDescriptionView()
                         
-                        Spacer(minLength: 0)
+                        Spacer()
+                        
+                        addImageView()
                         
                         GeneratorNavigationButton(isActive: viewModel.isEmpty) {
                             SecondGeneratorView(onXmarkPressed: onXmarkPressed)
+                            
                         }
+                        .padding(.top, 70)
+                        .padding(.bottom, 32)
                         
                         
-                        GeneratorExampleView()
-                            .frame(maxHeight: .height(ratio: 0.21))
-                            .padding(.top, .height(ratio: 0.05))
                     } //:VSTACK
                 }
-                .ignoresSafeArea(.keyboard, edges: .bottom)
+                
                 
             } //:ZSTACK
             .onTapGesture {
@@ -65,6 +72,47 @@ struct FirstGeneratorView: View {
         .environmentObject(viewModel)
     }
     
+    private func randomDescriptionView() -> some View {
+        VStack {
+            Text("이런 사진은 어때요?")
+                .pretendard(.number)
+                .foregroundStyle(.gentiGreen)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 7) {
+                ZStack(alignment: .topLeading) {
+                    // Background Color
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .strokeBorder(.gentiGreen, style: .init(lineWidth: 1))
+                        .frame(height: 62)
+                        .shadow(color: .black.opacity(0.09), radius: 5)
+                    // Content
+                    Text(randomDescription[currentIndex])
+                        .pretendard(.description)
+                        .padding(12)
+                } //:ZSTACK
+                .frame(height: 62)
+                
+                Button {
+                    // Action
+                    let maxIndex = randomDescription.count-1
+                    if currentIndex == maxIndex {
+                        currentIndex = 0
+                    } else {
+                        currentIndex += 1
+                    }
+                } label: {
+                    Image("Change")
+                        .resizable()
+                        .frame(width: 17, height: 17)
+                }
+            } //:HSTACK
+            
+        }
+        .padding(.horizontal, 29)
+        .padding(.top, 10)
+    }
+    
     private func inpuTextView() -> some View {
         VStack(spacing: 0) {
             Text("만들고 싶은 사진을 설명해주세요✏️")
@@ -80,10 +128,17 @@ struct FirstGeneratorView: View {
     
     private func addImageView() -> some View {
         VStack(spacing: 0) {
-            Text("참고사진이 있다면 추가해주세요")
-                .pretendard(.normal)
-                .foregroundStyle(.black)
-                .padding(.bottom, 5)
+            HStack(spacing: 3) {
+                Text("참고사진이 있다면 추가해주세요")
+                    .pretendard(.normal)
+                    .foregroundStyle(.black)
+                    .padding(.bottom, 5)
+                
+                Text("(선택)")
+                    .pretendard(.description)
+                    .foregroundStyle(.black)
+            }
+
             
             referenceImage()
             
@@ -126,7 +181,7 @@ struct FirstGeneratorView: View {
     private func descriptionTextEditor() -> some View {
         ZStack {
             TextEditor(text: $viewModel.photoDescription)
-                .limit(text: $viewModel.photoDescription, limit: 10)
+                .limit(text: $viewModel.photoDescription, limit: 200)
                 .pretendard(.number)
                 .foregroundStyle(.black)
                 .scrollContentBackground(.hidden)
@@ -140,18 +195,19 @@ struct FirstGeneratorView: View {
                 )
             
             if viewModel.isEmpty {
-                Text("ex) 잔디밭에 앉아서 과잠을 입고 막걸리를 먹는 모습을 만들어줘\n\n* 구체적인 지명을 지정하는 것은 불가능해요!")
-                    .pretendard(.small)
-                    .foregroundStyle(.gray7)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 11)
-                    .onTapGesture {
-                        isFocused = true
-                    }
+                Text("""
+                    의상과 배경을 포함해서 설명해 주세요!  * 헤어스타일을 변경하는 기능은 준비 중이에요 * 너무 특정한 배경과 의상은 구현이 어려울 수 있어요 (반포 한강 공원, 나이키 티셔츠 등)
+                    """)
+                .withFont(font: .PretendardType.small.value, color: .gray7, minimumScaleFactor: 0.5)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 11)
+                .onTapGesture {
+                    isFocused = true
+                }
             }
         }
-        .frame(height: 94)
+        .frame(height: 112)
     }
 }
 

@@ -8,10 +8,10 @@
 import Foundation
 
 enum PhotoFrame {
-    case closeUp, bust, knee, full, free
+    case closeUp, bust, knee, free
     
     static var selections: [PhotoFrame] {
-        return [.closeUp, .bust, .knee, .full]
+        return [.closeUp, .bust, .knee]
     }
     
     var image: String {
@@ -22,8 +22,6 @@ enum PhotoFrame {
             return "Frame_bust"
         case .knee:
             return "Frame_knee"
-        case .full:
-            return "Frame_full"
         case .free:
             return "Check_empty"
         }

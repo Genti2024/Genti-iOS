@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class GeneratorViewModel: ObservableObject {
-
+    
     // firstView
     @Published var referenceImage: ImageAsset? = nil
     @Published var showPhotoPickerWhenFirstView: Bool = false
@@ -29,9 +29,10 @@ final class GeneratorViewModel: ObservableObject {
     // secondView
     @Published var selectedAngle: PhotoAngle? = nil
     @Published var selectedFrame: PhotoFrame? = nil
+    @Published var selectedRatio: PhotoRatio? = nil
     
-    var angleOrFrameIsEmpty: Bool {
-        return selectedAngle == nil || selectedFrame == nil
+    var angleOrFrameOrRatioIsEmpty: Bool {
+        return selectedAngle == nil || selectedFrame == nil || selectedRatio == nil
     }
     
     // thirdView

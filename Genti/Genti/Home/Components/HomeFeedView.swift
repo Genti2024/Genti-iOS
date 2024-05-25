@@ -1,6 +1,13 @@
+//
+//  HomeFeedView.swift
+//  Genti
+//
+//  Created by uiskim on 5/25/24.
+//
+
 import SwiftUI
 
-struct FeedView: View {
+struct HomeFeedView: View {
     
     var mainImage: String = "SampleImage32"
     var description: String = Constants.text(length: 200)
@@ -63,18 +70,18 @@ struct FeedView: View {
     }
 }
 
-struct FeedView_Previews: PreviewProvider {
+struct HomeFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView()
+        HomeFeedView()
     }
 }
 
 #Preview {
     ScrollView {
-        FeedView(description: Constants.text(length: 50))
-        FeedView(description: Constants.text(length: 100))
-        FeedView(mainImage: "SampleImage32", description: Constants.text(length: 200))
-        FeedView(description: Constants.text(length: 100))
-        FeedView(description: Constants.text(length: 100))
+        HomeFeedView(description: Constants.text(length: 50))
+        HomeFeedView(description: Constants.text(length: 100))
+        HomeFeedView(mainImage: "SampleImage32", description: Constants.text(length: 200))
+        HomeFeedView(description: Constants.text(length: 100))
+        HomeFeedView(description: Constants.text(length: 100))
     }
 }

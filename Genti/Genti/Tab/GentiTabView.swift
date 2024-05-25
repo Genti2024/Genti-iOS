@@ -10,7 +10,7 @@ import SwiftUI
 struct GentiTabView: View {
 
     @State private var currentTab: Tab = .home
-    
+    @State private var showCompleteView: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $currentTab) {
@@ -26,6 +26,15 @@ struct GentiTabView: View {
             
             CustomTabView(selectedTab: $currentTab)
         } //:ZSTACK
+        .ignoresSafeArea(.keyboard)
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in
+            self.showCompleteView.toggle()
+        }
+        .fullScreenCover(isPresented: $showCompleteView, onDismiss: {
+            self.currentTab = .home
+        }, content: {
+            GenerateCompleteView()
+        })
     }
 }
 

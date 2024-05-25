@@ -9,10 +9,9 @@ import SwiftUI
 
 struct GenerateCompleteView: View {
     
-    @EnvironmentObject var viewModel: GeneratorViewModel
-    var onXmarkPressed: (() -> Void)? = nil
     var userName: String = "i_am_GenTi"
-    
+    @Environment(\.dismiss) private var dismiss
+    var xmarkPressed: (()->Void)? = nil
     var body: some View {
         NavigationStack {
             ZStack {
@@ -71,7 +70,8 @@ struct GenerateCompleteView: View {
                     
                     Button {
                         // Action
-                        onXmarkPressed?()
+                        xmarkPressed?()
+                        self.dismiss()
                     } label: {
                         Text("피드로 돌아가기")
                             .pretendard(.headline1)
@@ -86,13 +86,6 @@ struct GenerateCompleteView: View {
                     .buttonStyle(.plain)
                 } //:VSTACK
             } //:ZSTACK
-            .onAppear {
-                print("1. 디스크립션 : \(viewModel.photoDescription)")
-                print("2. 참고사진 : \(String(describing: viewModel.referenceImage?.asset))")
-                print("3. 앵글 : \(viewModel.selectedAngle!)")
-                print("4. 프레임 : \(viewModel.selectedFrame!)")
-                print("5. 얼굴사진 : \(viewModel.faceImages.map{$0.asset})")
-            }
         }
         .toolbar(.hidden, for: .navigationBar)
     }

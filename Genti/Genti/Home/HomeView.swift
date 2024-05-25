@@ -52,16 +52,16 @@ struct HomeView: View {
                                 .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
                         }
                         VStack(spacing: 0) {
-                            FeedView()
-                            FeedView(description: Constants.text(length: 100))
-                            FeedView(description: Constants.text(length: 50))
-                            FeedView(description: Constants.text(length: 100))
-                            FeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
-                            FeedView()
-                            FeedView(description: Constants.text(length: 100))
-                            FeedView(description: Constants.text(length: 50))
-                            FeedView(description: Constants.text(length: 100))
-                            FeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
+                            HomeFeedView()
+                            HomeFeedView(description: Constants.text(length: 100))
+                            HomeFeedView(description: Constants.text(length: 50))
+                            HomeFeedView(description: Constants.text(length: 100))
+                            HomeFeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
+                            HomeFeedView()
+                            HomeFeedView(description: Constants.text(length: 100))
+                            HomeFeedView(description: Constants.text(length: 50))
+                            HomeFeedView(description: Constants.text(length: 100))
+                            HomeFeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
                             
                         } //:VSTACK
                         .readingFrame { frame in

@@ -19,8 +19,6 @@ struct ThirdGeneratorView: View {
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    GeneratorNavigationView(onXmarkPressed: onXmarkPressed)
-                        .padding(.horizontal, 24)
                     
                     GeneratorHeaderView(step: 3)
                         .padding(.top, 10)
@@ -31,10 +29,23 @@ struct ThirdGeneratorView: View {
                     cautionScrollView()
                         .padding(.top, .height(ratio: 0.02))
 
-                    GeneratorNavigationButton(isActive: viewModel.facesIsEmpty) {
-                        GenerateCompleteView(onXmarkPressed: onXmarkPressed)
+                    
+                    Button {
+                        // Action
+                        NotificationCenter.default.post(name: Notification.Name("GeneratorCompleted"), object: nil)
+                    } label: {
+                        Text("사진 생성하기")
+                            .pretendard(.headline1)
+                            .foregroundStyle(viewModel.facesIsEmpty ? .black : .white)
+                            .frame(height: 50)
+                            .frame(maxWidth: .infinity)
+                            .background(viewModel.facesIsEmpty ? .gray5 : .green1)
+                            .clipShape(.rect(cornerRadius: 10))
+
                     }
-                    .padding(.bottom, .height(ratio: 0.03))
+                    .disabled(viewModel.facesIsEmpty)
+                    .padding(.horizontal, 28)
+                    .padding(.bottom, 32)
                     .padding(.top, .height(ratio: 0.02))
                     
                 } //:VSTACK
@@ -91,7 +102,7 @@ struct ThirdGeneratorView: View {
                     Text("💡")
                     Spacer()
                         .frame(height: 4)
-                    Text("만들고자 하는 사진과 같은 각도의 얼굴을 사용하면\n더욱 정확하게 만들어져요!")
+                    Text("사진의 각도가 다양할수록 생성된 얼굴이 자연스러워져요!")
                         .pretendard(.number)
                         .foregroundStyle(.gray1)
                         .multilineTextAlignment(.center)
