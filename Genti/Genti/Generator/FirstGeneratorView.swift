@@ -11,7 +11,10 @@ import Combine
 
 // MARK: - 5. 사진생성의 첫번째 flow이기때문에 해당 view를 다시 navigationstack으로 감쌈
 struct FirstGeneratorView: View {
-    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
+    @EnvironmentObject var viewModel: GeneratorViewModel
+    
+    @Binding var generateFlow: [GeneratorFlow]
+    
     private let randomDescription: [String] = [
         "프랑스 야경을 즐기는 모습을 그려주세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.1",
         "프랑스 야경을 즐기는 모습을 그려주세모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.2",
@@ -25,7 +28,6 @@ struct FirstGeneratorView: View {
     var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 // Background Color
                 Color.backgroundWhite
@@ -46,25 +48,12 @@ struct FirstGeneratorView: View {
                         
                         addImageView()
                         
-                        // MARK: - 6. 두번째 생성뷰에 viewmodel을 주입해주고 push함
-                        // 그런데 여기서 tabview위로 push되는 문제가 발생했습니다
-                        // 원하는 그림은 tabview는 그대로있고 FirstGeneratorView와 SecondGeneratorView 그리고 thirdGeneratorView가 하나의 flow로 navigation이동하는거였는데
-                        // loginview를 navigation stack으로 연결한 후에 그부분이 잘 구현되지 않아 질문드립니다
-                        NavigationLink {
-                            SecondGeneratorView()
-                                .environmentObject(viewModel)
+                        Button {
+                            // Action
+                            self.generateFlow.append(.second)
                         } label: {
-                            Text("두번째")
+                            Text("다음")
                         }
-
-//                        GeneratorNavigationButton(isActive: viewModel.isEmpty) {
-//                            
-//                            
-//                        }
-//                        .padding(.top, 70)
-//                        .padding(.bottom, 32)
-//                        
-                        
                     } //:VSTACK
                 }
                 
@@ -76,12 +65,13 @@ struct FirstGeneratorView: View {
             .onAppear {
                 isFocused = true
             }
+            .ignoresSafeArea(.keyboard)
             .focused($isFocused)
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
+                    .environmentObject(viewModel)
                 
             }
-        }
     }
     
     private func randomDescriptionView() -> some View {
@@ -224,6 +214,6 @@ struct FirstGeneratorView: View {
 }
 
 #Preview {
-    FirstGeneratorView()
+    FirstGeneratorView(generateFlow: .constant([]))
         .environmentObject(GeneratorViewModel())
 }

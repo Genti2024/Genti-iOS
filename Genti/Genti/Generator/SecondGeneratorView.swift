@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SecondGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
+    @Binding var generateFlow: [GeneratorFlow]
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 // Background Color
                 Color.backgroundWhite
@@ -20,6 +20,13 @@ struct SecondGeneratorView: View {
                 VStack(spacing: 0) {
                     GeneratorHeaderView(step: 2)
                         .padding(.top, 10)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .overlay(alignment: .leading) {
+                            Image(systemName: "heart.fill")
+                                .onTapGesture {
+                                    self.generateFlow.removeLast()
+                                }
+                        }
                     
                     VStack(spacing: 12) {
                         ratioSelectView()
@@ -31,16 +38,16 @@ struct SecondGeneratorView: View {
                     
                     Spacer()
                     
-                    GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-                        ThirdGeneratorView()
-                            .environmentObject(viewModel)
+                    Button {
+                        // Action
+                        self.generateFlow.append(.thrid)
+                    } label: {
+                        Text("다음")
                     }
                     .padding(.bottom, 32)
 
-
                 } //:VSTACK
             } //:ZSTACK
-        }
         .toolbar(.hidden, for: .navigationBar)
     }
     
@@ -172,7 +179,7 @@ struct SecondGeneratorView: View {
     }
 }
 
-#Preview {
-    SecondGeneratorView()
-        .environmentObject(GeneratorViewModel())
-}
+//#Preview {
+//    SecondGeneratorView()
+//        .environmentObject(GeneratorViewModel())
+//}

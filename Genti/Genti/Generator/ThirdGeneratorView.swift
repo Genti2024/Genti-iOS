@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ThirdGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
+    @Binding var generateFlow: [GeneratorFlow]
     var body: some View {
-        NavigationStack {
             ZStack {
                 // Background Color
                 Color.backgroundWhite
@@ -23,6 +23,14 @@ struct ThirdGeneratorView: View {
                     
                     imageUploadView()
                         .padding(.top, .height(ratio: 0.048))
+                    
+                    Button {
+                        // Action
+                        self.generateFlow.removeAll()
+                    } label: {
+                        Text("다 지워")
+                    }
+
                     
                     cautionScrollView()
                         .padding(.top, .height(ratio: 0.02))
@@ -51,7 +59,6 @@ struct ThirdGeneratorView: View {
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 3), pickerType: .faces)
             }
-        }
         .toolbar(.hidden, for: .navigationBar)
     }
     
@@ -192,8 +199,8 @@ struct ThirdGeneratorView: View {
         .frame(height: .height(ratio: 0.17))
     }
 }
-
-#Preview {
-    ThirdGeneratorView()
-        .environmentObject(GeneratorViewModel())
-}
+//
+//#Preview {
+//    ThirdGeneratorView()
+//        .environmentObject(GeneratorViewModel())
+//}

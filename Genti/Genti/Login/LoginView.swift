@@ -9,8 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     var body: some View {
-        // MARK: - 2. 로그인뷰를 navigationstack으로 감쌈
-        NavigationStack {
             ZStack {
                 // Background Color
                 Image("Login_Asset")
@@ -33,9 +31,8 @@ struct LoginView: View {
                                 .font(.system(size: 20))
                             
                         } //:VSTACK
-                        
+
                         VStack(alignment: .center, spacing: 10) {
-                            // MARK: - 3. 카카오버튼을 누르면 TabView가 push
                             NavigationLink {
                                 GentiTabView()
                             } label: {
@@ -44,6 +41,7 @@ struct LoginView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(height: 45)
                             }
+
 
 
                             
@@ -59,8 +57,6 @@ struct LoginView: View {
                     )
                 })
             } //:ZSTACK
-        }
-
     }
 }
 

@@ -46,4 +46,18 @@ final class GeneratorViewModel: ObservableObject {
     func setFaceImageAssets(assets: [ImageAsset]) {
         self.faceImages = assets
     }
+    
+    func reset() {
+        self.referenceImage = nil
+        self.showPhotoPickerWhenFirstView  = false
+        self.photoDescription = ""
+        
+        self.selectedAngle = nil
+        self.selectedFrame = nil
+        self.selectedRatio = nil
+        
+        self.showPhotoPickerWhenThirdView = false
+        self.faceImages = []
+        
+    }
 }

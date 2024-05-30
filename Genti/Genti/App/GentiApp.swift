@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct GentiApp: App {
-    // MARK: - 1. loginview시작
+    
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            NavigationView {
+                LoginView()
+            }
         }
     }
 }

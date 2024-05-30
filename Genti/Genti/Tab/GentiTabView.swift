@@ -7,20 +7,37 @@
 
 import SwiftUI
 
+enum GeneratorFlow: Hashable {
+    case second, thrid
+}
+
 struct GentiTabView: View {
 
     @State private var currentTab: Tab = .home
     @State private var showCompleteView: Bool = false
+    @State var generateFlow: [GeneratorFlow] = []
+    @StateObject var genteratorViewModel = GeneratorViewModel()
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $currentTab) {
                 HomeView()
                     .tag(Tab.home)
                 
-                // MARK: - 4. 가운데 아래 카메라 버튼을 누르면 FirstGeneratorView가 나타남
-                // firstGeneratorView는 들어가보시면 navigationstack으로 감쌌습니다
-                FirstGeneratorView()
-                    .tag(Tab.generator)
+                NavigationStack(path: $generateFlow) {
+                    FirstGeneratorView(generateFlow: $generateFlow)
+                        .navigationDestination(for: GeneratorFlow.self) { genType in
+                            switch genType {
+                            case .second:
+                                SecondGeneratorView(generateFlow: $generateFlow)
+                            case .thrid:
+                                ThirdGeneratorView(generateFlow: $generateFlow)
+                            }
+                        }
+
+                }
+                .environmentObject(genteratorViewModel)
+                .tag(Tab.generator)
+
                 
                 ProfileView()
                     .tag(Tab.profile)
@@ -33,8 +50,11 @@ struct GentiTabView: View {
             self.currentTab = .home
             self.showCompleteView.toggle()
         }
+        .toolbar(.hidden, for: .navigationBar)
         .fullScreenCover(isPresented: $showCompleteView, onDismiss: {
-//            self.currentTab = .home
+            self.genteratorViewModel.reset()
+            self.generateFlow.removeAll()
+            self.currentTab = .home
         }, content: {
             GenerateCompleteView()
         })

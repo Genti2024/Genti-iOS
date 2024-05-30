@@ -11,7 +11,7 @@ struct GenerateCompleteView: View {
     
     var userName: String = "i_am_GenTi"
     @Environment(\.dismiss) private var dismiss
-    var xmarkPressed: (()->Void)? = nil
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -70,7 +70,6 @@ struct GenerateCompleteView: View {
                     
                     Button {
                         // Action
-//                        xmarkPressed?()
                         self.dismiss()
                     } label: {
                         Text("피드로 돌아가기")
