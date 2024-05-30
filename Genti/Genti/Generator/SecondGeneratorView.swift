@@ -19,14 +19,20 @@ struct SecondGeneratorView: View {
                 // Content
                 VStack(spacing: 0) {
                     GeneratorHeaderView(step: 2)
-                        .padding(.top, 10)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .overlay(alignment: .leading) {
-                            Image(systemName: "heart.fill")
+                            Image("Back_fill")
+                                .resizable()
+                                .frame(width: 29, height: 29)
+                                .padding(11)
+                                .background(.black.opacity(0.001))
                                 .onTapGesture {
+                                    self.viewModel.resetSecond()
                                     self.generateFlow.removeLast()
                                 }
+                                .padding(.leading, 17)
                         }
+                        .padding(.top, 40)
                     
                     VStack(spacing: 12) {
                         ratioSelectView()
@@ -38,11 +44,8 @@ struct SecondGeneratorView: View {
                     
                     Spacer()
                     
-                    Button {
-                        // Action
+                    GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
                         self.generateFlow.append(.thrid)
-                    } label: {
-                        Text("다음")
                     }
                     .padding(.bottom, 32)
 

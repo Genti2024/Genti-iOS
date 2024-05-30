@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GenerateCompleteView: View {
     
-    var userName: String = "i_am_GenTi"
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -32,30 +31,19 @@ struct GenerateCompleteView: View {
                             .padding(.top, 44)
                         
                         
-                        VStack {
-                            HStack(alignment: .bottom, spacing: 5) {
-                                Text("@\(userName)")
-                                    .foregroundStyle(.gentiGreen)
-                                    .pretendard(.headline1)
-                                
-                                Text("님의")
-                                    .font(.system(size: 17, weight: .regular))
-                                    .foregroundStyle(.gentiGreen)
-                            } //:HSTACK
-                            
-                            Text("사진을 찍고 있어요!")
-                                .font(.system(size: 17, weight: .regular))
-                                .foregroundStyle(.gentiGreen)
-                        }
+                        Image("CompleteLabel")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 55)
                         
-                        Image("Complete_character")
+                        Image("Complete_charactor")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 275)
 
                     } //:VSTACK
                     
-                    Text("예상 소요시간은 4시간입니다")
+                    Text("예상 소요시간은 2시간입니다")
                         .pretendard(.normal)
                         .foregroundStyle(.black)
                         .padding(.top, 15)
