@@ -179,7 +179,7 @@ struct SecondGeneratorView: View {
     }
 }
 
-//#Preview {
-//    SecondGeneratorView()
-//        .environmentObject(GeneratorViewModel())
-//}
+#Preview {
+    SecondGeneratorView(generateFlow: .constant([]))
+        .environmentObject(GeneratorViewModel())
+}

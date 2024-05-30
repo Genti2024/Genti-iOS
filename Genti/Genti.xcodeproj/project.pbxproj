@@ -59,6 +59,7 @@
 		C0DD88242C0858B600109A25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88232C0858B600109A25 /* Post.swift */; };
 		C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88252C085EC600109A25 /* PostCardView.swift */; };
 		C0DD88282C086A9000109A25 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88272C086A9000109A25 /* BlurView.swift */; };
+		C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88292C08732200109A25 /* PostDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		C0DD88232C0858B600109A25 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C0DD88252C085EC600109A25 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		C0DD88272C086A9000109A25 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		C0DD88292C08732200109A25 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				C0DD88232C0858B600109A25 /* Post.swift */,
 				C0DD88252C085EC600109A25 /* PostCardView.swift */,
 				C0DD88272C086A9000109A25 /* BlurView.swift */,
+				C0DD88292C08732200109A25 /* PostDetailView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				C016AE002C01AD5A003ED0DF /* HomeFeedView.swift in Sources */,
 				C07409A12C01750A00616ED9 /* HomeView.swift in Sources */,
 				C086C2242BE09F0700E25D71 /* Caution.swift in Sources */,
+				C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
 				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
 				C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */,

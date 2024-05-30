@@ -17,6 +17,9 @@ struct GentiTabView: View {
     @State private var showCompleteView: Bool = false
     @State var generateFlow: [GeneratorFlow] = []
     @StateObject var genteratorViewModel = GeneratorViewModel()
+    
+    @State private var selectedPost: Post? = nil
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $currentTab) {
@@ -39,12 +42,14 @@ struct GentiTabView: View {
                 .tag(Tab.generator)
 
                 
-                ProfileView()
-                    .tag(Tab.profile)
+                ProfileView(imageTapped: { post in
+                    self.selectedPost = post
+                })
+                .tag(Tab.profile)
             }
             
             CustomTabView(selectedTab: $currentTab)
-        } //:ZSTACK
+        } //: ZSTACK
         .ignoresSafeArea(.keyboard)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in
             self.currentTab = .home
@@ -58,8 +63,14 @@ struct GentiTabView: View {
         }, content: {
             GenerateCompleteView()
         })
+        .fullScreenCover(item: $selectedPost) { post in
+            PostDetailView(imageUrl: post.imageURL)
+        }
     }
 }
+
+
+
 
 #Preview {
     GentiTabView()
