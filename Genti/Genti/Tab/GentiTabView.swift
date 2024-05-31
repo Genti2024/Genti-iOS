@@ -11,14 +11,21 @@ enum GeneratorFlow: Hashable {
     case second, thrid
 }
 
+enum SettingFlow: Hashable {
+    case setting
+}
+
 struct GentiTabView: View {
 
     @State private var currentTab: Tab = .home
     @State private var showCompleteView: Bool = false
     @State var generateFlow: [GeneratorFlow] = []
+    @State var settingFlow: [SettingFlow] = []
+    @State private var tabbarHidden: Bool = false
+    @State private var selectedPost: Post? = nil
+    
     @StateObject var genteratorViewModel = GeneratorViewModel()
     
-    @State private var selectedPost: Post? = nil
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -41,14 +48,25 @@ struct GentiTabView: View {
                 .environmentObject(genteratorViewModel)
                 .tag(Tab.generator)
 
-                
-                ProfileView(imageTapped: { post in
-                    self.selectedPost = post
-                })
+                NavigationStack(path: $settingFlow) {
+                    ProfileView(settingFlow: $settingFlow, imageTapped: { post in
+                        self.selectedPost = post
+                    })
+                    .navigationDestination(for: SettingFlow.self) { setType in
+                        switch setType {
+                        case .setting:
+                            SettingView(tabbarHidden: $tabbarHidden, settingFlow: $settingFlow)
+                        }
+                    }
+                }
+
                 .tag(Tab.profile)
             }
             
-            CustomTabView(selectedTab: $currentTab)
+            if !tabbarHidden {
+                CustomTabView(selectedTab: $currentTab)
+            }
+            
         } //: ZSTACK
         .ignoresSafeArea(.keyboard)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in

@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
     @State private var myImages: [Post] = []
+    @Binding var settingFlow: [SettingFlow]
+    @State private var isMaking: Bool = true
     
     var imageTapped: ((Post) -> Void)? = nil
     
@@ -29,9 +31,27 @@ struct ProfileView: View {
                         .foregroundStyle(.black)
                     Spacer()
                     Image("Setting")
+                        .onTapGesture {
+                            self.settingFlow.append(.setting)
+                        }
                 }
                 .padding(.horizontal, 27)
                 .padding(.vertical, 46)
+                
+                
+                if isMaking {
+                    BlurView(style: .light)
+                        .clipShape(.rect(cornerRadius: 18))
+                        .frame(height: 75)
+                        .padding(.horizontal, 16)
+                        .shadow(color: .green5, radius: 13)
+                        .overlay(alignment: .center) {
+                            Text("세상에 없던 나만의 사진 찍는중...")
+                                .pretendard(.large)
+                                .foregroundStyle(.black)
+                        }
+                        .padding(.bottom, 20)
+                }
                 
                 VStack(spacing: 0) {
                     BlurView(style: .light)
@@ -55,6 +75,7 @@ struct ProfileView: View {
 
             }
         } //:ZSTACK
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             myImages = Post.dummies
         }
@@ -62,5 +83,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(settingFlow: .constant([]))
 }

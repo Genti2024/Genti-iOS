@@ -60,6 +60,7 @@
 		C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88252C085EC600109A25 /* PostCardView.swift */; };
 		C0DD88282C086A9000109A25 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88272C086A9000109A25 /* BlurView.swift */; };
 		C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88292C08732200109A25 /* PostDetailView.swift */; };
+		C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882B2C0938B500109A25 /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		C0DD88252C085EC600109A25 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		C0DD88272C086A9000109A25 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		C0DD88292C08732200109A25 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		C0DD882B2C0938B500109A25 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				C0DD88252C085EC600109A25 /* PostCardView.swift */,
 				C0DD88272C086A9000109A25 /* BlurView.swift */,
 				C0DD88292C08732200109A25 /* PostDetailView.swift */,
+				C0DD882B2C0938B500109A25 /* SettingView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				C086C2202BDFA38600E25D71 /* CGFloat+Ext.swift in Sources */,
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
+				C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */,
 				C086C2192BDF154000E25D71 /* PHAssetImageView.swift in Sources */,
 				C016AE002C01AD5A003ED0DF /* HomeFeedView.swift in Sources */,
 				C07409A12C01750A00616ED9 /* HomeView.swift in Sources */,
