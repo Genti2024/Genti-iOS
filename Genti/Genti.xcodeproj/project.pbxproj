@@ -64,6 +64,7 @@
 		C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882E2C095D7400109A25 /* SettingRow.swift */; };
 		C0DD88312C095E1000109A25 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88302C095E1000109A25 /* WebView.swift */; };
 		C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88342C09632600109A25 /* GentiWebView.swift */; };
+		C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		C0DD882E2C095D7400109A25 /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
 		C0DD88302C095E1000109A25 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C0DD88342C09632600109A25 /* GentiWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiWebView.swift; sourceTree = "<group>"; };
+		C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCompleteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,6 +458,7 @@
 		C0DD882D2C095A1600109A25 /* Complete */ = {
 			isa = PBXGroup;
 			children = (
+				C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */,
 			);
 			path = Complete;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
 				C086C2122BDE121900E25D71 /* AlbumService.swift in Sources */,
 				C086C2222BDFA3E600E25D71 /* ThirdGeneratorView.swift in Sources */,
+				C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */,
 				C086C2282BE0B3E000E25D71 /* ImagePickerType.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
 				C016AE022C01C153003ED0DF /* PhotoRatio.swift in Sources */,
