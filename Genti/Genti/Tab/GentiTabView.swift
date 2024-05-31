@@ -23,6 +23,7 @@ struct GentiTabView: View {
     @State var settingFlow: [SettingFlow] = []
     @State private var tabbarHidden: Bool = false
     @State private var selectedPost: Post? = nil
+    @State private var completedImage: Post? = nil
     
     @StateObject var genteratorViewModel = GeneratorViewModel()
     
@@ -71,6 +72,11 @@ struct GentiTabView: View {
             
         } //: ZSTACK
         .ignoresSafeArea(.keyboard)
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("PhotoMakeCompleted"))) { noti in
+            if let imageName = noti.userInfo?["ImageName"] as? String {
+                self.completedImage = .init(imageURL: imageName)
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in
             self.currentTab = .home
             self.showCompleteView.toggle()
@@ -85,6 +91,9 @@ struct GentiTabView: View {
         })
         .fullScreenCover(item: $selectedPost) { post in
             PostDetailView(imageUrl: post.imageURL)
+        }
+        .fullScreenCover(item: $completedImage) { image in
+            PhotoCompleteView(imageName: image.imageURL)
         }
     }
 }
