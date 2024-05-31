@@ -12,7 +12,7 @@ enum GeneratorFlow: Hashable {
 }
 
 enum SettingFlow: Hashable {
-    case setting
+    case setting, notion(urlString: String)
 }
 
 struct GentiTabView: View {
@@ -56,6 +56,8 @@ struct GentiTabView: View {
                         switch setType {
                         case .setting:
                             SettingView(tabbarHidden: $tabbarHidden, settingFlow: $settingFlow)
+                        case .notion(let urlString):
+                            GentiWebView(settingFlow: $settingFlow, urlString: urlString)
                         }
                     }
                 }

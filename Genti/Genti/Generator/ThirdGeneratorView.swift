@@ -40,6 +40,7 @@ struct ThirdGeneratorView: View {
                     
                     cautionScrollView()
                         .padding(.top, .height(ratio: 0.02))
+                        .padding(.bottom, 30)
 
                     GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
                         NotificationCenter.default.post(name: Notification.Name("GeneratorCompleted"), object: nil)

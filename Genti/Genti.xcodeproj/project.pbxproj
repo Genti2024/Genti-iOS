@@ -61,6 +61,9 @@
 		C0DD88282C086A9000109A25 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88272C086A9000109A25 /* BlurView.swift */; };
 		C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88292C08732200109A25 /* PostDetailView.swift */; };
 		C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882B2C0938B500109A25 /* SettingView.swift */; };
+		C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882E2C095D7400109A25 /* SettingRow.swift */; };
+		C0DD88312C095E1000109A25 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88302C095E1000109A25 /* WebView.swift */; };
+		C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88342C09632600109A25 /* GentiWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +139,9 @@
 		C0DD88272C086A9000109A25 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		C0DD88292C08732200109A25 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		C0DD882B2C0938B500109A25 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		C0DD882E2C095D7400109A25 /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
+		C0DD88302C095E1000109A25 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		C0DD88342C09632600109A25 /* GentiWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +244,9 @@
 				C0DD88272C086A9000109A25 /* BlurView.swift */,
 				C0DD88292C08732200109A25 /* PostDetailView.swift */,
 				C0DD882B2C0938B500109A25 /* SettingView.swift */,
+				C0DD882E2C095D7400109A25 /* SettingRow.swift */,
+				C0DD88302C095E1000109A25 /* WebView.swift */,
+				C0DD88342C09632600109A25 /* GentiWebView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -318,6 +327,7 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C0DD882D2C095A1600109A25 /* Complete */,
 				C086C21C2BDF1C9800E25D71 /* Extentions */,
 				C02D67C82BD38038004DD995 /* Info.plist */,
 				C086C2072BDE113900E25D71 /* ImagePicker */,
@@ -441,6 +451,13 @@
 				C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C0DD882D2C095A1600109A25 /* Complete */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Complete;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -605,6 +622,7 @@
 				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
 				C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */,
 				C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */,
+				C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086C2262BE09F3800E25D71 /* BulletText.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
@@ -612,6 +630,7 @@
 				C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
+				C0DD88312C095E1000109A25 /* WebView.swift in Sources */,
 				C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */,
 				C0DD88222C0857E600109A25 /* StraggeredGrid.swift in Sources */,
 				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
@@ -629,6 +648,7 @@
 				C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */,
 				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
 				C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */,
+				C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
