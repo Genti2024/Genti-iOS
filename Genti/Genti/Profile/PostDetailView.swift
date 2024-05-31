@@ -75,6 +75,5 @@ struct PostDetailView: View {
 }
 
 #Preview {
-    
     PostDetailView(imageUrl: "SampleImage23")
 }

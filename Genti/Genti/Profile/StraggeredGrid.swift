@@ -57,7 +57,4 @@ struct StraggeredGrid<Content: View, T: Identifiable>: View {
     }
 }
 
-//#Preview {
-//    StraggeredGrid()
-//}
 
