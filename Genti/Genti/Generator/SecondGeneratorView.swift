@@ -19,14 +19,20 @@ struct SecondGeneratorView: View {
                 // Content
                 VStack(spacing: 0) {
                     GeneratorHeaderView(step: 2)
-                        .padding(.top, 10)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .overlay(alignment: .leading) {
-                            Image(systemName: "heart.fill")
+                            Image("Back_fill")
+                                .resizable()
+                                .frame(width: 29, height: 29)
+                                .padding(11)
+                                .background(.black.opacity(0.001))
                                 .onTapGesture {
+                                    self.viewModel.resetSecond()
                                     self.generateFlow.removeLast()
                                 }
+                                .padding(.leading, 17)
                         }
+                        .padding(.top, 40)
                     
                     VStack(spacing: 12) {
                         ratioSelectView()
@@ -38,11 +44,8 @@ struct SecondGeneratorView: View {
                     
                     Spacer()
                     
-                    Button {
-                        // Action
+                    GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
                         self.generateFlow.append(.thrid)
-                    } label: {
-                        Text("다음")
                     }
                     .padding(.bottom, 32)
 
@@ -52,31 +55,19 @@ struct SecondGeneratorView: View {
     }
     
     private func ratioSelectView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             Text("사진의 비율을을 선택해주세요📷")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
                 .frame(height: 22)
             
             VStack(spacing: 5) {
-                HStack(spacing: 4) {
-                    Text("비율은 자유롭게 맡길래요")
-                        .pretendard(.description)
-                        .foregroundStyle(viewModel.selectedRatio == .free ? .green1 : .gray3)
-                    Image(viewModel.selectedRatio == .free ? PhotoFrame.freeSelectedImage : PhotoAngle.free.image)
-                } //:HSTACK
-                .frame(height: 19)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    viewModel.selectedRatio = .free
-                }
-                
                 HStack(spacing: 9) {
                     ForEach(PhotoRatio.selections, id: \.self) { frame in
                         Image(frame.image)
                             .resizable()
-                            .frame(width: (UIScreen.main.bounds.width-32-8)/3)
-                            .frame(height: (UIScreen.main.bounds.width-32-8)/3)
+                            .frame(width: (UIScreen.main.bounds.width-32-16)/3)
+                            .frame(height: (UIScreen.main.bounds.width-32-16)/3)
                             .overlay {
                                 if viewModel.selectedRatio == frame {
                                     Rectangle()
@@ -132,7 +123,6 @@ struct SecondGeneratorView: View {
                     }
                 } //:HSTACK
             } //:VSTACK
-            
         } //:VSTACK
     }
     
@@ -179,7 +169,7 @@ struct SecondGeneratorView: View {
     }
 }
 
-//#Preview {
-//    SecondGeneratorView()
-//        .environmentObject(GeneratorViewModel())
-//}
+#Preview {
+    SecondGeneratorView(generateFlow: .constant([]))
+        .environmentObject(GeneratorViewModel())
+}

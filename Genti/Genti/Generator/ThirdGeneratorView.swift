@@ -19,41 +19,33 @@ struct ThirdGeneratorView: View {
                 VStack(spacing: 0) {
                     
                     GeneratorHeaderView(step: 3)
-                        .padding(.top, 10)
+
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .overlay(alignment: .leading) {
+                            Image("Back_fill")
+                                .resizable()
+                                .frame(width: 29, height: 29)
+                                .padding(11)
+                                .background(.black.opacity(0.001))
+                                .onTapGesture {
+                                    self.viewModel.resetThird()
+                                    self.generateFlow.removeLast()
+                                }
+                                .padding(.leading, 17)
+                        }
+                        .padding(.top, 40)
                     
                     imageUploadView()
                         .padding(.top, .height(ratio: 0.048))
                     
-                    Button {
-                        // Action
-                        self.generateFlow.removeAll()
-                    } label: {
-                        Text("다 지워")
-                    }
-
-                    
                     cautionScrollView()
                         .padding(.top, .height(ratio: 0.02))
+                        .padding(.bottom, 30)
 
-                    
-                    Button {
-                        // Action
+                    GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
                         NotificationCenter.default.post(name: Notification.Name("GeneratorCompleted"), object: nil)
-                    } label: {
-                        Text("사진 생성하기")
-                            .pretendard(.headline1)
-                            .foregroundStyle(viewModel.facesIsEmpty ? .black : .white)
-                            .frame(height: 50)
-                            .frame(maxWidth: .infinity)
-                            .background(viewModel.facesIsEmpty ? .gray5 : .green1)
-                            .clipShape(.rect(cornerRadius: 10))
-
                     }
-                    .disabled(viewModel.facesIsEmpty)
-                    .padding(.horizontal, 28)
                     .padding(.bottom, 32)
-                    .padding(.top, .height(ratio: 0.02))
-                    
                 } //:VSTACK
             } //:ZSTACK
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
@@ -199,8 +191,8 @@ struct ThirdGeneratorView: View {
         .frame(height: .height(ratio: 0.17))
     }
 }
-//
-//#Preview {
-//    ThirdGeneratorView()
-//        .environmentObject(GeneratorViewModel())
-//}
+
+#Preview {
+    ThirdGeneratorView(generateFlow: .constant([]))
+        .environmentObject(GeneratorViewModel())
+}

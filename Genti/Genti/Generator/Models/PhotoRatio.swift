@@ -8,7 +8,7 @@
 import Foundation
 
 enum PhotoRatio {
-    case twoThird, threeSecond, free
+    case twoThird, threeSecond
     
     static var selections: [PhotoRatio] {
         return [.twoThird, .threeSecond]
@@ -20,8 +20,6 @@ enum PhotoRatio {
             return "Ratio_23"
         case .threeSecond:
             return "Ratio_32"
-        case .free:
-            return "Check_empty"
         }
     }
     

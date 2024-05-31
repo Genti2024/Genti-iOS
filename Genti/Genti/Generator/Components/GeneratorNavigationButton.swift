@@ -7,21 +7,22 @@
 
 import SwiftUI
 
-struct GeneratorNavigationButton<Content>: View where Content: View {
+struct GeneratorNavigationButton: View {
     
-    let destination: () -> Content
+    let action: () -> Void
     let isActive: Bool
     let title: String
     
-    init(isActive: Bool, title: String = "다음으로", @ViewBuilder _ destination: @escaping () -> Content) {
-        self.destination = destination
+    init(isActive: Bool, title: String = "다음으로", _ action: @escaping () -> Void) {
+        self.action = action
         self.isActive = isActive
         self.title = title
     }
     
     var body: some View {
-        NavigationLink {
-            destination()
+        Button {
+            // Action
+            action()
         } label: {
             Text(title)
                 .pretendard(.headline1)
@@ -34,11 +35,11 @@ struct GeneratorNavigationButton<Content>: View where Content: View {
         .disabled(isActive)
         .padding(.horizontal, 28)
     }
-    
 }
 
 #Preview {
     VStack(spacing: 10) {
+        GeneratorNavigationButton(isActive: true) {}
         GeneratorNavigationButton(isActive: true) {}
         GeneratorNavigationButton(isActive: false) {}
         GeneratorNavigationButton(isActive: true, title: "테스트") {}

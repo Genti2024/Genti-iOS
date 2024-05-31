@@ -14,7 +14,7 @@ final class GeneratorViewModel: ObservableObject {
     @Published var showPhotoPickerWhenFirstView: Bool = false
     @Published var photoDescription: String = ""
     
-    var isEmpty: Bool {
+    var descriptionIsEmpty: Bool {
         return photoDescription.isEmpty
     }
 
@@ -47,17 +47,26 @@ final class GeneratorViewModel: ObservableObject {
         self.faceImages = assets
     }
     
-    func reset() {
+    func resetFirst() {
         self.referenceImage = nil
         self.showPhotoPickerWhenFirstView  = false
         self.photoDescription = ""
-        
+    }
+    
+    func resetSecond() {
         self.selectedAngle = nil
         self.selectedFrame = nil
         self.selectedRatio = nil
-        
+    }
+    
+    func resetThird() {
         self.showPhotoPickerWhenThirdView = false
         self.faceImages = []
-        
+    }
+    
+    func reset() {
+        resetFirst()
+        resetSecond()
+        resetThird()
     }
 }

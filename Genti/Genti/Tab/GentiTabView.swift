@@ -11,12 +11,22 @@ enum GeneratorFlow: Hashable {
     case second, thrid
 }
 
+enum SettingFlow: Hashable {
+    case setting, notion(urlString: String)
+}
+
 struct GentiTabView: View {
 
     @State private var currentTab: Tab = .home
     @State private var showCompleteView: Bool = false
     @State var generateFlow: [GeneratorFlow] = []
+    @State var settingFlow: [SettingFlow] = []
+    @State private var tabbarHidden: Bool = false
+    @State private var selectedPost: Post? = nil
+    
     @StateObject var genteratorViewModel = GeneratorViewModel()
+    
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $currentTab) {
@@ -38,13 +48,28 @@ struct GentiTabView: View {
                 .environmentObject(genteratorViewModel)
                 .tag(Tab.generator)
 
-                
-                ProfileView()
-                    .tag(Tab.profile)
+                NavigationStack(path: $settingFlow) {
+                    ProfileView(settingFlow: $settingFlow, imageTapped: { post in
+                        self.selectedPost = post
+                    })
+                    .navigationDestination(for: SettingFlow.self) { setType in
+                        switch setType {
+                        case .setting:
+                            SettingView(tabbarHidden: $tabbarHidden, settingFlow: $settingFlow)
+                        case .notion(let urlString):
+                            GentiWebView(settingFlow: $settingFlow, urlString: urlString)
+                        }
+                    }
+                }
+
+                .tag(Tab.profile)
             }
             
-            CustomTabView(selectedTab: $currentTab)
-        } //:ZSTACK
+            if !tabbarHidden {
+                CustomTabView(selectedTab: $currentTab)
+            }
+            
+        } //: ZSTACK
         .ignoresSafeArea(.keyboard)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in
             self.currentTab = .home
@@ -58,8 +83,14 @@ struct GentiTabView: View {
         }, content: {
             GenerateCompleteView()
         })
+        .fullScreenCover(item: $selectedPost) { post in
+            PostDetailView(imageUrl: post.imageURL)
+        }
     }
 }
+
+
+
 
 #Preview {
     GentiTabView()

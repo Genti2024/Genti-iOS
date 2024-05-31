@@ -53,9 +53,17 @@
 		C086C2A82BE5D4E000E25D71 /* PHAssetImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2A72BE5D4E000E25D71 /* PHAssetImageViewModel.swift */; };
 		C086C2AB2BE7265300E25D71 /* TextEditorLimitLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2AA2BE7265300E25D71 /* TextEditorLimitLength.swift */; };
 		C086C2AD2BE72F2A00E25D71 /* GeneratorNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2AC2BE72F2A00E25D71 /* GeneratorNavigationButton.swift */; };
-		C0B1F6102BDDE786003DFDD9 /* GeneratorNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */; };
 		C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */; };
 		C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */; };
+		C0DD88222C0857E600109A25 /* StraggeredGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88212C0857E600109A25 /* StraggeredGrid.swift */; };
+		C0DD88242C0858B600109A25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88232C0858B600109A25 /* Post.swift */; };
+		C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88252C085EC600109A25 /* PostCardView.swift */; };
+		C0DD88282C086A9000109A25 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88272C086A9000109A25 /* BlurView.swift */; };
+		C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88292C08732200109A25 /* PostDetailView.swift */; };
+		C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882B2C0938B500109A25 /* SettingView.swift */; };
+		C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882E2C095D7400109A25 /* SettingRow.swift */; };
+		C0DD88312C095E1000109A25 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88302C095E1000109A25 /* WebView.swift */; };
+		C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88342C09632600109A25 /* GentiWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,9 +131,17 @@
 		C086C2A72BE5D4E000E25D71 /* PHAssetImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageViewModel.swift; sourceTree = "<group>"; };
 		C086C2AA2BE7265300E25D71 /* TextEditorLimitLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorLimitLength.swift; sourceTree = "<group>"; };
 		C086C2AC2BE72F2A00E25D71 /* GeneratorNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationButton.swift; sourceTree = "<group>"; };
-		C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationView.swift; sourceTree = "<group>"; };
 		C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
 		C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
+		C0DD88212C0857E600109A25 /* StraggeredGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraggeredGrid.swift; sourceTree = "<group>"; };
+		C0DD88232C0858B600109A25 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		C0DD88252C085EC600109A25 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
+		C0DD88272C086A9000109A25 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		C0DD88292C08732200109A25 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		C0DD882B2C0938B500109A25 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		C0DD882E2C095D7400109A25 /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
+		C0DD88302C095E1000109A25 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		C0DD88342C09632600109A25 /* GentiWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +238,15 @@
 			isa = PBXGroup;
 			children = (
 				C02BFD0C2BD0F94F00FAADC1 /* ProfileView.swift */,
+				C0DD88212C0857E600109A25 /* StraggeredGrid.swift */,
+				C0DD88232C0858B600109A25 /* Post.swift */,
+				C0DD88252C085EC600109A25 /* PostCardView.swift */,
+				C0DD88272C086A9000109A25 /* BlurView.swift */,
+				C0DD88292C08732200109A25 /* PostDetailView.swift */,
+				C0DD882B2C0938B500109A25 /* SettingView.swift */,
+				C0DD882E2C095D7400109A25 /* SettingRow.swift */,
+				C0DD88302C095E1000109A25 /* WebView.swift */,
+				C0DD88342C09632600109A25 /* GentiWebView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -302,6 +327,7 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C0DD882D2C095A1600109A25 /* Complete */,
 				C086C21C2BDF1C9800E25D71 /* Extentions */,
 				C02D67C82BD38038004DD995 /* Info.plist */,
 				C086C2072BDE113900E25D71 /* ImagePicker */,
@@ -413,7 +439,6 @@
 		C0B1F60E2BDDE76B003DFDD9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C0B1F60F2BDDE786003DFDD9 /* GeneratorNavigationView.swift */,
 				C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */,
 				C086C2AC2BE72F2A00E25D71 /* GeneratorNavigationButton.swift */,
 			);
@@ -426,6 +451,13 @@
 				C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C0DD882D2C095A1600109A25 /* Complete */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Complete;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -575,19 +607,22 @@
 			files = (
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
 				C086C2102BDE11F800E25D71 /* ImagePickerViewModel.swift in Sources */,
+				C0DD88282C086A9000109A25 /* BlurView.swift in Sources */,
 				C086C20B2BDE11CD00E25D71 /* PopupImagePickerView.swift in Sources */,
 				C086C2202BDFA38600E25D71 /* CGFloat+Ext.swift in Sources */,
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
-				C0B1F6102BDDE786003DFDD9 /* GeneratorNavigationView.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
+				C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */,
 				C086C2192BDF154000E25D71 /* PHAssetImageView.swift in Sources */,
 				C016AE002C01AD5A003ED0DF /* HomeFeedView.swift in Sources */,
 				C07409A12C01750A00616ED9 /* HomeView.swift in Sources */,
 				C086C2242BE09F0700E25D71 /* Caution.swift in Sources */,
+				C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
 				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
 				C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */,
 				C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */,
+				C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086C2262BE09F3800E25D71 /* BulletText.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
@@ -595,7 +630,9 @@
 				C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
+				C0DD88312C095E1000109A25 /* WebView.swift in Sources */,
 				C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */,
+				C0DD88222C0857E600109A25 /* StraggeredGrid.swift in Sources */,
 				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
 				C086C2AB2BE7265300E25D71 /* TextEditorLimitLength.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
@@ -606,9 +643,12 @@
 				C086C2282BE0B3E000E25D71 /* ImagePickerType.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
 				C016AE022C01C153003ED0DF /* PhotoRatio.swift in Sources */,
+				C0DD88242C0858B600109A25 /* Post.swift in Sources */,
 				C086C21E2BDF1CC300E25D71 /* View+Ext.swift in Sources */,
+				C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */,
 				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
 				C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */,
+				C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

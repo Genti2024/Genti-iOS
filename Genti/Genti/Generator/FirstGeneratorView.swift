@@ -8,8 +8,6 @@
 import SwiftUI
 import Combine
 
-
-// MARK: - 5. 사진생성의 첫번째 flow이기때문에 해당 view를 다시 navigationstack으로 감쌈
 struct FirstGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
     
@@ -25,53 +23,50 @@ struct FirstGeneratorView: View {
     @State private var currentIndex: Int = 0
     
     @FocusState var isFocused: Bool
-    var onXmarkPressed: (() -> Void)? = nil
     
     var body: some View {
-            ZStack {
-                // Background Color
-                Color.backgroundWhite
-                    .ignoresSafeArea()
-                // Content
-                GeometryReader { _ in
-                    VStack(spacing: 0) {
-                        
-                        GeneratorHeaderView(step: 1)
-                            .padding(.top, 10)
-                        
-                        inpuTextView()
-                            .padding(.top, 32)
-                        
-                        randomDescriptionView()
-                        
-                        Spacer()
-                        
-                        addImageView()
-                        
-                        Button {
-                            // Action
-                            self.generateFlow.append(.second)
-                        } label: {
-                            Text("다음")
-                        }
-                    } //:VSTACK
+        ZStack {
+            // Background Color
+            Color.backgroundWhite
+                .ignoresSafeArea()
+            // Content
+            VStack(spacing: 0) {
+                
+                GeneratorHeaderView(step: 1)
+                    .padding(.top, 40)
+                
+                inpuTextView()
+                    .padding(.top, 32)
+                
+                randomDescriptionView()
+                
+                
+                addImageView()
+                    .padding(.top, 43)
+                
+                
+                Spacer()
+
+                GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
+                    self.generateFlow.append(.second)
                 }
-                
-                
-            } //:ZSTACK
-            .onTapGesture {
-                isFocused = false
-            }
-            .onAppear {
-                isFocused = true
-            }
-            .ignoresSafeArea(.keyboard)
-            .focused($isFocused)
-            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
-                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
-                    .environmentObject(viewModel)
-                
-            }
+                .padding(.bottom, 32)
+            } //:VSTACK
+        } //:ZSTACK
+        .onTapGesture {
+            isFocused = false
+        }
+        .onAppear {
+            isFocused = true
+        }
+        .ignoresSafeArea(.keyboard)
+        .focused($isFocused)
+        .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
+            PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
+                .environmentObject(viewModel)
+            
+        }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func randomDescriptionView() -> some View {
@@ -81,19 +76,19 @@ struct FirstGeneratorView: View {
                 .foregroundStyle(.gentiGreen)
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 7) {
-                ZStack(alignment: .topLeading) {
-                    // Background Color
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.white)
                         .strokeBorder(.gentiGreen, style: .init(lineWidth: 1))
-                        .frame(height: 62)
+                        .frame(height: 68)
                         .shadow(color: .black.opacity(0.09), radius: 5)
-                    // Content
-                    Text(randomDescription[currentIndex])
-                        .pretendard(.description)
-                        .padding(12)
-                } //:ZSTACK
-                .frame(height: 62)
+
+                        .overlay {
+                            Text(randomDescription[currentIndex])
+                                .pretendard(.description)
+                                .lineLimit(3)
+                                .padding(12)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        }
                 
                 Button {
                     // Action
@@ -107,6 +102,7 @@ struct FirstGeneratorView: View {
                     Image("Change")
                         .resizable()
                         .frame(width: 17, height: 17)
+                        .padding(10)
                 }
             } //:HSTACK
             
@@ -140,7 +136,7 @@ struct FirstGeneratorView: View {
                     .pretendard(.description)
                     .foregroundStyle(.black)
             }
-
+            
             
             referenceImage()
             
@@ -196,7 +192,7 @@ struct FirstGeneratorView: View {
                         .stroke(.gray5, lineWidth: 1)
                 )
             
-            if viewModel.isEmpty {
+            if viewModel.descriptionIsEmpty {
                 Text("""
                     의상과 배경을 포함해서 설명해 주세요!  * 헤어스타일을 변경하는 기능은 준비 중이에요 * 너무 특정한 배경과 의상은 구현이 어려울 수 있어요 (반포 한강 공원, 나이키 티셔츠 등)
                     """)
