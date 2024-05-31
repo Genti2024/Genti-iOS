@@ -15,6 +15,9 @@ struct SettingView: View {
     var body: some View {
         ZStack(alignment: .top) {
             // Background Color
+            Color.backgroundWhite
+                .ignoresSafeArea()
+            
             Color.green3
                 .frame(height: 100)
                 .ignoresSafeArea()

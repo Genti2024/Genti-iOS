@@ -25,41 +25,45 @@ struct FirstGeneratorView: View {
     @FocusState var isFocused: Bool
     
     var body: some View {
-        ZStack {
-            // Background Color
-            Color.backgroundWhite
-                .ignoresSafeArea()
-            // Content
-            VStack(spacing: 0) {
-                
-                GeneratorHeaderView(step: 1)
-                    .padding(.top, 40)
-                
-                inpuTextView()
-                    .padding(.top, 32)
-                
-                randomDescriptionView()
-                
-                
-                addImageView()
-                    .padding(.top, 43)
-                
-                
-                Spacer()
+        GeometryReader { _ in
+            ZStack {
+                // Background Color
+                Color.backgroundWhite
+                    .ignoresSafeArea()
+                // Content
+                VStack(spacing: 0) {
+                    
+                    GeneratorHeaderView(step: 1)
+                        .padding(.top, 40)
+                    
+                    inpuTextView()
+                        .padding(.top, 32)
+                    
+                    randomDescriptionView()
+                    
+                    
+                    addImageView()
+                        .padding(.top, 43)
+                    
+                    
+                    Spacer()
 
-                GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
-                    self.generateFlow.append(.second)
-                }
-                .padding(.bottom, 32)
-            } //:VSTACK
-        } //:ZSTACK
+                    GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
+                        self.generateFlow.append(.second)
+                    }
+                    .padding(.bottom, 32)
+                } //:VSTACK
+            } //:ZSTACK
+        }
+        .ignoresSafeArea(.keyboard)
+
+ 
         .onTapGesture {
             isFocused = false
         }
         .onAppear {
             isFocused = true
         }
-        .ignoresSafeArea(.keyboard)
         .focused($isFocused)
         .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
             PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
@@ -85,6 +89,7 @@ struct FirstGeneratorView: View {
                         .overlay {
                             Text(randomDescription[currentIndex])
                                 .pretendard(.description)
+                                .foregroundStyle(.black)
                                 .lineLimit(3)
                                 .padding(12)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
