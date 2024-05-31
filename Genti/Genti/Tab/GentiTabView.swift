@@ -81,7 +81,7 @@ struct GentiTabView: View {
             self.generateFlow.removeAll()
             self.currentTab = .home
         }, content: {
-            GenerateCompleteView()
+            GenerateRequestCompleteView()
         })
         .fullScreenCover(item: $selectedPost) { post in
             PostDetailView(imageUrl: post.imageURL)
