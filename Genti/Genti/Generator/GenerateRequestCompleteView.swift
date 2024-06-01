@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GenerateCompleteView: View {
+struct GenerateRequestCompleteView: View {
     
     @Environment(\.dismiss) private var dismiss
 
@@ -79,7 +79,7 @@ struct GenerateCompleteView: View {
 }
 
 #Preview {
-    GenerateCompleteView()
+    GenerateRequestCompleteView()
 }
 
 

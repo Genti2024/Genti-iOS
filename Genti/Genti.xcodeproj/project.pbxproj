@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C016AE002C01AD5A003ED0DF /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016ADFF2C01AD5A003ED0DF /* HomeFeedView.swift */; };
 		C016AE022C01C153003ED0DF /* PhotoRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016AE012C01C153003ED0DF /* PhotoRatio.swift */; };
-		C016AE3B2C01DA3D003ED0DF /* SwiftfulRouting in Frameworks */ = {isa = PBXBuildFile; productRef = C016AE3A2C01DA3D003ED0DF /* SwiftfulRouting */; };
 		C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFCFC2BD0EAB000FAADC1 /* GentiTabView.swift */; };
 		C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD012BD0F71A00FAADC1 /* CustomTabView.swift */; };
 		C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD042BD0F7B500FAADC1 /* Tab.swift */; };
@@ -26,6 +25,7 @@
 		C02D67C42BD37C74004DD995 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67BF2BD37C74004DD995 /* Pretendard-Medium.otf */; };
 		C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67C02BD37C74004DD995 /* Pretendard-Bold.otf */; };
 		C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67C62BD37CB8004DD995 /* Font+.swift */; };
+		C034CCD62C0976C700B68499 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034CCD52C0976C700B68499 /* PhotoDetailView.swift */; };
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
 		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
@@ -34,9 +34,10 @@
 		C073BD622BCBE5FC00130BAD /* GentiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD612BCBE5FC00130BAD /* GentiUITests.swift */; };
 		C073BD642BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */; };
 		C07409A12C01750A00616ED9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07409A02C01750A00616ED9 /* HomeView.swift */; };
+		C07FE6BB2C0AE5E500A93B43 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C07FE6BA2C0AE5E500A93B43 /* Alamofire */; };
 		C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2412BD617630052D59F /* PhotoAngle.swift */; };
 		C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2432BD617840052D59F /* PhotoFrame.swift */; };
-		C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateCompleteView.swift */; };
+		C086A2482BD62A960052D59F /* GenerateRequestCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */; };
 		C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2492BD6319B0052D59F /* SafeAreaInset.swift */; };
 		C086C20B2BDE11CD00E25D71 /* PopupImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C20A2BDE11CD00E25D71 /* PopupImagePickerView.swift */; };
 		C086C20E2BDE11E100E25D71 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C086C20D2BDE11E100E25D71 /* SwiftfulUI */; };
@@ -64,6 +65,7 @@
 		C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD882E2C095D7400109A25 /* SettingRow.swift */; };
 		C0DD88312C095E1000109A25 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88302C095E1000109A25 /* WebView.swift */; };
 		C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88342C09632600109A25 /* GentiWebView.swift */; };
+		C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,7 @@
 		C02D67C02BD37C74004DD995 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C02D67C62BD37CB8004DD995 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		C02D67C82BD38038004DD995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C034CCD52C0976C700B68499 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -115,7 +118,7 @@
 		C07409A02C01750A00616ED9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C086A2412BD617630052D59F /* PhotoAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAngle.swift; sourceTree = "<group>"; };
 		C086A2432BD617840052D59F /* PhotoFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrame.swift; sourceTree = "<group>"; };
-		C086A2472BD62A960052D59F /* GenerateCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCompleteView.swift; sourceTree = "<group>"; };
+		C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRequestCompleteView.swift; sourceTree = "<group>"; };
 		C086A2492BD6319B0052D59F /* SafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaInset.swift; sourceTree = "<group>"; };
 		C086C20A2BDE11CD00E25D71 /* PopupImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupImagePickerView.swift; sourceTree = "<group>"; };
 		C086C20F2BDE11F800E25D71 /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 		C0DD882E2C095D7400109A25 /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
 		C0DD88302C095E1000109A25 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C0DD88342C09632600109A25 /* GentiWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiWebView.swift; sourceTree = "<group>"; };
+		C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCompleteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07FE6BB2C0AE5E500A93B43 /* Alamofire in Frameworks */,
 				C086C20E2BDE11E100E25D71 /* SwiftfulUI in Frameworks */,
-				C016AE3B2C01DA3D003ED0DF /* SwiftfulRouting in Frameworks */,
 				C02BFD152BD10FF400FAADC1 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,7 +263,7 @@
 				C086A2402BD617550052D59F /* Models */,
 				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
 				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
-				C086A2472BD62A960052D59F /* GenerateCompleteView.swift */,
+				C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */,
 				C086C2212BDFA3E600E25D71 /* ThirdGeneratorView.swift */,
 			);
 			path = Generator;
@@ -456,6 +460,8 @@
 		C0DD882D2C095A1600109A25 /* Complete */ = {
 			isa = PBXGroup;
 			children = (
+				C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */,
+				C034CCD52C0976C700B68499 /* PhotoDetailView.swift */,
 			);
 			path = Complete;
 			sourceTree = "<group>";
@@ -479,7 +485,7 @@
 			packageProductDependencies = (
 				C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */,
 				C086C20D2BDE11E100E25D71 /* SwiftfulUI */,
-				C016AE3A2C01DA3D003ED0DF /* SwiftfulRouting */,
+				C07FE6BA2C0AE5E500A93B43 /* Alamofire */,
 			);
 			productName = Genti;
 			productReference = C073BD432BCBE5FA00130BAD /* Genti.app */;
@@ -556,7 +562,7 @@
 			packageReferences = (
 				C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				C086C20C2BDE11E100E25D71 /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
-				C016AE392C01DA3D003ED0DF /* XCRemoteSwiftPackageReference "SwiftfulRouting" */,
+				C07FE6B92C0AE5E500A93B43 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = C073BD442BCBE5FA00130BAD /* Products */;
 			projectDirPath = "";
@@ -619,9 +625,10 @@
 				C086C2242BE09F0700E25D71 /* Caution.swift in Sources */,
 				C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,
+				C034CCD62C0976C700B68499 /* PhotoDetailView.swift in Sources */,
 				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
 				C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */,
-				C086A2482BD62A960052D59F /* GenerateCompleteView.swift in Sources */,
+				C086A2482BD62A960052D59F /* GenerateRequestCompleteView.swift in Sources */,
 				C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */,
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086C2262BE09F3800E25D71 /* BulletText.swift in Sources */,
@@ -640,6 +647,7 @@
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
 				C086C2122BDE121900E25D71 /* AlbumService.swift in Sources */,
 				C086C2222BDFA3E600E25D71 /* ThirdGeneratorView.swift in Sources */,
+				C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */,
 				C086C2282BE0B3E000E25D71 /* ImagePickerType.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
 				C016AE022C01C153003ED0DF /* PhotoRatio.swift in Sources */,
@@ -994,20 +1002,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C016AE392C01DA3D003ED0DF /* XCRemoteSwiftPackageReference "SwiftfulRouting" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulRouting.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.4;
-			};
-		};
 		C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.0.2;
+			};
+		};
+		C07FE6B92C0AE5E500A93B43 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
 			};
 		};
 		C086C20C2BDE11E100E25D71 /* XCRemoteSwiftPackageReference "SwiftfulUI" */ = {
@@ -1021,15 +1029,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C016AE3A2C01DA3D003ED0DF /* SwiftfulRouting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C016AE392C01DA3D003ED0DF /* XCRemoteSwiftPackageReference "SwiftfulRouting" */;
-			productName = SwiftfulRouting;
-		};
 		C02BFD142BD10FF400FAADC1 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C02BFD132BD10FF400FAADC1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		C07FE6BA2C0AE5E500A93B43 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C07FE6B92C0AE5E500A93B43 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		C086C20D2BDE11E100E25D71 /* SwiftfulUI */ = {
 			isa = XCSwiftPackageProductDependency;

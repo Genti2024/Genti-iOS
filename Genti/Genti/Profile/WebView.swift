@@ -21,6 +21,7 @@ struct WebView: UIViewRepresentable {
         activityIndicator.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
         webView.navigationDelegate = context.coordinator
+        webView.backgroundColor = .white
         return webView
     }
     

@@ -18,6 +18,9 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             // Background Color
+            Color.backgroundWhite
+                .ignoresSafeArea()
+            
             Image("Mypage_Background")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
