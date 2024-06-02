@@ -13,17 +13,18 @@ enum GeneratorRouter: URLRequestConvertible {
     
     case getPresignedUrl(fileName: String)
     case getPresignedUrls(fileNames: [String])
+    case requestImage(prompt: String, poseURL: String, faceURLs: [String], angle: String, coverage: String)
     
     var method: HTTPMethod {
         switch self {
-        case .getPresignedUrl, .getPresignedUrls:
+        case .getPresignedUrl, .getPresignedUrls, .requestImage:
             return .post
         }
     }
     
     var headers: HTTPHeaders {
         switch self {
-        case .getPresignedUrl, .getPresignedUrls:
+        case .getPresignedUrl, .getPresignedUrls, .requestImage:
             return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcxNzI4MzA4OCwiZXhwIjoxNzc3MjgzMDg4fQ.rP2zPOLydDxUXvKqqNsfXSCxO6q8_O2NxhnE6pcP1WQwQqhouoR4UnVgJAiSxs47VCI7thlzbNvGo9mm-qFNig"]
         }
     }
@@ -38,6 +39,8 @@ enum GeneratorRouter: URLRequestConvertible {
             return "/api/presigned-url"
         case .getPresignedUrls:
             return "/api/presigned-url/many"
+        case .requestImage:
+            return "/api/users/picture-generate-requests"
         }
     }
     
@@ -46,19 +49,29 @@ enum GeneratorRouter: URLRequestConvertible {
         var urlRequest = URLRequest(url: url)
         urlRequest.method = method
         urlRequest.headers = headers
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         
         switch self {
         case .getPresignedUrl(let fileName):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["fileName": fileName, "fileType": "CREATED_IMAGE"])
+            
         case .getPresignedUrls(let fileNames):
             var body: [[String: Any]] = []
             for fileName in fileNames {
                 body.append(["fileName": fileName, "fileType": "CREATED_IMAGE"])
             }
-        
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body)
+            
+        case .requestImage(prompt: let prompt, poseURL: let poseURL, faceURLs: let faceURLs, angle: let angle, coverage: let coverage):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["prompt": prompt,
+                                                                            "posePictureUrl": poseURL,
+                                                                            "facePictureUrlList": faceURLs,
+                                                                            "cameraAngle": "위에서 촬영",
+                                                                            "shotCoverage": "얼굴만 클로즈업"
+                                                                           ])
         }
+        
         return urlRequest
     }
     

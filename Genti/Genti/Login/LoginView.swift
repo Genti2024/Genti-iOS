@@ -43,9 +43,6 @@ struct LoginView: View {
                                     .frame(height: 45)
                             }
 
-
-
-                            
                             Image("Apple_Login")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -58,25 +55,6 @@ struct LoginView: View {
                     )
                 })
             } //:ZSTACK
-            .onAppear {
-                Task {
-                    do {
-                        let result: [GetUploadImageUrlDTO] = try await APIService.shared.fetchResponse(for: GeneratorRouter.getPresignedUrls(fileNames: ["1.png", "2.png", "3.png"]))
-                        
-                        for i in result {
-                            print(i.fileName)
-                        }
-                    } catch(let error) {
-                        guard let gentiError = error as? GentiError else {
-                            print("Unknown Error")
-                            return
-                        }
-                        print(gentiError.localizedDescription)
-                    }
- 
-                }
-                
-            }
     }
 }
 

@@ -43,7 +43,18 @@ struct ThirdGeneratorView: View {
                         .padding(.bottom, 30)
 
                     GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
-                        NotificationCenter.default.post(name: Notification.Name("GeneratorCompleted"), object: nil)
+                        Task {
+                            do {
+                                self.viewModel.isGenerating = true
+                                try await self.viewModel.generateImage()
+                                self.viewModel.isGenerating = false
+                            } catch(let error) {
+                                guard let gentiError = error as? GentiError else {
+                                    throw GentiError.unknownedError(code: "Unknowned", message: "정의되지않은 에러가 발생했습니다")
+                                }
+                                print(gentiError.localizedDescription)
+                            }
+                        }
                     }
                     .padding(.bottom, 32)
                 } //:VSTACK

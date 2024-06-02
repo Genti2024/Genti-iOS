@@ -11,12 +11,16 @@ enum GentiError: Error {
     case emptyResponse(code: String?, message: String?)
     case serverError(code: String?, message: String?)
     case clientError(code: String?, message: String?)
+    case uploadFail(code: String?, message: String?)
+    case unknownedError(code: String?, message: String?)
     
     var code: String? {
         switch self {
         case .emptyResponse(let code, _),
              .serverError(let code, _),
-             .clientError(let code, _):
+             .clientError(let code, _),
+             .uploadFail(let code, _),
+             .unknownedError(let code, _):
             return code
         }
     }
@@ -25,12 +29,18 @@ enum GentiError: Error {
         switch self {
         case .emptyResponse(_, let message),
              .serverError(_, let message),
-             .clientError(_, let message):
+             .clientError(_, let message),
+             .uploadFail(_, let message),
+             .unknownedError(_, let message):
             return message
         }
     }
     
     var localizedDescription: String {
-        return "Code: \(code ?? "Unknown"), Message: \(message ?? "No message")"
+        return """
+        🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥오류 발생🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        오류 코드    : \(self.code ?? "코드가 안담겨왔음")
+        오류 메세지   : \(self.message ?? "메세지가 안담겨왔음")
+        """
     }
 }

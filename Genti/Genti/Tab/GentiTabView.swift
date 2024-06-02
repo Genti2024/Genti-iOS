@@ -70,6 +70,18 @@ struct GentiTabView: View {
                 CustomTabView(selectedTab: $currentTab)
             }
             
+            if genteratorViewModel.isGenerating {
+                ZStack {
+                    // Background Color
+                    Color.black.opacity(0.3)
+                        .ignoresSafeArea()
+                    // Content
+                    ProgressView()
+                        .tint(.gentiGreen)
+                } //:ZSTACK
+
+            }
+            
         } //: ZSTACK
         .ignoresSafeArea(.keyboard)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("PhotoMakeCompleted"))) { noti in
@@ -97,8 +109,6 @@ struct GentiTabView: View {
         }
     }
 }
-
-
 
 
 #Preview {
