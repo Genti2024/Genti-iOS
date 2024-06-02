@@ -35,6 +35,11 @@
 		C073BD642BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */; };
 		C07409A12C01750A00616ED9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07409A02C01750A00616ED9 /* HomeView.swift */; };
 		C07FE6BB2C0AE5E500A93B43 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C07FE6BA2C0AE5E500A93B43 /* Alamofire */; };
+		C07FE6C62C0BDC2600A93B43 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */; };
+		C07FE6C82C0BDC5F00A93B43 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6C72C0BDC5F00A93B43 /* APIService.swift */; };
+		C07FE6CB2C0BDEAA00A93B43 /* GeneratorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */; };
+		C07FE6CD2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CC2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift */; };
+		C07FE6CF2C0BEC2800A93B43 /* GentiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */; };
 		C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2412BD617630052D59F /* PhotoAngle.swift */; };
 		C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2432BD617840052D59F /* PhotoFrame.swift */; };
 		C086A2482BD62A960052D59F /* GenerateRequestCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */; };
@@ -116,6 +121,11 @@
 		C073BD612BCBE5FC00130BAD /* GentiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiUITests.swift; sourceTree = "<group>"; };
 		C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C07409A02C01750A00616ED9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		C07FE6C72C0BDC5F00A93B43 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorRouter.swift; sourceTree = "<group>"; };
+		C07FE6CC2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadImageUrlDTO.swift; sourceTree = "<group>"; };
+		C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiError.swift; sourceTree = "<group>"; };
 		C086A2412BD617630052D59F /* PhotoAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAngle.swift; sourceTree = "<group>"; };
 		C086A2432BD617840052D59F /* PhotoFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrame.swift; sourceTree = "<group>"; };
 		C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRequestCompleteView.swift; sourceTree = "<group>"; };
@@ -231,6 +241,7 @@
 		C02BFD082BD0F91100FAADC1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C07FE6C32C0BDBCD00A93B43 /* Network */,
 				C02D67B82BD374B2004DD995 /* Model */,
 				C02BFD1F2BD1DB7C00FAADC1 /* Components */,
 				C07409A02C01750A00616ED9 /* HomeView.swift */,
@@ -331,6 +342,7 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C07FE6C42C0BDC1800A93B43 /* Network */,
 				C0DD882D2C095A1600109A25 /* Complete */,
 				C086C21C2BDF1C9800E25D71 /* Extentions */,
 				C02D67C82BD38038004DD995 /* Info.plist */,
@@ -371,6 +383,33 @@
 				C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */,
 			);
 			path = GentiUITests;
+			sourceTree = "<group>";
+		};
+		C07FE6C32C0BDBCD00A93B43 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C07FE6C42C0BDC1800A93B43 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C07FE6C92C0BDE9F00A93B43 /* Generator */,
+				C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */,
+				C07FE6C72C0BDC5F00A93B43 /* APIService.swift */,
+				C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C07FE6C92C0BDE9F00A93B43 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */,
+				C07FE6CC2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift */,
+			);
+			path = Generator;
 			sourceTree = "<group>";
 		};
 		C086A2402BD617550052D59F /* Models */ = {
@@ -616,6 +655,7 @@
 				C0DD88282C086A9000109A25 /* BlurView.swift in Sources */,
 				C086C20B2BDE11CD00E25D71 /* PopupImagePickerView.swift in Sources */,
 				C086C2202BDFA38600E25D71 /* CGFloat+Ext.swift in Sources */,
+				C07FE6CD2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift in Sources */,
 				C02BFD1A2BD1106200FAADC1 /* Constants.swift in Sources */,
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
 				C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */,
@@ -633,7 +673,9 @@
 				C02BFD052BD0F7B500FAADC1 /* Tab.swift in Sources */,
 				C086C2262BE09F3800E25D71 /* BulletText.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
+				C07FE6C82C0BDC5F00A93B43 /* APIService.swift in Sources */,
 				C086C2A82BE5D4E000E25D71 /* PHAssetImageViewModel.swift in Sources */,
+				C07FE6CF2C0BEC2800A93B43 /* GentiError.swift in Sources */,
 				C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
 				C02BFD182BD1102A00FAADC1 /* ImageLoaderView.swift in Sources */,
@@ -642,6 +684,7 @@
 				C0DD88222C0857E600109A25 /* StraggeredGrid.swift in Sources */,
 				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
 				C086C2AB2BE7265300E25D71 /* TextEditorLimitLength.swift in Sources */,
+				C07FE6CB2C0BDEAA00A93B43 /* GeneratorRouter.swift in Sources */,
 				C02BFD122BD0FB4A00FAADC1 /* SecondGeneratorView.swift in Sources */,
 				C086C2AD2BE72F2A00E25D71 /* GeneratorNavigationButton.swift in Sources */,
 				C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */,
@@ -654,6 +697,7 @@
 				C0DD88242C0858B600109A25 /* Post.swift in Sources */,
 				C086C21E2BDF1CC300E25D71 /* View+Ext.swift in Sources */,
 				C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */,
+				C07FE6C62C0BDC2600A93B43 /* APIResponse.swift in Sources */,
 				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
 				C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */,
 				C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */,

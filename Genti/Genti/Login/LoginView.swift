@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct LoginView: View {
     var body: some View {
@@ -57,6 +58,25 @@ struct LoginView: View {
                     )
                 })
             } //:ZSTACK
+            .onAppear {
+                Task {
+                    do {
+                        let result: GetUploadImageUrlDTO = try await APIService.shared.fetchResponse(for: GeneratorRouter.getPresignedUrl(fileName: "test.png"))
+                        
+                        print(result.fileName)
+                        print(result.s3Key)
+                        print(result.url)
+                    } catch(let error) {
+                        guard let gentiError = error as? GentiError else {
+                            print("Unknown Error")
+                            return
+                        }
+                        print(gentiError.localizedDescription)
+                    }
+ 
+                }
+                
+            }
     }
 }
 
