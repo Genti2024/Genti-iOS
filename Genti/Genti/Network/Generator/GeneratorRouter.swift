@@ -41,28 +41,11 @@ enum GeneratorRouter: URLRequestConvertible {
         }
     }
     
-//    var parameters: [String: Any]? {
-//        switch self {
-//        case .getPresignedUrl(let fileName):
-//            return ["fileName": fileName, "fileType": "CREATED_IMAGE"]
-//        case .getPresignedUrls(let fileNames):
-//
-//        }
-//    }
-    
-//    var encoding: ParameterEncoding {
-//        switch self {
-//        case .getPresignedUrl:
-//            return JSONEncoding.default
-//        }
-//    }
-    
     func asURLRequest() throws -> URLRequest {
         let url = try baseURL.asURL().appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
         urlRequest.method = method
         urlRequest.headers = headers
-        
         
         switch self {
         case .getPresignedUrl(let fileName):
@@ -72,6 +55,7 @@ enum GeneratorRouter: URLRequestConvertible {
             for fileName in fileNames {
                 body.append(["fileName": fileName, "fileType": "CREATED_IMAGE"])
             }
+        
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body)
         }
