@@ -61,11 +61,11 @@ struct LoginView: View {
             .onAppear {
                 Task {
                     do {
-                        let result: GetUploadImageUrlDTO = try await APIService.shared.fetchResponse(for: GeneratorRouter.getPresignedUrl(fileName: "test.png"))
+                        let result: [GetUploadImageUrlDTO] = try await APIService.shared.fetchResponse(for: GeneratorRouter.getPresignedUrls(fileNames: ["1.png", "2.png", "3.png"]))
                         
-                        print(result.fileName)
-                        print(result.s3Key)
-                        print(result.url)
+                        for i in result {
+                            print(i.fileName)
+                        }
                     } catch(let error) {
                         guard let gentiError = error as? GentiError else {
                             print("Unknown Error")

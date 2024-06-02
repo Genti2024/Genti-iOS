@@ -28,7 +28,8 @@ class APIService {
                         } else {
                             continuation.resume(throwing: GentiError.serverError(code: apiResponse.errorCode, message: apiResponse.errorMessage))
                         }
-                    case .failure:
+                    case .failure(let error):
+                        print(error.localizedDescription)
                         continuation.resume(throwing: GentiError.clientError(code: "CLIENT", message: "StatusCode : \(String(describing: response.response?.statusCode))"))
                     }
                 }

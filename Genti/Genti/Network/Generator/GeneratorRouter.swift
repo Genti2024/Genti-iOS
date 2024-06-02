@@ -10,18 +10,20 @@ import Foundation
 import Alamofire
 
 enum GeneratorRouter: URLRequestConvertible {
+    
     case getPresignedUrl(fileName: String)
+    case getPresignedUrls(fileNames: [String])
     
     var method: HTTPMethod {
         switch self {
-        case .getPresignedUrl:
+        case .getPresignedUrl, .getPresignedUrls:
             return .post
         }
     }
     
     var headers: HTTPHeaders {
         switch self {
-        case .getPresignedUrl:
+        case .getPresignedUrl, .getPresignedUrls:
             return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcxNzI4MzA4OCwiZXhwIjoxNzc3MjgzMDg4fQ.rP2zPOLydDxUXvKqqNsfXSCxO6q8_O2NxhnE6pcP1WQwQqhouoR4UnVgJAiSxs47VCI7thlzbNvGo9mm-qFNig"]
         }
     }
@@ -34,22 +36,26 @@ enum GeneratorRouter: URLRequestConvertible {
         switch self {
         case .getPresignedUrl:
             return "/api/presigned-url"
+        case .getPresignedUrls:
+            return "/api/presigned-url/many"
         }
     }
     
-    var parameters: [String: Any]? {
-        switch self {
-        case .getPresignedUrl(let fileName):
-            return ["fileName": fileName, "fileType": "CREATED_IMAGE"]
-        }
-    }
+//    var parameters: [String: Any]? {
+//        switch self {
+//        case .getPresignedUrl(let fileName):
+//            return ["fileName": fileName, "fileType": "CREATED_IMAGE"]
+//        case .getPresignedUrls(let fileNames):
+//
+//        }
+//    }
     
-    var encoding: ParameterEncoding {
-        switch self {
-        case .getPresignedUrl:
-            return JSONEncoding.default
-        }
-    }
+//    var encoding: ParameterEncoding {
+//        switch self {
+//        case .getPresignedUrl:
+//            return JSONEncoding.default
+//        }
+//    }
     
     func asURLRequest() throws -> URLRequest {
         let url = try baseURL.asURL().appendingPathComponent(path)
@@ -57,10 +63,18 @@ enum GeneratorRouter: URLRequestConvertible {
         urlRequest.method = method
         urlRequest.headers = headers
         
-        if let parameters = parameters {
-            urlRequest = try encoding.encode(urlRequest, with: parameters)
-        }
         
+        switch self {
+        case .getPresignedUrl(let fileName):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["fileName": fileName, "fileType": "CREATED_IMAGE"])
+        case .getPresignedUrls(let fileNames):
+            var body: [[String: Any]] = []
+            for fileName in fileNames {
+                body.append(["fileName": fileName, "fileType": "CREATED_IMAGE"])
+            }
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body)
+        }
         return urlRequest
     }
     
