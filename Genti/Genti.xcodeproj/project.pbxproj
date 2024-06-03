@@ -40,6 +40,9 @@
 		C07FE6CB2C0BDEAA00A93B43 /* GeneratorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */; };
 		C07FE6CD2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CC2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift */; };
 		C07FE6CF2C0BEC2800A93B43 /* GentiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */; };
+		C07FE6D32C0C6B3400A93B43 /* GeneratorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6D22C0C6B3400A93B43 /* GeneratorRequest.swift */; };
+		C07FE6D62C0D46EF00A93B43 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6D52C0D46EF00A93B43 /* API.swift */; };
+		C07FE6D82C0D470800A93B43 /* APIEventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6D72C0D470800A93B43 /* APIEventLogger.swift */; };
 		C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2412BD617630052D59F /* PhotoAngle.swift */; };
 		C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2432BD617840052D59F /* PhotoFrame.swift */; };
 		C086A2482BD62A960052D59F /* GenerateRequestCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */; };
@@ -126,6 +129,9 @@
 		C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorRouter.swift; sourceTree = "<group>"; };
 		C07FE6CC2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadImageUrlDTO.swift; sourceTree = "<group>"; };
 		C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiError.swift; sourceTree = "<group>"; };
+		C07FE6D22C0C6B3400A93B43 /* GeneratorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorRequest.swift; sourceTree = "<group>"; };
+		C07FE6D52C0D46EF00A93B43 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		C07FE6D72C0D470800A93B43 /* APIEventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEventLogger.swift; sourceTree = "<group>"; };
 		C086A2412BD617630052D59F /* PhotoAngle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAngle.swift; sourceTree = "<group>"; };
 		C086A2432BD617840052D59F /* PhotoFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrame.swift; sourceTree = "<group>"; };
 		C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRequestCompleteView.swift; sourceTree = "<group>"; };
@@ -395,10 +401,8 @@
 		C07FE6C42C0BDC1800A93B43 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C07FE6D42C0D46D700A93B43 /* Base */,
 				C07FE6C92C0BDE9F00A93B43 /* Generator */,
-				C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */,
-				C07FE6C72C0BDC5F00A93B43 /* APIService.swift */,
-				C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -408,8 +412,21 @@
 			children = (
 				C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */,
 				C07FE6CC2C0BE4AF00A93B43 /* GetUploadImageUrlDTO.swift */,
+				C07FE6D22C0C6B3400A93B43 /* GeneratorRequest.swift */,
 			);
 			path = Generator;
+			sourceTree = "<group>";
+		};
+		C07FE6D42C0D46D700A93B43 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C07FE6C72C0BDC5F00A93B43 /* APIService.swift */,
+				C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */,
+				C07FE6CE2C0BEC2800A93B43 /* GentiError.swift */,
+				C07FE6D52C0D46EF00A93B43 /* API.swift */,
+				C07FE6D72C0D470800A93B43 /* APIEventLogger.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		C086A2402BD617550052D59F /* Models */ = {
@@ -675,6 +692,8 @@
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
 				C07FE6C82C0BDC5F00A93B43 /* APIService.swift in Sources */,
 				C086C2A82BE5D4E000E25D71 /* PHAssetImageViewModel.swift in Sources */,
+				C07FE6D32C0C6B3400A93B43 /* GeneratorRequest.swift in Sources */,
+				C07FE6D62C0D46EF00A93B43 /* API.swift in Sources */,
 				C07FE6CF2C0BEC2800A93B43 /* GentiError.swift in Sources */,
 				C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */,
 				C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */,
@@ -693,6 +712,7 @@
 				C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */,
 				C086C2282BE0B3E000E25D71 /* ImagePickerType.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
+				C07FE6D82C0D470800A93B43 /* APIEventLogger.swift in Sources */,
 				C016AE022C01C153003ED0DF /* PhotoRatio.swift in Sources */,
 				C0DD88242C0858B600109A25 /* Post.swift in Sources */,
 				C086C21E2BDF1CC300E25D71 /* View+Ext.swift in Sources */,

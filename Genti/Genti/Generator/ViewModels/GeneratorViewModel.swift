@@ -73,21 +73,25 @@ final class GeneratorViewModel: ObservableObject {
     
     @Published var isGenerating: Bool = false
     
-    func generateImage() async throws {
-        var referenceURL = ""
-        var facesURLs: [String] = []
-        
-        // 참조 이미지 업로드
+    func getReferenceS3Key() async throws -> String {
         if let referencePhAsset = referenceImage?.asset {
-            if let referenceS3Key = try await APIService.shared.uploadPHAssetToS3(phAsset: referencePhAsset) {
-                referenceURL = referenceS3Key
+            guard let referenceKey = try await APIService.shared.uploadPHAssetToS3(phAsset: referencePhAsset) else {
+                throw GentiError.serverError(code: "AWS", message: "referenceImage의 s3key가 null입니다")
             }
+            return referenceKey
         }
-        
-        // 얼굴 이미지 업로드
+        return ""
+    }
+    
+    func getFaceS3Keys() async throws -> [String] {
         let facePhAssets = faceImages.map { $0.asset }
-        let referenceS3Keys = try await APIService.shared.uploadPHAssetToS3(phAssets: facePhAssets)
-        facesURLs = referenceS3Keys.compactMap { $0 }
+        return try await APIService.shared.uploadPHAssetToS3(phAssets: facePhAssets).compactMap{ $0 }
+    }
+
+    func generateImage() async throws {
+
+        async let referenceURL = getReferenceS3Key()
+        async let facesURLs = getFaceS3Keys()
         
         // 결과 요청 및 처리
         if try await APIService.shared.fetchResponse(for: GeneratorRouter.requestImage(prompt: photoDescription, poseURL: referenceURL, faceURLs: facesURLs, angle: "", coverage: "")) {

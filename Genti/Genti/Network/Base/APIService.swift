@@ -16,21 +16,25 @@ class APIService {
     
     func fetchResponse<T: Decodable>(for endpoint: URLRequestConvertible) async throws -> T {
         return try await withCheckedThrowingContinuation { continuation in
-            AF.request(endpoint)
-                .responseDecodable(of: APIResponse<T>.self) { response in
-                    switch response.result {
+            API.session.request(endpoint)
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: APIResponse<T>.self) { res in
+                    switch res.result {
                     case .success(let apiResponse):
+                        // response의 success가 true일때
                         if apiResponse.success {
-                            if let response = apiResponse.response {
-                                continuation.resume(returning: response)
+                            guard let response = apiResponse.response else {
+                                // response의 success가 true인데 response가 null일 경우
+                                continuation.resume(throwing: GentiError.serverError(code: "SERVER", message: "Success인데 response가 null입니다"))
                                 return
                             }
-                            continuation.resume(throwing: GentiError.emptyResponse(code: "SERVER", message: "response가 비어있습니다"))
+                            continuation.resume(returning: response)
                         } else {
+                            // response의 success가 failure일때
                             continuation.resume(throwing: GentiError.serverError(code: apiResponse.errorCode, message: apiResponse.errorMessage))
                         }
-                    case .failure:
-                        continuation.resume(throwing: GentiError.clientError(code: "CLIENT", message: "API자체가 failure입니다 fetchResponse를 확인하세요"))
+                    case .failure(let error):
+                        continuation.resume(throwing: GentiError.clientError(code: "CLIENT", message: "API자체가 failure입니다 fetchResponse를 확인하세요\nstatus Code : \(res.response!.statusCode)\n\(error.localizedDescription)"))
                     }
                 }
         }
@@ -56,21 +60,23 @@ class APIService {
             
             let zippedArray = Array(zip(responses, phAssets))
             
-            let uploadTasks = zippedArray.map { dto, phasset in
-                Task<String?, Error> {
-                    let imageData = try await requestImageData(for: phasset)
-                    return try await uploadImageDataToS3(s3Key: dto.s3Key, imageData: imageData, presignedURLString: dto.url)
+            return try await withThrowingTaskGroup(of: String?.self) { group in
+                for (dto, phAsset) in zippedArray {
+                    group.addTask {
+                        let imageData = try await self.requestImageData(for: phAsset)
+                        return try await self.uploadImageDataToS3(s3Key: dto.s3Key, imageData: imageData, presignedURLString: dto.url)
+                    }
                 }
+                
+                var uploadResults = [String?]()
+                for try await result in group {
+                    uploadResults.append(result)
+                }
+                return uploadResults
             }
-            
-            var results = [String?]()
-            for task in uploadTasks {
-                results.append(try await task.value)
-            }
-            return results
             
         } catch {
-            throw GentiError.uploadFail(code: "AWS", message: "AWS에 여러장 업로드 실패")
+            throw GentiError.uploadFail(code: "AWS", message: "AWS에 여러 장 업로드 실패")
         }
     }
     
