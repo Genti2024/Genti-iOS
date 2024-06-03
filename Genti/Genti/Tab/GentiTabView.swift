@@ -76,8 +76,9 @@ struct GentiTabView: View {
                     Color.black.opacity(0.3)
                         .ignoresSafeArea()
                     // Content
-                    ProgressView()
-                        .tint(.gentiGreen)
+                    LottieView(lottieFile: "ProgressLottie")
+                        .frame(width: 100, height: 100)
+
                 } //:ZSTACK
 
             }

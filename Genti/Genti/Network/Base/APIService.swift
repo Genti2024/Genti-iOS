@@ -17,7 +17,7 @@ class APIService {
     func fetchResponse<T: Decodable>(for endpoint: URLRequestConvertible) async throws -> T {
         return try await withCheckedThrowingContinuation { continuation in
             API.session.request(endpoint)
-                .validate(statusCode: 200..<300)
+//                .validate(statusCode: 200..<300)
                 .responseDecodable(of: APIResponse<T>.self) { res in
                     switch res.result {
                     case .success(let apiResponse):
