@@ -12,8 +12,11 @@ struct PhotoCompleteView: View {
     @State private var showPhotoDetail: Bool = false
     @State private var showReportAlert: Bool = false
     @State private var showCompleteAlert: Bool = false
+    @State private var showRatingAlert: Bool = false
+    
     @State private var reportContent: String = ""
     @State private var isLoading: Bool = false
+    
     var imageName: String = "SampleImage23"
     
     var body: some View {
@@ -24,7 +27,6 @@ struct PhotoCompleteView: View {
                     .ignoresSafeArea()
 
                 // Content
-                
                 VStack {
                     Image("Genti_LOGO")
                         .resizable()
@@ -111,7 +113,7 @@ struct PhotoCompleteView: View {
                         .padding(.vertical, 10)
                         .background(.black.opacity(0.001))
                         .onTapGesture {
-                            self.dismiss()
+                            self.showRatingAlert = true
                         }
                         .padding(.bottom, 30)
 
@@ -124,8 +126,6 @@ struct PhotoCompleteView: View {
                         .onTapGesture {
                             self.showReportAlert = true
                         }
-
-                    
                 }
                 
                 if isLoading {
@@ -135,7 +135,6 @@ struct PhotoCompleteView: View {
             } //:ZSTACK
         }
         .ignoresSafeArea(.keyboard)
-
         .fullScreenCover(isPresented: $showPhotoDetail) {
             PhotoDetailView(imageName: self.imageName)
         }
@@ -161,7 +160,21 @@ struct PhotoCompleteView: View {
         } message: {
             Text("작성해주신 내용 잘 확인하여 더 좋은\n서비스를 제공하는 젠티가 되겠습니다")
         }
-
+        .fullScreenCover(isPresented: $showRatingAlert, onDismiss: self.onDismiss) {
+            RatingAlertView()
+        }
+        .transaction { transaction in
+            transaction.disablesAnimations = true
+        }
+    }
+    var onDismiss: (()->Void)? {
+        return {
+            Task {
+                try await Task.sleep(nanoseconds:200000000)
+                self.dismiss()
+            }
+            
+        }
     }
 }
 
