@@ -28,7 +28,8 @@
 		C034CCD62C0976C700B68499 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034CCD52C0976C700B68499 /* PhotoDetailView.swift */; };
 		C062B0E72C0DCFC500ECA268 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062B0E62C0DCFC500ECA268 /* LottieView.swift */; };
 		C062B0EC2C0DD17800ECA268 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C062B0EB2C0DD17800ECA268 /* Lottie */; };
-		C062B0EE2C0DD33700ECA268 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C062B0ED2C0DD33700ECA268 /* ProgressLottie.json */; };
+		C062B0F02C1007E600ECA268 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C062B0EF2C1007E600ECA268 /* ProgressLottie.json */; };
+		C062B0F22C101D4C00ECA268 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */; };
 		C073BD472BCBE5FA00130BAD /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD462BCBE5FA00130BAD /* GentiApp.swift */; };
 		C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD482BCBE5FA00130BAD /* LoginView.swift */; };
 		C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */; };
@@ -117,7 +118,8 @@
 		C02D67C82BD38038004DD995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C034CCD52C0976C700B68499 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		C062B0E62C0DCFC500ECA268 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		C062B0ED2C0DD33700ECA268 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
+		C062B0EF2C1007E600ECA268 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
+		C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C073BD482BCBE5FA00130BAD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -235,7 +237,7 @@
 		C02BFD062BD0F7CF00FAADC1 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				C062B0ED2C0DD33700ECA268 /* ProgressLottie.json */,
+				C062B0EF2C1007E600ECA268 /* ProgressLottie.json */,
 				C02D67C62BD37CB8004DD995 /* Font+.swift */,
 				C02D67BB2BD37C68004DD995 /* Fonts */,
 				C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */,
@@ -301,6 +303,7 @@
 				C02BFD192BD1106200FAADC1 /* Constants.swift */,
 				C086A2492BD6319B0052D59F /* SafeAreaInset.swift */,
 				C086C2252BE09F3800E25D71 /* BulletText.swift */,
+				C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -647,9 +650,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C073BD4E2BCBE5FC00130BAD /* Preview Assets.xcassets in Resources */,
-				C062B0EE2C0DD33700ECA268 /* ProgressLottie.json in Resources */,
 				C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */,
 				C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */,
+				C062B0F02C1007E600ECA268 /* ProgressLottie.json in Resources */,
 				C02D67C32BD37C74004DD995 /* Pretendard-Regular.otf in Resources */,
 				C02D67C12BD37C74004DD995 /* Pretendard-Light.otf in Resources */,
 				C02D67C22BD37C74004DD995 /* Pretendard-SemiBold.otf in Resources */,
@@ -712,6 +715,7 @@
 				C0DD88312C095E1000109A25 /* WebView.swift in Sources */,
 				C086A24A2BD6319B0052D59F /* SafeAreaInset.swift in Sources */,
 				C0DD88222C0857E600109A25 /* StraggeredGrid.swift in Sources */,
+				C062B0F22C101D4C00ECA268 /* NavigationUtil.swift in Sources */,
 				C086A2442BD617840052D59F /* PhotoFrame.swift in Sources */,
 				C086C2AB2BE7265300E25D71 /* TextEditorLimitLength.swift in Sources */,
 				C07FE6CB2C0BDEAA00A93B43 /* GeneratorRouter.swift in Sources */,
@@ -906,7 +910,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -942,7 +946,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

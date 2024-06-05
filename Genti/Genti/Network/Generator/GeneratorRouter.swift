@@ -13,7 +13,7 @@ enum GeneratorRouter: URLRequestConvertible {
     
     case getPresignedUrl(fileName: String)
     case getPresignedUrls(fileNames: [String])
-    case requestImage(prompt: String, poseURL: String, faceURLs: [String], angle: String, coverage: String)
+    case requestImage(prompt: String, poseURL: String?, faceURLs: [String], angle: String, coverage: String)
     
     var method: HTTPMethod {
         switch self {
@@ -54,7 +54,7 @@ enum GeneratorRouter: URLRequestConvertible {
         
         switch self {
         case .getPresignedUrl(let fileName):
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["fileName": fileName, "fileType": "CREATED_IMAGE"])
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["fileName": fileName, "fileType": "USER_UPLOADED_IMAGE"])
             
         case .getPresignedUrls(let fileNames):
             var body: [[String: Any]] = []
@@ -65,8 +65,8 @@ enum GeneratorRouter: URLRequestConvertible {
             
         case .requestImage(prompt: let prompt, poseURL: let poseURL, faceURLs: let faceURLs, angle: let angle, coverage: let coverage):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["prompt": prompt,
-                                                                            "posePictureUrl": poseURL,
-                                                                            "facePictureUrlList": faceURLs,
+                                                                            "posePictureKey": poseURL,
+                                                                            "facePictureKeyList": faceURLs,
                                                                             "cameraAngle": "위에서 촬영",
                                                                             "shotCoverage": "얼굴만 클로즈업"
                                                                            ])

@@ -15,6 +15,10 @@ final class GeneratorViewModel: ObservableObject {
     @Published var showPhotoPickerWhenFirstView: Bool = false
     @Published var photoDescription: String = ""
     
+    
+    
+    
+    
     var descriptionIsEmpty: Bool {
         return photoDescription.isEmpty
     }
@@ -71,16 +75,18 @@ final class GeneratorViewModel: ObservableObject {
         resetThird()
     }
     
+    
+    // request
     @Published var isGenerating: Bool = false
     
-    func getReferenceS3Key() async throws -> String {
+    func getReferenceS3Key() async throws -> String? {
         if let referencePhAsset = referenceImage?.asset {
             guard let referenceKey = try await APIService.shared.uploadPHAssetToS3(phAsset: referencePhAsset) else {
                 throw GentiError.serverError(code: "AWS", message: "referenceImage의 s3key가 null입니다")
             }
             return referenceKey
         }
-        return ""
+        return nil
     }
     
     func getFaceS3Keys() async throws -> [String] {
