@@ -15,7 +15,7 @@ struct NavigationUtil {
               .first?.windows
               .filter({$0.isKeyWindow}).first
     findNavigationController(viewController: keyWindow?.rootViewController)?
-      .popToRootViewController(animated: true)
+      .popToRootViewController(animated: false)
   }
  
   static func findNavigationController(viewController: UIViewController?) -> UINavigationController? {

@@ -12,6 +12,9 @@ struct SettingView: View {
     @Binding var tabbarHidden: Bool
     @Binding var settingFlow: [SettingFlow]
     
+    @State private var showLogoutAlert: Bool = false
+    @State private var showResignAlert: Bool = false
+    
     var body: some View {
         ZStack(alignment: .top) {
             // Background Color
@@ -66,7 +69,8 @@ struct SettingView: View {
                 
                 VStack(spacing: 0) {
                     SettingRow(title: "로그아웃") {
-                        NavigationUtil.popToRootView()
+                        self.showLogoutAlert = true
+//                        NavigationUtil.popToRootView()
                     }
                     SettingRow(title: "회원탈퇴") {
                         NavigationUtil.popToRootView()
@@ -90,6 +94,23 @@ struct SettingView: View {
         .onAppear {
             self.tabbarHidden = true
         }
+        .alert("정말 로그아웃 하시겠어요?", isPresented: $showLogoutAlert) {
+            Button("로그아웃") {
+                Task {
+                    do {
+                        try await Task.sleep(nanoseconds: 1000000000)
+                        print("sfsf")
+                    } catch {
+                        
+                    }
+                }
+
+            }
+            Button("취소하기", role: .cancel, action: {})
+        } message: {
+            Text("사진 생성 중에 로그아웃 하시면\n오류가 발생할 수 있습니다. 주의해주세요!")
+        }
+
     }
 }
 
