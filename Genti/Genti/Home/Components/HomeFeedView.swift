@@ -73,10 +73,10 @@ struct HomeFeedView_Previews: PreviewProvider {
 
 #Preview {
     ScrollView {
-        HomeFeedView(description: Constants.text(length: 50))
-        HomeFeedView(description: Constants.text(length: 100))
+        HomeFeedView(description: Constants.text(length: 200))
+        HomeFeedView(description: Constants.text(length: 200))
         HomeFeedView(mainImage: "SampleImage32", description: Constants.text(length: 200))
-        HomeFeedView(description: Constants.text(length: 100))
+        HomeFeedView(description: Constants.text(length: 200))
         HomeFeedView(description: Constants.text(length: 100))
     }
 }
