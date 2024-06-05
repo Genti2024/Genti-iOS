@@ -17,14 +17,12 @@ struct RatingAlertView: View {
         ZStack {
             VStack(spacing: 0) {
                 ratingContentView()
-
                 Rectangle()
                     .frame(height: 1)
-                
                 acceptButton()
                 cancelButton()
             }
-            .background(.gray4)
+            .background(.gray5)
             .clipShape(.rect(cornerRadius: 14))
             .padding(.horizontal, 50)
             
@@ -67,13 +65,12 @@ struct RatingAlertView: View {
             .frame(maxWidth: .infinity)
             .background(.black.opacity(0.001))
             .onTapGesture {
-                
                 if rating == 0 {
                     self.showErrorText = true
                 } else {
                     Task {
-                        self.showErrorText = false
                         self.isLoading = true
+                        self.showErrorText = false
                         try await Task.sleep(nanoseconds: 2000000000)
                         self.isLoading = false
                         print("별점 : \(self.rating)점")
