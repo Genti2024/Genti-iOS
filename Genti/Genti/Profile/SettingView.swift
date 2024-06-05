@@ -66,10 +66,10 @@ struct SettingView: View {
                 
                 VStack(spacing: 0) {
                     SettingRow(title: "로그아웃") {
-                        
+                        NavigationUtil.popToRootView()
                     }
                     SettingRow(title: "회원탈퇴") {
-                        
+                        NavigationUtil.popToRootView()
                     }
                 }
                 .padding(20)
