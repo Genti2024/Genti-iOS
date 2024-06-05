@@ -22,7 +22,7 @@ struct RatingAlertView: View {
                 acceptButton()
                 cancelButton()
             }
-            .background(.gray5)
+            .background(.grayAlert)
             .clipShape(.rect(cornerRadius: 14))
             .padding(.horizontal, 50)
             
