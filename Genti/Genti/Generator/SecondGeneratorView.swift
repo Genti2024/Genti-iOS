@@ -18,40 +18,48 @@ struct SecondGeneratorView: View {
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    GeneratorHeaderView(step: 2)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .overlay(alignment: .leading) {
-                            Image("Back_fill")
-                                .resizable()
-                                .frame(width: 29, height: 29)
-                                .padding(11)
-                                .background(.black.opacity(0.001))
-                                .onTapGesture {
-                                    self.viewModel.resetSecond()
-                                    self.generateFlow.removeLast()
-                                }
-                                .padding(.leading, 17)
-                        }
-                        .padding(.top, 40)
-                    
-                    VStack(spacing: 12) {
-                        ratioSelectView()
-                        angleSelectView()
-                        frameSelectView()
-                    } //:VSTACK
-                    .padding(.horizontal, 16)
-                    .padding(.top, 19)
-                    
+                    headerView()
+                    selectViews()
                     Spacer()
-                    
-                    GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-                        self.generateFlow.append(.thrid)
-                    }
-                    .padding(.bottom, 32)
-
+                    nextButtonView()
                 } //:VSTACK
             } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)
+    }
+    
+    private func nextButtonView() -> some View {
+        GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
+            self.generateFlow.append(.thrid)
+        }
+        .padding(.bottom, 32)
+    }
+    
+    private func selectViews() -> some View {
+        VStack(spacing: 12) {
+            ratioSelectView()
+            angleSelectView()
+            frameSelectView()
+        } //:VSTACK
+        .padding(.horizontal, 16)
+        .padding(.top, 19)
+    }
+    
+    private func headerView() -> some View {
+        GeneratorHeaderView(step: 2)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .overlay(alignment: .leading) {
+                Image("Back_fill")
+                    .resizable()
+                    .frame(width: 29, height: 29)
+                    .padding(11)
+                    .background(.black.opacity(0.001))
+                    .onTapGesture {
+                        self.viewModel.resetSecond()
+                        self.generateFlow.removeLast()
+                    }
+                    .padding(.leading, 17)
+            }
+            .padding(.top, 40)
     }
     
     private func ratioSelectView() -> some View {

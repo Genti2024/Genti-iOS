@@ -10,18 +10,7 @@ import Combine
 
 struct FirstGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
-    
     @Binding var generateFlow: [GeneratorFlow]
-    
-    private let randomDescription: [String] = [
-        "프랑스 야경을 즐기는 모습을 그려주세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.1",
-        "프랑스 야경을 즐기는 모습을 그려주세모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요. 항공점퍼를 입고 테라스요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.2",
-        "프랑스 야경을 즐기는 모습을 그려. 항공점퍼를 입고주세요. 항공점퍼를 입고. 항공점퍼를 입고 테라스에 서 있는 모습이에요.3",
-        "프랑스 야경을 즐기는 모습을 그려주모습을 그려주세요. 항공점퍼를 입고 테라스세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.4",
-    ]
-    
-    @State private var currentIndex: Int = 0
-    
     @FocusState var isFocused: Bool
     
     var body: some View {
@@ -32,47 +21,42 @@ struct FirstGeneratorView: View {
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    
-                    GeneratorHeaderView(step: 1)
-                        .padding(.top, 40)
-                    
+                    headerView()
                     inpuTextView()
-                        .padding(.top, 32)
-                    
                     randomDescriptionView()
-                    
-                    
                     addImageView()
-                        .padding(.top, 43)
-                    
-                    
                     Spacer()
-
-                    GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
-                        self.generateFlow.append(.second)
-                    }
-                    .padding(.bottom, 32)
+                    nextButtonView()
                 } //:VSTACK
             } //:ZSTACK
         }
         .ignoresSafeArea(.keyboard)
-
- 
+        .focused($isFocused)
+        .toolbar(.hidden, for: .navigationBar)
         .onTapGesture {
             isFocused = false
         }
         .onAppear {
             isFocused = true
+            self.viewModel.getRandomDescriptionExample()
         }
-        .focused($isFocused)
         .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
             PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
                 .environmentObject(viewModel)
             
         }
-        .toolbar(.hidden, for: .navigationBar)
     }
     
+    private func nextButtonView() -> some View {
+        GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
+            self.generateFlow.append(.second)
+        }
+        .padding(.bottom, 32)
+    }
+    private func headerView() -> some View {
+        GeneratorHeaderView(step: 1)
+            .padding(.top, 40)
+    }
     private func randomDescriptionView() -> some View {
         VStack {
             Text("이런 사진은 어때요?")
@@ -87,7 +71,7 @@ struct FirstGeneratorView: View {
                         .shadow(color: .black.opacity(0.09), radius: 5)
 
                         .overlay {
-                            Text(randomDescription[currentIndex])
+                            Text(viewModel.currentRandomDescriptionExample)
                                 .pretendard(.description)
                                 .foregroundStyle(.black)
                                 .lineLimit(3)
@@ -97,12 +81,7 @@ struct FirstGeneratorView: View {
                 
                 Button {
                     // Action
-                    let maxIndex = randomDescription.count-1
-                    if currentIndex == maxIndex {
-                        currentIndex = 0
-                    } else {
-                        currentIndex += 1
-                    }
+                    self.viewModel.getRandomDescriptionExample()
                 } label: {
                     Image("Change")
                         .resizable()
@@ -115,7 +94,6 @@ struct FirstGeneratorView: View {
         .padding(.horizontal, 29)
         .padding(.top, 10)
     }
-    
     private func inpuTextView() -> some View {
         VStack(spacing: 0) {
             Text("만들고 싶은 사진을 설명해주세요✏️")
@@ -127,8 +105,8 @@ struct FirstGeneratorView: View {
                 .padding(.top, 14)
             
         } //:VSTACK
+        .padding(.top, 32)
     }
-    
     private func addImageView() -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 3) {
@@ -150,8 +128,8 @@ struct FirstGeneratorView: View {
                 .foregroundStyle(.gray3)
                 .padding(.top, 5)
         } //:VSTACK
+        .padding(.top, 43)
     }
-    
     @ViewBuilder
     private func referenceImage() -> some View {
         if let referenceImage = viewModel.referenceImage?.asset {
@@ -180,7 +158,6 @@ struct FirstGeneratorView: View {
                 }
         }
     }
-    
     private func descriptionTextEditor() -> some View {
         ZStack {
             TextEditor(text: $viewModel.photoDescription)

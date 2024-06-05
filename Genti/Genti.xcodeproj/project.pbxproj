@@ -290,8 +290,8 @@
 				C086A2402BD617550052D59F /* Models */,
 				C02BFD0F2BD0F97D00FAADC1 /* FirstGeneratorView.swift */,
 				C02BFD112BD0FB4A00FAADC1 /* SecondGeneratorView.swift */,
-				C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */,
 				C086C2212BDFA3E600E25D71 /* ThirdGeneratorView.swift */,
+				C086A2472BD62A960052D59F /* GenerateRequestCompleteView.swift */,
 			);
 			path = Generator;
 			sourceTree = "<group>";

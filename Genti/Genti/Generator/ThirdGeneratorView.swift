@@ -17,52 +17,52 @@ struct ThirdGeneratorView: View {
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    
-                    GeneratorHeaderView(step: 3)
-
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .overlay(alignment: .leading) {
-                            Image("Back_fill")
-                                .resizable()
-                                .frame(width: 29, height: 29)
-                                .padding(11)
-                                .background(.black.opacity(0.001))
-                                .onTapGesture {
-                                    self.viewModel.resetThird()
-                                    self.generateFlow.removeLast()
-                                }
-                                .padding(.leading, 17)
-                        }
-                        .padding(.top, 40)
-                    
+                    headerView()
                     imageUploadView()
-                        .padding(.top, .height(ratio: 0.048))
-                    
                     cautionScrollView()
-                        .padding(.top, .height(ratio: 0.02))
-                        .padding(.bottom, 30)
-
-                    GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
-                        Task {
-                            do {
-                                self.viewModel.isGenerating = true
-                                try await self.viewModel.generateImage()
-                                self.viewModel.isGenerating = false
-                            } catch(let error) {
-                                guard let gentiError = error as? GentiError else {
-                                    throw GentiError.unknownedError(code: "Unknowned", message: "정의되지않은 에러가 발생했습니다")
-                                }
-                                print(gentiError.localizedDescription)
-                            }
-                        }
-                    }
-                    .padding(.bottom, 32)
+                    completeButtonView()
                 } //:VSTACK
             } //:ZSTACK
+            .toolbar(.hidden, for: .navigationBar)
             .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
                 PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 3), pickerType: .faces)
             }
-        .toolbar(.hidden, for: .navigationBar)
+    }
+    
+    private func completeButtonView() -> some View {
+        GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
+            Task {
+                do {
+                    self.viewModel.isGenerating = true
+                    try await self.viewModel.generateImage()
+                    self.viewModel.isGenerating = false
+                } catch(let error) {
+                    guard let gentiError = error as? GentiError else {
+                        throw GentiError.unknownedError(code: "Unknowned", message: "정의되지않은 에러가 발생했습니다")
+                    }
+                    print(gentiError.localizedDescription)
+                }
+            }
+        }
+        .padding(.bottom, 32)
+    }
+    
+    private func headerView() -> some View {
+        GeneratorHeaderView(step: 3)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .overlay(alignment: .leading) {
+                Image("Back_fill")
+                    .resizable()
+                    .frame(width: 29, height: 29)
+                    .padding(11)
+                    .background(.black.opacity(0.001))
+                    .onTapGesture {
+                        self.viewModel.resetThird()
+                        self.generateFlow.removeLast()
+                    }
+                    .padding(.leading, 17)
+            }
+            .padding(.top, 40)
     }
     
     private func cautionScrollView() -> some View {
@@ -158,6 +158,8 @@ struct ThirdGeneratorView: View {
                     .frame(height: 20)
             }
         }
+        .padding(.top, .height(ratio: 0.02))
+        .padding(.bottom, 30)
     }
     
     private func imageUploadView() -> some View {

@@ -25,25 +25,15 @@ struct PopupImagePickerView: View {
             // Content
             VStack(spacing: 0) {
                 headerView()
-                    .padding([.horizontal, .top])
-                    .padding(.bottom, 10)
-                
                 albumImageScrollView()
             } //:VSTACK
-            
             selectButton()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, .height(ratio: 0.03))
-            
         } //:ZSTACK
         .onDisappear(perform: {
             imagePickerModel.removeAll()
         })
     }
-
-}
-
-private extension PopupImagePickerView {
+    
     func albumImageScrollView() -> some View {
         ScrollViewWithOnScrollChanged {
             LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 3), count: 3), spacing: 3) {
@@ -68,7 +58,6 @@ private extension PopupImagePickerView {
             self.imagePickerModel.scrollViewHeight = size.height
         })
     }
-    
     func selectButton() -> some View {
         Button {
             // Action
@@ -91,8 +80,9 @@ private extension PopupImagePickerView {
                 )
         }
         .disabled(!imagePickerModel.isReachLimit)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .padding(.bottom, .height(ratio: 0.03))
     }
-    
     func headerView() -> some View {
         HStack {
             Text("\(imagePickerModel.limit)장의 이미지를 선택해주세요")
@@ -107,8 +97,9 @@ private extension PopupImagePickerView {
                     .foregroundStyle(.black)
             }
         }
+        .padding([.horizontal, .top])
+        .padding(.bottom, 10)
     }
-    
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
                 
@@ -146,7 +137,11 @@ private extension PopupImagePickerView {
                 }
             }
     }
-    
+
+}
+
+private extension PopupImagePickerView {
+
     func updateImageSelection(for imageAsset: ImageAsset) {
         if let index = imagePickerModel.isSelected(from: imageAsset) {
             removeImage(at: index)

@@ -28,7 +28,6 @@ struct HomeFeedView: View {
         .padding(.vertical, 10)
     }
     
-    // Main Image View
     private func mainImageView() -> some View {
         Image(mainImage)
             .resizable()
@@ -39,8 +38,6 @@ struct HomeFeedView: View {
                     .stroke(Color.gentiGreen, lineWidth: 1)
             )
     }
-    
-    // Photo Description View
     private func photoDescriptionView() -> some View {
         HStack {
             Text("사진 설명")
@@ -50,8 +47,6 @@ struct HomeFeedView: View {
         }
         .padding(.horizontal, 10)
     }
-    
-    // Detailed Description View
     private func detailedDescriptionView() -> some View {
         Text(description)
             .pretendard(.normal)

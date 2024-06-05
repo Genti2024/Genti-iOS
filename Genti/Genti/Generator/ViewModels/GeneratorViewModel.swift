@@ -11,13 +11,23 @@ import Photos
 final class GeneratorViewModel: ObservableObject {
     
     // firstView
+    private var currentIndex: Int = -1
+    private let randomDescription: [String] = [
+        "프랑스 야경을 즐기는 모습을 그려주세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.1",
+        "프랑스 야경을 즐기는 모습을 그려주세모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요.2",
+        "프랑스 야경을 즐기는 모습을 그려. 항공점퍼를 입고주세요. 항공점퍼를 입고. 항공점퍼를 입고 테라스에 서 있는 모습이에요.3",
+        "프랑스 야경을 즐기는 모습을 그려주모습을 그려주세요. 항공점퍼를 입고 테라스세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.4",
+    ]
+    
     @Published var referenceImage: ImageAsset? = nil
     @Published var showPhotoPickerWhenFirstView: Bool = false
     @Published var photoDescription: String = ""
+    @Published var currentRandomDescriptionExample: String = ""
     
-    
-    
-    
+    func getRandomDescriptionExample() {
+        currentIndex = (currentIndex + 1) % randomDescription.count
+        self.currentRandomDescriptionExample = randomDescription[currentIndex]
+    }
     
     var descriptionIsEmpty: Bool {
         return photoDescription.isEmpty
