@@ -68,6 +68,8 @@
 		C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */; };
 		C0C14BF12C1034C300B0E570 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C0C14BF02C1034C300B0E570 /* Lottie */; };
 		C0C14BF42C1034D400B0E570 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C0C14BF32C1034D400B0E570 /* Alamofire */; };
+		C0C14BF72C1035BA00B0E570 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */; };
+		C0C14BFA2C103E3400B0E570 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C14BF92C103E3400B0E570 /* LoadingView.swift */; };
 		C0DD88222C0857E600109A25 /* StraggeredGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88212C0857E600109A25 /* StraggeredGrid.swift */; };
 		C0DD88242C0858B600109A25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88232C0858B600109A25 /* Post.swift */; };
 		C0DD88262C085EC600109A25 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88252C085EC600109A25 /* PostCardView.swift */; };
@@ -159,6 +161,8 @@
 		C086C2AC2BE72F2A00E25D71 /* GeneratorNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationButton.swift; sourceTree = "<group>"; };
 		C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
 		C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
+		C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
+		C0C14BF92C103E3400B0E570 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C0DD88212C0857E600109A25 /* StraggeredGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraggeredGrid.swift; sourceTree = "<group>"; };
 		C0DD88232C0858B600109A25 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C0DD88252C085EC600109A25 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
@@ -301,6 +305,7 @@
 				C086A2492BD6319B0052D59F /* SafeAreaInset.swift */,
 				C086C2252BE09F3800E25D71 /* BulletText.swift */,
 				C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */,
+				C0C14BF92C103E3400B0E570 /* LoadingView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 		C07FE6C42C0BDC1800A93B43 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C0C14BF52C10359600B0E570 /* Setting */,
 				C07FE6D42C0D46D700A93B43 /* Base */,
 				C07FE6C92C0BDE9F00A93B43 /* Generator */,
 			);
@@ -538,6 +544,14 @@
 				C0DD88232C0858B600109A25 /* Post.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C0C14BF52C10359600B0E570 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		C0DD882D2C095A1600109A25 /* Complete */ = {
@@ -697,6 +711,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0C14BF72C1035BA00B0E570 /* SettingRouter.swift in Sources */,
 				C073BD492BCBE5FA00130BAD /* LoginView.swift in Sources */,
 				C086C2102BDE11F800E25D71 /* ImagePickerViewModel.swift in Sources */,
 				C0DD88282C086A9000109A25 /* BlurView.swift in Sources */,
@@ -721,6 +736,7 @@
 				C086C2262BE09F3800E25D71 /* BulletText.swift in Sources */,
 				C086A2422BD617630052D59F /* PhotoAngle.swift in Sources */,
 				C07FE6C82C0BDC5F00A93B43 /* APIService.swift in Sources */,
+				C0C14BFA2C103E3400B0E570 /* LoadingView.swift in Sources */,
 				C086C2A82BE5D4E000E25D71 /* PHAssetImageViewModel.swift in Sources */,
 				C07FE6D32C0C6B3400A93B43 /* GeneratorRequest.swift in Sources */,
 				C07FE6D62C0D46EF00A93B43 /* API.swift in Sources */,

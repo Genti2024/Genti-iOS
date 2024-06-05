@@ -71,16 +71,7 @@ struct GentiTabView: View {
             }
             
             if genteratorViewModel.isGenerating {
-                ZStack {
-                    // Background Color
-                    Color.black.opacity(0.3)
-                        .ignoresSafeArea()
-                    // Content
-                    LottieView(lottieFile: "ProgressLottie")
-                        .frame(width: 100, height: 100)
-
-                } //:ZSTACK
-
+                LoadingView()
             }
             
         } //: ZSTACK
