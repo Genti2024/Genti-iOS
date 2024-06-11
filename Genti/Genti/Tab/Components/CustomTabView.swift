@@ -12,14 +12,14 @@ struct CustomTabView: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Image(selectedTab == .home ? "Home_fill" : "Home_empty")
+            Image(selectedTab == .feed ? "Feed_fill" : "Feed_empty")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    selectedTab = .home
+                    selectedTab = .feed
                 }
             Spacer()
             
@@ -71,7 +71,7 @@ struct CustomTabView: View {
 }
 
 fileprivate struct CustomTabViewPreView: View {
-    @State private var selected: Tab = .home
+    @State private var selected: Tab = .feed
     var body: some View {
         CustomTabView(selectedTab: $selected)
     }

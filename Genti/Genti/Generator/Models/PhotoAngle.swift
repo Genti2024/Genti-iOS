@@ -8,22 +8,35 @@
 import Foundation
 
 enum PhotoAngle {
-    case top, center, bottom, free
+    case above, eyeLevel, below, any
     
     static var selections: [PhotoAngle] {
-        return [.top, .center, .bottom]
+        return [.above, .eyeLevel, .below]
     }
     
     var image: String {
         switch self {
-        case .top:
+        case .above:
             return "Angle_top"
-        case .center:
+        case .eyeLevel:
             return "Angle_center"
-        case .bottom:
+        case .below:
             return "Angle_bottom"
-        case .free:
+        case .any:
             return "Check_empty"
+        }
+    }
+    
+    var requsetString: String {
+        switch self {
+        case .above:
+            return "ABOVE"
+        case .eyeLevel:
+            return "EYE_LEVEL"
+        case .below:
+            return "BELOW"
+        case .any:
+            return "ANY"
         }
     }
     

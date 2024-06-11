@@ -13,7 +13,7 @@ enum GeneratorRouter: URLRequestConvertible {
     
     case getPresignedUrl(fileName: String)
     case getPresignedUrls(fileNames: [String])
-    case requestImage(prompt: String, poseURL: String?, faceURLs: [String], angle: String, coverage: String)
+    case requestImage(prompt: String, poseURL: String?, faceURLs: [String], angle: PhotoAngle, coverage: PhotoFrame, ratio: PhotoRatio)
     
     var method: HTTPMethod {
         switch self {
@@ -59,17 +59,21 @@ enum GeneratorRouter: URLRequestConvertible {
         case .getPresignedUrls(let fileNames):
             var body: [[String: Any]] = []
             for fileName in fileNames {
-                body.append(["fileName": fileName, "fileType": "CREATED_IMAGE"])
+                body.append(["fileName": fileName, "fileType": "USER_UPLOADED_IMAGE"])
             }
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body)
             
-        case .requestImage(prompt: let prompt, poseURL: let poseURL, faceURLs: let faceURLs, angle: let angle, coverage: let coverage):
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["prompt": prompt,
-                                                                            "posePictureKey": poseURL,
-                                                                            "facePictureKeyList": faceURLs,
-                                                                            "cameraAngle": "위에서 촬영",
-                                                                            "shotCoverage": "얼굴만 클로즈업"
-                                                                           ])
+        case .requestImage(prompt: let prompt, poseURL: let poseURL, faceURLs: let faceURLs, angle: let angle, coverage: let coverage, ratio: let ratio):
+            var parameters: [String: Any] = ["prompt": prompt,
+                              "facePictureKeyList": faceURLs,
+                              "cameraAngle": angle.requsetString,
+                              "shotCoverage": coverage.requsetString,
+                              "pictureRatio": ratio.requsetString
+                             ]
+            if let poseURL = poseURL {
+                parameters["posePictureKey"] = poseURL
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         }
         
         return urlRequest

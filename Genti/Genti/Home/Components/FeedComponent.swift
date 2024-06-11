@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeFeedView: View {
+struct FeedComponent: View {
     
     var mainImage: String = "SampleImage32"
     var description: String = Constants.text(length: 200)
@@ -67,16 +67,16 @@ struct HomeFeedView: View {
 
 struct HomeFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeFeedView()
+        FeedComponent()
     }
 }
 
 #Preview {
     ScrollView {
-        HomeFeedView(description: Constants.text(length: 200))
-        HomeFeedView(description: Constants.text(length: 200))
-        HomeFeedView(mainImage: "SampleImage32", description: Constants.text(length: 200))
-        HomeFeedView(description: Constants.text(length: 200))
-        HomeFeedView(description: Constants.text(length: 100))
+        FeedComponent(description: Constants.text(length: 200))
+        FeedComponent(description: Constants.text(length: 200))
+        FeedComponent(mainImage: "SampleImage32", description: Constants.text(length: 200))
+        FeedComponent(description: Constants.text(length: 200))
+        FeedComponent(description: Constants.text(length: 100))
     }
 }

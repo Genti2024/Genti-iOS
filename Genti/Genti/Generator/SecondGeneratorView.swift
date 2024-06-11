@@ -104,12 +104,12 @@ struct SecondGeneratorView: View {
                 HStack(spacing: 4) {
                     Text("앵글은 자유롭게 맡길래요")
                         .pretendard(.description)
-                        .foregroundStyle(viewModel.selectedAngle == .free ? .green1 : .gray3)
-                    Image(viewModel.selectedAngle == .free ? PhotoAngle.freeSelectedImage : PhotoAngle.free.image)
+                        .foregroundStyle(viewModel.selectedAngle == .any ? .green1 : .gray3)
+                    Image(viewModel.selectedAngle == .any ? PhotoAngle.freeSelectedImage : PhotoAngle.any.image)
                 } //:HSTACK
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    viewModel.selectedAngle = .free
+                    viewModel.selectedAngle = .any
                 }
                 
                 HStack(spacing: 9) {
@@ -145,12 +145,12 @@ struct SecondGeneratorView: View {
                 HStack(spacing: 4) {
                     Text("프레임은 자유롭게 맡길래요")
                         .pretendard(.description)
-                        .foregroundStyle(viewModel.selectedFrame == .free ? .green1 : .gray3)
-                    Image(viewModel.selectedFrame == .free ? PhotoFrame.freeSelectedImage : PhotoAngle.free.image)
+                        .foregroundStyle(viewModel.selectedFrame == .any ? .green1 : .gray3)
+                    Image(viewModel.selectedFrame == .any ? PhotoFrame.freeSelectedImage : PhotoAngle.any.image)
                 } //:HSTACK
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    viewModel.selectedFrame = .free
+                    viewModel.selectedFrame = .any
                 }
                 
                 HStack(spacing: 9) {

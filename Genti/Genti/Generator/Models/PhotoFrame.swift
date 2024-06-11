@@ -8,24 +8,38 @@
 import Foundation
 
 enum PhotoFrame {
-    case closeUp, bust, knee, free
+    case face, fullBody, kneeUp, any
     
     static var selections: [PhotoFrame] {
-        return [.closeUp, .bust, .knee]
+        return [.face, .fullBody, .kneeUp]
     }
     
     var image: String {
         switch self {
-        case .closeUp:
+        case .face:
             return "Frame_closeup"
-        case .bust:
+        case .fullBody:
             return "Frame_bust"
-        case .knee:
+        case .kneeUp:
             return "Frame_knee"
-        case .free:
+        case .any:
             return "Check_empty"
         }
     }
+    
+    var requsetString: String {
+        switch self {
+        case .face:
+            return "FACE"
+        case .fullBody:
+            return "FULL_BODY"
+        case .kneeUp:
+            return "KNEE_UP"
+        case .any:
+            return "ANY"
+        }
+    }
+    
     
     static var freeSelectedImage: String {
         return "Check_fill"

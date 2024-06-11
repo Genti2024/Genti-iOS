@@ -31,9 +31,9 @@ struct ThirdGeneratorView: View {
     
     private func completeButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
+            self.viewModel.isGenerating = true
             Task {
                 do {
-                    self.viewModel.isGenerating = true
                     try await self.viewModel.generateImage()
                     self.viewModel.isGenerating = false
                 } catch(let error) {
@@ -201,6 +201,7 @@ struct ThirdGeneratorView: View {
                 .padding(.horizontal, 39)
             }
         } //:VSTACK
+        .padding(.top, 40)
         .frame(height: .height(ratio: 0.17))
     }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C016AE002C01AD5A003ED0DF /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016ADFF2C01AD5A003ED0DF /* HomeFeedView.swift */; };
+		C016AE002C01AD5A003ED0DF /* FeedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016ADFF2C01AD5A003ED0DF /* FeedComponent.swift */; };
 		C016AE022C01C153003ED0DF /* PhotoRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016AE012C01C153003ED0DF /* PhotoRatio.swift */; };
 		C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFCFC2BD0EAB000FAADC1 /* GentiTabView.swift */; };
 		C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02BFD012BD0F71A00FAADC1 /* CustomTabView.swift */; };
@@ -26,7 +26,6 @@
 		C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67C62BD37CB8004DD995 /* Font+.swift */; };
 		C034CCD62C0976C700B68499 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034CCD52C0976C700B68499 /* PhotoDetailView.swift */; };
 		C062B0E72C0DCFC500ECA268 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062B0E62C0DCFC500ECA268 /* LottieView.swift */; };
-		C062B0F02C1007E600ECA268 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C062B0EF2C1007E600ECA268 /* ProgressLottie.json */; };
 		C062B0F22C101D4C00ECA268 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */; };
 		C062B0FB2C102D8B00ECA268 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C062B0FA2C102D8B00ECA268 /* SDWebImageSwiftUI */; };
 		C062B0FE2C102D9800ECA268 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C062B0FD2C102D9800ECA268 /* SwiftfulUI */; };
@@ -37,7 +36,7 @@
 		C073BD582BCBE5FC00130BAD /* GentiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD572BCBE5FC00130BAD /* GentiTests.swift */; };
 		C073BD622BCBE5FC00130BAD /* GentiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD612BCBE5FC00130BAD /* GentiUITests.swift */; };
 		C073BD642BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */; };
-		C07409A12C01750A00616ED9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07409A02C01750A00616ED9 /* HomeView.swift */; };
+		C07409A12C01750A00616ED9 /* MainFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07409A02C01750A00616ED9 /* MainFeedView.swift */; };
 		C07FE6C62C0BDC2600A93B43 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */; };
 		C07FE6C82C0BDC5F00A93B43 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6C72C0BDC5F00A93B43 /* APIService.swift */; };
 		C07FE6CB2C0BDEAA00A93B43 /* GeneratorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */; };
@@ -66,6 +65,7 @@
 		C086C2AD2BE72F2A00E25D71 /* GeneratorNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C086C2AC2BE72F2A00E25D71 /* GeneratorNavigationButton.swift */; };
 		C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */; };
 		C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */; };
+		C0B697172C17D6490083ADC3 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B697162C17D6490083ADC3 /* ProgressLottie.json */; };
 		C0C14BF12C1034C300B0E570 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C0C14BF02C1034C300B0E570 /* Lottie */; };
 		C0C14BF42C1034D400B0E570 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C0C14BF32C1034D400B0E570 /* Alamofire */; };
 		C0C14BF72C1035BA00B0E570 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */; };
@@ -101,7 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C016ADFF2C01AD5A003ED0DF /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
+		C016ADFF2C01AD5A003ED0DF /* FeedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedComponent.swift; sourceTree = "<group>"; };
 		C016AE012C01C153003ED0DF /* PhotoRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRatio.swift; sourceTree = "<group>"; };
 		C02BFCFC2BD0EAB000FAADC1 /* GentiTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiTabView.swift; sourceTree = "<group>"; };
 		C02BFD012BD0F71A00FAADC1 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
@@ -121,7 +121,6 @@
 		C02D67C82BD38038004DD995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C034CCD52C0976C700B68499 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		C062B0E62C0DCFC500ECA268 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		C062B0EF2C1007E600ECA268 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 		C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD462BCBE5FA00130BAD /* GentiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
@@ -133,7 +132,7 @@
 		C073BD5D2BCBE5FC00130BAD /* GentiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GentiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C073BD612BCBE5FC00130BAD /* GentiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiUITests.swift; sourceTree = "<group>"; };
 		C073BD632BCBE5FC00130BAD /* GentiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C07409A02C01750A00616ED9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C07409A02C01750A00616ED9 /* MainFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedView.swift; sourceTree = "<group>"; };
 		C07FE6C52C0BDC2600A93B43 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		C07FE6C72C0BDC5F00A93B43 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C07FE6CA2C0BDEAA00A93B43 /* GeneratorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorRouter.swift; sourceTree = "<group>"; };
@@ -162,6 +161,7 @@
 		C086C2AC2BE72F2A00E25D71 /* GeneratorNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationButton.swift; sourceTree = "<group>"; };
 		C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
 		C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
+		C0B697162C17D6490083ADC3 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 		C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		C0C14BF92C103E3400B0E570 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C0C14BFB2C104A0300B0E570 /* RatingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingAlertView.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		C02BFD062BD0F7CF00FAADC1 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				C062B0EF2C1007E600ECA268 /* ProgressLottie.json */,
+				C0B697162C17D6490083ADC3 /* ProgressLottie.json */,
 				C02D67C62BD37CB8004DD995 /* Font+.swift */,
 				C02D67BB2BD37C68004DD995 /* Fonts */,
 				C073BD4A2BCBE5FC00130BAD /* Assets.xcassets */,
@@ -266,7 +266,7 @@
 				C07FE6C32C0BDBCD00A93B43 /* Network */,
 				C02D67B82BD374B2004DD995 /* Model */,
 				C02BFD1F2BD1DB7C00FAADC1 /* Components */,
-				C07409A02C01750A00616ED9 /* HomeView.swift */,
+				C07409A02C01750A00616ED9 /* MainFeedView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -315,7 +315,7 @@
 		C02BFD1F2BD1DB7C00FAADC1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C016ADFF2C01AD5A003ED0DF /* HomeFeedView.swift */,
+				C016ADFF2C01AD5A003ED0DF /* FeedComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -684,8 +684,8 @@
 			files = (
 				C073BD4E2BCBE5FC00130BAD /* Preview Assets.xcassets in Resources */,
 				C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */,
+				C0B697172C17D6490083ADC3 /* ProgressLottie.json in Resources */,
 				C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */,
-				C062B0F02C1007E600ECA268 /* ProgressLottie.json in Resources */,
 				C02D67C32BD37C74004DD995 /* Pretendard-Regular.otf in Resources */,
 				C02D67C12BD37C74004DD995 /* Pretendard-Light.otf in Resources */,
 				C02D67C22BD37C74004DD995 /* Pretendard-SemiBold.otf in Resources */,
@@ -725,8 +725,8 @@
 				C02BFCFD2BD0EAB000FAADC1 /* GentiTabView.swift in Sources */,
 				C0DD882C2C0938B500109A25 /* SettingView.swift in Sources */,
 				C086C2192BDF154000E25D71 /* PHAssetImageView.swift in Sources */,
-				C016AE002C01AD5A003ED0DF /* HomeFeedView.swift in Sources */,
-				C07409A12C01750A00616ED9 /* HomeView.swift in Sources */,
+				C016AE002C01AD5A003ED0DF /* FeedComponent.swift in Sources */,
+				C07409A12C01750A00616ED9 /* MainFeedView.swift in Sources */,
 				C086C2242BE09F0700E25D71 /* Caution.swift in Sources */,
 				C0DD882A2C08732200109A25 /* PostDetailView.swift in Sources */,
 				C02D67BA2BD374BA004DD995 /* Feed.swift in Sources */,

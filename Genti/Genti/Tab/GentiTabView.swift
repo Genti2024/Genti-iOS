@@ -17,7 +17,7 @@ enum SettingFlow: Hashable {
 
 struct GentiTabView: View {
 
-    @State private var currentTab: Tab = .home
+    @State private var currentTab: Tab = .feed
     @State private var showCompleteView: Bool = false
     @State var generateFlow: [GeneratorFlow] = []
     @State var settingFlow: [SettingFlow] = []
@@ -31,8 +31,8 @@ struct GentiTabView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $currentTab) {
-                HomeView()
-                    .tag(Tab.home)
+                MainFeedView()
+                    .tag(Tab.feed)
                 
                 NavigationStack(path: $generateFlow) {
                     FirstGeneratorView(generateFlow: $generateFlow)
@@ -82,14 +82,14 @@ struct GentiTabView: View {
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("GeneratorCompleted"))) { _ in
-            self.currentTab = .home
+            self.currentTab = .feed
             self.showCompleteView.toggle()
         }
         .toolbar(.hidden, for: .navigationBar)
         .fullScreenCover(isPresented: $showCompleteView, onDismiss: {
             self.genteratorViewModel.reset()
             self.generateFlow.removeAll()
-            self.currentTab = .home
+            self.currentTab = .feed
         }, content: {
             GenerateRequestCompleteView()
         })
