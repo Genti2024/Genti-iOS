@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  MainFeedView.swift
 //  Genti
 //
 //  Created by uiskim on 5/25/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct MainFeedView: View {
     @State private var logoHidden: Bool = false
     
     var body: some View {
@@ -34,16 +34,16 @@ struct HomeView: View {
     
     private func feedsView() -> some View {
         VStack(spacing: 0) {
-            HomeFeedView()
-            HomeFeedView(description: Constants.text(length: 100))
-            HomeFeedView(description: Constants.text(length: 50))
-            HomeFeedView(description: Constants.text(length: 100))
-            HomeFeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
-            HomeFeedView()
-            HomeFeedView(description: Constants.text(length: 100))
-            HomeFeedView(description: Constants.text(length: 50))
-            HomeFeedView(description: Constants.text(length: 100))
-            HomeFeedView(mainImage: "SampleImage23", description: Constants.text(length: 50))
+            FeedComponent()
+            FeedComponent(description: Constants.text(length: 100))
+            FeedComponent(description: Constants.text(length: 50))
+            FeedComponent(description: Constants.text(length: 100))
+            FeedComponent(mainImage: "SampleImage23", description: Constants.text(length: 50))
+            FeedComponent()
+            FeedComponent(description: Constants.text(length: 100))
+            FeedComponent(description: Constants.text(length: 50))
+            FeedComponent(description: Constants.text(length: 100))
+            FeedComponent(mainImage: "SampleImage23", description: Constants.text(length: 50))
             
         } //:VSTACK
         .readingFrame { frame in
@@ -100,5 +100,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    MainFeedView()
 }

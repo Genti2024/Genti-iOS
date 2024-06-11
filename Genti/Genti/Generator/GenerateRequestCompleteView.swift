@@ -13,6 +13,10 @@ struct GenerateRequestCompleteView: View {
 
     var body: some View {
         ZStack {
+            
+            Color.backgroundWhite
+                .ignoresSafeArea()
+            
             LinearGradient(gradient: Gradient(colors: [Color.purple0, Color.gentiPurple.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             

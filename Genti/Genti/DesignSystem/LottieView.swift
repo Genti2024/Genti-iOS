@@ -19,6 +19,8 @@ struct LottieView: UIViewRepresentable {
         animationView.animation = LottieAnimation.named(lottieFile)
         animationView.contentMode = .scaleAspectFill
         animationView.loopMode = loopMode
+        animationView.play()
+        animationView.backgroundBehavior = .pauseAndRestore
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
@@ -28,18 +30,18 @@ struct LottieView: UIViewRepresentable {
             animationView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
         
+
+        
         return view
     }
     
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
-        animationView.play()
     }
 }
 
 struct Lottie: View {
     var body: some View {
         LottieView(lottieFile: "ProgressLottie")
-            .frame(width: 100, height: 100)
     }
 }
 

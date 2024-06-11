@@ -23,6 +23,15 @@ enum PhotoRatio {
         }
     }
     
+    var requsetString: String {
+        switch self {
+        case .twoThird:
+            return "TWO_THREE"
+        case .threeSecond:
+            return "THREE_TWO"
+        }
+    }
+    
     static var freeSelectedImage: String {
         return "Check_fill"
     }

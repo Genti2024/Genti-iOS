@@ -109,8 +109,7 @@ final class GeneratorViewModel: ObservableObject {
         async let referenceURL = getReferenceS3Key()
         async let facesURLs = getFaceS3Keys()
         
-        // 결과 요청 및 처리
-        if try await APIService.shared.fetchResponse(for: GeneratorRouter.requestImage(prompt: photoDescription, poseURL: referenceURL, faceURLs: facesURLs, angle: "", coverage: "")) {
+        if try await APIService.shared.fetchResponse(for: GeneratorRouter.requestImage(prompt: photoDescription, poseURL: referenceURL, faceURLs: facesURLs, angle: selectedAngle!, coverage: selectedFrame!, ratio: selectedRatio!)) {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("GeneratorCompleted"), object: nil)
             }

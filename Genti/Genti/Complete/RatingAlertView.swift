@@ -10,21 +10,21 @@ import SwiftUI
 struct RatingAlertView: View {
     @State private var rating: Int = 0
     @State private var isLoading: Bool = false
-    @State private var showErrorText: Bool = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
-            VStack(spacing: 0) {
-                ratingContentView()
-                Rectangle()
-                    .frame(height: 1)
-                acceptButton()
-                cancelButton()
-            }
-            .background(.grayAlert)
-            .clipShape(.rect(cornerRadius: 14))
-            .padding(.horizontal, 50)
+            Image("Rating_backgroundImage")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 270, height: 250)
+                .overlay(alignment: .top) {
+                    VStack(spacing: 0) {
+                        ratingContentView()
+                        acceptButton()
+                        cancelButton()
+                    }
+                }
             
             if isLoading {
                 LoadingView()
@@ -41,13 +41,11 @@ struct RatingAlertView: View {
             titleView()
             ratingStarView()
         } //:VSTACK
-        .padding(.top, 19)
-        .padding(.bottom, 15)
     }
     private func cancelButton() -> some View {
         Text("건너뛰기")
             .pretendard(.description)
-            .foregroundStyle(.black)
+            .foregroundStyle(.gray2)
             .underline()
             .padding(.bottom, 13)
             .frame(maxWidth: .infinity)
@@ -55,29 +53,32 @@ struct RatingAlertView: View {
             .onTapGesture {
                 self.dismiss()
             }
+            .padding(.top, 12)
     }
     private func acceptButton() -> some View {
-        Text("별점 남기기")
+        Text("제출하기")
             .pretendard(.headline4)
-            .foregroundStyle(.black)
-            .padding(.top, 7)
-            .padding(.bottom, 13)
-            .frame(maxWidth: .infinity)
+            .foregroundStyle(rating == 0 ? .gray2 : .white)
+            .frame(width: 221, height: 34)
+            .background(rating == 0 ? .clear : .gentiGreen)
+            .clipShape(.rect(cornerRadius: 6))
+            .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .strokeBorder(Color.gray2, lineWidth: rating == 0 ? 1 : 0)
+            )
+            
             .background(.black.opacity(0.001))
-            .onTapGesture {
-                if rating == 0 {
-                    self.showErrorText = true
-                } else {
-                    Task {
-                        self.isLoading = true
-                        self.showErrorText = false
-                        try await Task.sleep(nanoseconds: 2000000000)
-                        self.isLoading = false
-                        print("별점 : \(self.rating)점")
-                        self.dismiss()
-                    }
+            .asButton(.press, action: {
+                Task {
+                    self.isLoading = true
+                    try await Task.sleep(nanoseconds: 2000000000)
+                    self.isLoading = false
+                    print("별점 : \(self.rating)점")
+                    self.dismiss()
                 }
-            }
+            })
+            .disabled(rating == 0)
+            .padding(.top, 19)
     }
     private func ratingStarView() -> some View {
         HStack(spacing: 0) {
@@ -91,26 +92,22 @@ struct RatingAlertView: View {
                     }
             }
         }
+        .frame(height: 25)
     }
     private func titleView() -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 21) {
             Text("사진은 어떠셨나요?")
                 .pretendard(.headline4)
                 .foregroundStyle(.black)
-            
-            if showErrorText {
-                if rating == 0 {
-                    Text("별점은 1점부터 줄 수 있어요!")
-                        .pretendard(.description)
-                        .foregroundStyle(.red)
-                }
-            }
+                .frame(height: 22)
             
             Text("별점을 남겨주시면 앞으로 더 마음에 드는\n사진을 만들어 드릴 수 있어요!")
                 .pretendard(.description)
                 .foregroundStyle(.black)
                 .multilineTextAlignment(.center)
+                .frame(height: 32)
         } //:VSTACK
+        .padding(.top, 43)
     }
 }
 
