@@ -26,12 +26,9 @@ extension TextEditor {
         text: Binding<String>,
         limit: Int
     ) -> some View {
-        return ModifiedContent(
-            content: self,
-            modifier: LimitLengthModifier(
-                text: text,
-                limit: limit
-            )
-        )
+        modifier(LimitLengthModifier(
+            text: text,
+            limit: limit
+        ))
     }
 }
