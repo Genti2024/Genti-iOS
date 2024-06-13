@@ -371,7 +371,6 @@
 			isa = PBXGroup;
 			children = (
 				C0B6975A2C1943F70083ADC3 /* Genti.entitlements */,
-				C0B697182C19063A0083ADC3 /* Splash */,
 				C07FE6C42C0BDC1800A93B43 /* Network */,
 				C0DD882D2C095A1600109A25 /* Complete */,
 				C086C21C2BDF1C9800E25D71 /* Extentions */,
@@ -537,13 +536,6 @@
 				C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		C0B697182C19063A0083ADC3 /* Splash */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Splash;
 			sourceTree = "<group>";
 		};
 		C0C14BED2C10312D00B0E570 /* Components */ = {
