@@ -66,6 +66,9 @@
 		C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */; };
 		C0B1F61C2BDE01C3003DFDD9 /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */; };
 		C0B697172C17D6490083ADC3 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B697162C17D6490083ADC3 /* ProgressLottie.json */; };
+		C0B697522C1939660083ADC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0B697512C1939660083ADC3 /* GoogleService-Info.plist */; };
+		C0B697552C193A6B0083ADC3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C0B697542C193A6B0083ADC3 /* FirebaseAnalytics */; };
+		C0B697572C193A6B0083ADC3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C0B697562C193A6B0083ADC3 /* FirebaseMessaging */; };
 		C0C14BF12C1034C300B0E570 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C0C14BF02C1034C300B0E570 /* Lottie */; };
 		C0C14BF42C1034D400B0E570 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C0C14BF32C1034D400B0E570 /* Alamofire */; };
 		C0C14BF72C1035BA00B0E570 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */; };
@@ -162,6 +165,8 @@
 		C0B1F6112BDDE900003DFDD9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
 		C0B1F61B2BDE01C3003DFDD9 /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B697162C17D6490083ADC3 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
+		C0B697512C1939660083ADC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0B6975A2C1943F70083ADC3 /* Genti.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti.entitlements; sourceTree = "<group>"; };
 		C0C14BF62C1035BA00B0E570 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		C0C14BF92C103E3400B0E570 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C0C14BFB2C104A0300B0E570 /* RatingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingAlertView.swift; sourceTree = "<group>"; };
@@ -182,9 +187,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B697572C193A6B0083ADC3 /* FirebaseMessaging in Frameworks */,
 				C062B0FE2C102D9800ECA268 /* SwiftfulUI in Frameworks */,
 				C0C14BF42C1034D400B0E570 /* Alamofire in Frameworks */,
 				C062B0FB2C102D8B00ECA268 /* SDWebImageSwiftUI in Frameworks */,
+				C0B697552C193A6B0083ADC3 /* FirebaseAnalytics in Frameworks */,
 				C0C14BF12C1034C300B0E570 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,10 +370,13 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C0B6975A2C1943F70083ADC3 /* Genti.entitlements */,
+				C0B697182C19063A0083ADC3 /* Splash */,
 				C07FE6C42C0BDC1800A93B43 /* Network */,
 				C0DD882D2C095A1600109A25 /* Complete */,
 				C086C21C2BDF1C9800E25D71 /* Extentions */,
 				C02D67C82BD38038004DD995 /* Info.plist */,
+				C0B697512C1939660083ADC3 /* GoogleService-Info.plist */,
 				C086C2072BDE113900E25D71 /* ImagePicker */,
 				C02BFD162BD1101600FAADC1 /* Shared */,
 				C02BFD0E2BD0F95C00FAADC1 /* Generator */,
@@ -529,6 +539,13 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		C0B697182C19063A0083ADC3 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		C0C14BED2C10312D00B0E570 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +604,8 @@
 				C062B0FD2C102D9800ECA268 /* SwiftfulUI */,
 				C0C14BF02C1034C300B0E570 /* Lottie */,
 				C0C14BF32C1034D400B0E570 /* Alamofire */,
+				C0B697542C193A6B0083ADC3 /* FirebaseAnalytics */,
+				C0B697562C193A6B0083ADC3 /* FirebaseMessaging */,
 			);
 			productName = Genti;
 			productReference = C073BD432BCBE5FA00130BAD /* Genti.app */;
@@ -665,6 +684,7 @@
 				C062B0FC2C102D9800ECA268 /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
 				C0C14BEF2C1034C200B0E570 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				C0C14BF22C1034D400B0E570 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				C0B697532C193A6B0083ADC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = C073BD442BCBE5FA00130BAD /* Products */;
 			projectDirPath = "";
@@ -684,6 +704,7 @@
 			files = (
 				C073BD4E2BCBE5FC00130BAD /* Preview Assets.xcassets in Resources */,
 				C073BD4B2BCBE5FC00130BAD /* Assets.xcassets in Resources */,
+				C0B697522C1939660083ADC3 /* GoogleService-Info.plist in Resources */,
 				C0B697172C17D6490083ADC3 /* ProgressLottie.json in Resources */,
 				C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */,
 				C02D67C32BD37C74004DD995 /* Pretendard-Regular.otf in Resources */,
@@ -933,6 +954,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Genti/Genti.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Genti/Preview Content\"";
@@ -952,8 +975,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimscastle.Genti;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.2024.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -969,6 +993,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Genti/Genti.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Genti/Preview Content\"";
@@ -988,8 +1014,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimscastle.Genti;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.2024.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1134,6 +1161,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		C0B697532C193A6B0083ADC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.27.0;
+			};
+		};
 		C0C14BEF2C1034C200B0E570 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -1162,6 +1197,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C062B0FC2C102D9800ECA268 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
 			productName = SwiftfulUI;
+		};
+		C0B697542C193A6B0083ADC3 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0B697532C193A6B0083ADC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C0B697562C193A6B0083ADC3 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0B697532C193A6B0083ADC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		C0C14BF02C1034C300B0E570 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
