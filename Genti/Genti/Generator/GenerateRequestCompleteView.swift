@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct GenerateRequestCompleteView: View {
-    
-    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var viewModel: GeneratorViewModel
 
     var body: some View {
         ZStack {
@@ -57,7 +56,11 @@ struct GenerateRequestCompleteView: View {
                 
                 Button {
                     // Action
-                    self.dismiss()
+                    NotificationCenter.default.post(
+                        name: NSNotification.Name(rawValue: "GeneratorFinished"),
+                        object: nil,
+                        userInfo: nil
+                    )
                 } label: {
                     Text("피드로 돌아가기")
                         .pretendard(.headline1)

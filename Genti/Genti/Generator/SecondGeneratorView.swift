@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SecondGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
-    @Binding var generateFlow: [GeneratorFlow]
-    
+
     var body: some View {
             ZStack {
                 // Background Color
@@ -29,7 +28,7 @@ struct SecondGeneratorView: View {
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-            self.generateFlow.append(.thrid)
+            self.viewModel.push(.thrid)
         }
         .padding(.bottom, 32)
     }
@@ -45,20 +44,7 @@ struct SecondGeneratorView: View {
     }
     
     private func headerView() -> some View {
-        GeneratorHeaderView(step: 2)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .overlay(alignment: .leading) {
-                Image("Back_fill")
-                    .resizable()
-                    .frame(width: 29, height: 29)
-                    .padding(11)
-                    .background(.black.opacity(0.001))
-                    .onTapGesture {
-                        self.viewModel.resetSecond()
-                        self.generateFlow.removeLast()
-                    }
-                    .padding(.leading, 17)
-            }
+        GeneratorHeaderView(step: 2, headerType: .backAndDismiss)
             .padding(.top, 40)
     }
     
@@ -178,6 +164,6 @@ struct SecondGeneratorView: View {
 }
 
 #Preview {
-    SecondGeneratorView(generateFlow: .constant([]))
+    SecondGeneratorView()
         .environmentObject(GeneratorViewModel())
 }

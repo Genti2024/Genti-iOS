@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
+    @EnvironmentObject var mainNavigation: GentiMainNavigation
     @State private var myImages: [Post] = []
-    @Binding var settingFlow: [SettingFlow]
     @State private var isMaking: Bool = true
-    
-    var imageTapped: ((Post) -> Void)? = nil
     
     var body: some View {
         ZStack {
@@ -35,7 +32,7 @@ struct ProfileView: View {
                     Spacer()
                     Image("Setting")
                         .onTapGesture {
-                            self.settingFlow.append(.setting)
+                            self.mainNavigation.path.append(.setting)
                         }
                 }
                 .padding(.horizontal, 27)
@@ -70,12 +67,14 @@ struct ProfileView: View {
                     StraggeredGrid(list: myImages, spacing: 1) { object in
                         PostCardView(post: object)
                             .onTapGesture {
-                                imageTapped?(object)
+                                NotificationCenter.default.post(
+                                    name: NSNotification.Name(rawValue: "SelectedMyImage"),
+                                    object: object,
+                                    userInfo: nil
+                                )
                             }
                     }
-
                 }
-
             }
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)
@@ -86,5 +85,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(settingFlow: .constant([]))
+    ProfileView()
 }

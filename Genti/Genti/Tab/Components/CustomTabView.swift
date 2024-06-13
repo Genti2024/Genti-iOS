@@ -10,6 +10,10 @@ import SwiftUI
 struct CustomTabView: View {
     @Binding var selectedTab: Tab
     
+    @State private var selectedPost: Post? = nil
+    @State private var receiveNoti: Bool = false
+    @State private var showGeneratorView: Bool = false
+    
     var body: some View {
         HStack(alignment: .center) {
             Image(selectedTab == .feed ? "Feed_fill" : "Feed_empty")
@@ -23,24 +27,13 @@ struct CustomTabView: View {
                 }
             Spacer()
             
-            if selectedTab == .generator {
-                Image("Camera_fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 30, height: 30)
-                    .padding(3)
-                    .background(.black.opacity(0.001))
-                    .onTapGesture {
-                        selectedTab = .generator
-                    }
-            } else {
-                Image("Camera_empty")
-                    .frame(width: 60, height: 60)
-                    .background(.black.opacity(0.001))
-                    .onTapGesture {
-                        selectedTab = .generator
-                    }
-            }
+            Image("Camera")
+                .frame(width: 60, height: 60)
+                .padding(3)
+                .background(.black.opacity(0.001))
+                .onTapGesture {
+                    showGeneratorView = true
+                }
 
 
             Spacer()
@@ -67,6 +60,38 @@ struct CustomTabView: View {
                     .frame(height: 1)
             } //:ZSTACK
         )
+        .onReceive(NotificationCenter
+            .default
+            .publisher(for: Notification.Name("PushNotificationReceived"))
+            .eraseToAnyPublisher(), perform: { _ in
+                self.showGeneratorView = false
+                self.selectedPost = nil
+                receiveNoti = true
+            })
+        .onReceive(NotificationCenter
+            .default
+            .publisher(for: Notification.Name("GeneratorFinished"))
+            .eraseToAnyPublisher(), perform: { _ in
+                self.showGeneratorView = false
+            })
+        .onReceive(NotificationCenter
+            .default
+            .publisher(for: Notification.Name("SelectedMyImage"))
+            .eraseToAnyPublisher(), perform: { object in
+                guard let post = object.object as? Post else {
+                    return
+                }
+                self.selectedPost = post
+            })
+        .fullScreenCover(item: $selectedPost) { post in
+            PostDetailView(imageUrl: post.imageURL)
+        }
+        .fullScreenCover(isPresented: $receiveNoti, content: {
+            PhotoCompleteView()
+        })
+        .fullScreenCover(isPresented: $showGeneratorView, content: {
+            FirstGeneratorView()
+        })
     }
 }
 

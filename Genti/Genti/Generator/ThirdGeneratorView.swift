@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ThirdGeneratorView: View {
     @EnvironmentObject var viewModel: GeneratorViewModel
-    @Binding var generateFlow: [GeneratorFlow]
     var body: some View {
             ZStack {
                 // Background Color
@@ -48,20 +47,7 @@ struct ThirdGeneratorView: View {
     }
     
     private func headerView() -> some View {
-        GeneratorHeaderView(step: 3)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .overlay(alignment: .leading) {
-                Image("Back_fill")
-                    .resizable()
-                    .frame(width: 29, height: 29)
-                    .padding(11)
-                    .background(.black.opacity(0.001))
-                    .onTapGesture {
-                        self.viewModel.resetThird()
-                        self.generateFlow.removeLast()
-                    }
-                    .padding(.leading, 17)
-            }
+        GeneratorHeaderView(step: 3, headerType: .backAndDismiss)
             .padding(.top, 40)
     }
     
@@ -167,12 +153,14 @@ struct ThirdGeneratorView: View {
             Text("사진 생성에 이용할 얼굴 3장을 업로드해주세요")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
+                .frame(height: 22)
             
             if viewModel.facesIsEmpty {
                 Image("AddImageIcon")
                     .resizable()
                     .frame(width: 29, height: 29)
-                    .padding((CGFloat.height(ratio: 0.14)-29)/2)
+                    .frame(height: 116)
+                    .frame(maxWidth: .infinity)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
                         viewModel.showPhotoPickerWhenThirdView = true
@@ -199,14 +187,14 @@ struct ThirdGeneratorView: View {
                     } //:HSTACK
                 } //:VSTACK
                 .padding(.horizontal, 39)
+                .frame(height: 116)
             }
         } //:VSTACK
         .padding(.top, 40)
-        .frame(height: .height(ratio: 0.17))
     }
 }
 
 #Preview {
-    ThirdGeneratorView(generateFlow: .constant([]))
+    ThirdGeneratorView()
         .environmentObject(GeneratorViewModel())
 }

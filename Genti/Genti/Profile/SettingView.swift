@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SettingView: View {
     
-    @Binding var tabbarHidden: Bool
-    @Binding var settingFlow: [SettingFlow]
+    @EnvironmentObject var mainNavigation: GentiMainNavigation
+    
     @State private var showLogoutAlert: Bool = false
     @State private var showResignAlert: Bool = false
     @State private var isLoading: Bool = false
@@ -33,9 +33,6 @@ struct SettingView: View {
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .onAppear {
-            self.tabbarHidden = true
-        }
         .alert("정말 로그아웃 하시겠어요?", isPresented: $showLogoutAlert) {
             Button("로그아웃") {
                 Task {
@@ -43,7 +40,7 @@ struct SettingView: View {
                         self.isLoading = true
                         try await Task.sleep(nanoseconds: 2000000000)
                         self.isLoading = false
-                        NavigationUtil.popToRootView()
+                        self.mainNavigation.popToRoot()
                     } catch {
                         
                     }
@@ -62,7 +59,7 @@ struct SettingView: View {
                         self.isLoading = true
                         try await Task.sleep(nanoseconds: 2000000000)
                         self.isLoading = false
-                        NavigationUtil.popToRootView()
+                        self.mainNavigation.popToRoot()
                     } catch {
                         
                     }
@@ -103,25 +100,25 @@ struct SettingView: View {
                     .frame(width: 29, height: 29)
                     .padding(.leading, 30)
                     .onTapGesture {
-                        self.tabbarHidden = false
-                        self.settingFlow.removeLast()
+                        self.mainNavigation.back()
+//                        self.tabbarHidden = false
+//                        self.settingFlow.removeLast()
                     }
             }
     }
     private func infoView() -> some View {
         VStack(spacing: 0) {
             SettingRow(title: "이용 약관") {
-                self.settingFlow.append(.notion(urlString: "https://stealth-goose-156.notion.site/5e84488cbf874b8f91e779ea4dc8f08a"))
+                self.mainNavigation.push(.notion(urlString: "https://stealth-goose-156.notion.site/5e84488cbf874b8f91e779ea4dc8f08a"))
             }
             SettingRow(title: "개인정보처리방침") {
-                self.settingFlow.append(.notion(urlString: "https://stealth-goose-156.notion.site/e0f2e17a3a60437b8e62423f61cca2a9"))
-                
+                self.mainNavigation.push(.notion(urlString: "https://stealth-goose-156.notion.site/e0f2e17a3a60437b8e62423f61cca2a9"))
             }
             SettingRow(title: "앱 버전 정보") {
-                self.settingFlow.append(.notion(urlString: "https://stealth-goose-156.notion.site/iOS-4f75393b25e84ceeb2cff037a671146d"))
+                self.mainNavigation.push(.notion(urlString: "https://stealth-goose-156.notion.site/iOS-4f75393b25e84ceeb2cff037a671146d"))
             }
             SettingRow(title: "사업자 정보") {
-                self.settingFlow.append(.notion(urlString: "https://stealth-goose-156.notion.site/39d39ae82a3a436fa053e5287ff9742c"))
+                self.mainNavigation.push(.notion(urlString: "https://stealth-goose-156.notion.site/39d39ae82a3a436fa053e5287ff9742c"))
             }
         }
         .padding(20)
@@ -151,5 +148,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(tabbarHidden: .constant(true), settingFlow: .constant([]))
+    SettingView()
 }

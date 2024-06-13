@@ -9,7 +9,7 @@ import SwiftUI
 import Photos
 
 final class GeneratorViewModel: ObservableObject {
-    
+
     // firstView
     private var currentIndex: Int = -1
     private let randomDescription: [String] = [
@@ -62,6 +62,22 @@ final class GeneratorViewModel: ObservableObject {
         self.faceImages = assets
     }
     
+    // navigation
+    @Published var generatorPath: [GeneratorFlow] = []
+    
+    func push(_ flow: GeneratorFlow) {
+        self.generatorPath.append(flow)
+    }
+    
+    func back() {
+        let removeLast = self.generatorPath.removeLast()
+        if removeLast == .second {
+            self.resetSecond()
+        } else if removeLast == .thrid {
+            self.resetThird()
+        }
+    }
+    
     func resetFirst() {
         self.referenceImage = nil
         self.showPhotoPickerWhenFirstView  = false
@@ -88,6 +104,7 @@ final class GeneratorViewModel: ObservableObject {
     
     // request
     @Published var isGenerating: Bool = false
+    @Published var generateCompleted: Bool = false
     
     func getReferenceS3Key() async throws -> String? {
         if let referencePhAsset = referenceImage?.asset {
@@ -111,7 +128,7 @@ final class GeneratorViewModel: ObservableObject {
         
         if try await APIService.shared.fetchResponse(for: GeneratorRouter.requestImage(prompt: photoDescription, poseURL: referenceURL, faceURLs: facesURLs, angle: selectedAngle!, coverage: selectedFrame!, ratio: selectedRatio!)) {
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: Notification.Name("GeneratorCompleted"), object: nil)
+                self.generatorPath.append(.complete)
             }
         }
     }

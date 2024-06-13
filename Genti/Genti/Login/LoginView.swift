@@ -9,6 +9,7 @@ import SwiftUI
 import Alamofire
 
 struct LoginView: View {
+    @EnvironmentObject var mainNavigation: GentiMainNavigation
     var body: some View {
             ZStack {
                 // Background Color
@@ -26,6 +27,8 @@ struct LoginView: View {
                     )
                 })
             } //:ZSTACK
+            .toolbar(.hidden, for: .navigationBar)
+
     }
     
     private func socialLoginButtonsView() -> some View {
@@ -35,8 +38,9 @@ struct LoginView: View {
         } //:VSTACK
     }
     private func kakaoLoginButton() -> some View {
-        NavigationLink {
-            GentiTabView()
+        Button {
+            // Action
+            self.mainNavigation.push(.home)
         } label: {
             Image("Kakao_Login")
                 .resizable()

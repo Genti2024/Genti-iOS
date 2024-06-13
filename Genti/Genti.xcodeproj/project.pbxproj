@@ -25,6 +25,8 @@
 		C02D67C52BD37C74004DD995 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02D67C02BD37C74004DD995 /* Pretendard-Bold.otf */; };
 		C02D67C72BD37CB8004DD995 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D67C62BD37CB8004DD995 /* Font+.swift */; };
 		C034CCD62C0976C700B68499 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034CCD52C0976C700B68499 /* PhotoDetailView.swift */; };
+		C05039212C1A7A37007FA111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05039202C1A7A37007FA111 /* AppDelegate.swift */; };
+		C05039242C1A7C10007FA111 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05039232C1A7C10007FA111 /* SplashView.swift */; };
 		C062B0E72C0DCFC500ECA268 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062B0E62C0DCFC500ECA268 /* LottieView.swift */; };
 		C062B0F22C101D4C00ECA268 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */; };
 		C062B0FB2C102D8B00ECA268 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C062B0FA2C102D8B00ECA268 /* SDWebImageSwiftUI */; };
@@ -84,6 +86,7 @@
 		C0DD88312C095E1000109A25 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88302C095E1000109A25 /* WebView.swift */; };
 		C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88342C09632600109A25 /* GentiWebView.swift */; };
 		C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */; };
+		C0EE8B082C1AD05B004F7E14 /* GeneratorFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE8B072C1AD05B004F7E14 /* GeneratorFlow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,8 @@
 		C02D67C62BD37CB8004DD995 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		C02D67C82BD38038004DD995 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C034CCD52C0976C700B68499 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		C05039202C1A7A37007FA111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C05039232C1A7C10007FA111 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		C062B0E62C0DCFC500ECA268 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		C062B0F12C101D4C00ECA268 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		C073BD432BCBE5FA00130BAD /* Genti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +185,7 @@
 		C0DD88302C095E1000109A25 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C0DD88342C09632600109A25 /* GentiWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiWebView.swift; sourceTree = "<group>"; };
 		C0DD88362C096FC700109A25 /* PhotoCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCompleteView.swift; sourceTree = "<group>"; };
+		C0EE8B072C1AD05B004F7E14 /* GeneratorFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorFlow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				C073BD462BCBE5FA00130BAD /* GentiApp.swift */,
+				C05039202C1A7A37007FA111 /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -347,6 +354,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		C05039222C1A7C00007FA111 /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				C05039232C1A7C10007FA111 /* SplashView.swift */,
+			);
+			path = SplashView;
+			sourceTree = "<group>";
+		};
 		C073BD3A2BCBE5FA00130BAD = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +385,7 @@
 		C073BD452BCBE5FA00130BAD /* Genti */ = {
 			isa = PBXGroup;
 			children = (
+				C05039222C1A7C00007FA111 /* SplashView */,
 				C0B6975A2C1943F70083ADC3 /* Genti.entitlements */,
 				C07FE6C42C0BDC1800A93B43 /* Network */,
 				C0DD882D2C095A1600109A25 /* Complete */,
@@ -461,6 +477,7 @@
 				C086A2412BD617630052D59F /* PhotoAngle.swift */,
 				C086A2432BD617840052D59F /* PhotoFrame.swift */,
 				C086C2232BE09F0600E25D71 /* Caution.swift */,
+				C0EE8B072C1AD05B004F7E14 /* GeneratorFlow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -746,6 +763,7 @@
 				C034CCD62C0976C700B68499 /* PhotoDetailView.swift in Sources */,
 				C0B1F6122BDDE900003DFDD9 /* GeneratorHeaderView.swift in Sources */,
 				C0C14BFC2C104A0300B0E570 /* RatingAlertView.swift in Sources */,
+				C0EE8B082C1AD05B004F7E14 /* GeneratorFlow.swift in Sources */,
 				C086C2142BDE122B00E25D71 /* ImageAsset.swift in Sources */,
 				C086A2482BD62A960052D59F /* GenerateRequestCompleteView.swift in Sources */,
 				C0DD88352C09632600109A25 /* GentiWebView.swift in Sources */,
@@ -775,6 +793,7 @@
 				C086C2222BDFA3E600E25D71 /* ThirdGeneratorView.swift in Sources */,
 				C062B0E72C0DCFC500ECA268 /* LottieView.swift in Sources */,
 				C0DD88372C096FC700109A25 /* PhotoCompleteView.swift in Sources */,
+				C05039212C1A7A37007FA111 /* AppDelegate.swift in Sources */,
 				C086C2282BE0B3E000E25D71 /* ImagePickerType.swift in Sources */,
 				C02BFD102BD0F97D00FAADC1 /* FirstGeneratorView.swift in Sources */,
 				C07FE6D82C0D470800A93B43 /* APIEventLogger.swift in Sources */,
@@ -786,6 +805,7 @@
 				C02BFD0D2BD0F94F00FAADC1 /* ProfileView.swift in Sources */,
 				C02BFD022BD0F71A00FAADC1 /* CustomTabView.swift in Sources */,
 				C0DD882F2C095D7400109A25 /* SettingRow.swift in Sources */,
+				C05039242C1A7C10007FA111 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

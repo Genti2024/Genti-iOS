@@ -85,10 +85,6 @@ struct MainFeedView: View {
             Image("Genti_logo_green")
                 .frame(height: 23)
                 .aspectRatio(contentMode: .fill)
-                .onTapGesture {
-                    let images = ["SampleImage23", "SampleImage32"]
-                    NotificationCenter.default.post(name: Notification.Name("PhotoMakeCompleted"), object: nil, userInfo: ["ImageName": images.randomElement()!])
-                }
         }
         .frame(height: 37)
     }

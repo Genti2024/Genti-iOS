@@ -9,52 +9,67 @@ import SwiftUI
 import Combine
 
 struct FirstGeneratorView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
-    @Binding var generateFlow: [GeneratorFlow]
+    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
     @FocusState var isFocused: Bool
     
     var body: some View {
-        GeometryReader { _ in
-            ZStack {
-                // Background Color
-                Color.backgroundWhite
-                    .ignoresSafeArea()
-                // Content
-                VStack(spacing: 0) {
-                    headerView()
-                    inpuTextView()
-                    randomDescriptionView()
-                    addImageView()
-                    Spacer()
-                    nextButtonView()
-                } //:VSTACK
-            } //:ZSTACK
+        NavigationStack(path: $viewModel.generatorPath) {
+            GeometryReader { _ in
+                ZStack {
+                    // Background Color
+                    Color.backgroundWhite
+                        .ignoresSafeArea()
+                    // Content
+                    VStack(spacing: 0) {
+                        headerView()
+                        inpuTextView()
+                        randomDescriptionView()
+                        addImageView()
+                        Spacer()
+                        nextButtonView()
+                    } //:VSTACK
+                } //:ZSTACK
+            }
+            .navigationDestination(for: GeneratorFlow.self) { type in
+                switch type {
+                case .second:
+                    SecondGeneratorView()
+                        .environmentObject(viewModel)
+                case .thrid:
+                    ThirdGeneratorView()
+                        .environmentObject(viewModel)
+                case .complete:
+                    GenerateRequestCompleteView()
+                        .environmentObject(viewModel)
+                    
+                }
+            }
+            .ignoresSafeArea(.keyboard)
+            .focused($isFocused)
+            .toolbar(.hidden, for: .navigationBar)
+            .onTapGesture {
+                isFocused = false
+            }
+            .onAppear {
+                isFocused = true
+                self.viewModel.getRandomDescriptionExample()
+            }
+            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
+                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
+                    .environmentObject(viewModel)
+            }
         }
-        .ignoresSafeArea(.keyboard)
-        .focused($isFocused)
-        .toolbar(.hidden, for: .navigationBar)
-        .onTapGesture {
-            isFocused = false
-        }
-        .onAppear {
-            isFocused = true
-            self.viewModel.getRandomDescriptionExample()
-        }
-        .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
-            PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
-                .environmentObject(viewModel)
-            
-        }
+
     }
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
-            self.generateFlow.append(.second)
+            self.viewModel.push(.second)
         }
         .padding(.bottom, 32)
     }
     private func headerView() -> some View {
-        GeneratorHeaderView(step: 1)
+        GeneratorHeaderView(step: 1, headerType: .back)
             .padding(.top, 40)
     }
     private func randomDescriptionView() -> some View {
@@ -192,6 +207,6 @@ struct FirstGeneratorView: View {
 }
 
 #Preview {
-    FirstGeneratorView(generateFlow: .constant([]))
+    FirstGeneratorView()
         .environmentObject(GeneratorViewModel())
 }
