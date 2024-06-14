@@ -89,6 +89,7 @@
 		C099C3592C1C3D000006EF83 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3582C1C3D000006EF83 /* FirebaseAnalytics */; };
 		C099C35B2C1C3D000006EF83 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C099C35A2C1C3D000006EF83 /* FirebaseMessaging */; };
 		C099C35D2C1C3DC00006EF83 /* GentiMainFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* GentiMainFlow.swift */; };
+		C099C35F2C1C408B0006EF83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,8 @@
 		C017C4762C1C3AA3009924C9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* GentiMainFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiMainFlow.swift; sourceTree = "<group>"; };
+		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,7 @@
 		C017C3DC2C1C39CE009924C9 /* Genti_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */,
 				C017C4252C1C3AA3009924C9 /* Complete */,
 				C017C4752C1C3AA3009924C9 /* Extentions */,
 				C017C4352C1C3AA3009924C9 /* Generator */,
@@ -260,6 +264,7 @@
 				C017C4212C1C3A86009924C9 /* App */,
 				C017C41E2C1C3A3A009924C9 /* DesignSystem */,
 				C017C3EB2C1C39D0009924C9 /* Info.plist */,
+				C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */,
 			);
 			path = Genti_iOS;
 			sourceTree = "<group>";
@@ -722,6 +727,7 @@
 				C017C41C2C1C3A35009924C9 /* Pretendard-SemiBold.otf in Resources */,
 				C017C4192C1C3A35009924C9 /* Pretendard-Light.otf in Resources */,
 				C017C41B2C1C3A35009924C9 /* Pretendard-Regular.otf in Resources */,
+				C099C35F2C1C408B0006EF83 /* GoogleService-Info.plist in Resources */,
 				C017C3EA2C1C39D0009924C9 /* Base in Resources */,
 				C017C41A2C1C3A35009924C9 /* Pretendard-Medium.otf in Resources */,
 			);
@@ -911,7 +917,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -968,7 +974,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -983,9 +989,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Genti_iOS/Genti_iOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z225784MRD;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -998,8 +1008,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Genti.2024.Genti-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.iOS.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Genti;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1011,9 +1023,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Genti_iOS/Genti_iOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z225784MRD;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1026,8 +1042,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Genti.2024.Genti-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.iOS.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Genti;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
