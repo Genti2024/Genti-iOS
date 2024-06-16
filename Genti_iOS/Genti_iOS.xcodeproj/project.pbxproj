@@ -90,6 +90,7 @@
 		C099C35B2C1C3D000006EF83 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C099C35A2C1C3D000006EF83 /* FirebaseMessaging */; };
 		C099C35D2C1C3DC00006EF83 /* GentiMainFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* GentiMainFlow.swift */; };
 		C099C35F2C1C408B0006EF83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */; };
+		C0D74A3F2C1E9B3200A45371 /* Genti_Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		C099C35C2C1C3DC00006EF83 /* GentiMainFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiMainFlow.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
+		C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Genti_Splash.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +303,7 @@
 		C017C41E2C1C3A3A009924C9 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */,
 				C017C3E62C1C39D0009924C9 /* Assets.xcassets */,
 				C017C4152C1C3A35009924C9 /* Font+.swift */,
 				C017C4142C1C3A35009924C9 /* Fonts */,
@@ -722,6 +725,7 @@
 			files = (
 				C017C4172C1C3A35009924C9 /* ProgressLottie.json in Resources */,
 				C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */,
+				C0D74A3F2C1E9B3200A45371 /* Genti_Splash.gif in Resources */,
 				C017C4182C1C3A35009924C9 /* Pretendard-Bold.otf in Resources */,
 				C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */,
 				C017C41C2C1C3A35009924C9 /* Pretendard-SemiBold.otf in Resources */,

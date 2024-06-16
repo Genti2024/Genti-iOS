@@ -10,9 +10,9 @@ import SwiftUI
 struct GentiApp: View {
     @EnvironmentObject var gentiNavigation: GentiMainFlow
     var body: some View {
-        NavigationStack(path: $gentiNavigation.path) {
+        NavigationStack(path: $gentiNavigation.mainPath) {
             SplashView()
-                .navigationDestination(for: AppFlow.self) { path in
+                .navigationDestination(for: MainFlow.self) { path in
                     switch path {
                     case .home:
                         GentiTabView()

@@ -8,22 +8,18 @@
 import SwiftUI
 
 struct CustomTabView: View {
-    @Binding var selectedTab: Tab
-    
-    @State private var selectedPost: Post? = nil
-    @State private var receiveNoti: Bool = false
-    @State private var showGeneratorView: Bool = false
-    
+    @EnvironmentObject var mainFlow: GentiMainFlow
+    @Binding var currentTab: Tab
     var body: some View {
         HStack(alignment: .center) {
-            Image(selectedTab == .feed ? "Feed_fill" : "Feed_empty")
+            Image(currentTab == .feed ? "Feed_fill" : "Feed_empty")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    selectedTab = .feed
+                    currentTab = .feed
                 }
             Spacer()
             
@@ -32,19 +28,19 @@ struct CustomTabView: View {
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    showGeneratorView = true
+                    mainFlow.showGeneratorView = true
                 }
 
 
             Spacer()
-            Image(selectedTab == .profile ? "User_fill" : "User_empty")
+            Image(currentTab == .profile ? "User_fill" : "User_empty")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    selectedTab = .profile
+                    currentTab = .profile
                 }
         }
         .frame(height: 50)
@@ -64,15 +60,13 @@ struct CustomTabView: View {
             .default
             .publisher(for: Notification.Name("PushNotificationReceived"))
             .eraseToAnyPublisher(), perform: { _ in
-                self.showGeneratorView = false
-                self.selectedPost = nil
-                receiveNoti = true
+                self.mainFlow.receiveNoti = true
             })
         .onReceive(NotificationCenter
             .default
             .publisher(for: Notification.Name("GeneratorFinished"))
             .eraseToAnyPublisher(), perform: { _ in
-                self.showGeneratorView = false
+                self.mainFlow.showGeneratorView = false
             })
         .onReceive(NotificationCenter
             .default
@@ -81,16 +75,19 @@ struct CustomTabView: View {
                 guard let post = object.object as? Post else {
                     return
                 }
-                self.selectedPost = post
+                self.mainFlow.selectedPost = post
             })
-        .fullScreenCover(item: $selectedPost) { post in
+        .fullScreenCover(item: $mainFlow.selectedPost) { post in
             PostDetailView(imageUrl: post.imageURL)
         }
-        .fullScreenCover(isPresented: $receiveNoti, content: {
+        .fullScreenCover(isPresented: $mainFlow.receiveNoti, content: {
             PhotoCompleteView()
         })
-        .fullScreenCover(isPresented: $showGeneratorView, content: {
+        .fullScreenCover(isPresented: $mainFlow.showGeneratorView, content: {
             FirstGeneratorView()
+        })
+        .fullScreenCover(isPresented: .constant(mainFlow.hasCompleted), onDismiss: { self.mainFlow.hasCompleted = false }, content: {
+            PhotoCompleteView()
         })
     }
 }
@@ -98,7 +95,7 @@ struct CustomTabView: View {
 fileprivate struct CustomTabViewPreView: View {
     @State private var selected: Tab = .feed
     var body: some View {
-        CustomTabView(selectedTab: $selected)
+        CustomTabView(currentTab: $selected)
     }
 }
 

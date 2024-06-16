@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GentiWebView: View {
     
-    @EnvironmentObject var mainNavigation: GentiMainFlow
+    @EnvironmentObject var mainFlow: GentiMainFlow
     
     let urlString: String
     
@@ -33,7 +33,7 @@ struct GentiWebView: View {
                             .frame(width: 29, height: 29)
                             .padding(.leading, 30)
                             .onTapGesture {
-                                self.mainNavigation.back()
+                                self.mainFlow.back()
                             }
                     }
                 WebView(urlString: urlString)

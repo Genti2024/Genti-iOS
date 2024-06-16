@@ -7,33 +7,22 @@
 
 import SwiftUI
 
+import SDWebImageSwiftUI
+
 struct SplashView: View {
-    @EnvironmentObject var mainNavigation: GentiMainFlow
+    @EnvironmentObject var mainFlow: GentiMainFlow
+
     var body: some View {
         ZStack {
-            // Background Color
-            Color.gentiGreen
+            AnimatedImage(name: "Genti_Splash.gif")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-            // Content
-            
-        } //:ZSTACK
+        }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                self.mainNavigation.push(.login)
+            DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+                self.mainFlow.push(.login)
             }
         }
     }
 }
-
-#Preview {
-    SplashView()
-}
-
-
-enum AppFlow: Hashable {
-    case login
-    case home
-    case setting
-    case notion(urlString: String)
-}
-

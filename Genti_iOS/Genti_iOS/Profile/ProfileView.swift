@@ -32,7 +32,7 @@ struct ProfileView: View {
                     Spacer()
                     Image("Setting")
                         .onTapGesture {
-                            self.mainNavigation.path.append(.setting)
+                            self.mainNavigation.mainPath.append(.setting)
                         }
                 }
                 .padding(.horizontal, 27)

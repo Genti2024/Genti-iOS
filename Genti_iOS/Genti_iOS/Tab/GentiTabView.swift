@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct GentiTabView: View {
-    @State private var currentTab: Tab = .feed
+    @State var currentTab: Tab = .feed
+    @EnvironmentObject var mainFlow: GentiMainFlow
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -20,7 +21,7 @@ struct GentiTabView: View {
                 .tag(Tab.profile)
             }
             
-            CustomTabView(selectedTab: $currentTab)
+            CustomTabView(currentTab: $currentTab)
         } //: ZSTACK
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)

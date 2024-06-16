@@ -7,18 +7,43 @@
 
 import SwiftUI
 
+enum MainFlow: Hashable {
+    case login
+    case home
+    case setting
+    case notion(urlString: String)
+}
+
+
 final class GentiMainFlow: ObservableObject {
-    @Published var path: [AppFlow] = []
+    @Published var mainPath: [MainFlow] = []
+
     
-    func push(_ flow: AppFlow) {
-        self.path.append(flow)
+    @Published var selectedPost: Post? = nil
+    @Published var receiveNoti: Bool = false
+    @Published var showGeneratorView: Bool = false
+    
+    var hasCompleted: Bool = false
+    
+    func push(_ flow: MainFlow) {
+        self.mainPath.append(flow)
     }
+    
     
     func back() {
-        self.path.removeLast()
+        self.mainPath.removeLast()
     }
-    
+
+    private var transaction: Transaction {
+        var t = Transaction()
+        t.disablesAnimations = true
+        return t
+    }
     func popToRoot() {
-        self.path.removeAll()
+        withTransaction(transaction) {
+            self.mainPath.removeAll()
+        }
+        
+        
     }
 }
