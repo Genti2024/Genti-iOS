@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GeneratorHeaderView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
+    @Bindable var router: Router<MainRoute>
     enum HeaderType {
         case back
         case backAndDismiss
@@ -50,7 +50,7 @@ struct GeneratorHeaderView: View {
                         .padding(15)
                         .background(.black.opacity(0.001))
                         .onTapGesture {
-                            self.viewModel.back()
+                            router.dismiss()
                         }
                 }
 
@@ -63,11 +63,7 @@ struct GeneratorHeaderView: View {
                     .padding(15)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        NotificationCenter.default.post(
-                            name: NSNotification.Name(rawValue: "GeneratorFinished"),
-                            object: nil,
-                            userInfo: nil
-                        )
+                        router.dismissSheet()
                     }
             }
             .padding(.horizontal, 13)
@@ -82,9 +78,9 @@ struct GeneratorHeaderView: View {
             .ignoresSafeArea()
         // Content
         VStack(spacing: 20) {
-            GeneratorHeaderView(step: 1, headerType: .back)
-            GeneratorHeaderView(step: 2, headerType: .backAndDismiss)
-            GeneratorHeaderView(step: 3, headerType: .backAndDismiss)
+            GeneratorHeaderView(router: .init(), step: 1, headerType: .back)
+            GeneratorHeaderView(router: .init(), step: 2, headerType: .backAndDismiss)
+            GeneratorHeaderView(router: .init(), step: 3, headerType: .backAndDismiss)
         } //:VSTACK
     } //:ZSTACK
 }

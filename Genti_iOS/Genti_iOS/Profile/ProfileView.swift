@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @EnvironmentObject var mainNavigation: GentiMainFlow
+    @Bindable var router: Router<MainRoute>
     @State private var myImages: [Post] = []
     @State private var isMaking: Bool = true
     
@@ -32,7 +32,7 @@ struct ProfileView: View {
                     Spacer()
                     Image("Setting")
                         .onTapGesture {
-                            self.mainNavigation.mainPath.append(.setting)
+                            router.routeTo(.setting)
                         }
                 }
                 .padding(.horizontal, 27)
@@ -67,11 +67,7 @@ struct ProfileView: View {
                     StraggeredGrid(list: myImages, spacing: 1) { object in
                         PostCardView(post: object)
                             .onTapGesture {
-                                NotificationCenter.default.post(
-                                    name: NSNotification.Name(rawValue: "SelectedMyImage"),
-                                    object: object,
-                                    userInfo: nil
-                                )
+                                router.routeTo(.expandImage(imageUrl: object.imageURL))
                             }
                     }
                 }
@@ -85,5 +81,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(router: .init())
 }

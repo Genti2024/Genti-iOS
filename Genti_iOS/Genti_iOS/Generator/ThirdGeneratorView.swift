@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ThirdGeneratorView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
+    @State var viewModel = GeneratorViewModel()
+    @State var router: Router<MainRoute>
     var body: some View {
             ZStack {
                 // Background Color
@@ -23,31 +24,17 @@ struct ThirdGeneratorView: View {
                 } //:VSTACK
             } //:ZSTACK
             .toolbar(.hidden, for: .navigationBar)
-            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenThirdView) {
-                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 3), pickerType: .faces)
-            }
     }
     
     private func completeButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
-            self.viewModel.isGenerating = true
-            Task {
-                do {
-                    try await self.viewModel.generateImage()
-                    self.viewModel.isGenerating = false
-                } catch(let error) {
-                    guard let gentiError = error as? GentiError else {
-                        throw GentiError.unknownedError(code: "Unknowned", message: "정의되지않은 에러가 발생했습니다")
-                    }
-                    print(gentiError.localizedDescription)
-                }
-            }
+            router.routeTo(.requestCompleted)
         }
         .padding(.bottom, 32)
     }
     
     private func headerView() -> some View {
-        GeneratorHeaderView(step: 3, headerType: .backAndDismiss)
+        GeneratorHeaderView(router: router, step: 3, headerType: .backAndDismiss)
             .padding(.top, 40)
     }
     
@@ -163,7 +150,7 @@ struct ThirdGeneratorView: View {
                     .frame(maxWidth: .infinity)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPickerWhenThirdView = true
+                        router.routeTo(.imagePicker(limitCount: 3, viewModel: viewModel))
                     }
             } else {
                 VStack(spacing: 0) {
@@ -176,7 +163,7 @@ struct ThirdGeneratorView: View {
                     } //:HSTACK
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        viewModel.showPhotoPickerWhenThirdView = true
+                        router.routeTo(.imagePicker(limitCount: 3, viewModel: viewModel))
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
@@ -195,6 +182,5 @@ struct ThirdGeneratorView: View {
 }
 
 #Preview {
-    ThirdGeneratorView()
-        .environmentObject(GeneratorViewModel())
+    ThirdGeneratorView(router: .init())
 }

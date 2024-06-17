@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct PostDetailView: View {
-    
-    @Environment(\.dismiss) private var dismiss
-    
+    @Bindable var router: Router<MainRoute>
+
     let imageUrl: String
 
     var body: some View {
@@ -29,9 +28,8 @@ struct PostDetailView: View {
                                     .resizable()
                                     .frame(width: 29, height: 29)
                                     .onTapGesture {
-                                        self.dismiss()
+                                        router.dismissSheet()
                                     }
-                                    
                                 
                                 Spacer()
                                 
@@ -75,5 +73,5 @@ struct PostDetailView: View {
 }
 
 #Preview {
-    PostDetailView(imageUrl: "SampleImage23")
+    PostDetailView(router: .init(), imageUrl: "SampleImage23")
 }

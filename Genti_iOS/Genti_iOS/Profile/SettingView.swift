@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    
-    @EnvironmentObject var mainFlow: GentiMainFlow
+    @Bindable var router: Router<MainRoute>
     
     @State private var showLogoutAlert: Bool = false
     @State private var showResignAlert: Bool = false
@@ -40,7 +39,7 @@ struct SettingView: View {
                         self.isLoading = true
                         try await Task.sleep(nanoseconds: 2000000000)
                         self.isLoading = false
-                        self.mainFlow.popToRoot()
+                        router.popToRoot()
                     } catch {
                         
                     }
@@ -59,7 +58,7 @@ struct SettingView: View {
                         self.isLoading = true
                         try await Task.sleep(nanoseconds: 2000000000)
                         self.isLoading = false
-                        self.mainFlow.popToRoot()
+                        router.popToRoot()
                     } catch {
                         
                     }
@@ -100,23 +99,24 @@ struct SettingView: View {
                     .frame(width: 29, height: 29)
                     .padding(.leading, 30)
                     .onTapGesture {
-                        self.mainFlow.back()
+                        router.dismiss()
+
                     }
             }
     }
     private func infoView() -> some View {
         VStack(spacing: 0) {
             SettingRow(title: "이용 약관") {
-                self.mainFlow.push(.notion(urlString: "https://stealth-goose-156.notion.site/5e84488cbf874b8f91e779ea4dc8f08a"))
+                router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/5e84488cbf874b8f91e779ea4dc8f08a"))
             }
             SettingRow(title: "개인정보처리방침") {
-                self.mainFlow.push(.notion(urlString: "https://stealth-goose-156.notion.site/e0f2e17a3a60437b8e62423f61cca2a9"))
+                router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/e0f2e17a3a60437b8e62423f61cca2a9"))
             }
             SettingRow(title: "앱 버전 정보") {
-                self.mainFlow.push(.notion(urlString: "https://stealth-goose-156.notion.site/iOS-4f75393b25e84ceeb2cff037a671146d"))
+                router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/iOS-4f75393b25e84ceeb2cff037a671146d"))
             }
             SettingRow(title: "사업자 정보") {
-                self.mainFlow.push(.notion(urlString: "https://stealth-goose-156.notion.site/39d39ae82a3a436fa053e5287ff9742c"))
+                router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/39d39ae82a3a436fa053e5287ff9742c"))
             }
         }
         .padding(20)
@@ -146,5 +146,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    SettingView(router: .init())
 }

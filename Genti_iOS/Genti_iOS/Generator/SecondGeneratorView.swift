@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SecondGeneratorView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
-
+    @State var viewModel = GeneratorViewModel()
+    @Bindable var router: Router<MainRoute>
     var body: some View {
             ZStack {
                 // Background Color
@@ -28,7 +28,7 @@ struct SecondGeneratorView: View {
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-            self.viewModel.push(.thrid)
+            router.routeTo(.thirdGen)
         }
         .padding(.bottom, 32)
     }
@@ -44,7 +44,7 @@ struct SecondGeneratorView: View {
     }
     
     private func headerView() -> some View {
-        GeneratorHeaderView(step: 2, headerType: .backAndDismiss)
+        GeneratorHeaderView(router: router, step: 2, headerType: .backAndDismiss)
             .padding(.top, 40)
     }
     
@@ -164,6 +164,5 @@ struct SecondGeneratorView: View {
 }
 
 #Preview {
-    SecondGeneratorView()
-        .environmentObject(GeneratorViewModel())
+    SecondGeneratorView(router: .init())
 }
