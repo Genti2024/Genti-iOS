@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SecondGeneratorView: View {
-    @State var viewModel = GeneratorViewModel()
+    @State var viewModel: SecondGeneratorViewModel
     @Bindable var router: Router<MainRoute>
     var body: some View {
             ZStack {
@@ -28,7 +28,7 @@ struct SecondGeneratorView: View {
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-            router.routeTo(.thirdGen)
+            router.routeTo(.thirdGen(data: viewModel.requestData()))
         }
         .padding(.bottom, 32)
     }
@@ -163,6 +163,6 @@ struct SecondGeneratorView: View {
     }
 }
 
-#Preview {
-    SecondGeneratorView(router: .init())
-}
+//#Preview {
+//    SecondGeneratorView(router: .init())
+//}

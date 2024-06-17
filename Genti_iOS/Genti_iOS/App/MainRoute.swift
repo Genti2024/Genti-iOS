@@ -14,10 +14,10 @@ enum MainRoute: Routable {
     case setting
     case expandImage(imageUrl: String)
     case firstGen
-    case secondGen
-    case thirdGen
+    case secondGen(data: RequestImageData)
+    case thirdGen(data: RequestImageData)
     case requestCompleted
-    case imagePicker(limitCount: Int, viewModel: GeneratorViewModel)
+    case imagePicker(limitCount: Int, viewModel: GetImageFromAlbum)
     case webView(url: String)
     
     @ViewBuilder
@@ -33,10 +33,10 @@ enum MainRoute: Routable {
             PostDetailView(router: router, imageUrl: url)
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(router: $0) }
-        case .secondGen:
-            SecondGeneratorView(router: router)
-        case .thirdGen:
-            ThirdGeneratorView(router: router)
+        case .secondGen(let data):
+            SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data), router: router)
+        case .thirdGen(let data):
+            ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(requestImageData: data), router: router)
         case .imagePicker(limitCount: let limitCount, viewModel: let viewModel):
             PopupImagePickerView(limitCount: limitCount, viewModel: viewModel)
         case .requestCompleted:

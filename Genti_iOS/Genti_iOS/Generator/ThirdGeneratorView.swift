@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ThirdGeneratorView: View {
-    @State var viewModel = GeneratorViewModel()
+    @State var viewModel: ThirdGeneratorViewModel
     @State var router: Router<MainRoute>
     var body: some View {
             ZStack {
@@ -28,7 +28,15 @@ struct ThirdGeneratorView: View {
     
     private func completeButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
-            router.routeTo(.requestCompleted)
+            Task {
+                do {
+                    try await viewModel.generateImage()
+                    router.routeTo(.requestCompleted)
+                } catch {
+                    
+                }
+            }
+            
         }
         .padding(.bottom, 32)
     }
@@ -168,7 +176,7 @@ struct ThirdGeneratorView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
                     HStack(spacing: 8) {
-                        ForEach(viewModel.faceImages) { imageAsset in
+                        ForEach(viewModel.referenceImages) { imageAsset in
                             PHAssetImageView(asset: imageAsset.asset)
                         }
                     } //:HSTACK
@@ -181,6 +189,6 @@ struct ThirdGeneratorView: View {
     }
 }
 
-#Preview {
-    ThirdGeneratorView(router: .init())
-}
+//#Preview {
+//    ThirdGeneratorView(router: .init())
+//}

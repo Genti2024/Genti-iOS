@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct FirstGeneratorView: View {
-    @State var viewModel: GeneratorViewModel = GeneratorViewModel()
+    @State var viewModel: FirstGeneratorViewModel = FirstGeneratorViewModel()
     @FocusState var isFocused: Bool
     @Bindable var router: Router<MainRoute>
     
@@ -44,7 +44,7 @@ struct FirstGeneratorView: View {
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
-            router.routeTo(.secondGen)
+            router.routeTo(.secondGen(data: viewModel.requestData()))
         }
         .padding(.bottom, 32)
     }
@@ -127,7 +127,17 @@ struct FirstGeneratorView: View {
     }
     @ViewBuilder
     private func referenceImage() -> some View {
-        if let referenceImage = viewModel.referenceImage?.asset {
+        if viewModel.referenceImages.count == 0 {
+            Image("AddImageIcon")
+                .resizable()
+                .frame(width: 29, height: 29)
+                .padding((CGFloat.height(ratio: 0.13)-29)/2)
+                .background(.black.opacity(0.001))
+                .onTapGesture {
+                    router.routeTo(.imagePicker(limitCount: 1, viewModel: viewModel))
+                }
+        } else {
+            let referenceImage = viewModel.referenceImages[0].asset
             PHAssetImageView(asset: referenceImage)
                 .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
                 .overlay(alignment: .topTrailing) {
@@ -141,16 +151,6 @@ struct FirstGeneratorView: View {
                                 viewModel.removeReferenceImage()
                             }
                         }
-                }
-        } else {
-            Image("AddImageIcon")
-                .resizable()
-                .frame(width: 29, height: 29)
-                .padding((CGFloat.height(ratio: 0.13)-29)/2)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    router.routeTo(.imagePicker(limitCount: 1, viewModel: viewModel))
-//                    viewModel.showPhotoPickerWhenFirstView = true
                 }
         }
     }

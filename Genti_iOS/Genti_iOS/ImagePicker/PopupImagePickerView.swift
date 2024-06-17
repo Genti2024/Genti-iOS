@@ -13,11 +13,10 @@ import SwiftfulUI
 struct PopupImagePickerView: View {
 
     @State var imagePickerModel: ImagePickerViewModel
-    @Bindable var generatorViewModel: GeneratorViewModel
+    @State var generatorViewModel: GetImageFromAlbum
     @Environment(\.dismiss) private var dismiss
-//    let pickerType: ImagePickerType
     
-    init(limitCount: Int, viewModel: GeneratorViewModel) {
+    init(limitCount: Int, viewModel: GetImageFromAlbum) {
         self.imagePickerModel = ImagePickerViewModel(limitCount: limitCount)
         self.generatorViewModel = viewModel
     }
@@ -66,17 +65,7 @@ struct PopupImagePickerView: View {
     func selectButton() -> some View {
         Button {
             // Action
-//            switch pickerType {
-//            case .faces:
-            if imagePickerModel.limit == 1 {
-                self.generatorViewModel.setReferenceImageAsset(asset: imagePickerModel.selectedImages[0])
-            } else {
-                self.generatorViewModel.setFaceImageAssets(assets: imagePickerModel.selectedImages)
-            }
-                
-//            case .reference:
-                
-//            }
+            self.generatorViewModel.setReferenceImageAssets(assets: imagePickerModel.selectedImages)
             dismiss()
         } label: {
             Text("\(imagePickerModel.selectedImageCount) / \(imagePickerModel.limit) 장의 사진 추가하기")

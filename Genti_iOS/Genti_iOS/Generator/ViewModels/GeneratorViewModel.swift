@@ -8,8 +8,39 @@
 import SwiftUI
 import Photos
 
-@Observable final class GeneratorViewModel {
+protocol GetImageFromAlbum {
+    var referenceImages: [ImageAsset] { get set }
+    func setReferenceImageAssets(assets: [ImageAsset])
+}
 
+struct RequestImageData {
+    var description: String = ""
+    var referenceImageAsset: ImageAsset? = nil
+    var selectedAngle: PhotoAngle? = nil
+    var selectedFrame: PhotoFrame? = nil
+    var selectedRatio: PhotoRatio? = nil
+    var faceImageAssets: [ImageAsset] = []
+    
+    mutating func set(description: String, reference: ImageAsset?) -> Self {
+        self.description = description
+        self.referenceImageAsset = reference
+        return self
+    }
+    
+    mutating func set(angle: PhotoAngle?, frame: PhotoFrame?, ratio: PhotoRatio?) -> Self {
+        self.selectedAngle = angle
+        self.selectedFrame = frame
+        self.selectedRatio = ratio
+        return self
+    }
+    
+    mutating func set(faces: [ImageAsset]) -> Self {
+        self.faceImageAssets = faces
+        return self
+    }
+}
+
+@Observable final class FirstGeneratorViewModel: GetImageFromAlbum {
     // firstView
     private var currentIndex: Int = -1
     private let randomDescription: [String] = [
@@ -19,8 +50,16 @@ import Photos
         "프랑스 야경을 즐기는 모습을 그려주모습을 그려주세요. 항공점퍼를 입고 테라스세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.4",
     ]
     
-    var referenceImage: ImageAsset? = nil
-    var showPhotoPickerWhenFirstView: Bool = false
+    var referenceImages: [ImageAsset] = []
+    
+    func setReferenceImageAssets(assets: [ImageAsset]) {
+        self.referenceImages = assets
+    }
+    
+    func removeReferenceImage() {
+        self.referenceImages = []
+    }
+
     var photoDescription: String = ""
     var currentRandomDescriptionExample: String = ""
     
@@ -32,16 +71,26 @@ import Photos
     var descriptionIsEmpty: Bool {
         return photoDescription.isEmpty
     }
+    
+    func requestData() -> RequestImageData {
+        var requestImageData = RequestImageData()
+        if referenceImages.isEmpty {
+            return requestImageData.set(description: self.photoDescription, reference: nil)
+        } else {
+            return requestImageData.set(description: self.photoDescription, reference: referenceImages[0])
+            
+        }
+    }
+}
 
-    func setReferenceImageAsset(asset: ImageAsset) {
-        self.referenceImage = asset
+@Observable final class SecondGeneratorViewModel {
+    
+    var requestImageData: RequestImageData
+    
+    init(requestImageData: RequestImageData) {
+        self.requestImageData = requestImageData
     }
     
-    func removeReferenceImage() {
-        self.referenceImage = nil
-    }
-    
-    // secondView
     var selectedAngle: PhotoAngle? = nil
     var selectedFrame: PhotoFrame? = nil
     var selectedRatio: PhotoRatio? = nil
@@ -50,64 +99,37 @@ import Photos
         return selectedAngle == nil || selectedFrame == nil || selectedRatio == nil
     }
     
-    // thirdView
-    var showPhotoPickerWhenThirdView: Bool = false
-    var faceImages: [ImageAsset] = []
+    func requestData() -> RequestImageData {
+        return requestImageData.set(angle: self.selectedAngle,
+                               frame: self.selectedFrame,
+                               ratio: self.selectedRatio)
+    }
+}
+
+@Observable final class ThirdGeneratorViewModel: GetImageFromAlbum {
+    
+    var requestImageData: RequestImageData
+    
+    init(requestImageData: RequestImageData) {
+        self.requestImageData = requestImageData
+    }
+    
+    var referenceImages: [ImageAsset] = []
     
     var facesIsEmpty: Bool {
-        return faceImages.isEmpty
+        return referenceImages.isEmpty
     }
     
-    func setFaceImageAssets(assets: [ImageAsset]) {
-        self.faceImages = assets
+    func setReferenceImageAssets(assets: [ImageAsset]) {
+        self.referenceImages = assets
     }
     
-    // navigation
-//    var generatorPath: [GeneratorFlow] = []
-//    
-//    func push(_ flow: GeneratorFlow) {
-//        self.generatorPath.append(flow)
-//    }
-//    
-//    func back() {
-//        let removeLast = self.generatorPath.removeLast()
-//        if removeLast == .second {
-//            self.resetSecond()
-//        } else if removeLast == .thrid {
-//            self.resetThird()
-//        }
-//    }
+    func requestData() -> RequestImageData {
+        return requestImageData.set(faces: referenceImages)
+    }
     
-//    func resetFirst() {
-//        self.referenceImage = nil
-//        self.showPhotoPickerWhenFirstView  = false
-//        self.photoDescription = ""
-//    }
-//    
-//    func resetSecond() {
-//        self.selectedAngle = nil
-//        self.selectedFrame = nil
-//        self.selectedRatio = nil
-//    }
-//    
-//    func resetThird() {
-//        self.showPhotoPickerWhenThirdView = false
-//        self.faceImages = []
-//    }
-//    
-//    func reset() {
-//        resetFirst()
-//        resetSecond()
-//        resetThird()
-//    }
-//    
-    
-    // request
-    var isGenerating: Bool = false
-    var generateCompleted: Bool = false
-    
-    func getReferenceS3Key() async throws -> String? {
-        if let referencePhAsset = referenceImage?.asset {
+    func getReferenceS3Key(imageAsset: ImageAsset?) async throws -> String? {
+        if let referencePhAsset = imageAsset?.asset {
             guard let referenceKey = try await APIService.shared.uploadPHAssetToS3(phAsset: referencePhAsset) else {
                 throw GentiError.serverError(code: "AWS", message: "referenceImage의 s3key가 null입니다")
             }
@@ -116,16 +138,19 @@ import Photos
         return nil
     }
     
-    func getFaceS3Keys() async throws -> [String] {
-        let facePhAssets = faceImages.map { $0.asset }
-        return try await APIService.shared.uploadPHAssetToS3(phAssets: facePhAssets).compactMap{ $0 }
+    func getFaceS3Keys(imageAssets: [ImageAsset]) async throws -> [String] {
+        return try await APIService.shared.uploadPHAssetToS3(phAssets: imageAssets.map { $0.asset }).compactMap{ $0 }
     }
 
-    func generateImage() async throws -> Bool {
-
-        async let referenceURL = getReferenceS3Key()
-        async let facesURLs = getFaceS3Keys()
+    func generateImage() async throws {
+        let request = self.requestData()
+        async let referenceURL = getReferenceS3Key(imageAsset: request.referenceImageAsset)
+        async let facesURLs = getFaceS3Keys(imageAssets: request.faceImageAssets)
         
-        return try await APIService.shared.fetchResponse(for: GeneratorRouter.requestImage(prompt: photoDescription, poseURL: referenceURL, faceURLs: facesURLs, angle: selectedAngle!, coverage: selectedFrame!, ratio: selectedRatio!))
+        guard let selectedAngle = request.selectedAngle, let selectedFrame = request.selectedFrame, let selectedRatio = request.selectedRatio else {
+            throw GentiError.clientError(code: "Unwrapping", message: "각도,프레임,비율의 값이 비어있습니다")
+        }
+        
+        let _: Bool = try await APIService.shared.fetchResponse(for: GeneratorRouter.requestImage(prompt: request.description, poseURL: referenceURL, faceURLs: facesURLs, angle: selectedAngle, coverage: selectedFrame, ratio: selectedRatio))
     }
 }
