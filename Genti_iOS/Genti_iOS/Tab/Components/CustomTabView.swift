@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomTabView: View {
-    @EnvironmentObject var mainFlow: GentiMainFlow
+    @Bindable var router: Router<MainRoute>
     @Binding var currentTab: Tab
     var body: some View {
         HStack(alignment: .center) {
@@ -28,7 +28,7 @@ struct CustomTabView: View {
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    mainFlow.showGeneratorView = true
+                    router.routeTo(.firstGen)
                 }
 
 
@@ -56,46 +56,13 @@ struct CustomTabView: View {
                     .frame(height: 1)
             } //:ZSTACK
         )
-        .onReceive(NotificationCenter
-            .default
-            .publisher(for: Notification.Name("PushNotificationReceived"))
-            .eraseToAnyPublisher(), perform: { _ in
-                self.mainFlow.receiveNoti = true
-            })
-        .onReceive(NotificationCenter
-            .default
-            .publisher(for: Notification.Name("GeneratorFinished"))
-            .eraseToAnyPublisher(), perform: { _ in
-                self.mainFlow.showGeneratorView = false
-            })
-        .onReceive(NotificationCenter
-            .default
-            .publisher(for: Notification.Name("SelectedMyImage"))
-            .eraseToAnyPublisher(), perform: { object in
-                guard let post = object.object as? Post else {
-                    return
-                }
-                self.mainFlow.selectedPost = post
-            })
-        .fullScreenCover(item: $mainFlow.selectedPost) { post in
-            PostDetailView(imageUrl: post.imageURL)
-        }
-        .fullScreenCover(isPresented: $mainFlow.receiveNoti, content: {
-            PhotoCompleteView()
-        })
-        .fullScreenCover(isPresented: $mainFlow.showGeneratorView, content: {
-            FirstGeneratorView()
-        })
-        .fullScreenCover(isPresented: .constant(mainFlow.hasCompleted), onDismiss: { self.mainFlow.hasCompleted = false }, content: {
-            PhotoCompleteView()
-        })
     }
 }
 
 fileprivate struct CustomTabViewPreView: View {
     @State private var selected: Tab = .feed
     var body: some View {
-        CustomTabView(currentTab: $selected)
+        CustomTabView(router: .init(), currentTab: $selected)
     }
 }
 

@@ -10,8 +10,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct SplashView: View {
-    @EnvironmentObject var mainFlow: GentiMainFlow
-
+    @Bindable var router: Router<MainRoute>
     var body: some View {
         ZStack {
             AnimatedImage(name: "Genti_Splash.gif")
@@ -21,7 +20,7 @@ struct SplashView: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-                self.mainFlow.push(.login)
+                router.routeTo(.login)
             }
         }
     }

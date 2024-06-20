@@ -9,8 +9,8 @@ import UIKit
 import Combine
 import Photos
 
-class PHAssetImageViewModel: ObservableObject {
-    @Published var image: UIImage?
+@Observable final class PHAssetImageViewModel {
+    var image: UIImage?
     private var cancellables = Set<AnyCancellable>()
     private let imageManager = PHCachingImageManager()
 

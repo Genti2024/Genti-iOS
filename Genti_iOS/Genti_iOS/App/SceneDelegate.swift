@@ -11,18 +11,17 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var mainFlow = GentiMainFlow()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        let navigationController = UIHostingController(rootView: GentiApp().environmentObject(mainFlow))
+        let navigationController = UIHostingController(rootView: GentiApp())
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
         
         guard let _ = connectionOptions.notificationResponse else { return }
-        mainFlow.hasCompleted = true
+        // 만약에 앱이 꺼진상태에서 push notification받았을 때
         
         return
         

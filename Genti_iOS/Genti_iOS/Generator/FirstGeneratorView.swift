@@ -9,67 +9,47 @@ import SwiftUI
 import Combine
 
 struct FirstGeneratorView: View {
-    @StateObject var viewModel: GeneratorViewModel = GeneratorViewModel()
+    @State var viewModel: FirstGeneratorViewModel = FirstGeneratorViewModel()
     @FocusState var isFocused: Bool
+    @Bindable var router: Router<MainRoute>
     
     var body: some View {
-        NavigationStack(path: $viewModel.generatorPath) {
-            GeometryReader { _ in
-                ZStack {
-                    // Background Color
-                    Color.backgroundWhite
-                        .ignoresSafeArea()
-                    // Content
-                    VStack(spacing: 0) {
-                        headerView()
-                        inpuTextView()
-                        randomDescriptionView()
-                        addImageView()
-                        Spacer()
-                        nextButtonView()
-                    } //:VSTACK
-                } //:ZSTACK
-            }
-            .navigationDestination(for: GeneratorFlow.self) { type in
-                switch type {
-                case .second:
-                    SecondGeneratorView()
-                        .environmentObject(viewModel)
-                case .thrid:
-                    ThirdGeneratorView()
-                        .environmentObject(viewModel)
-                case .complete:
-                    GenerateRequestCompleteView()
-                        .environmentObject(viewModel)
-                    
-                }
-            }
-            .ignoresSafeArea(.keyboard)
-            .focused($isFocused)
-            .toolbar(.hidden, for: .navigationBar)
-            .onTapGesture {
-                isFocused = false
-            }
-            .onAppear {
-                isFocused = true
-                self.viewModel.getRandomDescriptionExample()
-            }
-            .fullScreenCover(isPresented: $viewModel.showPhotoPickerWhenFirstView) {
-                PopupImagePickerView(imagePickerModel: ImagePickerViewModel(limitCount: 1), pickerType: .reference)
-                    .environmentObject(viewModel)
-            }
+        GeometryReader { _ in
+            ZStack {
+                // Background Color
+                Color.backgroundWhite
+                    .ignoresSafeArea()
+                // Content
+                VStack(spacing: 0) {
+                    headerView()
+                    inpuTextView()
+                    randomDescriptionView()
+                    addImageView()
+                    Spacer()
+                    nextButtonView()
+                } //:VSTACK
+            } //:ZSTACK
         }
-
+        .ignoresSafeArea(.keyboard)
+        .focused($isFocused)
+        .toolbar(.hidden, for: .navigationBar)
+        .onTapGesture {
+            isFocused = false
+        }
+        .onAppear {
+            isFocused = true
+            self.viewModel.getRandomDescriptionExample()
+        }
     }
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
-            self.viewModel.push(.second)
+            router.routeTo(.secondGen(data: viewModel.requestData()))
         }
         .padding(.bottom, 32)
     }
     private func headerView() -> some View {
-        GeneratorHeaderView(step: 1, headerType: .back)
+        GeneratorHeaderView(router: router, step: 1, headerType: .back)
             .padding(.top, 40)
     }
     private func randomDescriptionView() -> some View {
@@ -79,20 +59,20 @@ struct FirstGeneratorView: View {
                 .foregroundStyle(.gentiGreen)
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 7) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .strokeBorder(.gentiGreen, style: .init(lineWidth: 1))
-                        .frame(height: 68)
-                        .shadow(color: .black.opacity(0.09), radius: 5)
-
-                        .overlay {
-                            Text(viewModel.currentRandomDescriptionExample)
-                                .pretendard(.description)
-                                .foregroundStyle(.black)
-                                .lineLimit(3)
-                                .padding(12)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        }
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.white)
+                    .strokeBorder(.gentiGreen, style: .init(lineWidth: 1))
+                    .frame(height: 68)
+                    .shadow(color: .black.opacity(0.09), radius: 5)
+                
+                    .overlay {
+                        Text(viewModel.currentRandomDescriptionExample)
+                            .pretendard(.description)
+                            .foregroundStyle(.black)
+                            .lineLimit(3)
+                            .padding(12)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    }
                 
                 Button {
                     // Action
@@ -147,7 +127,17 @@ struct FirstGeneratorView: View {
     }
     @ViewBuilder
     private func referenceImage() -> some View {
-        if let referenceImage = viewModel.referenceImage?.asset {
+        if viewModel.referenceImages.count == 0 {
+            Image("AddImageIcon")
+                .resizable()
+                .frame(width: 29, height: 29)
+                .padding((CGFloat.height(ratio: 0.13)-29)/2)
+                .background(.black.opacity(0.001))
+                .onTapGesture {
+                    router.routeTo(.imagePicker(limitCount: 1, viewModel: viewModel))
+                }
+        } else {
+            let referenceImage = viewModel.referenceImages[0].asset
             PHAssetImageView(asset: referenceImage)
                 .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
                 .overlay(alignment: .topTrailing) {
@@ -161,15 +151,6 @@ struct FirstGeneratorView: View {
                                 viewModel.removeReferenceImage()
                             }
                         }
-                }
-        } else {
-            Image("AddImageIcon")
-                .resizable()
-                .frame(width: 29, height: 29)
-                .padding((CGFloat.height(ratio: 0.13)-29)/2)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    viewModel.showPhotoPickerWhenFirstView = true
                 }
         }
     }
@@ -188,6 +169,8 @@ struct FirstGeneratorView: View {
                         .fill(.gray6)
                         .stroke(.gray5, lineWidth: 1)
                 )
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
             
             if viewModel.descriptionIsEmpty {
                 Text("""
@@ -207,6 +190,5 @@ struct FirstGeneratorView: View {
 }
 
 #Preview {
-    FirstGeneratorView()
-        .environmentObject(GeneratorViewModel())
+    FirstGeneratorView(router: .init())
 }

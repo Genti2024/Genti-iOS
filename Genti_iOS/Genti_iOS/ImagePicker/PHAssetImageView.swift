@@ -9,7 +9,7 @@ import SwiftUI
 import Photos
 
 struct PHAssetImageView: View {
-    @StateObject var viewModel: PHAssetImageViewModel = PHAssetImageViewModel()
+    @State var viewModel: PHAssetImageViewModel = PHAssetImageViewModel()
     var asset: PHAsset
 
     var body: some View {

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct GentiWebView: View {
-    
-    @EnvironmentObject var mainFlow: GentiMainFlow
-    
+    @Bindable var router: Router<MainRoute>
     let urlString: String
     
     var body: some View {
@@ -33,7 +31,7 @@ struct GentiWebView: View {
                             .frame(width: 29, height: 29)
                             .padding(.leading, 30)
                             .onTapGesture {
-                                self.mainFlow.back()
+                                router.dismiss()
                             }
                     }
                 WebView(urlString: urlString)
@@ -46,5 +44,5 @@ struct GentiWebView: View {
 }
 
 #Preview {
-    GentiWebView(urlString: "https://stealth-goose-156.notion.site/5e84488cbf874b8f91e779ea4dc8f08a")
+    GentiWebView(router: .init(), urlString: "https://stealth-goose-156.notion.site/5e84488cbf874b8f91e779ea4dc8f08a")
 }

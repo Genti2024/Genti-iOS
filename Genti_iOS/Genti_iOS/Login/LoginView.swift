@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 struct LoginView: View {
-    @EnvironmentObject var mainNavigation: GentiMainFlow
+    @Bindable var router: Router<MainRoute>
     var body: some View {
             ZStack {
                 // Background Color
@@ -40,7 +40,7 @@ struct LoginView: View {
     private func kakaoLoginButton() -> some View {
         Button {
             // Action
-            self.mainNavigation.push(.home)
+            router.routeTo(.mainTab)
         } label: {
             Image("Kakao_Login")
                 .resizable()
@@ -77,5 +77,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(router: .init())
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GenerateRequestCompleteView: View {
-    @EnvironmentObject var viewModel: GeneratorViewModel
+    @Bindable var router: Router<MainRoute>
 
     var body: some View {
         ZStack {
@@ -56,11 +56,7 @@ struct GenerateRequestCompleteView: View {
                 
                 Button {
                     // Action
-                    NotificationCenter.default.post(
-                        name: NSNotification.Name(rawValue: "GeneratorFinished"),
-                        object: nil,
-                        userInfo: nil
-                    )
+                    router.dismissSheet()
                 } label: {
                     Text("피드로 돌아가기")
                         .pretendard(.headline1)
@@ -80,7 +76,7 @@ struct GenerateRequestCompleteView: View {
 }
 
 #Preview {
-    GenerateRequestCompleteView()
+    GenerateRequestCompleteView(router: .init())
 }
 
 

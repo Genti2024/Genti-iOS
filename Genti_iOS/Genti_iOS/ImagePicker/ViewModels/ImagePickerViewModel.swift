@@ -9,13 +9,13 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-final class ImagePickerViewModel: ObservableObject {
+@Observable final class ImagePickerViewModel {
 
-    @Published var scrollViewHeight: CGFloat = 0
-    @Published var contentSize: CGFloat = 0
-    @Published var fetchedImages: [ImageAsset] = []
-    @Published var isReachLimit: Bool = false
-    @Published var selectedImages: [ImageAsset] = [] {
+    var scrollViewHeight: CGFloat = 0
+    var contentSize: CGFloat = 0
+    var fetchedImages: [ImageAsset] = []
+    var isReachLimit: Bool = false
+    var selectedImages: [ImageAsset] = [] {
         didSet {
             isReachLimit = selectedImages.count == limit
         }
