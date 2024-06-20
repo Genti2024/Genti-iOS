@@ -32,7 +32,6 @@
 		C017C4812C1C3AA3009924C9 /* PhotoAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C42B2C1C3AA3009924C9 /* PhotoAngle.swift */; };
 		C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C42C2C1C3AA3009924C9 /* PhotoFrame.swift */; };
 		C017C4832C1C3AA3009924C9 /* PhotoRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C42D2C1C3AA3009924C9 /* PhotoRatio.swift */; };
-		C017C4842C1C3AA3009924C9 /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C42F2C1C3AA3009924C9 /* GeneratorViewModel.swift */; };
 		C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4312C1C3AA3009924C9 /* FirstGeneratorView.swift */; };
 		C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4322C1C3AA3009924C9 /* GenerateRequestCompleteView.swift */; };
 		C017C4872C1C3AA3009924C9 /* SecondGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4332C1C3AA3009924C9 /* SecondGeneratorView.swift */; };
@@ -89,6 +88,11 @@
 		C099C35B2C1C3D000006EF83 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C099C35A2C1C3D000006EF83 /* FirebaseMessaging */; };
 		C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* MainRoute.swift */; };
 		C099C35F2C1C408B0006EF83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */; };
+		C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E5D2C23C57C0071C3CD /* RequestImageData.swift */; };
+		C0B80E602C23C59B0071C3CD /* FirstGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E5F2C23C59B0071C3CD /* FirstGeneratorViewModel.swift */; };
+		C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */; };
+		C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */; };
+		C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */; };
 		C0D74A3F2C1E9B3200A45371 /* Genti_Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */; };
 		C0D74A422C1EA68700A45371 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A412C1EA68700A45371 /* Router.swift */; };
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
@@ -142,7 +146,6 @@
 		C017C42B2C1C3AA3009924C9 /* PhotoAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAngle.swift; sourceTree = "<group>"; };
 		C017C42C2C1C3AA3009924C9 /* PhotoFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFrame.swift; sourceTree = "<group>"; };
 		C017C42D2C1C3AA3009924C9 /* PhotoRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRatio.swift; sourceTree = "<group>"; };
-		C017C42F2C1C3AA3009924C9 /* GeneratorViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
 		C017C4312C1C3AA3009924C9 /* FirstGeneratorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstGeneratorView.swift; sourceTree = "<group>"; };
 		C017C4322C1C3AA3009924C9 /* GenerateRequestCompleteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateRequestCompleteView.swift; sourceTree = "<group>"; };
 		C017C4332C1C3AA3009924C9 /* SecondGeneratorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondGeneratorView.swift; sourceTree = "<group>"; };
@@ -194,6 +197,11 @@
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
+		C0B80E5D2C23C57C0071C3CD /* RequestImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestImageData.swift; sourceTree = "<group>"; };
+		C0B80E5F2C23C59B0071C3CD /* FirstGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstGeneratorViewModel.swift; sourceTree = "<group>"; };
+		C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorViewModel.swift; sourceTree = "<group>"; };
+		C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdGeneratorViewModel.swift; sourceTree = "<group>"; };
+		C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageFromImagePicker.swift; sourceTree = "<group>"; };
 		C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Genti_Splash.gif; sourceTree = "<group>"; };
 		C0D74A412C1EA68700A45371 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
@@ -356,6 +364,7 @@
 				C017C42B2C1C3AA3009924C9 /* PhotoAngle.swift */,
 				C017C42C2C1C3AA3009924C9 /* PhotoFrame.swift */,
 				C017C42D2C1C3AA3009924C9 /* PhotoRatio.swift */,
+				C0B80E5D2C23C57C0071C3CD /* RequestImageData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -363,7 +372,9 @@
 		C017C4302C1C3AA3009924C9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				C017C42F2C1C3AA3009924C9 /* GeneratorViewModel.swift */,
+				C0B80E5F2C23C59B0071C3CD /* FirstGeneratorViewModel.swift */,
+				C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */,
+				C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -371,6 +382,7 @@
 		C017C4352C1C3AA3009924C9 /* Generator */ = {
 			isa = PBXGroup;
 			children = (
+				C0B80E662C23C5E80071C3CD /* Inferface */,
 				C017C4282C1C3AA3009924C9 /* Components */,
 				C017C42E2C1C3AA3009924C9 /* Models */,
 				C017C4302C1C3AA3009924C9 /* ViewModels */,
@@ -608,6 +620,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C0B80E662C23C5E80071C3CD /* Inferface */ = {
+			isa = PBXGroup;
+			children = (
+				C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */,
+			);
+			path = Inferface;
+			sourceTree = "<group>";
+		};
 		C0D74A402C1EA66B00A45371 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -811,20 +831,24 @@
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
 				C017C4AC2C1C3AA3009924C9 /* MainFeedView.swift in Sources */,
-				C017C4842C1C3AA3009924C9 /* GeneratorViewModel.swift in Sources */,
+				C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */,
 				C017C4AA2C1C3AA3009924C9 /* FeedComponent.swift in Sources */,
 				C017C47D2C1C3AA3009924C9 /* GeneratorHeaderView.swift in Sources */,
 				C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */,
 				C017C4892C1C3AA3009924C9 /* PostCardView.swift in Sources */,
 				C017C4932C1C3AA3009924C9 /* ImagePickerType.swift in Sources */,
 				C017C48E2C1C3AA3009924C9 /* GentiWebView.swift in Sources */,
+				C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */,
 				C017C48F2C1C3AA3009924C9 /* PostDetailView.swift in Sources */,
 				C017C4AD2C1C3AA3009924C9 /* CustomTabView.swift in Sources */,
 				C017C47B2C1C3AA3009924C9 /* PhotoDetailView.swift in Sources */,
+				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
+				C0B80E602C23C59B0071C3CD /* FirstGeneratorViewModel.swift in Sources */,
 				C017C4AE2C1C3AA3009924C9 /* Tab.swift in Sources */,
 				C017C49D2C1C3AA3009924C9 /* GentiError.swift in Sources */,
 				C017C4A02C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift in Sources */,
+				C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */,
 				C017C4A12C1C3AA3009924C9 /* SettingRouter.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,
 				C017C4952C1C3AA3009924C9 /* ImagePickerViewModel.swift in Sources */,

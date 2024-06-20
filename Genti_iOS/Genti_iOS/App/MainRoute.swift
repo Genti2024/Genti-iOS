@@ -17,7 +17,7 @@ enum MainRoute: Route {
     case secondGen(data: RequestImageData)
     case thirdGen(data: RequestImageData)
     case requestCompleted
-    case imagePicker(limitCount: Int, viewModel: GetImageFromAlbum)
+    case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
     
     @ViewBuilder

@@ -13,10 +13,10 @@ import SwiftfulUI
 struct PopupImagePickerView: View {
 
     @State var imagePickerModel: ImagePickerViewModel
-    @State var generatorViewModel: GetImageFromAlbum
+    @State var generatorViewModel: GetImageFromImagePicker
     @Environment(\.dismiss) private var dismiss
     
-    init(limitCount: Int, viewModel: GetImageFromAlbum) {
+    init(limitCount: Int, viewModel: GetImageFromImagePicker) {
         self.imagePickerModel = ImagePickerViewModel(limitCount: limitCount)
         self.generatorViewModel = viewModel
     }
