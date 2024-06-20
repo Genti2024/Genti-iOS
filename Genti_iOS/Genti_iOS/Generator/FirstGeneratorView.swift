@@ -170,6 +170,7 @@ struct FirstGeneratorView: View {
                         .stroke(.gray5, lineWidth: 1)
                 )
                 .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
             
             if viewModel.descriptionIsEmpty {
                 Text("""

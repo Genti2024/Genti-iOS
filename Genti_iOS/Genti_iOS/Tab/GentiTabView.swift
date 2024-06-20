@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GentiTabView: View {
     @State var currentTab: Tab = .feed
-    @State var router: Router<MainRoute>
+    @Bindable var router: Router<MainRoute>
     
     var body: some View {
         ZStack(alignment: .bottom) {

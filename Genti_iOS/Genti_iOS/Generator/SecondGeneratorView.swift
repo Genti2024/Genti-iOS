@@ -65,7 +65,12 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.selectedRatio == frame {
                                     Rectangle()
+                                        .fill(.black.opacity(0.5))
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
+                                        .overlay {
+                                            Text("\(frame)")
+                                                .foregroundStyle(.white)
+                                        }
                                 }
 
                             }

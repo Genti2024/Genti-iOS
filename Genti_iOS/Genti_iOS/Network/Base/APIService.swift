@@ -21,20 +21,21 @@ class APIService {
                 .responseDecodable(of: APIResponse<T>.self) { res in
                     switch res.result {
                     case .success(let apiResponse):
-                        // response의 success가 true일때
                         if apiResponse.success {
                             guard let response = apiResponse.response else {
-                                // response의 success가 true인데 response가 null일 경우
                                 continuation.resume(throwing: GentiError.serverError(code: "SERVER", message: "Success인데 response가 null입니다"))
                                 return
                             }
                             continuation.resume(returning: response)
                         } else {
-                            // response의 success가 failure일때
-                            continuation.resume(throwing: GentiError.serverError(code: apiResponse.errorCode, message: apiResponse.errorMessage))
+                            continuation.resume(throwing: GentiError.serverError(code: apiResponse.errorCode ?? "UNKNOWN", message: apiResponse.errorMessage ?? "Unknown error"))
                         }
                     case .failure(let error):
-                        continuation.resume(throwing: GentiError.clientError(code: "CLIENT", message: "API자체가 failure입니다 fetchResponse를 확인하세요\nstatus Code : \(res.response!.statusCode)\n\(error.localizedDescription)"))
+                        if let data = res.data, let serverError = try? JSONDecoder().decode(APIResponse<Bool>.self, from: data), !serverError.success {
+                            continuation.resume(throwing: GentiError.serverError(code: serverError.errorCode, message: serverError.errorMessage))
+                        } else {
+                            continuation.resume(throwing: GentiError.clientError(code: "REQUESTERROR", message: "\(res.response?.statusCode ?? 0)\n\(error.localizedDescription)"))
+                        }
                     }
                 }
         }

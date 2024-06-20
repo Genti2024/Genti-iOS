@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThirdGeneratorView: View {
     @State var viewModel: ThirdGeneratorViewModel
-    @State var router: Router<MainRoute>
+    @Bindable var router: Router<MainRoute>
     var body: some View {
             ZStack {
                 // Background Color
@@ -32,8 +32,8 @@ struct ThirdGeneratorView: View {
                 do {
                     try await viewModel.generateImage()
                     router.routeTo(.requestCompleted)
-                } catch {
-                    
+                } catch(let error) {
+                    print(error as! GentiError)
                 }
             }
             
