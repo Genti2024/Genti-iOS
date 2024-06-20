@@ -12,13 +12,13 @@ enum NavigationType {
     case fullScreenCover
 }
 
-protocol Routable: Hashable, Identifiable {
+protocol Route: Hashable, Identifiable {
     associatedtype ViewType: View
     var navigationType: NavigationType { get }
-    func viewToDisplay(router: Router<Self>) -> ViewType
+    func view(from router: Router<Self>) -> ViewType
 }
 
-extension Routable {
+extension Route {
     public var id: Self { self }
     
     func hash(into hasher: inout Hasher) {

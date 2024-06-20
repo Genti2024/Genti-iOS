@@ -92,7 +92,7 @@
 		C0D74A3F2C1E9B3200A45371 /* Genti_Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */; };
 		C0D74A422C1EA68700A45371 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A412C1EA68700A45371 /* Router.swift */; };
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
-		C0D74A462C1EA6B500A45371 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Routable.swift */; };
+		C0D74A462C1EA6B500A45371 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Route.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,7 +197,7 @@
 		C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Genti_Splash.gif; sourceTree = "<group>"; };
 		C0D74A412C1EA68700A45371 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
-		C0D74A452C1EA6B500A45371 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		C0D74A452C1EA6B500A45371 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -613,7 +613,7 @@
 			children = (
 				C0D74A412C1EA68700A45371 /* Router.swift */,
 				C0D74A432C1EA6A200A45371 /* RoutingView.swift */,
-				C0D74A452C1EA6B500A45371 /* Routable.swift */,
+				C0D74A452C1EA6B500A45371 /* Route.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -788,7 +788,7 @@
 				C017C49E2C1C3AA3009924C9 /* GeneratorRequest.swift in Sources */,
 				C017C47C2C1C3AA3009924C9 /* RatingAlertView.swift in Sources */,
 				C017C49C2C1C3AA3009924C9 /* APIService.swift in Sources */,
-				C0D74A462C1EA6B500A45371 /* Routable.swift in Sources */,
+				C0D74A462C1EA6B500A45371 /* Route.swift in Sources */,
 				C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */,
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,

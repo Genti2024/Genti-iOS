@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RoutingView<Content: View, Destination: Routable>: View {
+struct RoutingView<Content: View, Destination: Route>: View {
     @State var router: Router<Destination>
     private let rootContent: (Router<Destination>) -> Content
     
@@ -20,11 +20,11 @@ struct RoutingView<Content: View, Destination: Routable>: View {
         NavigationStack(path: $router.path) {
             rootContent(router)
                 .navigationDestination(for: Destination.self) { route in
-                    router.view(for: route)
+                    router.view(from: route)
                 }
         }
         .fullScreenCover(item: $router.presentingFullScreenCover) { route in
-                router.view(for: route)
+                router.view(from: route)
         }
     }
 }

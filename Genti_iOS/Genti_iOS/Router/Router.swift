@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-@Observable final class Router<Destination: Routable> {
+@Observable final class Router<Destination: Route> {
 
     public var path: NavigationPath = NavigationPath()
     public var presentingFullScreenCover: Destination?
     var isPresented: Binding<Destination?> = .constant(.none)
     
-    @ViewBuilder public func view(for route: Destination) -> some View {
-        route.viewToDisplay(router: router(routeType: route.navigationType))
+    @ViewBuilder public func view(from route: Destination) -> some View {
+        route.view(from: router(routeType: route.navigationType))
     }
     
     public func routeTo(_ route: Destination) {

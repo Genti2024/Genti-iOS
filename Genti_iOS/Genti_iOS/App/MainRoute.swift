@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MainRoute: Routable {
+enum MainRoute: Route {
     
     case login
     case mainTab
@@ -21,7 +21,7 @@ enum MainRoute: Routable {
     case webView(url: String)
     
     @ViewBuilder
-    func viewToDisplay(router: Router<MainRoute>) -> some View {
+    func view(from router: Router<MainRoute>) -> some View {
         switch self {
         case .login:
             LoginView(router: router)
