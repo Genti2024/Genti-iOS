@@ -26,9 +26,9 @@ enum PhotoRatio {
     var requsetString: String {
         switch self {
         case .twoThird:
-            return "TWO_THREE"
+            return "RATIO_2_3"
         case .threeSecond:
-            return "THREE_TWO"
+            return "RATIO_3_2"
         }
     }
     
