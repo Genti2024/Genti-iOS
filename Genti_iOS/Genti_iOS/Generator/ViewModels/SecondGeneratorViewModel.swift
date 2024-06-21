@@ -7,25 +7,58 @@
 
 import SwiftUI
 
-@Observable final class SecondGeneratorViewModel {
-    
+@Observable 
+final class SecondGeneratorViewModel: ViewModel {
+ 
+    var router: Router<MainRoute>
     var requestImageData: RequestImageData
+    var state: SecondGeneratorViewModel.State
     
-    init(requestImageData: RequestImageData) {
+    init(requestImageData: RequestImageData, router: Router<MainRoute>) {
         self.requestImageData = requestImageData
+        self.router = router
+        self.state = .init()
     }
     
-    var selectedAngle: PhotoAngle? = nil
-    var selectedFrame: PhotoFrame? = nil
-    var selectedRatio: PhotoRatio? = nil
+    struct State {
+        var selectedAngle: PhotoAngle? = nil
+        var selectedFrame: PhotoFrame? = nil
+        var selectedRatio: PhotoRatio? = nil
+    }
+    
+    enum Input {
+        case angleTap(PhotoAngle)
+        case frameTap(PhotoFrame)
+        case ratioTap(PhotoRatio)
+        case nextButtonTap
+        case xmarkTap
+        case backButtonTap
+    }
+    
+    func sendAction(_ input: Input) {
+        switch input {
+        case .angleTap(let photoAngle):
+            state.selectedAngle = photoAngle
+        case .frameTap(let photoFrame):
+            state.selectedFrame = photoFrame
+        case .ratioTap(let photoRatio):
+            state.selectedRatio = photoRatio
+        case .nextButtonTap:
+            self.router.routeTo(.thirdGen(data: self.requestData()))
+        case .xmarkTap:
+            self.router.dismissSheet()
+        case .backButtonTap:
+            self.router.dismiss()
+        }
+    }
     
     var angleOrFrameOrRatioIsEmpty: Bool {
-        return selectedAngle == nil || selectedFrame == nil || selectedRatio == nil
+        return state.selectedAngle == nil || state.selectedFrame == nil || state.selectedRatio == nil
     }
     
     func requestData() -> RequestImageData {
-        return requestImageData.set(angle: self.selectedAngle,
-                               frame: self.selectedFrame,
-                               ratio: self.selectedRatio)
+        return requestImageData.set(angle: self.state.selectedAngle,
+                                    frame: self.state.selectedFrame,
+                                    ratio: self.state.selectedRatio)
     }
 }

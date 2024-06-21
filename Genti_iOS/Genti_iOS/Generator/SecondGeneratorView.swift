@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SecondGeneratorView: View {
     @State var viewModel: SecondGeneratorViewModel
-    @Bindable var router: Router<MainRoute>
+
     var body: some View {
             ZStack {
                 // Background Color
@@ -28,7 +28,7 @@ struct SecondGeneratorView: View {
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
-            router.routeTo(.thirdGen(data: viewModel.requestData()))
+            viewModel.sendAction(.nextButtonTap)
         }
         .padding(.bottom, 32)
     }
@@ -44,7 +44,10 @@ struct SecondGeneratorView: View {
     }
     
     private func headerView() -> some View {
-        GeneratorHeaderView(router: router, step: 2, headerType: .backAndDismiss)
+        GeneratorHeaderView(backButtonTapped: { viewModel.sendAction(.backButtonTap) },
+                            xmarkTapped: { viewModel.sendAction(.xmarkTap) },
+                            step: 2,
+                            headerType: .backAndDismiss)
             .padding(.top, 40)
     }
     
@@ -57,25 +60,25 @@ struct SecondGeneratorView: View {
             
             VStack(spacing: 5) {
                 HStack(spacing: 9) {
-                    ForEach(PhotoRatio.selections, id: \.self) { frame in
-                        Image(frame.image)
+                    ForEach(PhotoRatio.selections, id: \.self) { ratio in
+                        Image(ratio.image)
                             .resizable()
                             .frame(width: (UIScreen.main.bounds.width-32-16)/3)
                             .frame(height: (UIScreen.main.bounds.width-32-16)/3)
                             .overlay {
-                                if viewModel.selectedRatio == frame {
+                                if viewModel.state.selectedRatio == ratio {
                                     Rectangle()
                                         .fill(.black.opacity(0.5))
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
                                         .overlay {
-                                            Text("\(frame)")
+                                            Text("\(ratio)")
                                                 .foregroundStyle(.white)
                                         }
                                 }
 
                             }
                             .onTapGesture {
-                                viewModel.selectedRatio = frame
+                                viewModel.sendAction(.ratioTap(ratio))
                             }
                     }
                 } //:HSTACK
@@ -95,12 +98,12 @@ struct SecondGeneratorView: View {
                 HStack(spacing: 4) {
                     Text("앵글은 자유롭게 맡길래요")
                         .pretendard(.description)
-                        .foregroundStyle(viewModel.selectedAngle == .any ? .green1 : .gray3)
-                    Image(viewModel.selectedAngle == .any ? PhotoAngle.freeSelectedImage : PhotoAngle.any.image)
+                        .foregroundStyle(viewModel.state.selectedAngle == .any ? .green1 : .gray3)
+                    Image(viewModel.state.selectedAngle == .any ? PhotoAngle.freeSelectedImage : PhotoAngle.any.image)
                 } //:HSTACK
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    viewModel.selectedAngle = .any
+                    viewModel.sendAction(.angleTap(.any))
                 }
                 
                 HStack(spacing: 9) {
@@ -110,14 +113,14 @@ struct SecondGeneratorView: View {
                             .aspectRatio(1, contentMode: .fit)
                             .frame(maxWidth: .infinity)
                             .overlay {
-                                if viewModel.selectedAngle == angle {
+                                if viewModel.state.selectedAngle == angle {
                                     Rectangle()
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
                                 }
 
                             }
                             .onTapGesture {
-                                viewModel.selectedAngle = angle
+                                viewModel.sendAction(.angleTap(angle))
                             }
                     }
                 } //:HSTACK
@@ -136,12 +139,12 @@ struct SecondGeneratorView: View {
                 HStack(spacing: 4) {
                     Text("프레임은 자유롭게 맡길래요")
                         .pretendard(.description)
-                        .foregroundStyle(viewModel.selectedFrame == .any ? .green1 : .gray3)
-                    Image(viewModel.selectedFrame == .any ? PhotoFrame.freeSelectedImage : PhotoAngle.any.image)
+                        .foregroundStyle(viewModel.state.selectedFrame == .any ? .green1 : .gray3)
+                    Image(viewModel.state.selectedFrame == .any ? PhotoFrame.freeSelectedImage : PhotoAngle.any.image)
                 } //:HSTACK
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    viewModel.selectedFrame = .any
+                    viewModel.sendAction(.frameTap(.any))
                 }
                 
                 HStack(spacing: 9) {
@@ -151,14 +154,14 @@ struct SecondGeneratorView: View {
                             .aspectRatio(1, contentMode: .fit)
                             .frame(maxWidth: .infinity)
                             .overlay {
-                                if viewModel.selectedFrame == frame {
+                                if viewModel.state.selectedFrame == frame {
                                     Rectangle()
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
                                 }
 
                             }
                             .onTapGesture {
-                                viewModel.selectedFrame = frame
+                                viewModel.sendAction(.frameTap(frame))
                             }
                     }
                 } //:HSTACK
