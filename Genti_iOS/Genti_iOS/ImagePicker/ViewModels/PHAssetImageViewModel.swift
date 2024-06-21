@@ -9,9 +9,38 @@ import UIKit
 import Combine
 import Photos
 
-@Observable final class PHAssetImageViewModel {
-    var image: UIImage?
-    private var cancellables = Set<AnyCancellable>()
+@Observable 
+final class PHAssetImageViewModel: ViewModel {
+    
+    struct State {
+        var image: UIImage? = nil
+    }
+    
+    enum Input {
+        case viewWillAppear(PHAssetImageViewModel.PhotoInfo)
+        case viewDidAppear
+    }
+    
+    func sendAction(_ input: Input) {
+        switch input {
+        case .viewWillAppear(let photoInfo):
+            loadImage(for: photoInfo.asset, size: photoInfo.size)
+        case .viewDidAppear:
+            cancel()
+        }
+    }
+    
+    struct PhotoInfo {
+        let size: CGSize
+        let asset: PHAsset
+    }
+    
+    var state: PHAssetImageViewModel.State
+    
+    init() {
+        self.state = .init()
+    }
+    
     private let imageManager = PHCachingImageManager()
 
     private let requestOptions: PHImageRequestOptions = {
@@ -22,10 +51,7 @@ import Photos
         return options
     }()
 
-    func loadImage(
-        for asset: PHAsset,
-        size: CGSize
-    ) {
+    func loadImage(for asset: PHAsset, size: CGSize) {
         imageManager.requestImage(
             for: asset,
             targetSize: size,
@@ -35,7 +61,7 @@ import Photos
             [weak self] result, _ in
             if let image = result {
                 DispatchQueue.main.async {
-                    self?.image = image
+                    self?.state.image = image
                 }
             }
         }
