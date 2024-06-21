@@ -38,7 +38,7 @@ enum MainRoute: Route {
         case .thirdGen(let data):
             ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(requestImageData: data, router: router))
         case .imagePicker(limitCount: let limitCount, viewModel: let viewModel):
-            PopupImagePickerView(viewModel: ImagePickerViewModel(generatorViewModel: viewModel, router: router, limit: limitCount))
+            PopupImagePickerView(viewModel: ImagePickerViewModel(generatorViewModel: viewModel, router: router, limit: limitCount, albumUseCase: AlbumUseCaseImpl(albumRepository: AlbumRepositoryImpl(albumService: AlbumServiceImpl()))))
         case .requestCompleted:
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):

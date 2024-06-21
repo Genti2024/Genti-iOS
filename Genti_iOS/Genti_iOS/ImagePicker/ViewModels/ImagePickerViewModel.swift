@@ -41,7 +41,7 @@ final class ImagePickerViewModel: ViewModel {
             }
         case .scroll(let orginY):
             if scrollViewHeight > state.contentSize + orginY {
-                fetchTrigger.send()
+                fetchImages()
             }
         case .xmarkTap:
             router.dismissSheet()
@@ -58,53 +58,30 @@ final class ImagePickerViewModel: ViewModel {
     var state: ImagePickerViewModel.State
     let limit: Int
     
-    private let fetchTrigger = PassthroughSubject<Void, Never>()
-    private let fetchLimit = 50
-    private var cancellables = Set<AnyCancellable>()
-    private let albumService: AlbumService = AlbumServiceImpl()
+    private let albumUseCase: AlbumUseCase
     var scrollViewHeight: CGFloat = 0
 
     
-    init(generatorViewModel: GetImageFromImagePicker, router: Router<MainRoute>, limit: Int) {
+    init(generatorViewModel: GetImageFromImagePicker, router: Router<MainRoute>, limit: Int, albumUseCase: AlbumUseCase) {
         self.generatorViewModel = generatorViewModel
         self.router = router
         self.limit = limit
+        self.albumUseCase = albumUseCase
         self.state = .init()
-        setupBindings()
     }
     
     func isSelected(from imageAsset: ImageAsset) -> Int? {
         state.selectedImages.firstIndex { $0.id == imageAsset.id }
     }
     
-    private func setupBindings() {
-        fetchTrigger
-            .filter { [weak self] in self?.state.isLoading == false }
-            .handleEvents(receiveOutput: { [weak self] in self?.state.isLoading = true })
-            .compactMap { [weak self] in self?.getNextIndexSet() }
-            .compactMap { [weak self] in self?.albumService.convertAlbumToImageAsset(indexSet: $0) }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] assets in
-                self?.state.fetchedImages.append(contentsOf: assets)
-                self?.state.currentIndex += assets.count
-                self?.state.isLoading = false
-            })
-            .store(in: &cancellables)
+    private func fetchImages() {
+        defer { state.isLoading = false }
+        guard !state.isLoading else { return }
+        state.isLoading = true
+        guard let newImages = albumUseCase.getImageAsset(currentIndex: state.currentIndex) else { return }
+        state.fetchedImages.append(contentsOf: newImages)
+        state.currentIndex += newImages.count
     }
-
-    private func getNextIndexSet() -> IndexSet? {
-        let endIndex = min(state.currentIndex + fetchLimit, albumService.count)
-        guard reachLastIndex(to: endIndex) else {
-            state.isLoading = false
-            return nil
-        }
-        return IndexSet(state.currentIndex..<endIndex)
-    }
-    
-    private func reachLastIndex(to endIndex: Int) -> Bool {
-        return state.currentIndex < endIndex
-    }
-    
     
     private func updateImageSelection(for imageAsset: ImageAsset) {
         if let index = isSelected(from: imageAsset) {
@@ -116,7 +93,9 @@ final class ImagePickerViewModel: ViewModel {
 
     private func removeImage(at index: Int) {
         state.selectedImages.remove(at: index)
-        updateAssetIndices()
+        for index in state.selectedImages.indices {
+            state.selectedImages[index].assetIndex = index
+        }
     }
 
     private func addImage(_ imageAsset: ImageAsset) {
@@ -125,11 +104,4 @@ final class ImagePickerViewModel: ViewModel {
         newAsset.assetIndex = state.selectedImages.count
         state.selectedImages.append(newAsset)
     }
-
-    private func updateAssetIndices() {
-        for index in state.selectedImages.indices {
-            state.selectedImages[index].assetIndex = index
-        }
-    }
-    
 }
