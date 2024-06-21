@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct GeneratorHeaderView: View {
-    @Bindable var router: Router<MainRoute>
+    
+    var backButtonTapped: (()->Void)? = nil
+    var xmarkTapped: (()->Void)? = nil
+    
     enum HeaderType {
         case back
         case backAndDismiss
@@ -50,7 +53,7 @@ struct GeneratorHeaderView: View {
                         .padding(15)
                         .background(.black.opacity(0.001))
                         .onTapGesture {
-                            router.dismiss()
+                            backButtonTapped?()
                         }
                 }
 
@@ -63,7 +66,7 @@ struct GeneratorHeaderView: View {
                     .padding(15)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        router.dismissSheet()
+                        xmarkTapped?()
                     }
             }
             .padding(.horizontal, 13)
@@ -78,9 +81,9 @@ struct GeneratorHeaderView: View {
             .ignoresSafeArea()
         // Content
         VStack(spacing: 20) {
-            GeneratorHeaderView(router: .init(), step: 1, headerType: .back)
-            GeneratorHeaderView(router: .init(), step: 2, headerType: .backAndDismiss)
-            GeneratorHeaderView(router: .init(), step: 3, headerType: .backAndDismiss)
+            GeneratorHeaderView(step: 1, headerType: .back)
+            GeneratorHeaderView(step: 2, headerType: .backAndDismiss)
+            GeneratorHeaderView(step: 3, headerType: .backAndDismiss)
         } //:VSTACK
     } //:ZSTACK
 }

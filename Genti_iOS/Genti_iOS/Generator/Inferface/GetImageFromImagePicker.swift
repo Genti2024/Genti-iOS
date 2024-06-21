@@ -8,12 +8,6 @@
 import Foundation
 
 protocol GetImageFromImagePicker: AnyObject {
-    var referenceImages: [ImageAsset] { get set }
     func setReferenceImageAssets(assets: [ImageAsset])
 }
 
-extension GetImageFromImagePicker {  
-    func setReferenceImageAssets(assets: [ImageAsset]) {
-        self.referenceImages = assets
-    }
-}
