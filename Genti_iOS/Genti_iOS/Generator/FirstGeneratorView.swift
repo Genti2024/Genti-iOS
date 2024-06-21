@@ -9,9 +9,12 @@ import SwiftUI
 import Combine
 
 struct FirstGeneratorView: View {
-    @State var viewModel: FirstGeneratorViewModel = FirstGeneratorViewModel()
+    @State var viewModel: FirstGeneratorViewModel
     @FocusState var isFocused: Bool
-    @Bindable var router: Router<MainRoute>
+    
+    init(viewModel: FirstGeneratorViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         GeometryReader { _ in
@@ -38,18 +41,21 @@ struct FirstGeneratorView: View {
         }
         .onAppear {
             isFocused = true
-            self.viewModel.getRandomDescriptionExample()
+            self.viewModel.sendAction(.viewWillAppear)
         }
     }
     
     private func nextButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
-            router.routeTo(.secondGen(data: viewModel.requestData()))
+            self.viewModel.sendAction(.nextButtonTap)
         }
         .padding(.bottom, 32)
     }
     private func headerView() -> some View {
-        GeneratorHeaderView(router: router, step: 1, headerType: .back)
+        GeneratorHeaderView(
+            xmarkTapped: { self.viewModel.sendAction(.xmarkTap) },
+            step: 1,
+            headerType: .back)
             .padding(.top, 40)
     }
     private func randomDescriptionView() -> some View {
@@ -66,7 +72,7 @@ struct FirstGeneratorView: View {
                     .shadow(color: .black.opacity(0.09), radius: 5)
                 
                     .overlay {
-                        Text(viewModel.currentRandomDescriptionExample)
+                        Text(viewModel.state.currentRandomDescriptionExample)
                             .pretendard(.description)
                             .foregroundStyle(.black)
                             .lineLimit(3)
@@ -76,7 +82,7 @@ struct FirstGeneratorView: View {
                 
                 Button {
                     // Action
-                    self.viewModel.getRandomDescriptionExample()
+                    self.viewModel.sendAction(.randomButtonTap)
                 } label: {
                     Image("Change")
                         .resizable()
@@ -127,18 +133,18 @@ struct FirstGeneratorView: View {
     }
     @ViewBuilder
     private func referenceImage() -> some View {
-        if viewModel.referenceImages.count == 0 {
+        if viewModel.state.referenceImages.count == 0 {
             Image("AddImageIcon")
                 .resizable()
                 .frame(width: 29, height: 29)
                 .padding((CGFloat.height(ratio: 0.13)-29)/2)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    router.routeTo(.imagePicker(limitCount: 1, viewModel: viewModel))
+                    self.viewModel.sendAction(.addImageButtonTap)
                 }
         } else {
-            let referenceImage = viewModel.referenceImages[0].asset
-            PHAssetImageView(asset: referenceImage)
+            let referenceImage = viewModel.state.referenceImages[0].asset
+            PHAssetImageView(viewModel: PHAssetImageViewModel(), asset: referenceImage)
                 .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
                 .overlay(alignment: .topTrailing) {
                     Image("ImageRemoveButton")
@@ -148,7 +154,7 @@ struct FirstGeneratorView: View {
                         .background(.black.opacity(0.001))
                         .onTapGesture {
                             withAnimation(.easeInOut) {
-                                viewModel.removeReferenceImage()
+                                viewModel.sendAction(.removeButtonTap)
                             }
                         }
                 }
@@ -156,8 +162,11 @@ struct FirstGeneratorView: View {
     }
     private func descriptionTextEditor() -> some View {
         ZStack {
-            TextEditor(text: $viewModel.photoDescription)
-                .limit(text: $viewModel.photoDescription, limit: 200)
+            TextEditor(text: Binding(
+                 get: { viewModel.state.photoDescription },
+                 set: { viewModel.sendAction(.inputDescription($0)) }
+             ))
+                .limit(text: $viewModel.state.photoDescription, limit: 200)
                 .pretendard(.number)
                 .foregroundStyle(.black)
                 .scrollContentBackground(.hidden)
@@ -189,6 +198,6 @@ struct FirstGeneratorView: View {
     }
 }
 
-#Preview {
-    FirstGeneratorView(router: .init())
-}
+//#Preview {
+//    FirstGeneratorView(router: .init())
+//}
