@@ -8,5 +8,5 @@
 import Foundation
 
 protocol AlbumUseCase {
-    func getImageAsset(currentIndex: Int) -> [ImageAsset]?
+    func getImageAsset(from currentIndex: Int) -> [ImageAsset]?
 }

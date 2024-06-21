@@ -555,19 +555,11 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C017C4682C1C3AA3009924C9 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		C017C46A2C1C3AA3009924C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				C017C4652C1C3AA3009924C9 /* Components */,
 				C017C4672C1C3AA3009924C9 /* Model */,
-				C017C4682C1C3AA3009924C9 /* Network */,
 				C017C4692C1C3AA3009924C9 /* MainFeedView.swift */,
 			);
 			path = Home;
