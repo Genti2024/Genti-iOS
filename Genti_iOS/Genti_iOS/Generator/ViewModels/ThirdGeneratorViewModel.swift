@@ -7,22 +7,66 @@
 
 import SwiftUI
 
-@Observable final class ThirdGeneratorViewModel: GetImageFromImagePicker {
+@Observable 
+final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
+
     
-    var requestImageData: RequestImageData
-    
-    init(requestImageData: RequestImageData) {
-        self.requestImageData = requestImageData
+    struct State {
+        var referenceImages: [ImageAsset] = []
+        var isLoading: Bool = false
     }
     
-    var referenceImages: [ImageAsset] = []
+    enum Input {
+        case addImageButtonTap
+        case backButtonTap
+        case xmarkTap
+        case nextButtonTap
+        case reChoiceButtonTap
+    }
+    
+    func sendAction(_ input: Input) {
+        switch input {
+        case .addImageButtonTap, .reChoiceButtonTap:
+            router.routeTo(.imagePicker(limitCount: 3, viewModel: self))
+        case .backButtonTap:
+            router.dismiss()
+        case .xmarkTap:
+            router.dismissSheet()
+        case .nextButtonTap:
+            Task {
+                do {
+                    state.isLoading = true
+                    try await generateImage()
+                    state.isLoading = false
+                    router.routeTo(.requestCompleted)
+                } catch(let error) {
+                    print(error as! GentiError)
+                }
+            }
+        }
+    }
+    
+    var state: ThirdGeneratorViewModel.State
+    
+    
+    var requestImageData: RequestImageData
+    var router: Router<MainRoute>
+    init(requestImageData: RequestImageData, router: Router<MainRoute>) {
+        self.requestImageData = requestImageData
+        self.router = router
+        self.state = .init()
+    }
+    
+    func setReferenceImageAssets(assets: [ImageAsset]) {
+        self.state.referenceImages = assets
+    }
     
     var facesIsEmpty: Bool {
-        return referenceImages.isEmpty
+        return state.referenceImages.isEmpty
     }
     
     func requestData() -> RequestImageData {
-        return requestImageData.set(faces: referenceImages)
+        return requestImageData.set(faces: state.referenceImages)
     }
     
     func getReferenceS3Key(imageAsset: ImageAsset?) async throws -> String? {
