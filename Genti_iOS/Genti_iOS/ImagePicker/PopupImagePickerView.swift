@@ -44,7 +44,6 @@ struct PopupImagePickerView: View {
                 }
             }
             .readingFrame { frame in
-                // MARK: - frame 길이 갱신
                 viewModel.sendAction(.readContentHight(frame.height))
             }
 
@@ -52,14 +51,12 @@ struct PopupImagePickerView: View {
             viewModel.sendAction(.scroll(origin.y))
         }
         .onReadSize({ size in
-            // MARK: - scrollview자체의 높이(contentsize아님)설정
             self.viewModel.scrollViewHeight = size.height
         })
     }
     func selectButton() -> some View {
         Button {
             // Action
-            // MARK: - 추가하기 버튼 눌렀을때
             viewModel.sendAction(.addImageButtonTap)
         } label: {
             Text("\(viewModel.state.selectedImages.count) / \(viewModel.limit) 장의 사진 추가하기")
@@ -106,7 +103,7 @@ struct PopupImagePickerView: View {
                     Circle()
                         .stroke(.white, lineWidth: 1)
                     
-                    if let index = viewModel.isSelected(from: imageAsset) {
+                    if let index = viewModel.index(of: imageAsset) {
                         Circle()
                             .fill(.gentiGreen)
                         Text("\(viewModel.state.selectedImages[index].assetIndex + 1)")
@@ -118,7 +115,7 @@ struct PopupImagePickerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                 .padding(6)
                 
-                if let _ = viewModel.isSelected(from: imageAsset) {
+                if let _ = viewModel.index(of: imageAsset) {
                     Rectangle()
                         .strokeBorder(.green1, style: .init(lineWidth: 2))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -126,10 +123,8 @@ struct PopupImagePickerView: View {
             }
             .onTapGesture {
                 withAnimation(.easeInOut) {
-                    // MARK: - image선택했을때
                     viewModel.sendAction(.selectImage(imageAsset))
                 }
             }
     }
-
 }

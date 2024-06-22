@@ -39,9 +39,9 @@ final class ImagePickerViewModel: ViewModel {
             if state.contentSize != height {
                 state.contentSize = height
             }
-        case .scroll(let orginY):
-            if scrollViewHeight > state.contentSize + orginY {
-                fetchImages()
+        case .scroll(let originY):
+            if isReachBottom(from: originY) {
+                fetch()
             }
         case .xmarkTap:
             router.dismissSheet()
@@ -70,17 +70,21 @@ final class ImagePickerViewModel: ViewModel {
         self.state = .init()
     }
     
-    func isSelected(from imageAsset: ImageAsset) -> Int? {
+    /// 이미 선택된 이미지들중 인자로 들어온 이미지가 몇번째 이미지인지를 반환합니다
+    /// - Parameter imageAsset: 인덱스를 알고싶은 이미지
+    /// - Returns: 인덱스를반환합니다(없다면 nil을 반환합니다)
+    func index(of imageAsset: ImageAsset) -> Int? {
         state.selectedImages.firstIndex { $0.id == imageAsset.id }
     }
     
-    private func fetchImages() {
+    /// pagination으로 인한 추가 이미지를 가져옵니다
+    /// 이미지를 가지고 오는 동안에는 이미지를 가져오는 동작을 block합니다(순식간에 여러번호출되는경우를 예방)
+    private func fetch() {
         defer { state.isLoading = false }
         guard !state.isLoading else { return }
         state.isLoading = true
         appendImages()
     }
-    
     
     /// 이미지를 추가합니다
     /// 현재 이미지 pagination을 구현해놨기때문에 이미지가 계속해서 추가되어야합니다 UseCase에서 이미지를 받아와서 fetch된이미지에추가하고 인덱스값을 갱신해줍니다
@@ -95,31 +99,36 @@ final class ImagePickerViewModel: ViewModel {
     /// 만약에 선택한 이미지가 이미 선택된이미지에 있는이미지라면 -> 선택해제(removeImage(at:_)))
     /// 만약에 선택한 이미지가 선택되지 않은 이미지라면 -> 선택(addImage())
     private func updateImageSelection(for imageAsset: ImageAsset) {
-        if let index = isSelected(from: imageAsset) {
-            removeImage(at: index)
+        if let index = index(of: imageAsset) {
+            deSelect(at: index)
         } else {
-            addImage(imageAsset)
+            add(imageAsset)
         }
     }
 
-    
     /// 선택된 이미지를 선택해제합니다
     /// - Parameter index: 이미선택된이미지들중에서 몇번째이미지지인지
     /// 선택된이미지에는 몇번째 선택한이미지인지를 UI로 보여줘야하기때문에 123에서 2번째 이미지를 선택해제하면 3이 2가되야합니다
-    private func removeImage(at index: Int) {
+    private func deSelect(at index: Int) {
         state.selectedImages.remove(at: index)
         for index in state.selectedImages.indices {
             state.selectedImages[index].assetIndex = index
         }
     }
 
-    
     /// 이미지를 선택합니다
     /// - Parameter imageAsset: 선택된 이미지
-    private func addImage(_ imageAsset: ImageAsset) {
+    private func add(_ imageAsset: ImageAsset) {
         guard !state.isReachLimit else { return }
         var newAsset = imageAsset
         newAsset.assetIndex = state.selectedImages.count
         state.selectedImages.append(newAsset)
+    }
+    
+    /// scrollview가 맨 아래에 도달했는지를 판단합니다
+    /// - Parameter originY: 현재 scrollview의 originY좌표
+    /// - Returns: 바닥에 도달했는지안했는지
+    private func isReachBottom(from originY: CGFloat) -> Bool {
+        return scrollViewHeight > state.contentSize + originY
     }
 }
