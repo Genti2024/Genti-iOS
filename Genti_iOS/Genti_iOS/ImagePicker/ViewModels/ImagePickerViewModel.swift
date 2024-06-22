@@ -14,8 +14,8 @@ final class ImagePickerViewModel: ViewModel {
 
     struct State {
         var fetchedImages: [ImageAsset] = []
-        var isReachLimit: Bool = false
         var selectedImages: [ImageAsset] = []
+        var isReachLimit: Bool = false
         var isLoading: Bool = false
         var currentIndex: Int = 0
         var contentSize: CGFloat = 0
@@ -33,16 +33,12 @@ final class ImagePickerViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .selectImage(let imageAsset):
-            updateImageSelection(for: imageAsset)
+            update(for: imageAsset)
             state.isReachLimit = state.selectedImages.count == limit
         case .readContentHight(let height):
-            if state.contentSize != height {
-                state.contentSize = height
-            }
+            if state.contentSize != height { state.contentSize = height }
         case .scroll(let originY):
-            if isReachBottom(from: originY) {
-                fetch()
-            }
+            if isReachBottom(from: originY) { fetch() }
         case .xmarkTap:
             router.dismissSheet()
         case .addImageButtonTap:
@@ -57,11 +53,10 @@ final class ImagePickerViewModel: ViewModel {
     var router: Router<MainRoute>
     var state: ImagePickerViewModel.State
     let limit: Int
-    
     private let albumUseCase: AlbumUseCase
+
     var scrollViewHeight: CGFloat = 0
 
-    
     init(generatorViewModel: GetImageFromImagePicker, router: Router<MainRoute>, limit: Int, albumUseCase: AlbumUseCase) {
         self.generatorViewModel = generatorViewModel
         self.router = router
@@ -75,6 +70,16 @@ final class ImagePickerViewModel: ViewModel {
     /// - Returns: 인덱스를반환합니다(없다면 nil을 반환합니다)
     func index(of imageAsset: ImageAsset) -> Int? {
         state.selectedImages.firstIndex { $0.id == imageAsset.id }
+    }
+    
+    /// 이미 선택된 이미지들중 인자로 들어온 이미지의 포함여부를 반환합니다
+    /// - Parameter imageAsset: 선택된이미지들중에 포함되어있는지를 알고싶은 이미지
+    /// - Returns: 포함여부를 반환합니다
+    func containsInSelectedImages(_ imageAsset: ImageAsset) -> Bool {
+        if let _ = state.selectedImages.firstIndex(where: { $0.id == imageAsset.id }) {
+            return true
+        }
+        return false
     }
     
     /// pagination으로 인한 추가 이미지를 가져옵니다
@@ -98,7 +103,7 @@ final class ImagePickerViewModel: ViewModel {
     /// - Parameter imageAsset: 선택한 이미지에셋
     /// 만약에 선택한 이미지가 이미 선택된이미지에 있는이미지라면 -> 선택해제(removeImage(at:_)))
     /// 만약에 선택한 이미지가 선택되지 않은 이미지라면 -> 선택(addImage())
-    private func updateImageSelection(for imageAsset: ImageAsset) {
+    private func update(for imageAsset: ImageAsset) {
         if let index = index(of: imageAsset) {
             deSelect(at: index)
         } else {

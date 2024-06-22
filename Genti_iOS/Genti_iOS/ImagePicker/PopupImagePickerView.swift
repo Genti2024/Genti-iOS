@@ -92,9 +92,7 @@ struct PopupImagePickerView: View {
     }
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
-                
-                PHAssetImageView(viewModel: PHAssetImageViewModel(), asset: imageAsset.asset)
-                
+                PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .fill(.black.opacity(0.1))
@@ -115,7 +113,7 @@ struct PopupImagePickerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                 .padding(6)
                 
-                if let _ = viewModel.index(of: imageAsset) {
+                if viewModel.containsInSelectedImages(imageAsset) {
                     Rectangle()
                         .strokeBorder(.green1, style: .init(lineWidth: 2))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

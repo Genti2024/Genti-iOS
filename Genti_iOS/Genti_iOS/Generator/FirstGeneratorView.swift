@@ -144,7 +144,7 @@ struct FirstGeneratorView: View {
                 }
         } else {
             let referenceImage = viewModel.state.referenceImages[0].asset
-            PHAssetImageView(viewModel: PHAssetImageViewModel(), asset: referenceImage)
+            PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: referenceImage)
                 .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
                 .overlay(alignment: .topTrailing) {
                     Image("ImageRemoveButton")

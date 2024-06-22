@@ -85,6 +85,10 @@
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
 		C088F2D02C25732900F92320 /* AlbumRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CF2C25732900F92320 /* AlbumRepository.swift */; };
 		C088F2D22C25733C00F92320 /* AlbumRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D12C25733C00F92320 /* AlbumRepositoryImpl.swift */; };
+		C088F2D42C26564A00F92320 /* PHAssetImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D32C26564A00F92320 /* PHAssetImageUseCase.swift */; };
+		C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D52C26567500F92320 /* PHAssetImageService.swift */; };
+		C088F2D82C26569700F92320 /* PHAssetImageServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D72C26569700F92320 /* PHAssetImageServiceImpl.swift */; };
+		C088F2DA2C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D92C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift */; };
 		C099C34D2C1C3BEE0006EF83 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C099C34C2C1C3BEE0006EF83 /* Alamofire */; };
 		C099C3502C1C3C6D0006EF83 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C099C34F2C1C3C6D0006EF83 /* Lottie */; };
 		C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3522C1C3C7D0006EF83 /* SDWebImageSwiftUI */; };
@@ -204,6 +208,10 @@
 		C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCaseImpl.swift; sourceTree = "<group>"; };
 		C088F2CF2C25732900F92320 /* AlbumRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepository.swift; sourceTree = "<group>"; };
 		C088F2D12C25733C00F92320 /* AlbumRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryImpl.swift; sourceTree = "<group>"; };
+		C088F2D32C26564A00F92320 /* PHAssetImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageUseCase.swift; sourceTree = "<group>"; };
+		C088F2D52C26567500F92320 /* PHAssetImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageService.swift; sourceTree = "<group>"; };
+		C088F2D72C26569700F92320 /* PHAssetImageServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageServiceImpl.swift; sourceTree = "<group>"; };
+		C088F2D92C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageUseCaseImpl.swift; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
@@ -450,6 +458,8 @@
 			children = (
 				C017C4452C1C3AA3009924C9 /* AlbumService.swift */,
 				C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */,
+				C088F2D52C26567500F92320 /* PHAssetImageService.swift */,
+				C088F2D72C26569700F92320 /* PHAssetImageServiceImpl.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -630,6 +640,8 @@
 			children = (
 				C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */,
 				C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */,
+				C088F2D32C26564A00F92320 /* PHAssetImageUseCase.swift */,
+				C088F2D92C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -834,6 +846,7 @@
 				C017C49C2C1C3AA3009924C9 /* APIService.swift in Sources */,
 				C0D74A462C1EA6B500A45371 /* Route.swift in Sources */,
 				C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */,
+				C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */,
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
@@ -852,6 +865,7 @@
 				C017C4A42C1C3AA3009924C9 /* Constants.swift in Sources */,
 				C017C4872C1C3AA3009924C9 /* SecondGeneratorView.swift in Sources */,
 				C017C49B2C1C3AA3009924C9 /* APIResponse.swift in Sources */,
+				C088F2D82C26569700F92320 /* PHAssetImageServiceImpl.swift in Sources */,
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
 				C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
@@ -863,6 +877,7 @@
 				C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */,
 				C017C4892C1C3AA3009924C9 /* PostCardView.swift in Sources */,
 				C017C4932C1C3AA3009924C9 /* ImagePickerType.swift in Sources */,
+				C088F2DA2C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift in Sources */,
 				C017C48E2C1C3AA3009924C9 /* GentiWebView.swift in Sources */,
 				C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */,
 				C017C48F2C1C3AA3009924C9 /* PostDetailView.swift in Sources */,
@@ -883,6 +898,7 @@
 				C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */,
 				C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */,
 				C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */,
+				C088F2D42C26564A00F92320 /* PHAssetImageUseCase.swift in Sources */,
 				C017C4812C1C3AA3009924C9 /* PhotoAngle.swift in Sources */,
 				C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */,
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,

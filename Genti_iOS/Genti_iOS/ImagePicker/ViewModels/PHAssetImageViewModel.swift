@@ -24,7 +24,7 @@ final class PHAssetImageViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .viewWillAppear(let photoInfo):
-            loadImage(for: photoInfo.asset, size: photoInfo.size)
+            load(from: photoInfo)
         case .viewDidAppear:
             cancel()
         }
@@ -36,38 +36,25 @@ final class PHAssetImageViewModel: ViewModel {
     }
     
     var state: PHAssetImageViewModel.State
+    var phassetImageUseCase: PHAssetImageUseCase
     
-    init() {
+    init(phassetImageUseCase: PHAssetImageUseCase) {
+        self.phassetImageUseCase = phassetImageUseCase
         self.state = .init()
     }
-    
-    private let imageManager = PHCachingImageManager()
 
-    private let requestOptions: PHImageRequestOptions = {
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        options.deliveryMode = .opportunistic
-        options.resizeMode = .exact
-        return options
-    }()
-
-    func loadImage(for asset: PHAsset, size: CGSize) {
-        imageManager.requestImage(
-            for: asset,
-            targetSize: size,
-            contentMode: .aspectFill,
-            options: requestOptions
-        ) {
-            [weak self] result, _ in
-            if let image = result {
-                DispatchQueue.main.async {
-                    self?.state.image = image
-                }
+    /// PHAsset으로부터 UIImage를 반환받아 state의 image에 할당해줍니다
+    /// - Parameter photoInfo: PHAsset과 Size가 담겨있는 custom Struct 
+    func load(from photoInfo: PHAssetImageViewModel.PhotoInfo) {
+        Task {
+            if let image = await phassetImageUseCase.getImage(from: photoInfo) {
+                self.state.image = image
             }
         }
     }
     
+    /// PHAsset에서 UIImage로의 변환을 취소합니다
     func cancel() {
-        self.imageManager.stopCachingImagesForAllAssets()
+        phassetImageUseCase.cancelLoad()
     }
 }
