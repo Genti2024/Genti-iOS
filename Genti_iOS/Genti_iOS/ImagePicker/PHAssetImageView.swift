@@ -9,18 +9,23 @@ import SwiftUI
 import Photos
 
 struct PHAssetImageView: View {
-    @State var viewModel: PHAssetImageViewModel = PHAssetImageViewModel()
+    @State var viewModel: PHAssetImageViewModel
     var asset: PHAsset
+    
+    init(viewModel: PHAssetImageViewModel, asset: PHAsset) {
+        self.viewModel = viewModel
+        self.asset = asset
+    }
 
     var body: some View {
         GeometryReader { geometry in
             let size = calculatedSize(for: geometry)
             imageView(using: size)
                 .onAppear {
-                    viewModel.loadImage(for: asset, size: size)
+                    viewModel.sendAction(.viewWillAppear(.init(size: size, asset: asset)))
                 }
                 .onDisappear {
-                    viewModel.cancel()
+                    viewModel.sendAction(.viewDidAppear)
                 }
         }
         .clipped()
@@ -30,7 +35,7 @@ struct PHAssetImageView: View {
 
     private func imageView(using size: CGSize) -> some View {
         Group {
-            if let uiImage = viewModel.image {
+            if let uiImage = viewModel.state.image {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()

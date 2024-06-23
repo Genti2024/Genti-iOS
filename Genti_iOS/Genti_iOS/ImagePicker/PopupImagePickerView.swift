@@ -12,13 +12,10 @@ import SwiftfulUI
 
 struct PopupImagePickerView: View {
 
-    @State var imagePickerModel: ImagePickerViewModel
-    @State var generatorViewModel: GetImageFromImagePicker
-    @Environment(\.dismiss) private var dismiss
+    @State var viewModel: ImagePickerViewModel
     
-    init(limitCount: Int, viewModel: GetImageFromImagePicker) {
-        self.imagePickerModel = ImagePickerViewModel(limitCount: limitCount)
-        self.generatorViewModel = viewModel
+    init(viewModel: ImagePickerViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -34,62 +31,56 @@ struct PopupImagePickerView: View {
             selectButton()
         } //:ZSTACK
         .onDisappear {
-            imagePickerModel.removeAll()
+            viewModel.sendAction(.viewDidAppear)
         }
     }
     
     func albumImageScrollView() -> some View {
         ScrollViewWithOnScrollChanged {
             LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 3), count: 3), spacing: 3) {
-                ForEach(imagePickerModel.fetchedImages) { imageAsset in
+                ForEach(viewModel.state.fetchedImages) { imageAsset in
                     albumImage(from: imageAsset)
                         .aspectRatio(1, contentMode: .fit)
                 }
             }
             .readingFrame { frame in
-                if imagePickerModel.contentSize != frame.height {
-                    imagePickerModel.contentSize = frame.height
-                }
+                viewModel.sendAction(.readContentHight(frame.height))
             }
 
         } onScrollChanged: { origin in
-            let height = imagePickerModel.scrollViewHeight
-            if height > imagePickerModel.contentSize + origin.y {
-                self.imagePickerModel.getPhotos()
-            }
+            viewModel.sendAction(.scroll(origin.y))
         }
         .onReadSize({ size in
-            self.imagePickerModel.scrollViewHeight = size.height
+            self.viewModel.scrollViewHeight = size.height
         })
     }
     func selectButton() -> some View {
         Button {
             // Action
-            self.generatorViewModel.setReferenceImageAssets(assets: imagePickerModel.selectedImages)
-            dismiss()
+            viewModel.sendAction(.addImageButtonTap)
         } label: {
-            Text("\(imagePickerModel.selectedImageCount) / \(imagePickerModel.limit) 장의 사진 추가하기")
+            Text("\(viewModel.state.selectedImages.count) / \(viewModel.limit) 장의 사진 추가하기")
                 .pretendard(.headline4)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 25)
                 .padding(.vertical, 12)
                 .background(
                     Capsule()
-                        .fill(imagePickerModel.isReachLimit ? .green1 : .gray3)
+                        .fill(viewModel.state.isReachLimit ? .green1 : .gray3)
                 )
         }
-        .disabled(!imagePickerModel.isReachLimit)
+        .disabled(!viewModel.state.isReachLimit)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .padding(.bottom, .height(ratio: 0.03))
     }
     func headerView() -> some View {
         HStack {
-            Text("\(imagePickerModel.limit)장의 이미지를 선택해주세요")
+            Text("\(viewModel.limit)장의 이미지를 선택해주세요")
                 .pretendard(.headline4)
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Button {
-                dismiss()
+                viewModel.sendAction(.xmarkTap)
             } label: {
                 Image(systemName: "xmark")
                     .font(.title2)
@@ -101,9 +92,7 @@ struct PopupImagePickerView: View {
     }
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
-                
-                PHAssetImageView(asset: imageAsset.asset)
-                
+                PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .fill(.black.opacity(0.1))
@@ -112,10 +101,10 @@ struct PopupImagePickerView: View {
                     Circle()
                         .stroke(.white, lineWidth: 1)
                     
-                    if let index = imagePickerModel.isSelected(from: imageAsset) {
+                    if let index = viewModel.index(of: imageAsset) {
                         Circle()
                             .fill(.gentiGreen)
-                        Text("\(imagePickerModel.selectedImages[index].assetIndex + 1)")
+                        Text("\(viewModel.state.selectedImages[index].assetIndex + 1)")
                             .font(.caption2.bold())
                             .foregroundStyle(.white)
                     }
@@ -124,7 +113,7 @@ struct PopupImagePickerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                 .padding(6)
                 
-                if let _ = imagePickerModel.isSelected(from: imageAsset) {
+                if viewModel.containsInSelectedImages(imageAsset) {
                     Rectangle()
                         .strokeBorder(.green1, style: .init(lineWidth: 2))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -132,38 +121,8 @@ struct PopupImagePickerView: View {
             }
             .onTapGesture {
                 withAnimation(.easeInOut) {
-                    updateImageSelection(for: imageAsset)
+                    viewModel.sendAction(.selectImage(imageAsset))
                 }
             }
-    }
-
-}
-
-private extension PopupImagePickerView {
-
-    func updateImageSelection(for imageAsset: ImageAsset) {
-        if let index = imagePickerModel.isSelected(from: imageAsset) {
-            removeImage(at: index)
-        } else {
-            addImage(imageAsset)
-        }
-    }
-
-    func removeImage(at index: Int) {
-        imagePickerModel.selectedImages.remove(at: index)
-        updateAssetIndices()
-    }
-
-    func addImage(_ imageAsset: ImageAsset) {
-        guard !imagePickerModel.isReachLimit else { return }
-        var newAsset = imageAsset
-        newAsset.assetIndex = imagePickerModel.selectedImages.count
-        imagePickerModel.selectedImages.append(newAsset)
-    }
-
-    func updateAssetIndices() {
-        for index in imagePickerModel.selectedImages.indices {
-            imagePickerModel.selectedImages[index].assetIndex = index
-        }
     }
 }

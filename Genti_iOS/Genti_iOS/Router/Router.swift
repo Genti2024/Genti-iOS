@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-@Observable final class Router<Destination: Route> {
+@Observable 
+final class Router<Destination: Route> {
 
     public var path: NavigationPath = NavigationPath()
     public var presentingFullScreenCover: Destination?

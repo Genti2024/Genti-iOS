@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThirdGeneratorView: View {
     @State var viewModel: ThirdGeneratorViewModel
-    @Bindable var router: Router<MainRoute>
+
     var body: some View {
             ZStack {
                 // Background Color
@@ -22,27 +22,25 @@ struct ThirdGeneratorView: View {
                     cautionScrollView()
                     completeButtonView()
                 } //:VSTACK
+                if viewModel.state.isLoading {
+                    LoadingView()
+                }
             } //:ZSTACK
             .toolbar(.hidden, for: .navigationBar)
     }
     
     private func completeButtonView() -> some View {
         GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
-            Task {
-                do {
-                    try await viewModel.generateImage()
-                    router.routeTo(.requestCompleted)
-                } catch(let error) {
-                    print(error as! GentiError)
-                }
-            }
-            
+            viewModel.sendAction(.nextButtonTap)
         }
         .padding(.bottom, 32)
     }
     
     private func headerView() -> some View {
-        GeneratorHeaderView(router: router, step: 3, headerType: .backAndDismiss)
+        GeneratorHeaderView(backButtonTapped: { viewModel.sendAction(.backButtonTap) },
+                            xmarkTapped: { viewModel.sendAction(.xmarkTap) },
+                            step: 3,
+                            headerType: .backAndDismiss)
             .padding(.top, 40)
     }
     
@@ -158,7 +156,7 @@ struct ThirdGeneratorView: View {
                     .frame(maxWidth: .infinity)
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        router.routeTo(.imagePicker(limitCount: 3, viewModel: viewModel))
+                        viewModel.sendAction(.addImageButtonTap)
                     }
             } else {
                 VStack(spacing: 0) {
@@ -171,13 +169,13 @@ struct ThirdGeneratorView: View {
                     } //:HSTACK
                     .background(.black.opacity(0.001))
                     .onTapGesture {
-                        router.routeTo(.imagePicker(limitCount: 3, viewModel: viewModel))
+                        viewModel.sendAction(.reChoiceButtonTap)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
                     HStack(spacing: 8) {
-                        ForEach(viewModel.referenceImages) { imageAsset in
-                            PHAssetImageView(asset: imageAsset.asset)
+                        ForEach(viewModel.state.referenceImages) { imageAsset in
+                            PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
                         }
                     } //:HSTACK
                 } //:VSTACK

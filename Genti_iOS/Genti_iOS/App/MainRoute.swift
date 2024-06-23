@@ -32,13 +32,13 @@ enum MainRoute: Route {
         case .expandImage(let url):
             PostDetailView(router: router, imageUrl: url)
         case .firstGen:
-            RoutingView(router) { FirstGeneratorView(router: $0) }
+            RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
-            SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data), router: router)
+            SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data, router: router))
         case .thirdGen(let data):
-            ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(requestImageData: data), router: router)
+            ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(imageGenerateUseCase: ImageGenerateUseCaseImpl(generateRepository: ImageGenerateRepositoryImpl(requsetService: RequestServiceImpl(), imageDataTransferService: ImageDataTransferServiceImpl(), uploadService: UploadServiceImpl())), requestImageData: data, router: router))
         case .imagePicker(limitCount: let limitCount, viewModel: let viewModel):
-            PopupImagePickerView(limitCount: limitCount, viewModel: viewModel)
+            PopupImagePickerView(viewModel: ImagePickerViewModel(generatorViewModel: viewModel, router: router, limit: limitCount, albumUseCase: AlbumUseCaseImpl(albumRepository: AlbumRepositoryImpl(albumService: AlbumServiceImpl()))))
         case .requestCompleted:
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):
