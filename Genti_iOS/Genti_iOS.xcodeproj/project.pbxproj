@@ -98,6 +98,8 @@
 		C088F2EB2C27AD7200F92320 /* ImageDataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2EA2C27AD7200F92320 /* ImageDataTransferService.swift */; };
 		C088F2ED2C27AD9200F92320 /* ImageDataTransferServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2EC2C27AD9200F92320 /* ImageDataTransferServiceImpl.swift */; };
 		C088F2EF2C27AE3400F92320 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2EE2C27AE3400F92320 /* ViewModel.swift */; };
+		C088F2F22C28D76500F92320 /* HorizontalImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2F12C28D76500F92320 /* HorizontalImageContentView.swift */; };
+		C088F2F42C28D77200F92320 /* VerticalImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2F32C28D77200F92320 /* VerticalImageContentView.swift */; };
 		C099C34D2C1C3BEE0006EF83 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C099C34C2C1C3BEE0006EF83 /* Alamofire */; };
 		C099C3502C1C3C6D0006EF83 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C099C34F2C1C3C6D0006EF83 /* Lottie */; };
 		C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3522C1C3C7D0006EF83 /* SDWebImageSwiftUI */; };
@@ -230,6 +232,8 @@
 		C088F2EA2C27AD7200F92320 /* ImageDataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataTransferService.swift; sourceTree = "<group>"; };
 		C088F2EC2C27AD9200F92320 /* ImageDataTransferServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataTransferServiceImpl.swift; sourceTree = "<group>"; };
 		C088F2EE2C27AE3400F92320 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C088F2F12C28D76500F92320 /* HorizontalImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalImageContentView.swift; sourceTree = "<group>"; };
+		C088F2F32C28D77200F92320 /* VerticalImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalImageContentView.swift; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
@@ -377,6 +381,7 @@
 		C017C4252C1C3AA3009924C9 /* Complete */ = {
 			isa = PBXGroup;
 			children = (
+				C088F2F02C28D74300F92320 /* Component */,
 				C017C4222C1C3AA3009924C9 /* PhotoCompleteView.swift */,
 				C017C4232C1C3AA3009924C9 /* PhotoDetailView.swift */,
 				C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */,
@@ -706,6 +711,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		C088F2F02C28D74300F92320 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				C088F2F12C28D76500F92320 /* HorizontalImageContentView.swift */,
+				C088F2F32C28D77200F92320 /* VerticalImageContentView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		C0B80E662C23C5E80071C3CD /* Inferface */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +900,7 @@
 				C017C49F2C1C3AA3009924C9 /* GeneratorRouter.swift in Sources */,
 				C017C4A52C1C3AA3009924C9 /* ImageLoaderView.swift in Sources */,
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
+				C088F2F42C28D77200F92320 /* VerticalImageContentView.swift in Sources */,
 				C017C4882C1C3AA3009924C9 /* ThirdGeneratorView.swift in Sources */,
 				C017C4972C1C3AA3009924C9 /* PHAssetImageView.swift in Sources */,
 				C017C48B2C1C3AA3009924C9 /* StraggeredGrid.swift in Sources */,
@@ -905,6 +920,7 @@
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
 				C017C48A2C1C3AA3009924C9 /* SettingRow.swift in Sources */,
 				C017C47F2C1C3AA3009924C9 /* Caution.swift in Sources */,
+				C088F2F22C28D76500F92320 /* HorizontalImageContentView.swift in Sources */,
 				C017C4962C1C3AA3009924C9 /* PHAssetImageViewModel.swift in Sources */,
 				C017C4832C1C3AA3009924C9 /* PhotoRatio.swift in Sources */,
 				C017C48D2C1C3AA3009924C9 /* Post.swift in Sources */,

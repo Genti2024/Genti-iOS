@@ -25,68 +25,17 @@ struct PhotoCompleteView: View {
                 // Background Color
                 Color.backgroundWhite
                     .ignoresSafeArea()
-
+                
                 // Content
-                VStack {
-                    Image("Genti_LOGO")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 44)
-                        .padding(.top, 55)
-                    
-                    VStack {
-                        HStack(spacing: 0) {
-                            Text("하나뿐인 나만의 사진")
-                                .pretendard(.headline1)
-                                .foregroundStyle(.gentiGreen)
-                            Text("이")
-                                .pretendard(.headline3)
-                        }
-                        Text("완성되었어요!")
-                            .pretendard(.headline3)
-                    }
-                    .foregroundStyle(.black)
-                    .padding(.top, 44)
-                    
-                    
-                    
-                    Image("Image_frame")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .overlay(alignment: .center) {
-                            Rectangle()
-                                .overlay(alignment: .center) {
-                                    Image(imageName)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                }
-                                .clipped()
-                                .padding(5)
-                            
-                            
-                        }
-                        .overlay(alignment: .bottomTrailing) {
-                            Image("Download")
-                                .resizable()
-                                .frame(width: 44, height: 44)
-                                .padding(.bottom, 5)
-                                .padding(.trailing, 5)
-                        }
-                        .padding(.horizontal, 58)
-                        .onTapGesture {
-                            self.showPhotoDetail = true
-                        }
-                        
-                    Text("사진이 마이페이지에 저장되었어요!")
-                        .pretendard(.normal)
-                        .foregroundStyle(.black)
-                    
-                    
+                VStack(spacing: 0) {
+                    // MARK: - 만약에 가로로 긴사진이오면
+//                    HorizontalImageContentView()
+                    // MARK: - 만약에 세로로 긴사진이오면
+                    VerticalImageContentView()
                     Spacer()
                     
                     Button {
                         // Action
-                        
                     } label: {
                         Text("공유하기")
                             .pretendard(.headline1)
@@ -103,29 +52,30 @@ struct PhotoCompleteView: View {
                             .clipShape(.rect(cornerRadius: 10))
                     }
                     .padding(.horizontal, 30)
-                    .padding(.bottom, 28)
+                    
+                    Spacer()
+                        .frame(height: 18)
                     
                     Text("메인으로 이동하기")
-                        .pretendard(.normal)
+                        .pretendard(.small)
                         .foregroundStyle(.gray3)
                         .frame(maxWidth: .infinity)
-
-                        .padding(.vertical, 10)
                         .background(.black.opacity(0.001))
                         .onTapGesture {
                             self.showRatingAlert = true
                         }
-                        .padding(.bottom, 30)
-
+                    
+                    Spacer()
+                        
                     
                     Text("혹시 만들려고 했던 사진과 전혀 다른 사진이 나왔나요?")
                         .pretendard(.small)
                         .foregroundStyle(.error)
                         .underline()
-                        .padding(.bottom, 30)
                         .onTapGesture {
                             self.showReportAlert = true
                         }
+                    Spacer()
                 }
                 
                 if isLoading {
@@ -133,7 +83,9 @@ struct PhotoCompleteView: View {
                 }
                 
             } //:ZSTACK
+            
         }
+        .ignoresSafeArea()
         .ignoresSafeArea(.keyboard)
         .fullScreenCover(isPresented: $showPhotoDetail) {
             PhotoDetailView(imageName: self.imageName)

@@ -16,7 +16,7 @@ struct GenerateRequestCompleteView: View {
             Color.backgroundWhite
                 .ignoresSafeArea()
             
-            LinearGradient(gradient: Gradient(colors: [Color.purple0, Color.gentiPurple.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color.gradientPurple1, Color.gentiPurple.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             // Content
