@@ -46,8 +46,8 @@ final class PHAssetImageViewModel: ViewModel {
     /// PHAsset으로부터 UIImage를 반환받아 state의 image에 할당해줍니다
     /// - Parameter photoInfo: PHAsset과 Size가 담겨있는 custom Struct 
     func load(from photoInfo: PHAssetImageViewModel.PhotoInfo) {
-        Task {
-            if let image = await phassetImageUseCase.getImage(from: photoInfo) {
+        phassetImageUseCase.getImage(from: photoInfo) { image, _ in
+            DispatchQueue.main.async {
                 self.state.image = image
             }
         }

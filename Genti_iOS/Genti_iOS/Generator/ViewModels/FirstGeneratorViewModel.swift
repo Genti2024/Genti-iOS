@@ -8,14 +8,6 @@
 import SwiftUI
 import Combine
 
-protocol ViewModel: ObservableObject {
-    associatedtype State
-    associatedtype Input
-
-    var state: State { get }
-    func sendAction(_ input: Input)
-}
-
 @Observable 
 final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     

@@ -10,6 +10,6 @@ import Photos
 
 protocol PHAssetImageService {
     var imageManager: PHCachingImageManager { get }
-    func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo) async -> UIImage?
+    func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo, completionHandler: @escaping (UIImage?, [AnyHashable : Any]?) -> Void)
     func cancelLoad()
 }

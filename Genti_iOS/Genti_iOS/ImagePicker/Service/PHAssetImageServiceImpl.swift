@@ -19,14 +19,8 @@ final class PHAssetImageServiceImpl: PHAssetImageService {
         return options
     }()
     
-    func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo) async -> UIImage? {
-        return await withCheckedContinuation { continuation in
-            imageManager.requestImage(for: photoInfo.asset, targetSize: photoInfo.size, contentMode: .aspectFill, options: requestOptions) { image, _ in
-                DispatchQueue.main.async {
-                    continuation.resume(returning: image)
-                }
-            }
-        }
+    func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo, completionHandler: @escaping (UIImage?, [AnyHashable : Any]?) -> Void) {
+        imageManager.requestImage(for: photoInfo.asset, targetSize: photoInfo.size, contentMode: .aspectFill, options: requestOptions, resultHandler: completionHandler)
     }
     
     func cancelLoad() {

@@ -15,8 +15,8 @@ final class PHAssetImageUseCaseImpl: PHAssetImageUseCase {
         self.service = service
     }
     
-    func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo) async -> UIImage? {
-        return await service.getImage(from: photoInfo)
+    func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo, completionHandler: @escaping (UIImage?, [AnyHashable : Any]?) -> Void) {
+        service.getImage(from: photoInfo, completionHandler: completionHandler)
     }
     
     func cancelLoad() {

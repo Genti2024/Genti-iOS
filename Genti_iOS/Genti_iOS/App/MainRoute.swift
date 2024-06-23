@@ -36,7 +36,7 @@ enum MainRoute: Route {
         case .secondGen(let data):
             SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data, router: router))
         case .thirdGen(let data):
-            ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(requestImageData: data, router: router))
+            ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(imageGenerateUseCase: ImageGenerateUseCaseImpl(generateRepository: ImageGenerateRepositoryImpl(requsetService: RequestServiceImpl(), imageDataTransferService: ImageDataTransferServiceImpl(), uploadService: UploadServiceImpl())), requestImageData: data, router: router))
         case .imagePicker(limitCount: let limitCount, viewModel: let viewModel):
             PopupImagePickerView(viewModel: ImagePickerViewModel(generatorViewModel: viewModel, router: router, limit: limitCount, albumUseCase: AlbumUseCaseImpl(albumRepository: AlbumRepositoryImpl(albumService: AlbumServiceImpl()))))
         case .requestCompleted:
