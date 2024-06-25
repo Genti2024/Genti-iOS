@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HorizontalImageContentView: View {
+    @Bindable var viewModel: PhotoCompleteViewViewModel
+    
     var body: some View {
         ZStack(alignment: .top) {
             Rectangle()
@@ -66,6 +68,7 @@ struct HorizontalImageContentView: View {
                         )
                         .onTapGesture {
                             print(#fileID, #function, #line, "- imagetap")
+                            self.viewModel.sendAction(.imageTap)
                         }
                     
                     Spacer()
@@ -79,6 +82,6 @@ struct HorizontalImageContentView: View {
     }
 }
 
-#Preview {
-    HorizontalImageContentView()
-}
+//#Preview {
+//    HorizontalImageContentView()
+//}

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct RatingAlertView: View {
-    @State private var rating: Int = 0
-    @State private var isLoading: Bool = false
-    @Environment(\.dismiss) private var dismiss
+    @Bindable var viewModel: PhotoCompleteViewViewModel
     
     var body: some View {
         ZStack {
+            
+            Color.black.opacity(0.4)
+                .ignoresSafeArea()
+            
             Image("Rating_backgroundImage")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -25,14 +27,6 @@ struct RatingAlertView: View {
                         cancelButton()
                     }
                 }
-            
-            if isLoading {
-                LoadingView()
-            }
-        }
-        .presentationBackground {
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
         }
     }
     
@@ -51,44 +45,38 @@ struct RatingAlertView: View {
             .frame(maxWidth: .infinity)
             .background(.black.opacity(0.001))
             .onTapGesture {
-                self.dismiss()
+                self.viewModel.sendAction(.ratingViewSkipButtonTap)
             }
             .padding(.top, 12)
     }
     private func acceptButton() -> some View {
         Text("제출하기")
             .pretendard(.headline4)
-            .foregroundStyle(rating == 0 ? .gray2 : .white)
+            .foregroundStyle(viewModel.state.rating == 0 ? .gray2 : .white)
             .frame(width: 221, height: 34)
-            .background(rating == 0 ? .clear : .gentiGreen)
+            .background(viewModel.state.rating == 0 ? .clear : .gentiGreen)
             .clipShape(.rect(cornerRadius: 6))
             .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .strokeBorder(Color.gray2, lineWidth: rating == 0 ? 1 : 0)
+                RoundedRectangle(cornerRadius: 6)
+                    .strokeBorder(Color.gray2, lineWidth: viewModel.state.rating == 0 ? 1 : 0)
             )
             
             .background(.black.opacity(0.001))
             .asButton(.press, action: {
-                Task {
-                    self.isLoading = true
-                    try await Task.sleep(nanoseconds: 2000000000)
-                    self.isLoading = false
-                    print("별점 : \(self.rating)점")
-                    self.dismiss()
-                }
+                self.viewModel.sendAction(.ratingViewSubmitButtonTap)
             })
-            .disabled(rating == 0)
+            .disabled(viewModel.state.rating == 0)
             .padding(.top, 19)
     }
     private func ratingStarView() -> some View {
         HStack(spacing: 0) {
             ForEach(1..<6) { index in
-                Image(index > rating ? "Star_empty" : "Star_fill")
+                Image(index > viewModel.state.rating ? "Star_empty" : "Star_fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30, height: 30)
                     .onTapGesture {
-                        rating = index
+                        viewModel.sendAction(.ratingViewStarTap(rating: index))
                     }
             }
         }
@@ -111,6 +99,6 @@ struct RatingAlertView: View {
     }
 }
 
-#Preview {
-    RatingAlertView()
-}
+//#Preview {
+//    RatingAlertView()
+//}

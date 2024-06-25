@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct VerticalImageContentView: View {
+    
+    @Bindable var viewModel: PhotoCompleteViewViewModel
+    
     var body: some View {
         ZStack(alignment: .top) {
             Rectangle()
@@ -70,6 +73,7 @@ struct VerticalImageContentView: View {
                         )
                         .onTapGesture {
                             print(#fileID, #function, #line, "- imagetap")
+                            self.viewModel.sendAction(.imageTap)
                         }
                     
                     Spacer()
@@ -83,6 +87,6 @@ struct VerticalImageContentView: View {
     }
 }
 
-#Preview {
-    VerticalImageContentView()
-}
+//#Preview {
+//    VerticalImageContentView()
+//}
