@@ -1,5 +1,5 @@
 //
-//  PhotoDetailView.swift
+//  ExpandPhotoView.swift
 //  Genti
 //
 //  Created by uiskim on 5/31/24.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct PhotoDetailView: View {
-    @Environment(\.dismiss) private var dismiss
+struct ExpandPhotoView: View {
+    @Bindable var router: Router<MainRoute>
     var imageName: String = "SampleImage23"
     
     var body: some View {
@@ -31,20 +31,20 @@ struct PhotoDetailView: View {
                     .padding(.trailing, 10)
                     .padding(.top, 10)
                     .onTapGesture {
-                        self.dismiss()
+                        self.router.dismissSheet()
                     }
             }
             .padding(.horizontal, 28)
             .presentationBackground {
                 BlurView(style: .systemUltraThinMaterialDark)
                     .onTapGesture {
-                        self.dismiss()
+                        self.router.dismissSheet()
                     }
             }
     }
 
 }
 
-#Preview {
-    PhotoDetailView()
-}
+//#Preview {
+//    PhotoDetailView()
+//}

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PostDetailView: View {
+struct ExpandPhotoWithShareView: View {
     @Bindable var router: Router<MainRoute>
 
     let imageUrl: String
@@ -73,5 +73,5 @@ struct PostDetailView: View {
 }
 
 #Preview {
-    PostDetailView(router: .init(), imageUrl: "SampleImage23")
+    ExpandPhotoWithShareView(router: .init(), imageUrl: "SampleImage23")
 }

@@ -19,6 +19,8 @@ enum MainRoute: Route {
     case requestCompleted
     case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
+    case photoMakeCompleteView
+    case photoExpandView
     
     @ViewBuilder
     func view(from router: Router<MainRoute>) -> some View {
@@ -30,7 +32,7 @@ enum MainRoute: Route {
         case .setting:
             SettingView(router: router)
         case .expandImage(let url):
-            PostDetailView(router: router, imageUrl: url)
+            ExpandPhotoWithShareView(router: router, imageUrl: url)
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
@@ -43,6 +45,10 @@ enum MainRoute: Route {
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):
             GentiWebView(router: router, urlString: url)
+        case .photoMakeCompleteView:
+            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
+        case .photoExpandView:
+            ExpandPhotoView(router: router)
         }
     }
         
@@ -50,7 +56,7 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView:
             return .push
-        case .expandImage, .firstGen, .imagePicker:
+        case .expandImage, .firstGen, .imagePicker, .photoMakeCompleteView, .photoExpandView:
             return .fullScreenCover
         }
     }

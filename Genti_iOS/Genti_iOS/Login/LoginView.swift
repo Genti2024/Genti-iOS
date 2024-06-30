@@ -53,6 +53,9 @@ struct LoginView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: 44)
+            .asButton {
+                self.router.routeTo(.photoMakeCompleteView)
+            }
     }
     private func backgroundView() -> some View {
         Image("Login_Asset")
