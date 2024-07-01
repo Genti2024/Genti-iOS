@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainFeedView: View {
-    @State private var logoHidden: Bool = false
+    
+    @State var viewModel: MainFeedViewModel
     
     var body: some View {
         ZStack {
@@ -23,32 +24,30 @@ struct MainFeedView: View {
                         scrollHederView()
                         feedsView()
                     }
+                    .refreshable {
+                        print(#fileID, #function, #line, "- refresh main feed")
+                    }
                 }
                 
-                if !self.logoHidden {
+                if !viewModel.state.isLogoHidden {
                     logoView()
                 }
             } //:ZSTACK
         } //:ZSTACK
+        .onFirstAppear {
+            self.viewModel.sendAction(.viewWillAppear)
+        }
     }
     
     private func feedsView() -> some View {
-        VStack(spacing: 0) {
-            FeedComponent()
-            FeedComponent(description: Constants.text(length: 100))
-            FeedComponent(description: Constants.text(length: 50))
-            FeedComponent(description: Constants.text(length: 100))
-            FeedComponent(mainImage: "SampleImage23", description: Constants.text(length: 50))
-            FeedComponent()
-            FeedComponent(description: Constants.text(length: 100))
-            FeedComponent(description: Constants.text(length: 50))
-            FeedComponent(description: Constants.text(length: 100))
-            FeedComponent(mainImage: "SampleImage23", description: Constants.text(length: 50))
-            
-        } //:VSTACK
+        LazyVStack(spacing: 0) {
+            ForEach(viewModel.state.feeds, id: \.id) { feed in
+                FeedComponent(mainImage: feed.mainImage, description: feed.description, ratio: feed.ratio)
+            }
+        }
         .readingFrame { frame in
             withAnimation {
-                self.logoHidden = frame.origin.y < 165 ? true : false
+                viewModel.sendAction(.scroll(offset: frame.origin.y))
             }
         }
     }
@@ -94,7 +93,7 @@ struct MainFeedView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 }
-
-#Preview {
-    MainFeedView()
-}
+//
+//#Preview {
+//    MainFeedView()
+//}
