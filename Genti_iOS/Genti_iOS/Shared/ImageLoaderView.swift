@@ -11,12 +11,15 @@ import SDWebImageSwiftUI
 
 struct ImageLoaderView: View {
     
-    var urlString: String = Constants.randomImage
-    var resizingMode: ContentMode = .fill
+    var urlString: String
+    var resizingMode: ContentMode = .fit
+    var ratio: PhotoRatio
+    var width: CGFloat
     
     var body: some View {
         Rectangle()
-            .opacity(0.001)
+            .frame(width: width)
+            .frame(height: width*ratio.ratio)
             .overlay {
                 WebImage(url: URL(string: urlString))
                     .resizable()
@@ -26,11 +29,4 @@ struct ImageLoaderView: View {
             }
             .clipped()
     }
-}
-
-#Preview {
-    ImageLoaderView()
-        .clipShape(.rect(cornerRadius: 30))
-        .padding(40)
-        .padding(.vertical, 60)
 }

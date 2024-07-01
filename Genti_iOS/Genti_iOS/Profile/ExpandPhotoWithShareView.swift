@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SDWebImageSwiftUI
+
 struct ExpandPhotoWithShareView: View {
     @Bindable var router: Router<MainRoute>
 
@@ -19,7 +21,7 @@ struct ExpandPhotoWithShareView: View {
                 .frame(width: UIScreen.main.bounds.width - 60)
                 .frame(height: (UIScreen.main.bounds.width - 60)*1.5)
                 .overlay(alignment: .center) {
-                    Image(imageUrl)
+                    WebImage(url: URL(string: imageUrl))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .overlay(alignment: .trailing) {

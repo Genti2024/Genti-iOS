@@ -14,6 +14,15 @@ enum PhotoRatio {
         return [.twoThird, .threeSecond]
     }
     
+    var ratio: CGFloat {
+        switch self {
+        case .twoThird:
+            return 3/2
+        case .threeSecond:
+            return 2/3
+        }
+    }
+    
     var image: String {
         switch self {
         case .twoThird:
