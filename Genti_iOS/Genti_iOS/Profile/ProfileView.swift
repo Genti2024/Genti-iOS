@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Bindable var router: Router<MainRoute>
-    @State private var myImages: [Post] = []
-    @State private var isMaking: Bool = true
+ 
+    @State var viewModel: ProfileViewModel
     
     var body: some View {
         ZStack {
@@ -32,14 +31,14 @@ struct ProfileView: View {
                     Spacer()
                     Image("Setting")
                         .onTapGesture {
-                            router.routeTo(.setting)
+                            viewModel.sendAction(.gearButtonTap)
                         }
                 }
                 .padding(.horizontal, 27)
                 .padding(.vertical, 46)
                 
                 
-                if isMaking {
+                if viewModel.state.hasInProgressImage {
                     BlurView(style: .light)
                         .clipShape(.rect(cornerRadius: 18))
                         .frame(height: 75)
@@ -64,22 +63,36 @@ struct ProfileView: View {
                                 .foregroundStyle(.black)
                         }
                     
-                    StraggeredGrid(list: myImages, spacing: 1) { object in
-                        PostCardView(post: object)
+                    
+                    StraggeredGrid(list: viewModel.state.myImages, spacing: 1) { object in
+                        ImageLoaderView(urlString: object.imageURL, ratio: object.ratio, width: (Constants.screenWidth-1)/2)
                             .onTapGesture {
-                                router.routeTo(.expandImage(imageUrl: object.imageURL))
+                                viewModel.sendAction(.imageTap(object.imageURL))
+                            }
+                            .onAppear {
+                                guard let index = viewModel.state.myImages.firstIndex(where: { $0.id == object.id }) else { return }
+                                
+                                if index == viewModel.state.myImages.count - 1 {
+                                    viewModel.sendAction(.reachBottom)
+                                }
                             }
                     }
                 }
             }
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)
-        .onAppear {
-            myImages = Post.dummies
+        .onFirstAppear {
+            viewModel.sendAction(.viewWillAppear)
+        }
+        .refreshable {
+            print(#fileID, #function, #line, "- refresh profile")
         }
     }
 }
 
-#Preview {
-    ProfileView(router: .init())
-}
+//#Preview {
+//    ProfileView(router: .init())
+//}
+
+
+
