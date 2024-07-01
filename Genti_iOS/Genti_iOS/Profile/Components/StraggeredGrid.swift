@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct StraggeredGrid<Content: View, T: Identifiable>: View {
-    
     var content: (T) -> Content
     var list: [T]
     var columns: Int = 2
@@ -34,7 +33,7 @@ struct StraggeredGrid<Content: View, T: Identifiable>: View {
         
         return gridArray
     }
-    
+
     init(list: [T], spacing: CGFloat, @ViewBuilder content: @escaping (T) -> Content) {
         self.content = content
         self.list = list
@@ -43,11 +42,13 @@ struct StraggeredGrid<Content: View, T: Identifiable>: View {
     
     var body: some View {
         ScrollView(.vertical) {
-            HStack(alignment: .top, spacing: spacing) {
-                ForEach(setUpList()) { columnData in
-                    LazyVStack(spacing: spacing) {
-                        ForEach(columnData.items) { object in
-                            content(object)
+            VStack(spacing: 0) {
+                HStack(alignment: .top, spacing: spacing) {
+                    ForEach(setUpList()) { columnData in
+                        LazyVStack(spacing: spacing) {
+                            ForEach(columnData.items) { object in
+                                content(object)
+                            }
                         }
                     }
                 }
@@ -56,5 +57,3 @@ struct StraggeredGrid<Content: View, T: Identifiable>: View {
         }
     }
 }
-
-

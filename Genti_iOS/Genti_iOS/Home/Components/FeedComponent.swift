@@ -9,8 +9,9 @@ import SwiftUI
 
 struct FeedComponent: View {
     
-    var mainImage: String = "SampleImage32"
-    var description: String = Constants.text(length: 200)
+    var mainImage: String
+    var description: String
+    var ratio: PhotoRatio
     
     var body: some View {
         VStack {
@@ -29,9 +30,7 @@ struct FeedComponent: View {
     }
     
     private func mainImageView() -> some View {
-        Image(mainImage)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
+        ImageLoaderView(urlString: mainImage, ratio: ratio, width: Constants.screenWidth - 32)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
@@ -62,21 +61,5 @@ struct FeedComponent: View {
             )
             .padding(.horizontal, 10)
             .padding(.bottom, 10)
-    }
-}
-
-struct HomeFeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedComponent()
-    }
-}
-
-#Preview {
-    ScrollView {
-        FeedComponent(description: Constants.text(length: 200))
-        FeedComponent(description: Constants.text(length: 200))
-        FeedComponent(mainImage: "SampleImage32", description: Constants.text(length: 200))
-        FeedComponent(description: Constants.text(length: 200))
-        FeedComponent(description: Constants.text(length: 100))
     }
 }
