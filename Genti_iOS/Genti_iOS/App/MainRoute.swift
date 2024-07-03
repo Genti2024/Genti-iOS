@@ -21,6 +21,7 @@ enum MainRoute: Route {
     case webView(url: String)
     case photoMakeCompleteView
     case photoExpandView
+    case completeMakeImage
     
     @ViewBuilder
     func view(from router: Router<MainRoute>) -> some View {
@@ -49,6 +50,8 @@ enum MainRoute: Route {
             RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
         case .photoExpandView:
             ExpandPhotoView(router: router)
+        case .completeMakeImage:
+            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
         }
     }
         
@@ -56,7 +59,7 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView:
             return .push
-        case .expandImage, .firstGen, .imagePicker, .photoMakeCompleteView, .photoExpandView:
+        case .expandImage, .firstGen, .imagePicker, .photoMakeCompleteView, .photoExpandView, .completeMakeImage:
             return .fullScreenCover
         }
     }

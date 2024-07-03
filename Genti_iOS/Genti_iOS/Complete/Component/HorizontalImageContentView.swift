@@ -1,5 +1,5 @@
 //
-//  horizontalImageContentView.swift
+//  HorizontalImageContentView.swift
 //  Genti_iOS
 //
 //  Created by uiskim on 6/24/24.
@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HorizontalImageContentView: View {
+    
     @Bindable var viewModel: PhotoCompleteViewViewModel
     
     var body: some View {
@@ -18,7 +19,7 @@ struct HorizontalImageContentView: View {
                 .shadow(color: .black.opacity(0.13), radius: 15, y: 4)
                 .overlay(alignment: .top) {
                     LinearGradient(colors: [.gradientPurple2, .gentiPurple.opacity(0)], startPoint: .top, endPoint: .bottom)
-                        .frame(height: 171)
+                        .frame(height: 316)
                 }
             // Content
             VStack(spacing: 0) {
@@ -28,6 +29,11 @@ struct HorizontalImageContentView: View {
                         .frame(height: 44)
                         .padding(.top, 80)
                 
+                    Image("Charactor")
+                        .resizable( )
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 162)
+                        .padding(.top, 12)
                     
                     VStack {
                         HStack(spacing: 0) {
@@ -42,21 +48,20 @@ struct HorizontalImageContentView: View {
                     }
                     .frame(height: 57)
                     .foregroundStyle(.black)
-                    .padding(.top, 29)
                     
                     Spacer()
                         .frame(height: 16)
                     
-                    Image("SampleImage23")
+                    Image("testImage")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 360)
+                        .frame(height: 212)
                         .overlay(alignment: .bottomTrailing) {
                             Image("Download")
                                 .resizable()
                                 .frame(width: 44, height: 44)
-                                .padding(.bottom, 12)
-                                .padding(.trailing, 22)
+                                .padding(.bottom, 6)
+                                .padding(.trailing, 18)
                                 .onTapGesture {
                                     print(#fileID, #function, #line, "- downloadtap")
                                 }
@@ -82,6 +87,6 @@ struct HorizontalImageContentView: View {
     }
 }
 
-//#Preview {
-//    HorizontalImageContentView()
-//}
+#Preview {
+    HorizontalImageContentView(viewModel: PhotoCompleteViewViewModel(router: .init()))
+}

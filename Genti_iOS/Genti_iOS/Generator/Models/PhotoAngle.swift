@@ -40,6 +40,19 @@ enum PhotoAngle {
         }
     }
     
+    var description: String {
+        switch self {
+        case .high:
+            return "위에서 촬영"
+        case .middle:
+            return "눈높이에서 촬영"
+        case .low:
+            return "아래에서 촬영"
+        case .any:
+            return ""
+        }
+    }
+    
     static var freeSelectedImage: String {
         return "Check_fill"
     }

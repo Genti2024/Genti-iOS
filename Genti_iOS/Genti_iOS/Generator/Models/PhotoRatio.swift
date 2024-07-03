@@ -11,7 +11,7 @@ enum PhotoRatio {
     case twoThird, threeSecond
     
     static var selections: [PhotoRatio] {
-        return [.twoThird, .threeSecond]
+        return [.threeSecond, .twoThird]
     }
     
     var ratio: CGFloat {
@@ -40,6 +40,16 @@ enum PhotoRatio {
             return "RATIO_3_2"
         }
     }
+    
+    var description: String {
+        switch self {
+        case .twoThird:
+            "2:3 비율\n(가로로 긴 사진)"
+        case .threeSecond:
+            "3:2 비율\n(세로로 긴 사진)"
+        }
+    }
+    
     
     static var freeSelectedImage: String {
         return "Check_fill"

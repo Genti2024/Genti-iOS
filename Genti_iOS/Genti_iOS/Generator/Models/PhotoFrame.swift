@@ -8,20 +8,20 @@
 import Foundation
 
 enum PhotoFrame {
-    case face, fullBody, kneeUp, any
+    case bustShot, kneeShot, fullShot, any
     
     static var selections: [PhotoFrame] {
-        return [.face, .fullBody, .kneeUp]
+        return [.bustShot, .kneeShot, .fullShot]
     }
     
     var image: String {
         switch self {
-        case .face:
-            return "Frame_closeup"
-        case .fullBody:
-            return "Frame_bust"
-        case .kneeUp:
-            return "Frame_knee"
+        case .bustShot:
+            return "BustShotImage"
+        case .kneeShot:
+            return "KneeShotImage"
+        case .fullShot:
+            return "FullShotImage"
         case .any:
             return "Check_empty"
         }
@@ -29,14 +29,27 @@ enum PhotoFrame {
     
     var requsetString: String {
         switch self {
-        case .face:
-            return "FACE"
-        case .fullBody:
+        case .bustShot:
+            return "UPPER_BODY"
+        case .fullShot:
             return "FULL_BODY"
-        case .kneeUp:
-            return "KNEE_UP"
+        case .kneeShot:
+            return "KNEE_SHOT"
         case .any:
             return "ANY"
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .bustShot:
+            return "바스트샷\n(상반샷)"
+        case .kneeShot:
+            return "니샷\n(무릎 위)"
+        case .fullShot:
+            return "풀샷\n(전신)"
+        case .any:
+            return ""
         }
     }
     

@@ -12,7 +12,7 @@ struct ExpandPhotoView: View {
     var imageName: String = "SampleImage23"
     
     var body: some View {
-        Image(imageName)
+        Image("testImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .overlay(alignment: .bottomTrailing) {

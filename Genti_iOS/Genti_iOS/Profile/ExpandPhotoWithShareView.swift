@@ -47,7 +47,6 @@ struct ExpandPhotoWithShareView: View {
             
             Button {
                 // Action
-                
             } label: {
                 Text("공유하기")
                     .pretendard(.headline1)

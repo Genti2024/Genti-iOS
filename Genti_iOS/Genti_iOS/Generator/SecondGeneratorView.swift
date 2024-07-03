@@ -63,6 +63,7 @@ struct SecondGeneratorView: View {
                     ForEach(PhotoRatio.selections, id: \.self) { ratio in
                         Image(ratio.image)
                             .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .frame(width: (UIScreen.main.bounds.width-32-16)/3)
                             .frame(height: (UIScreen.main.bounds.width-32-16)/3)
                             .overlay {
@@ -71,8 +72,10 @@ struct SecondGeneratorView: View {
                                         .fill(.black.opacity(0.5))
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
                                         .overlay {
-                                            Text("\(ratio)")
-                                                .foregroundStyle(.white)
+                                            Text(ratio.description)
+                                                .pretendard(.small)
+                                                .foregroundStyle(.gentiGreen)
+                                                .multilineTextAlignment(.center)
                                         }
                                 }
 
@@ -115,7 +118,14 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.state.selectedAngle == angle {
                                     Rectangle()
+                                        .fill(.black.opacity(0.5))
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
+                                        .overlay {
+                                            Text(angle.description)
+                                                .pretendard(.small)
+                                                .foregroundStyle(.gentiGreen)
+                                                .multilineTextAlignment(.center)
+                                        }
                                 }
 
                             }
@@ -156,7 +166,14 @@ struct SecondGeneratorView: View {
                             .overlay {
                                 if viewModel.state.selectedFrame == frame {
                                     Rectangle()
+                                        .fill(.black.opacity(0.5))
                                         .strokeBorder(.green1, style: .init(lineWidth:2))
+                                        .overlay {
+                                            Text(frame.description)
+                                                .pretendard(.small)
+                                                .foregroundStyle(.gentiGreen)
+                                                .multilineTextAlignment(.center)
+                                        }
                                 }
 
                             }

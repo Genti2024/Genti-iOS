@@ -196,9 +196,8 @@ struct PhotoCompleteView: View {
                 
                 // Content
                 VStack(spacing: 0) {
-                    // MARK: - 만약에 가로로 긴사진이오면
                     // HorizontalImageContentView()
-                    // MARK: - 만약에 세로로 긴사진이오면
+//                    HorizontalImageContentView(viewModel: viewModel)
                     VerticalImageContentView(viewModel: viewModel)
                     Spacer()
                     

@@ -98,6 +98,7 @@ struct SettingView: View {
                     .resizable()
                     .frame(width: 29, height: 29)
                     .padding(.leading, 30)
+                    .padding(.top, 16)
                     .onTapGesture {
                         router.dismiss()
 

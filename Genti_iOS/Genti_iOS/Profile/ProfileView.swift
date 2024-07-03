@@ -77,6 +77,25 @@ struct ProfileView: View {
                                 }
                             }
                     }
+                    .background {
+                        if viewModel.state.myImages.isEmpty {
+                            BlurView(style: .light)
+                                .overlay(alignment: .center) {
+                                    VStack(spacing: 37) {
+                                        Image("ExclamationImage")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 43)
+                                        
+                                        Text("아직 내가 만든 사진이 없어요")
+                                            .pretendard(.headline1)
+                                            .foregroundStyle(.gray3)
+                                    }
+
+                                }
+                        }
+
+                    }
                 }
             }
         } //:ZSTACK

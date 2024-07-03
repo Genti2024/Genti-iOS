@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct VerticalImageContentView: View {
-    
     @Bindable var viewModel: PhotoCompleteViewViewModel
     
     var body: some View {
@@ -19,7 +18,7 @@ struct VerticalImageContentView: View {
                 .shadow(color: .black.opacity(0.13), radius: 15, y: 4)
                 .overlay(alignment: .top) {
                     LinearGradient(colors: [.gradientPurple2, .gentiPurple.opacity(0)], startPoint: .top, endPoint: .bottom)
-                        .frame(height: 316)
+                        .frame(height: 171)
                 }
             // Content
             VStack(spacing: 0) {
@@ -29,11 +28,6 @@ struct VerticalImageContentView: View {
                         .frame(height: 44)
                         .padding(.top, 80)
                 
-                    Image("Charactor")
-                        .resizable( )
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 162)
-                        .padding(.top, 12)
                     
                     VStack {
                         HStack(spacing: 0) {
@@ -48,20 +42,21 @@ struct VerticalImageContentView: View {
                     }
                     .frame(height: 57)
                     .foregroundStyle(.black)
+                    .padding(.top, 29)
                     
                     Spacer()
                         .frame(height: 16)
                     
-                    Image("SampleImage32")
+                    Image("testImage")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 212)
+                        .frame(height: 360)
                         .overlay(alignment: .bottomTrailing) {
                             Image("Download")
                                 .resizable()
                                 .frame(width: 44, height: 44)
-                                .padding(.bottom, 6)
-                                .padding(.trailing, 18)
+                                .padding(.bottom, 12)
+                                .padding(.trailing, 22)
                                 .onTapGesture {
                                     print(#fileID, #function, #line, "- downloadtap")
                                 }
@@ -87,6 +82,6 @@ struct VerticalImageContentView: View {
     }
 }
 
-//#Preview {
-//    VerticalImageContentView()
-//}
+#Preview {
+    VerticalImageContentView(viewModel: PhotoCompleteViewViewModel(router: .init()))
+}
