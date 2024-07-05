@@ -1,13 +1,13 @@
 //
-//  ExpandPhotoView.swift
-//  Genti
+//  PhotoDetailView.swift
+//  Genti_iOS
 //
-//  Created by uiskim on 5/31/24.
+//  Created by uiskim on 7/5/24.
 //
 
 import SwiftUI
 
-struct ExpandPhotoView: View {
+struct PhotoDetailView: View {
     @Bindable var router: Router<MainRoute>
     var imageName: String = "SampleImage23"
     
@@ -42,7 +42,6 @@ struct ExpandPhotoView: View {
                     }
             }
     }
-
 }
 
 //#Preview {

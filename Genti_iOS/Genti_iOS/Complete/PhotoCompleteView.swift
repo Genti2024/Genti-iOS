@@ -155,7 +155,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
     }
 
     private func navigateToPhotoExpandView() {
-        router.routeTo(.photoExpandView)
+        router.routeTo(.photoDetail)
     }
 
     private func dismissRatingView() {

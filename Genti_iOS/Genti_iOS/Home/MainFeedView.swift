@@ -27,10 +27,10 @@ struct MainFeedView: View {
                     .refreshable {
                         print(#fileID, #function, #line, "- refresh main feed")
                     }
-                }
+                }.zIndex(0)
                 
                 if !viewModel.state.isLogoHidden {
-                    logoView()
+                    logoView().zIndex(1)
                 }
             } //:ZSTACK
         } //:ZSTACK
