@@ -55,7 +55,6 @@ final class PhotoDetailViewModel: ViewModel {
             router.dismissSheet()
         }
     }
-    
     var getImage: Image {
         if let image = self.state.image {
             return Image(uiImage: image)
@@ -63,17 +62,10 @@ final class PhotoDetailViewModel: ViewModel {
         return Image(uiImage: UIImage())
     }
     
-    var getUIImage: UIImage {
-        if let image = self.state.image {
-            return image
-        }
-        return UIImage()
-    }
-    
     var disabled: Bool {
         if let _ = self.state.image {
-            return true
+            return false
         }
-        return false
+        return true
     }
 }

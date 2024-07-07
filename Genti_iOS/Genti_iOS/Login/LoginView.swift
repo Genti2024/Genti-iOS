@@ -54,7 +54,7 @@ struct LoginView: View {
             .aspectRatio(contentMode: .fit)
             .frame(height: 44)
             .asButton {
-                self.router.routeTo(.photoMakeCompleteView)
+                self.router.routeTo(.completeMakeImage)
             }
     }
     private func backgroundView() -> some View {

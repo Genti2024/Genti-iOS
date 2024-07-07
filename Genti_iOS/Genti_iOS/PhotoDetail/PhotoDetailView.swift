@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct PhotoDetailView: View {
-    @Bindable var router: Router<MainRoute>
-    var imageName: String = "SampleImage23"
+
+    let viewModel: PhotoDetailViewModel
+    
+    init(viewModel: PhotoDetailViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
-        Image("testImage")
+        viewModel.getImage
             .resizable()
             .aspectRatio(contentMode: .fit)
             .overlay(alignment: .bottomTrailing) {
@@ -22,6 +26,9 @@ struct PhotoDetailView: View {
                     .frame(width: 44, height: 44)
                     .padding(.trailing, 10)
                     .padding(.bottom, 10)
+                    .asButton {
+                        self.viewModel.sendAction(.downloadButtonTap)
+                    }
             }
             .overlay(alignment: .topTrailing) {
                 Image("Xmark_empty")
@@ -31,15 +38,18 @@ struct PhotoDetailView: View {
                     .padding(.trailing, 10)
                     .padding(.top, 10)
                     .onTapGesture {
-                        self.router.dismissSheet()
+                        self.viewModel.sendAction(.xmarkTap)
                     }
             }
             .padding(.horizontal, 28)
             .presentationBackground {
                 BlurView(style: .systemUltraThinMaterialDark)
                     .onTapGesture {
-                        self.router.dismissSheet()
+                        print(#fileID, #function, #line, "- 배경터치했습니다")
                     }
+            }
+            .onAppear {
+                self.viewModel.sendAction(.viewWillAppear)
             }
     }
 }

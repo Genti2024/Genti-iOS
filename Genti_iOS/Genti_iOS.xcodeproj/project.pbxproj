@@ -14,6 +14,10 @@
 		C0113D5E2C37C1D700071BF6 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D5D2C37C1D700071BF6 /* PhotoDetailViewModel.swift */; };
 		C0113D602C37C20300071BF6 /* PhotoDetailWithShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D5F2C37C20300071BF6 /* PhotoDetailWithShareView.swift */; };
 		C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D612C37C25400071BF6 /* PhotoDetailView.swift */; };
+		C0113D672C3A208F00071BF6 /* CompletePhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D662C3A208F00071BF6 /* CompletePhotoEntity.swift */; };
+		C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D692C3A217600071BF6 /* Alert.swift */; };
+		C0113D6C2C3A219300071BF6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D6B2C3A219300071BF6 /* AlertType.swift */; };
+		C0113D6F2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D6E2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift */; };
 		C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */; };
 		C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */; };
 		C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C3E62C1C39D0009924C9 /* Assets.xcassets */; };
@@ -162,6 +166,10 @@
 		C0113D5D2C37C1D700071BF6 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
 		C0113D5F2C37C20300071BF6 /* PhotoDetailWithShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailWithShareView.swift; sourceTree = "<group>"; };
 		C0113D612C37C25400071BF6 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		C0113D662C3A208F00071BF6 /* CompletePhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePhotoEntity.swift; sourceTree = "<group>"; };
+		C0113D692C3A217600071BF6 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		C0113D6B2C3A219300071BF6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		C0113D6E2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCompleteViewViewModel.swift; sourceTree = "<group>"; };
 		C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -345,6 +353,31 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C0113D632C3A207E00071BF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D662C3A208F00071BF6 /* CompletePhotoEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0113D682C3A215300071BF6 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D692C3A217600071BF6 /* Alert.swift */,
+				C0113D6B2C3A219300071BF6 /* AlertType.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		C0113D6D2C3A21A700071BF6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D6E2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C017C3D12C1C39CE009924C9 = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +481,8 @@
 		C017C4252C1C3AA3009924C9 /* Complete */ = {
 			isa = PBXGroup;
 			children = (
+				C0113D6D2C3A21A700071BF6 /* ViewModel */,
+				C0113D632C3A207E00071BF6 /* Model */,
 				C088F2F02C28D74300F92320 /* Component */,
 				C017C4222C1C3AA3009924C9 /* PhotoCompleteView.swift */,
 				C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */,
@@ -626,6 +661,7 @@
 		C017C4612C1C3AA3009924C9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C0113D682C3A215300071BF6 /* Alert */,
 				C017C45A2C1C3AA3009924C9 /* BlurView.swift */,
 				C017C45B2C1C3AA3009924C9 /* BulletText.swift */,
 				C017C45C2C1C3AA3009924C9 /* Constants.swift */,
@@ -1042,6 +1078,7 @@
 				C017C4A52C1C3AA3009924C9 /* ImageLoaderView.swift in Sources */,
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
 				C088F2F42C28D77200F92320 /* HorizontalImageContentView.swift in Sources */,
+				C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */,
 				C028436A2C32BB4600B84566 /* MainFeedUseCaseImpl.swift in Sources */,
 				C017C4882C1C3AA3009924C9 /* ThirdGeneratorView.swift in Sources */,
 				C017C4972C1C3AA3009924C9 /* PHAssetImageView.swift in Sources */,
@@ -1059,6 +1096,7 @@
 				C0D74A462C1EA6B500A45371 /* Route.swift in Sources */,
 				C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */,
 				C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */,
+				C0113D6F2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift in Sources */,
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
@@ -1098,6 +1136,7 @@
 				C088F2DA2C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift in Sources */,
 				C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */,
 				C0113D602C37C20300071BF6 /* PhotoDetailWithShareView.swift in Sources */,
+				C0113D6C2C3A219300071BF6 /* AlertType.swift in Sources */,
 				C028436C2C32BB5D00B84566 /* FeedRepository.swift in Sources */,
 				C088F2E42C26F1A200F92320 /* ImageGenerateUseCaseImpl.swift in Sources */,
 				C028437E2C32BF5F00B84566 /* ProfileViewModel.swift in Sources */,
@@ -1119,6 +1158,7 @@
 				C017C4A02C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift in Sources */,
 				C02843742C32BEF100B84566 /* UserRepository.swift in Sources */,
 				C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */,
+				C0113D672C3A208F00071BF6 /* CompletePhotoEntity.swift in Sources */,
 				C017C4A12C1C3AA3009924C9 /* SettingRouter.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,

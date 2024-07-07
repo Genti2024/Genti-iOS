@@ -44,13 +44,13 @@ struct PhotoDetailWithShareView: View {
                         }
                 }
             
-            ShareLink(item: viewModel.getImage, preview: .init("내 사진", image: viewModel.getImage)) {
+            ShareLink(item: Image(uiImage: viewModel.state.image ?? UIImage(systemName: "star")!), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image ?? UIImage(systemName: "star")!))) {
                 Text("공유하기")
                     .pretendard(.headline1)
                     .foregroundStyle(.white)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity)
-                    .background(!viewModel.disabled ? .gray4 : .gentiGreen)
+                    .background(viewModel.state.image == nil ? .gray4 : .gentiGreen)
                     .overlay(alignment: .leading) {
                         Image("Share")
                             .resizable()
@@ -61,7 +61,7 @@ struct PhotoDetailWithShareView: View {
                     .padding(.horizontal, 30)
                 
             }
-            .disabled(!viewModel.disabled)
+            .disabled(viewModel.state.image == nil)
         }
         .onAppear {
             viewModel.sendAction(.viewWillAppear)

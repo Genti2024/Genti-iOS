@@ -19,8 +19,7 @@ enum MainRoute: Route {
     case requestCompleted
     case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
-    case photoMakeCompleteView
-    case photoDetail
+    case photoDetail(url: String)
     case completeMakeImage
     
     @ViewBuilder
@@ -46,12 +45,10 @@ enum MainRoute: Route {
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):
             GentiWebView(router: router, urlString: url)
-        case .photoMakeCompleteView:
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
-        case .photoDetail:
-            PhotoDetailView(router: router)
+        case .photoDetail(let url):
+            PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, imageUrlString: url))
         case .completeMakeImage:
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
+            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl())) }
         }
     }
         
@@ -59,7 +56,7 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView:
             return .push
-        case .photoDetailWithShare, .firstGen, .imagePicker, .photoMakeCompleteView, .photoDetail, .completeMakeImage:
+        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakeImage:
             return .fullScreenCover
         }
     }

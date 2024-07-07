@@ -52,29 +52,29 @@ struct HorizontalImageContentView: View {
                     Spacer()
                         .frame(height: 16)
                     
-                    Image("testImage")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 212)
-                        .overlay(alignment: .bottomTrailing) {
-                            Image("Download")
-                                .resizable()
-                                .frame(width: 44, height: 44)
-                                .padding(.bottom, 6)
-                                .padding(.trailing, 18)
-                                .onTapGesture {
-                                    print(#fileID, #function, #line, "- downloadtap")
-                                }
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .strokeBorder(LinearGradient(colors: [.gentiGreen, .gentiGreen.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 2)
-                        )
-                        .onTapGesture {
-                            print(#fileID, #function, #line, "- imagetap")
-                            self.viewModel.sendAction(.imageTap)
-                        }
+                viewModel.getImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 212)
+                    .overlay(alignment: .bottomTrailing) {
+                        Image("Download")
+                            .resizable()
+                            .frame(width: 44, height: 44)
+                            .padding(.bottom, 6)
+                            .padding(.trailing, 18)
+                            .onTapGesture {
+                                print(#fileID, #function, #line, "- downloadtap")
+                            }
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .strokeBorder(LinearGradient(colors: [.gentiGreen, .gentiGreen.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 2)
+                    )
+                    .onTapGesture {
+                        print(#fileID, #function, #line, "- imagetap")
+                        self.viewModel.sendAction(.imageTap)
+                    }
                     
                     Spacer()
                         .frame(height: 18)
@@ -84,9 +84,12 @@ struct HorizontalImageContentView: View {
                 }
         } //:ZSTACK
         .frame(height: 640)
+        .onAppear {
+            self.viewModel.sendAction(.viewWillAppear)
+        }
     }
 }
 
-#Preview {
-    HorizontalImageContentView(viewModel: PhotoCompleteViewViewModel(router: .init()))
-}
+//#Preview {
+//    HorizontalImageContentView(viewModel: PhotoCompleteViewViewModel(router: .init()))
+//}
