@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Lottie
+
 struct LoadingView: View {
     var body: some View {
         ZStack {
@@ -14,7 +16,8 @@ struct LoadingView: View {
             Color.black.opacity(0.4)
                 .ignoresSafeArea()
             // Content
-            LottieView(lottieFile: "ProgressLottie")
+            LottieView(animation: .named("ProgressLottie"))
+                .looping()
                 .frame(width: 100, height: 100)
         } //:ZSTACK
     }
