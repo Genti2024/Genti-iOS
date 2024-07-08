@@ -21,7 +21,7 @@
 		C0113D812C3BEAA400071BF6 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7A2C3BEA9D00071BF6 /* CustomAlertModifier.swift */; };
 		C0113D822C3BEAA400071BF6 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7B2C3BEAA400071BF6 /* OnFirstAppearModifier.swift */; };
 		C0113D832C3BEAA400071BF6 /* LimitLengthModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7C2C3BEAA400071BF6 /* LimitLengthModifier.swift */; };
-		C0113D842C3BEAA400071BF6 /* CornerRadiusWithGradientModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithGradientModifier.swift */; };
+		C0113D842C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift */; };
 		C0113D852C3BEAA400071BF6 /* ShareStyleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7E2C3BEAA400071BF6 /* ShareStyleModifier.swift */; };
 		C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7F2C3BEAA400071BF6 /* AddXmarkModifier.swift */; };
 		C0113D872C3BEAA400071BF6 /* AddDownloadButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D802C3BEAA400071BF6 /* AddDownloadButtonModifier.swift */; };
@@ -176,7 +176,7 @@
 		C0113D7A2C3BEA9D00071BF6 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
 		C0113D7B2C3BEAA400071BF6 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
 		C0113D7C2C3BEAA400071BF6 /* LimitLengthModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitLengthModifier.swift; sourceTree = "<group>"; };
-		C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithGradientModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRadiusWithGradientModifier.swift; sourceTree = "<group>"; };
+		C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRadiusWithBorderModifier.swift; sourceTree = "<group>"; };
 		C0113D7E2C3BEAA400071BF6 /* ShareStyleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareStyleModifier.swift; sourceTree = "<group>"; };
 		C0113D7F2C3BEAA400071BF6 /* AddXmarkModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddXmarkModifier.swift; sourceTree = "<group>"; };
 		C0113D802C3BEAA400071BF6 /* AddDownloadButtonModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDownloadButtonModifier.swift; sourceTree = "<group>"; };
@@ -746,7 +746,7 @@
 			children = (
 				C0113D802C3BEAA400071BF6 /* AddDownloadButtonModifier.swift */,
 				C0113D7F2C3BEAA400071BF6 /* AddXmarkModifier.swift */,
-				C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithGradientModifier.swift */,
+				C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift */,
 				C0113D7A2C3BEA9D00071BF6 /* CustomAlertModifier.swift */,
 				C0113D7C2C3BEAA400071BF6 /* LimitLengthModifier.swift */,
 				C0113D7B2C3BEAA400071BF6 /* OnFirstAppearModifier.swift */,
@@ -1131,7 +1131,7 @@
 				C017C49B2C1C3AA3009924C9 /* APIResponse.swift in Sources */,
 				C088F2D82C26569700F92320 /* PHAssetImageServiceImpl.swift in Sources */,
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
-				C0113D842C3BEAA400071BF6 /* CornerRadiusWithGradientModifier.swift in Sources */,
+				C0113D842C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift in Sources */,
 				C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
 				C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */,
