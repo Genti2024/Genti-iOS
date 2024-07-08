@@ -14,10 +14,6 @@ struct PopupImagePickerView: View {
 
     @State var viewModel: ImagePickerViewModel
     
-    init(viewModel: ImagePickerViewModel) {
-        self.viewModel = viewModel
-    }
-    
     var body: some View {
         ZStack {
             // Background Color
@@ -50,29 +46,27 @@ struct PopupImagePickerView: View {
         } onScrollChanged: { origin in
             viewModel.sendAction(.scroll(origin.y))
         }
-        .onReadSize({ size in
+        .onReadSize { size in
             self.viewModel.scrollViewHeight = size.height
-        })
+        }
     }
     func selectButton() -> some View {
-        Button {
-            // Action
-            viewModel.sendAction(.addImageButtonTap)
-        } label: {
-            Text("\(viewModel.state.selectedImages.count) / \(viewModel.limit) 장의 사진 추가하기")
-                .pretendard(.headline4)
-                .foregroundStyle(.white)
-                .padding(.horizontal, 25)
-                .padding(.vertical, 12)
-                .background(
-                    Capsule()
-                        .fill(viewModel.state.isReachLimit ? .green1 : .gray3)
-                )
-        }
-        .disabled(!viewModel.state.isReachLimit)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        .padding(.bottom, .height(ratio: 0.03))
+        Capsule()
+            .fill(viewModel.state.isReachLimit ? .green1 : .gray3)
+            .frame(width: 216, height: 50)
+            .overlay(alignment: .center) {
+                Text("\(viewModel.state.selectedImages.count) / \(viewModel.limit) 장의 사진 추가하기")
+                    .pretendard(.headline4)
+                    .foregroundStyle(.white)
+            }
+            .disabled(!viewModel.state.isReachLimit)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .padding(.bottom, 41)
+            .asButton {
+                viewModel.sendAction(.addImageButtonTap)
+            }
     }
+    
     func headerView() -> some View {
         HStack {
             Text("\(viewModel.limit)장의 이미지를 선택해주세요")
@@ -90,6 +84,7 @@ struct PopupImagePickerView: View {
         .padding([.horizontal, .top])
         .padding(.bottom, 10)
     }
+    
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
                 PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)

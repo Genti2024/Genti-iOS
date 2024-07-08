@@ -16,7 +16,7 @@ struct GenerateRequestCompleteView: View {
             Color.backgroundWhite
                 .ignoresSafeArea()
             
-            LinearGradient(gradient: Gradient(colors: [Color.gradientPurple1, Color.gentiPurple.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
+            LinearGradient.backgroundPurple2
                 .ignoresSafeArea()
             
             // Content
@@ -67,7 +67,7 @@ struct GenerateRequestCompleteView: View {
                         .clipShape(.rect(cornerRadius: 10))
                 }
                 .padding(.horizontal, 31)
-                .padding(.bottom, .height(ratio: 0.03))
+                .padding(.bottom, 30)
                 .buttonStyle(.plain)
             } //:VSTACK
         } //:ZSTACK

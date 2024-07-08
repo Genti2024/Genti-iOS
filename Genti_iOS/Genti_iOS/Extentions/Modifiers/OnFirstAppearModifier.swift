@@ -1,5 +1,5 @@
 //
-//  onFirstAppear.swift
+//  OnFirstAppearModifier.swift
 //  Genti_iOS
 //
 //  Created by uiskim on 7/1/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnFirstAppear: ViewModifier {
+struct OnFirstAppearModifier: ViewModifier {
     let perform: () -> Void
 
     @State private var firstTime = true
@@ -24,6 +24,6 @@ struct OnFirstAppear: ViewModifier {
 
 extension View {
     func onFirstAppear(perform: @escaping () -> Void) -> some View {
-        modifier(OnFirstAppear(perform: perform))
+        modifier(OnFirstAppearModifier(perform: perform))
     }
 }

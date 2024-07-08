@@ -130,14 +130,15 @@ struct ThirdGeneratorView: View {
         }
         .overlay {
             VStack {
-                LinearGradient(colors: [.backgroundWhite, .backgroundWhite.opacity(0)], startPoint: .top, endPoint: .bottom)
+                LinearGradient.backgroundWhite
                     .frame(height: 20)
                 Spacer()
-                LinearGradient(colors: [.backgroundWhite, .backgroundWhite.opacity(0)], startPoint: .bottom, endPoint: .top)
+                LinearGradient.backgroundWhite
                     .frame(height: 20)
+                    .rotationEffect(.degrees(180))
             }
         }
-        .padding(.top, .height(ratio: 0.02))
+        .padding(.top, 20)
         .padding(.bottom, 30)
     }
     

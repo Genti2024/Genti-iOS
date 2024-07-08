@@ -1,5 +1,5 @@
 //
-//  CustomAlert.swift
+//  CustomAlertModifier.swift
 //  Genti_iOS
 //
 //  Created by uiskim on 6/25/24.

@@ -1,5 +1,5 @@
 //
-//  TextEditorLimitLength.swift
+//  LimitLengthModifier.swift
 //  Genti
 //
 //  Created by uiskim on 5/5/24.

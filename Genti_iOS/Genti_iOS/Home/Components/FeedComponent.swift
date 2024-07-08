@@ -20,22 +20,14 @@ struct FeedComponent: View {
             detailedDescriptionView()
         }
         .background(Color.green4)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .strokeBorder(Color.gentiGreen, lineWidth: 1)
-        )
+        .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 15, lineWidth: 1)
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
     
     private func mainImageView() -> some View {
         ImageLoaderView(urlString: mainImage, ratio: ratio, width: Constants.screenWidth - 32)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.gentiGreen, lineWidth: 1)
-            )
+            .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 15, lineWidth: 1)
     }
     private func photoDescriptionView() -> some View {
         HStack {
@@ -54,11 +46,7 @@ struct FeedComponent: View {
             .padding(.vertical, 12)
             .padding(.horizontal, 8)
             .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gentiGreen, lineWidth: 1)
-            )
+            .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 10, lineWidth: 1)
             .padding(.horizontal, 10)
             .padding(.bottom, 10)
     }
