@@ -137,7 +137,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
         if let image = self.state.image {
             return Image(uiImage: image)
         }
-        return Image(uiImage: UIImage())
+        return Image(uiImage: UIImage(resource: .camera))
     }
     
     var disabled: Bool {

@@ -30,18 +30,8 @@ struct PhotoDetailView: View {
                         self.viewModel.sendAction(.downloadButtonTap)
                     }
             }
-            .overlay(alignment: .topTrailing) {
-                Image("Xmark_empty")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 29, height: 29)
-                    .padding(.trailing, 10)
-                    .padding(.top, 10)
-                    .onTapGesture {
-                        self.viewModel.sendAction(.xmarkTap)
-                    }
-            }
             .padding(.horizontal, 28)
+            .addXmark { viewModel.sendAction(.xmarkTap) } 
             .presentationBackground {
                 BlurView(style: .systemUltraThinMaterialDark)
                     .onTapGesture {

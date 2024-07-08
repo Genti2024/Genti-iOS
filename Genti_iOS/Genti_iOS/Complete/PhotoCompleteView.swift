@@ -28,24 +28,11 @@ struct PhotoCompleteView: View {
                     
                     Spacer()
                     
-                    Button {
-                        // Action
-                    } label: {
+                    ShareLink(item: viewModel.getImage, preview: .init("내 사진", image: viewModel.getImage)) {
                         Text("공유하기")
-                            .pretendard(.headline1)
-                            .foregroundStyle(.white)
-                            .frame(height: 50)
-                            .frame(maxWidth: .infinity)
-                            .background(.gentiGreen)
-                            .overlay(alignment: .leading) {
-                                Image("Share")
-                                    .resizable()
-                                    .frame(width: 29, height: 29)
-                                    .padding(.leading, 20)
-                            }
-                            .clipShape(.rect(cornerRadius: 10))
+                            .shareStyle(disable: viewModel.disabled)
                     }
-                    .padding(.horizontal, 30)
+                    .disabled(viewModel.disabled)
                     
                     Spacer()
                         .frame(height: 18)

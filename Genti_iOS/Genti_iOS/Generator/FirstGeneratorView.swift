@@ -12,10 +12,6 @@ struct FirstGeneratorView: View {
     @State var viewModel: FirstGeneratorViewModel
     @FocusState var isFocused: Bool
     
-    init(viewModel: FirstGeneratorViewModel) {
-        self.viewModel = viewModel
-    }
-    
     var body: some View {
         GeometryReader { _ in
             ZStack {
@@ -134,18 +130,22 @@ struct FirstGeneratorView: View {
     @ViewBuilder
     private func referenceImage() -> some View {
         if viewModel.state.referenceImages.count == 0 {
-            Image("AddImageIcon")
-                .resizable()
-                .frame(width: 29, height: 29)
-                .padding((CGFloat.height(ratio: 0.13)-29)/2)
-                .background(.black.opacity(0.001))
+            Rectangle()
+                .fill(.red)
+                .frame(height: 138)
+                .overlay(alignment: .center) {
+                    Image("AddImageIcon")
+                        .resizable()
+                        .frame(width: 29, height: 29)
+                }
                 .onTapGesture {
                     self.viewModel.sendAction(.addImageButtonTap)
                 }
+
         } else {
             let referenceImage = viewModel.state.referenceImages[0].asset
             PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: referenceImage)
-                .frame(width: CGFloat.height(ratio: 0.13), height: CGFloat.height(ratio: 0.13))
+                .frame(width: 138, height: 138)
                 .overlay(alignment: .topTrailing) {
                     Image("ImageRemoveButton")
                         .resizable()
