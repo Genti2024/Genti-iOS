@@ -137,7 +137,7 @@ struct ThirdGeneratorView: View {
                     .frame(height: 20)
             }
         }
-        .padding(.top, .height(ratio: 0.02))
+        .padding(.top, 20)
         .padding(.bottom, 30)
     }
     
