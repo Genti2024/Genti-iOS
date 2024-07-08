@@ -73,7 +73,7 @@ struct MainFeedView: View {
                 .frame(height: 16)
                 .padding(.bottom, 13)
                 .background {
-                    LinearGradient(colors: [.gentiGreen.opacity(0), .gentiGreen.opacity(1)], startPoint: .top, endPoint: .bottom)
+                    LinearGradient.backgroundGreen1
                 }
                 .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
         }

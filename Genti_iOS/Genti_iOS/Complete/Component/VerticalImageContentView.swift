@@ -42,7 +42,7 @@ struct VerticalImageContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 360)
                 .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap) }
-                .cornerRadiusWithBorder(style: LinearGradient(colors: [.gentiGreen, .gentiGreen.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing), radius: 15, lineWidth: 2)
+                .cornerRadiusWithBorder(style: LinearGradient.borderGreen, radius: 15, lineWidth: 2)
                 .onTapGesture {
                     print(#fileID, #function, #line, "- imagetap")
                     self.viewModel.sendAction(.imageTap)
@@ -67,7 +67,7 @@ struct VerticalImageContentView: View {
                 .clipShape(.rect(cornerRadius: 30))
                 .shadow(color: .black.opacity(0.13), radius: 15, y: 4)
                 .overlay(alignment: .top) {
-                    LinearGradient(colors: [.gradientPurple2, .gentiPurple.opacity(0)], startPoint: .top, endPoint: .bottom)
+                    LinearGradient.backgroundPurple1
                         .frame(height: 171)
                 }
         }
@@ -77,3 +77,5 @@ struct VerticalImageContentView: View {
 //#Preview {
 //    VerticalImageContentView(viewModel: PhotoCompleteViewViewModel(router: .init()))
 //}
+
+
