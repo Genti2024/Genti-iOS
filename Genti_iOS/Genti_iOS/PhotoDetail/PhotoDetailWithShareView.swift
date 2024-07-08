@@ -1,18 +1,14 @@
 //
-//  PostDetailView.swift
-//  Genti
+//  PhotoDetailWithShareView.swift
+//  Genti_iOS
 //
-//  Created by uiskim on 5/30/24.
+//  Created by uiskim on 7/5/24.
 //
 
 import SwiftUI
 
-import SDWebImageSwiftUI
-
-struct ExpandPhotoWithShareView: View {
-    @Bindable var router: Router<MainRoute>
-
-    let imageUrl: String
+struct PhotoDetailWithShareView: View {
+    @State var viewModel: PhotoDetailViewModel
 
     var body: some View {
         VStack(spacing: 20) {
@@ -21,7 +17,7 @@ struct ExpandPhotoWithShareView: View {
                 .frame(width: UIScreen.main.bounds.width - 60)
                 .frame(height: (UIScreen.main.bounds.width - 60)*1.5)
                 .overlay(alignment: .center) {
-                    WebImage(url: URL(string: imageUrl))
+                    viewModel.getImage
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .overlay(alignment: .trailing) {
@@ -30,7 +26,7 @@ struct ExpandPhotoWithShareView: View {
                                     .resizable()
                                     .frame(width: 29, height: 29)
                                     .onTapGesture {
-                                        router.dismissSheet()
+                                        viewModel.sendAction(.xmarkTap)
                                     }
                                 
                                 Spacer()
@@ -38,6 +34,9 @@ struct ExpandPhotoWithShareView: View {
                                 Image("Download")
                                     .resizable()
                                     .frame(width: 44, height: 44)
+                                    .asButton {
+                                        viewModel.sendAction(.downloadButtonTap)
+                                    }
                                 
                             }
                             .padding(.vertical, 4)
@@ -45,15 +44,13 @@ struct ExpandPhotoWithShareView: View {
                         }
                 }
             
-            Button {
-                // Action
-            } label: {
+            ShareLink(item: Image(uiImage: viewModel.state.image ?? UIImage(systemName: "star")!), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image ?? UIImage(systemName: "star")!))) {
                 Text("공유하기")
                     .pretendard(.headline1)
                     .foregroundStyle(.white)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity)
-                    .background(.gentiGreen)
+                    .background(viewModel.state.image == nil ? .gray4 : .gentiGreen)
                     .overlay(alignment: .leading) {
                         Image("Share")
                             .resizable()
@@ -61,18 +58,20 @@ struct ExpandPhotoWithShareView: View {
                             .padding(.leading, 20)
                     }
                     .clipShape(.rect(cornerRadius: 10))
+                    .padding(.horizontal, 30)
+                
             }
-            .padding(.horizontal, 30)
-
+            .disabled(viewModel.state.image == nil)
         }
-
+        .onAppear {
+            viewModel.sendAction(.viewWillAppear)
+        }
         .presentationBackground {
             BlurView(style: .systemUltraThinMaterialDark)
         }
-
     }
 }
 
 #Preview {
-    ExpandPhotoWithShareView(router: .init(), imageUrl: "SampleImage23")
+    PhotoDetailWithShareView(viewModel: .init(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: .init(), imageUrlString: ""))
 }

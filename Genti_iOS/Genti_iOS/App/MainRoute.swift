@@ -12,15 +12,14 @@ enum MainRoute: Route {
     case login
     case mainTab
     case setting
-    case expandImage(imageUrl: String)
+    case photoDetailWithShare(imageUrl: String)
     case firstGen
     case secondGen(data: RequestImageData)
     case thirdGen(data: RequestImageData)
     case requestCompleted
     case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
-    case photoMakeCompleteView
-    case photoExpandView
+    case photoDetail(url: String)
     case completeMakeImage
     
     @ViewBuilder
@@ -32,8 +31,8 @@ enum MainRoute: Route {
             GentiTabView(router: router)
         case .setting:
             SettingView(router: router)
-        case .expandImage(let url):
-            ExpandPhotoWithShareView(router: router, imageUrl: url)
+        case .photoDetailWithShare(let url):
+            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, imageUrlString: url))
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
@@ -46,12 +45,10 @@ enum MainRoute: Route {
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):
             GentiWebView(router: router, urlString: url)
-        case .photoMakeCompleteView:
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
-        case .photoExpandView:
-            ExpandPhotoView(router: router)
+        case .photoDetail(let url):
+            PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, imageUrlString: url))
         case .completeMakeImage:
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(router: $0)) }
+            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl())) }
         }
     }
         
@@ -59,14 +56,14 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView:
             return .push
-        case .expandImage, .firstGen, .imagePicker, .photoMakeCompleteView, .photoExpandView, .completeMakeImage:
+        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakeImage:
             return .fullScreenCover
         }
     }
     
     static func == (lhs: MainRoute, rhs: MainRoute) -> Bool {
         switch (lhs, rhs) {
-        case (.expandImage(let lhsUrl), .expandImage(let rhsUrl)), (.webView(let lhsUrl), .webView(let rhsUrl)):
+        case (.photoDetailWithShare(let lhsUrl), .photoDetailWithShare(let rhsUrl)), (.webView(let lhsUrl), .webView(let rhsUrl)):
             return lhsUrl == rhsUrl
         case (.imagePicker, .imagePicker):
             return false

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D542C37C15200071BF6 /* ImageRepository.swift */; };
+		C0113D572C37C17400071BF6 /* ImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */; };
+		C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D582C37C19800071BF6 /* HapticRepository.swift */; };
+		C0113D5B2C37C1A700071BF6 /* HapticRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D5A2C37C1A700071BF6 /* HapticRepositoryImpl.swift */; };
+		C0113D5E2C37C1D700071BF6 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D5D2C37C1D700071BF6 /* PhotoDetailViewModel.swift */; };
+		C0113D602C37C20300071BF6 /* PhotoDetailWithShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D5F2C37C20300071BF6 /* PhotoDetailWithShareView.swift */; };
+		C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D612C37C25400071BF6 /* PhotoDetailView.swift */; };
+		C0113D672C3A208F00071BF6 /* CompletePhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D662C3A208F00071BF6 /* CompletePhotoEntity.swift */; };
+		C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D692C3A217600071BF6 /* Alert.swift */; };
+		C0113D6C2C3A219300071BF6 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D6B2C3A219300071BF6 /* AlertType.swift */; };
+		C0113D6F2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D6E2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift */; };
 		C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */; };
 		C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */; };
 		C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C3E62C1C39D0009924C9 /* Assets.xcassets */; };
@@ -14,7 +25,6 @@
 		C017C3F52C1C39D0009924C9 /* Genti_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3F42C1C39D0009924C9 /* Genti_iOSTests.swift */; };
 		C017C3FF2C1C39D0009924C9 /* Genti_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3FE2C1C39D0009924C9 /* Genti_iOSUITests.swift */; };
 		C017C4012C1C39D0009924C9 /* Genti_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4002C1C39D0009924C9 /* Genti_iOSUITestsLaunchTests.swift */; };
-		C017C4162C1C3A35009924C9 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C40D2C1C3A35009924C9 /* LottieView.swift */; };
 		C017C4172C1C3A35009924C9 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C017C40E2C1C3A35009924C9 /* ProgressLottie.json */; };
 		C017C4182C1C3A35009924C9 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C017C40F2C1C3A35009924C9 /* Pretendard-Bold.otf */; };
 		C017C4192C1C3A35009924C9 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C017C4102C1C3A35009924C9 /* Pretendard-Light.otf */; };
@@ -24,7 +34,6 @@
 		C017C41D2C1C3A35009924C9 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4152C1C3A35009924C9 /* Font+.swift */; };
 		C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C41F2C1C3A62009924C9 /* GentiApp.swift */; };
 		C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4222C1C3AA3009924C9 /* PhotoCompleteView.swift */; };
-		C017C47B2C1C3AA3009924C9 /* ExpandPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4232C1C3AA3009924C9 /* ExpandPhotoView.swift */; };
 		C017C47C2C1C3AA3009924C9 /* RatingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */; };
 		C017C47D2C1C3AA3009924C9 /* GeneratorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4262C1C3AA3009924C9 /* GeneratorHeaderView.swift */; };
 		C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4272C1C3AA3009924C9 /* GeneratorNavigationButton.swift */; };
@@ -41,7 +50,6 @@
 		C017C48C2C1C3AA3009924C9 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4392C1C3AA3009924C9 /* WebView.swift */; };
 		C017C48D2C1C3AA3009924C9 /* MyImagesEntitiy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C43B2C1C3AA3009924C9 /* MyImagesEntitiy.swift */; };
 		C017C48E2C1C3AA3009924C9 /* GentiWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C43D2C1C3AA3009924C9 /* GentiWebView.swift */; };
-		C017C48F2C1C3AA3009924C9 /* ExpandPhotoWithShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C43E2C1C3AA3009924C9 /* ExpandPhotoWithShareView.swift */; };
 		C017C4902C1C3AA3009924C9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C43F2C1C3AA3009924C9 /* ProfileView.swift */; };
 		C017C4912C1C3AA3009924C9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4402C1C3AA3009924C9 /* SettingView.swift */; };
 		C017C4922C1C3AA3009924C9 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4422C1C3AA3009924C9 /* ImageAsset.swift */; };
@@ -150,6 +158,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C0113D542C37C15200071BF6 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImpl.swift; sourceTree = "<group>"; };
+		C0113D582C37C19800071BF6 /* HapticRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticRepository.swift; sourceTree = "<group>"; };
+		C0113D5A2C37C1A700071BF6 /* HapticRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticRepositoryImpl.swift; sourceTree = "<group>"; };
+		C0113D5D2C37C1D700071BF6 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
+		C0113D5F2C37C20300071BF6 /* PhotoDetailWithShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailWithShareView.swift; sourceTree = "<group>"; };
+		C0113D612C37C25400071BF6 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		C0113D662C3A208F00071BF6 /* CompletePhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePhotoEntity.swift; sourceTree = "<group>"; };
+		C0113D692C3A217600071BF6 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		C0113D6B2C3A219300071BF6 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		C0113D6E2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCompleteViewViewModel.swift; sourceTree = "<group>"; };
 		C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,7 +180,6 @@
 		C017C3FA2C1C39D0009924C9 /* Genti_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Genti_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3FE2C1C39D0009924C9 /* Genti_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genti_iOSUITests.swift; sourceTree = "<group>"; };
 		C017C4002C1C39D0009924C9 /* Genti_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genti_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C017C40D2C1C3A35009924C9 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		C017C40E2C1C3A35009924C9 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 		C017C40F2C1C3A35009924C9 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C017C4102C1C3A35009924C9 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -171,7 +189,6 @@
 		C017C4152C1C3A35009924C9 /* Font+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		C017C41F2C1C3A62009924C9 /* GentiApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GentiApp.swift; sourceTree = "<group>"; };
 		C017C4222C1C3AA3009924C9 /* PhotoCompleteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCompleteView.swift; sourceTree = "<group>"; };
-		C017C4232C1C3AA3009924C9 /* ExpandPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandPhotoView.swift; sourceTree = "<group>"; };
 		C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingAlertView.swift; sourceTree = "<group>"; };
 		C017C4262C1C3AA3009924C9 /* GeneratorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorHeaderView.swift; sourceTree = "<group>"; };
 		C017C4272C1C3AA3009924C9 /* GeneratorNavigationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorNavigationButton.swift; sourceTree = "<group>"; };
@@ -188,7 +205,6 @@
 		C017C4392C1C3AA3009924C9 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C017C43B2C1C3AA3009924C9 /* MyImagesEntitiy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImagesEntitiy.swift; sourceTree = "<group>"; };
 		C017C43D2C1C3AA3009924C9 /* GentiWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GentiWebView.swift; sourceTree = "<group>"; };
-		C017C43E2C1C3AA3009924C9 /* ExpandPhotoWithShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandPhotoWithShareView.swift; sourceTree = "<group>"; };
 		C017C43F2C1C3AA3009924C9 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C017C4402C1C3AA3009924C9 /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		C017C4422C1C3AA3009924C9 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
@@ -305,6 +321,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0113D522C37C13600071BF6 /* PhotoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D5C2C37C1CA00071BF6 /* ViewModel */,
+				C0113D532C37C14100071BF6 /* Repository */,
+				C0113D5F2C37C20300071BF6 /* PhotoDetailWithShareView.swift */,
+				C0113D612C37C25400071BF6 /* PhotoDetailView.swift */,
+			);
+			path = PhotoDetail;
+			sourceTree = "<group>";
+		};
+		C0113D532C37C14100071BF6 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D542C37C15200071BF6 /* ImageRepository.swift */,
+				C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */,
+				C0113D582C37C19800071BF6 /* HapticRepository.swift */,
+				C0113D5A2C37C1A700071BF6 /* HapticRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		C0113D5C2C37C1CA00071BF6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D5D2C37C1D700071BF6 /* PhotoDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C0113D632C3A207E00071BF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D662C3A208F00071BF6 /* CompletePhotoEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0113D682C3A215300071BF6 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D692C3A217600071BF6 /* Alert.swift */,
+				C0113D6B2C3A219300071BF6 /* AlertType.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		C0113D6D2C3A21A700071BF6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D6E2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C017C3D12C1C39CE009924C9 = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +399,7 @@
 		C017C3DC2C1C39CE009924C9 /* Genti_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C0113D522C37C13600071BF6 /* PhotoDetail */,
 				C0D74A402C1EA66B00A45371 /* Router */,
 				C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */,
 				C017C4252C1C3AA3009924C9 /* Complete */,
@@ -386,7 +458,6 @@
 				C017C3E62C1C39D0009924C9 /* Assets.xcassets */,
 				C017C4152C1C3A35009924C9 /* Font+.swift */,
 				C017C4142C1C3A35009924C9 /* Fonts */,
-				C017C40D2C1C3A35009924C9 /* LottieView.swift */,
 				C017C40E2C1C3A35009924C9 /* ProgressLottie.json */,
 				C017C3E82C1C39D0009924C9 /* LaunchScreen.storyboard */,
 			);
@@ -407,9 +478,10 @@
 		C017C4252C1C3AA3009924C9 /* Complete */ = {
 			isa = PBXGroup;
 			children = (
+				C0113D6D2C3A21A700071BF6 /* ViewModel */,
+				C0113D632C3A207E00071BF6 /* Model */,
 				C088F2F02C28D74300F92320 /* Component */,
 				C017C4222C1C3AA3009924C9 /* PhotoCompleteView.swift */,
-				C017C4232C1C3AA3009924C9 /* ExpandPhotoView.swift */,
 				C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */,
 			);
 			path = Complete;
@@ -492,7 +564,6 @@
 				C017C43A2C1C3AA3009924C9 /* Components */,
 				C017C43C2C1C3AA3009924C9 /* Models */,
 				C017C43D2C1C3AA3009924C9 /* GentiWebView.swift */,
-				C017C43E2C1C3AA3009924C9 /* ExpandPhotoWithShareView.swift */,
 				C017C43F2C1C3AA3009924C9 /* ProfileView.swift */,
 				C017C4402C1C3AA3009924C9 /* SettingView.swift */,
 			);
@@ -587,6 +658,7 @@
 		C017C4612C1C3AA3009924C9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C0113D682C3A215300071BF6 /* Alert */,
 				C017C45A2C1C3AA3009924C9 /* BlurView.swift */,
 				C017C45B2C1C3AA3009924C9 /* BulletText.swift */,
 				C017C45C2C1C3AA3009924C9 /* Constants.swift */,
@@ -1003,21 +1075,25 @@
 				C017C4A52C1C3AA3009924C9 /* ImageLoaderView.swift in Sources */,
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
 				C088F2F42C28D77200F92320 /* HorizontalImageContentView.swift in Sources */,
+				C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */,
 				C028436A2C32BB4600B84566 /* MainFeedUseCaseImpl.swift in Sources */,
 				C017C4882C1C3AA3009924C9 /* ThirdGeneratorView.swift in Sources */,
 				C017C4972C1C3AA3009924C9 /* PHAssetImageView.swift in Sources */,
 				C017C48B2C1C3AA3009924C9 /* StraggeredGrid.swift in Sources */,
+				C0113D572C37C17400071BF6 /* ImageRepositoryImpl.swift in Sources */,
 				C017C4AF2C1C3AA3009924C9 /* GentiTabView.swift in Sources */,
 				C088F2D22C25733C00F92320 /* AlbumRepositoryImpl.swift in Sources */,
 				C017C4A32C1C3AA3009924C9 /* BulletText.swift in Sources */,
 				C088F2EF2C27AE3400F92320 /* ViewModel.swift in Sources */,
 				C0D74A422C1EA68700A45371 /* Router.swift in Sources */,
+				C0113D5E2C37C1D700071BF6 /* PhotoDetailViewModel.swift in Sources */,
 				C017C49E2C1C3AA3009924C9 /* GeneratorRequest.swift in Sources */,
 				C017C47C2C1C3AA3009924C9 /* RatingAlertView.swift in Sources */,
 				C017C49C2C1C3AA3009924C9 /* APIService.swift in Sources */,
 				C0D74A462C1EA6B500A45371 /* Route.swift in Sources */,
 				C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */,
 				C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */,
+				C0113D6F2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift in Sources */,
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
@@ -1043,6 +1119,7 @@
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
 				C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
+				C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */,
 				C017C4AC2C1C3AA3009924C9 /* MainFeedView.swift in Sources */,
 				C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */,
 				C088F2E22C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift in Sources */,
@@ -1054,17 +1131,18 @@
 				C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */,
 				C017C4932C1C3AA3009924C9 /* ImagePickerType.swift in Sources */,
 				C088F2DA2C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift in Sources */,
+				C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */,
+				C0113D602C37C20300071BF6 /* PhotoDetailWithShareView.swift in Sources */,
+				C0113D6C2C3A219300071BF6 /* AlertType.swift in Sources */,
 				C028436C2C32BB5D00B84566 /* FeedRepository.swift in Sources */,
 				C088F2E42C26F1A200F92320 /* ImageGenerateUseCaseImpl.swift in Sources */,
 				C028437E2C32BF5F00B84566 /* ProfileViewModel.swift in Sources */,
 				C017C48E2C1C3AA3009924C9 /* GentiWebView.swift in Sources */,
 				C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */,
-				C017C48F2C1C3AA3009924C9 /* ExpandPhotoWithShareView.swift in Sources */,
 				C06ABC792C2A4A8800ABB43F /* CustomAlert.swift in Sources */,
 				C088F2E72C26F20B00F92320 /* UploadService.swift in Sources */,
 				C017C4AD2C1C3AA3009924C9 /* CustomTabView.swift in Sources */,
 				C088F2D02C25732900F92320 /* AlbumRepository.swift in Sources */,
-				C017C47B2C1C3AA3009924C9 /* ExpandPhotoView.swift in Sources */,
 				C02843712C32BB8900B84566 /* MainFeedViewModel.swift in Sources */,
 				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
@@ -1077,6 +1155,7 @@
 				C017C4A02C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift in Sources */,
 				C02843742C32BEF100B84566 /* UserRepository.swift in Sources */,
 				C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */,
+				C0113D672C3A208F00071BF6 /* CompletePhotoEntity.swift in Sources */,
 				C017C4A12C1C3AA3009924C9 /* SettingRouter.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,
@@ -1089,14 +1168,15 @@
 				C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */,
 				C088F2D42C26564A00F92320 /* PHAssetImageUseCase.swift in Sources */,
 				C017C4812C1C3AA3009924C9 /* PhotoAngle.swift in Sources */,
+				C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */,
 				C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */,
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,
+				C0113D5B2C37C1A700071BF6 /* HapticRepositoryImpl.swift in Sources */,
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,
 				C017C4912C1C3AA3009924C9 /* SettingView.swift in Sources */,
 				C088F2E02C26F0EA00F92320 /* ImageGenerateRepository.swift in Sources */,
 				C02843572C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift in Sources */,
 				C02843682C32BB3300B84566 /* MainFeedUseCase.swift in Sources */,
-				C017C4162C1C3A35009924C9 /* LottieView.swift in Sources */,
 				C017C4B02C1C3AA3009924C9 /* TextEditorLimitLength.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

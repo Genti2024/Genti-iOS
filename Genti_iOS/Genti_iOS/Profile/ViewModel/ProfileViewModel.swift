@@ -58,7 +58,7 @@ final class ProfileViewModel: ViewModel {
             }
             
         case .imageTap(let url):
-            router.routeTo(.expandImage(imageUrl: url))
+            router.routeTo(.photoDetailWithShare(imageUrl: url))
         case .gearButtonTap:
             router.routeTo(.setting)
         }
