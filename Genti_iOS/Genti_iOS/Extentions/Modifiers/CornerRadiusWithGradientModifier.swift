@@ -7,19 +7,23 @@
 
 import SwiftUI
 
-struct CornerRadiusWithGradientModifier: ViewModifier {
+struct CornerRadiusWithBorderModifier<S: ShapeStyle>: ViewModifier {
+    let style: S
+    let radius: CGFloat
+    let lineWidth: CGFloat
+    
     func body(content: Content) -> some View {
         content
-            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .clipShape(RoundedRectangle(cornerRadius: radius))
             .overlay(
-                RoundedRectangle(cornerRadius: 15)
-                    .strokeBorder(LinearGradient(colors: [.gentiGreen, .gentiGreen.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 2)
+                RoundedRectangle(cornerRadius: radius)
+                    .strokeBorder(style, lineWidth: lineWidth)
             )
     }
 }
 
 extension View {
-    func cornerRadiusWithGradient() -> some View {
-        return modifier(CornerRadiusWithGradientModifier())
+    func cornerRadiusWithBorder<S: ShapeStyle>(style: S, radius: CGFloat, lineWidth: CGFloat) -> some View {
+        return modifier(CornerRadiusWithBorderModifier(style: style, radius: radius, lineWidth: lineWidth))
     }
 }

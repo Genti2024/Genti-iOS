@@ -49,7 +49,7 @@ struct HorizontalImageContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 212)
                 .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap) }
-                .cornerRadiusWithGradient()
+                .cornerRadiusWithBorder(style: LinearGradient(colors: [.gentiGreen, .gentiGreen.opacity(0)], startPoint: .topLeading, endPoint: .bottomTrailing), radius: 15, lineWidth: 2)
                 .onTapGesture {
                     self.viewModel.sendAction(.imageTap)
                 }
