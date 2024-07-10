@@ -9,4 +9,5 @@ import Foundation
 
 protocol MainFeedUseCase {
     func fetchFeeds() async throws -> [FeedEntity]
+    func showOnboarding() -> Bool
 }

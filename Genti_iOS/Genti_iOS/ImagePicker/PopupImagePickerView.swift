@@ -59,12 +59,12 @@ struct PopupImagePickerView: View {
                     .pretendard(.headline4)
                     .foregroundStyle(.white)
             }
-            .disabled(!viewModel.state.isReachLimit)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .padding(.bottom, 41)
             .asButton {
                 viewModel.sendAction(.addImageButtonTap)
             }
+            .disabled(!viewModel.state.isReachLimit)
     }
     
     func headerView() -> some View {
@@ -73,13 +73,13 @@ struct PopupImagePickerView: View {
                 .pretendard(.headline4)
                 .foregroundStyle(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Button {
-                viewModel.sendAction(.xmarkTap)
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.title2)
-                    .foregroundStyle(.black)
-            }
+            
+            Image(systemName: "xmark")
+                .font(.title2)
+                .foregroundStyle(.black)
+                .asButton {
+                    viewModel.sendAction(.xmarkTap)
+                }
         }
         .padding([.horizontal, .top])
         .padding(.bottom, 10)
