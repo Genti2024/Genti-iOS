@@ -15,12 +15,13 @@ final class PhotoCompleteViewViewModel: ViewModel {
     var state: State
     
     let imageRepository: ImageRepository
-    let hapticRepository: HapticRepository = HapticRepositoryImpl()
+    let hapticRepository: HapticRepository
     
-    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository) {
+    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository, hapticRepository: HapticRepository) {
         self.photoInfo = photoInfo
         self.router = router
         self.imageRepository = imageRepository
+        self.hapticRepository = hapticRepository
         self.state = .init()
     }
 

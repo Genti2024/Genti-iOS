@@ -37,9 +37,10 @@ final class ProfileViewModel: ViewModel {
         case .viewWillAppear:
             Task {
                 do {
-                    let entity = try await profileUseCase.getCompletedPhotos(page: 0)
-                    state.myImages = entity.images
-                    state.isLastPage = entity.isLast
+                    let entity = try await profileUseCase.fetchInitalUserInfo()
+                    state.hasInProgressImage = entity.hasInProgressPhoto
+                    state.myImages = entity.completedImage.images
+                    state.isLastPage = entity.completedImage.isLast
                 } catch {
                     
                 }

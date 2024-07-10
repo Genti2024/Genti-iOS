@@ -50,7 +50,7 @@ enum UserRouter: URLRequestConvertible {
         case .fetchMyPictures(let page):
             var parameters: [String: Any] = [:]
             parameters["page"] = page
-            parameters["size"] = 10
+            parameters["size"] = 4
             parameters["sortBy"] = "createdAt"
             parameters["direction"] = "desc"
             

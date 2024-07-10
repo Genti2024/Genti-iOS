@@ -8,5 +8,11 @@
 import Foundation
 
 protocol ProfileUseCase {
+    func fetchInitalUserInfo() async throws -> UserInfoEntity
     func getCompletedPhotos(page: Int) async throws -> MyImagesEntitiy
+}
+
+struct UserInfoEntity {
+    var hasInProgressPhoto: Bool
+    var completedImage: MyImagesEntitiy
 }

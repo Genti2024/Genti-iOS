@@ -9,4 +9,5 @@ import Foundation
 
 protocol UserRepository {
     func getMyPictures(page: Int) async throws -> PageCommonPictureResponseDTO
+    func checkInProgress() async throws -> Bool
 }
