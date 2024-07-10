@@ -133,6 +133,7 @@
 		C08BB5B52C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5B42C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift */; };
 		C08BB5B82C3E7EC600D4CFA9 /* SplashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */; };
 		C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */; };
+		C08BB5BC2C3E8F6700D4CFA9 /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5BB2C3E8F6700D4CFA9 /* ShadowModifier.swift */; };
 		C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3522C1C3C7D0006EF83 /* SDWebImageSwiftUI */; };
 		C099C3562C1C3C8B0006EF83 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3552C1C3C8B0006EF83 /* SwiftfulUI */; };
 		C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* MainRoute.swift */; };
@@ -295,6 +296,7 @@
 		C08BB5B42C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepositoryImpl.swift; sourceTree = "<group>"; };
 		C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashLottie.json; sourceTree = "<group>"; };
 		C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottieView+Ext.swift"; sourceTree = "<group>"; };
+		C08BB5BB2C3E8F6700D4CFA9 /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 				C0113D7C2C3BEAA400071BF6 /* LimitLengthModifier.swift */,
 				C0113D7B2C3BEAA400071BF6 /* OnFirstAppearModifier.swift */,
 				C0113D7E2C3BEAA400071BF6 /* ShareStyleModifier.swift */,
+				C08BB5BB2C3E8F6700D4CFA9 /* ShadowModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -1100,6 +1103,7 @@
 				C017C49F2C1C3AA3009924C9 /* GeneratorRouter.swift in Sources */,
 				C017C4A52C1C3AA3009924C9 /* ImageLoaderView.swift in Sources */,
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
+				C08BB5BC2C3E8F6700D4CFA9 /* ShadowModifier.swift in Sources */,
 				C088F2F42C28D77200F92320 /* HorizontalImageContentView.swift in Sources */,
 				C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */,
 				C017C4882C1C3AA3009924C9 /* ThirdGeneratorView.swift in Sources */,

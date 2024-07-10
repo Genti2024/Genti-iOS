@@ -65,7 +65,7 @@ struct VerticalImageContentView: View {
             Rectangle()
                 .fill(.backgroundWhite)
                 .clipShape(.rect(cornerRadius: 30))
-                .shadow(color: .black.opacity(0.13), radius: 15, y: 4)
+                .shadow(type: .strong)
                 .overlay(alignment: .top) {
                     LinearGradient.backgroundPurple1
                         .frame(height: 171)

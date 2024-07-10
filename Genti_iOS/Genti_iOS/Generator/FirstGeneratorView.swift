@@ -63,7 +63,7 @@ struct FirstGeneratorView: View {
                     .fill(.white)
                     .strokeBorder(.gentiGreen, style: .init(lineWidth: 1))
                     .frame(height: 68)
-                    .shadow(color: .black.opacity(0.09), radius: 5)
+                    .shadow(type: .strong)
                 
                     .overlay {
                         Text(viewModel.state.currentRandomDescriptionExample)

@@ -43,7 +43,7 @@ struct ProfileView: View {
                         .clipShape(.rect(cornerRadius: 18))
                         .frame(height: 75)
                         .padding(.horizontal, 16)
-                        .shadow(color: .green5, radius: 13)
+                        .shadow(type: .soft)
                         .overlay(alignment: .center) {
                             Text("세상에 없던 나만의 사진 찍는중...")
                                 .pretendard(.large)
@@ -56,7 +56,7 @@ struct ProfileView: View {
                     BlurView(style: .light)
                         .cornerRadius(10, corners: [.topLeft, .topRight])
                         .frame(height: 50)
-                        .shadow(color: .green5, radius: 13)
+                        .shadow(type: .soft)
                         .overlay(alignment: .center) {
                             Text("내가 만든 사진")
                                 .pretendard(.normal)
@@ -78,9 +78,9 @@ struct ProfileView: View {
                             }
                     }
                     .background {
-                        if viewModel.state.myImages.isEmpty {
-                            BlurView(style: .light)
-                                .overlay(alignment: .center) {
+                        BlurView(style: .light)
+                            .overlay(alignment: .center) {
+                                if viewModel.state.myImages.isEmpty {
                                     VStack(spacing: 37) {
                                         Image("ExclamationImage")
                                             .resizable()
@@ -91,10 +91,8 @@ struct ProfileView: View {
                                             .pretendard(.headline1)
                                             .foregroundStyle(.gray3)
                                     }
-
                                 }
-                        }
-
+                            }
                     }
                 }
             }
