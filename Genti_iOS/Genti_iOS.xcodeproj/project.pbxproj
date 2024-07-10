@@ -26,6 +26,10 @@
 		C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D7F2C3BEAA400071BF6 /* AddXmarkModifier.swift */; };
 		C0113D872C3BEAA400071BF6 /* AddDownloadButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D802C3BEAA400071BF6 /* AddDownloadButtonModifier.swift */; };
 		C0113D892C3BED0400071BF6 /* LinearGradient+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D882C3BED0400071BF6 /* LinearGradient+Ext.swift */; };
+		C0113D8C2C3C002F00071BF6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D8B2C3C002F00071BF6 /* OnboardingView.swift */; };
+		C0113D8E2C3D39E700071BF6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D8D2C3D39E700071BF6 /* OnboardingViewModel.swift */; };
+		C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D8F2C3D3A0900071BF6 /* OnboardingStep.swift */; };
+		C0113D922C3D426700071BF6 /* UserdefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D912C3D426700071BF6 /* UserdefaultManager.swift */; };
 		C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */; };
 		C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */; };
 		C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C3E62C1C39D0009924C9 /* Assets.xcassets */; };
@@ -181,6 +185,10 @@
 		C0113D7F2C3BEAA400071BF6 /* AddXmarkModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddXmarkModifier.swift; sourceTree = "<group>"; };
 		C0113D802C3BEAA400071BF6 /* AddDownloadButtonModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDownloadButtonModifier.swift; sourceTree = "<group>"; };
 		C0113D882C3BED0400071BF6 /* LinearGradient+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinearGradient+Ext.swift"; sourceTree = "<group>"; };
+		C0113D8B2C3C002F00071BF6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		C0113D8D2C3D39E700071BF6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		C0113D8F2C3D3A0900071BF6 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
+		C0113D912C3D426700071BF6 /* UserdefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefaultManager.swift; sourceTree = "<group>"; };
 		C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -384,6 +392,17 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C0113D8A2C3C002200071BF6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C0113D8B2C3C002F00071BF6 /* OnboardingView.swift */,
+				C0113D8D2C3D39E700071BF6 /* OnboardingViewModel.swift */,
+				C0113D8F2C3D3A0900071BF6 /* OnboardingStep.swift */,
+				C0113D912C3D426700071BF6 /* UserdefaultManager.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		C017C3D12C1C39CE009924C9 = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +426,7 @@
 		C017C3DC2C1C39CE009924C9 /* Genti_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C0113D8A2C3C002200071BF6 /* Onboarding */,
 				C0113D522C37C13600071BF6 /* PhotoDetail */,
 				C0D74A402C1EA66B00A45371 /* Router */,
 				C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */,
@@ -1108,11 +1128,13 @@
 				C0113D6F2C3A21B100071BF6 /* PhotoCompleteViewViewModel.swift in Sources */,
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,
+				C0113D8C2C3C002F00071BF6 /* OnboardingView.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
 				C0113D852C3BEAA400071BF6 /* ShareStyleModifier.swift in Sources */,
 				C017C48A2C1C3AA3009924C9 /* SettingRow.swift in Sources */,
 				C017C47F2C1C3AA3009924C9 /* Caution.swift in Sources */,
 				C028437B2C32BF3F00B84566 /* ProfileUseCaseImpl.swift in Sources */,
+				C0113D922C3D426700071BF6 /* UserdefaultManager.swift in Sources */,
 				C088F2F22C28D76500F92320 /* VerticalImageContentView.swift in Sources */,
 				C028435E2C326CAE00B84566 /* UserRouter.swift in Sources */,
 				C017C4962C1C3AA3009924C9 /* PHAssetImageViewModel.swift in Sources */,
@@ -1166,6 +1188,7 @@
 				C02843792C32BF1B00B84566 /* ProfileUseCase.swift in Sources */,
 				C0B80E602C23C59B0071C3CD /* FirstGeneratorViewModel.swift in Sources */,
 				C088F2DD2C26F0D600F92320 /* ImageGenerateUseCase.swift in Sources */,
+				C0113D8E2C3D39E700071BF6 /* OnboardingViewModel.swift in Sources */,
 				C017C4AE2C1C3AA3009924C9 /* Tab.swift in Sources */,
 				C017C49D2C1C3AA3009924C9 /* GentiError.swift in Sources */,
 				C017C4A02C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift in Sources */,
@@ -1175,6 +1198,7 @@
 				C017C4A12C1C3AA3009924C9 /* SettingRouter.swift in Sources */,
 				C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
+				C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,
 				C017C4952C1C3AA3009924C9 /* ImagePickerViewModel.swift in Sources */,
 				C017C4A62C1C3AA3009924C9 /* LoadingView.swift in Sources */,

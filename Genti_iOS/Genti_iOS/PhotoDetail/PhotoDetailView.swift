@@ -31,7 +31,7 @@ struct PhotoDetailView: View {
                     }
             }
             .padding(.horizontal, 28)
-            .addXmark { viewModel.sendAction(.xmarkTap) } 
+            .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
             .presentationBackground {
                 BlurView(style: .systemUltraThinMaterialDark)
                     .onTapGesture {

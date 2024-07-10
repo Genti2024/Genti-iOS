@@ -54,21 +54,19 @@ struct GenerateRequestCompleteView: View {
                 
                 Spacer(minLength: 0)
                 
-                Button {
-                    // Action
-                    router.dismissSheet()
-                } label: {
-                    Text("피드로 돌아가기")
-                        .pretendard(.headline1)
-                        .foregroundStyle(.black)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(.gentiGreen)
-                        .clipShape(.rect(cornerRadius: 10))
-                }
-                .padding(.horizontal, 31)
-                .padding(.bottom, 30)
-                .buttonStyle(.plain)
+                Text("피드로 돌아가기")
+                    .pretendard(.headline1)
+                    .foregroundStyle(.black)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(.gentiGreen)
+                    .clipShape(.rect(cornerRadius: 10))
+                    .padding(.horizontal, 31)
+                    .padding(.bottom, 30)
+                    .buttonStyle(.plain)
+                    .asButton {
+                        router.dismissSheet()
+                    }
             } //:VSTACK
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)

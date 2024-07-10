@@ -38,9 +38,13 @@ final class MainFeedViewModel: ViewModel {
             Task {
                 do {
                     state.feeds = try await mainFeedUseCase.fetchFeeds()
-                } catch {
+                } catch(let error) {
                     print(#fileID, #function, #line, "- error in feed api")
                 }
+            }
+            
+            if mainFeedUseCase.showOnboarding() {
+                self.router.routeTo(.onboarding)
             }
         case .scroll(offset: let offset):
             state.isLogoHidden = offset < 165 ? true : false

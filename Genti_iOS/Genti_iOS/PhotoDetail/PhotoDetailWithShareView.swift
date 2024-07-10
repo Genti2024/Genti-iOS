@@ -37,9 +37,9 @@ struct PhotoDetailWithShareView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
         }
-        .addXmark { viewModel.sendAction(.xmarkTap) }
+        .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
         .presentationBackground {
-            BlurView(style: .systemUltraThinMaterialDark)
+            BlurView(style: .systemThinMaterialDark)
         }
     }
 }
