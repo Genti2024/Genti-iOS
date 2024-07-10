@@ -87,7 +87,7 @@ struct PopupImagePickerView: View {
     
     func albumImage(from imageAsset: ImageAsset) -> some View {
             ZStack {
-                PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
+                PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageRepository: PHAssetImageRepositoryImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .fill(.black.opacity(0.1))

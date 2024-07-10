@@ -1,5 +1,5 @@
 //
-//  PHAssetImageUseCaseImpl.swift
+//  PHAssetImageRepositoryImpl.swift
 //  Genti_iOS
 //
 //  Created by uiskim on 6/22/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PHAssetImageUseCaseImpl: PHAssetImageUseCase {
+final class PHAssetImageRepositoryImpl: PHAssetImageRepository {
 
     let service: PHAssetImageService
     

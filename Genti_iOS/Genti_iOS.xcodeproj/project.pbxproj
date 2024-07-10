@@ -112,10 +112,10 @@
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
 		C088F2D02C25732900F92320 /* AlbumRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CF2C25732900F92320 /* AlbumRepository.swift */; };
 		C088F2D22C25733C00F92320 /* AlbumRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D12C25733C00F92320 /* AlbumRepositoryImpl.swift */; };
-		C088F2D42C26564A00F92320 /* PHAssetImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D32C26564A00F92320 /* PHAssetImageUseCase.swift */; };
+		C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */; };
 		C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D52C26567500F92320 /* PHAssetImageService.swift */; };
 		C088F2D82C26569700F92320 /* PHAssetImageServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D72C26569700F92320 /* PHAssetImageServiceImpl.swift */; };
-		C088F2DA2C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D92C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift */; };
+		C088F2DA2C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */; };
 		C088F2DD2C26F0D600F92320 /* ImageGenerateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2DC2C26F0D600F92320 /* ImageGenerateUseCase.swift */; };
 		C088F2E02C26F0EA00F92320 /* ImageGenerateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2DF2C26F0EA00F92320 /* ImageGenerateRepository.swift */; };
 		C088F2E22C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2E12C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift */; };
@@ -275,10 +275,10 @@
 		C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCaseImpl.swift; sourceTree = "<group>"; };
 		C088F2CF2C25732900F92320 /* AlbumRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepository.swift; sourceTree = "<group>"; };
 		C088F2D12C25733C00F92320 /* AlbumRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryImpl.swift; sourceTree = "<group>"; };
-		C088F2D32C26564A00F92320 /* PHAssetImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageUseCase.swift; sourceTree = "<group>"; };
+		C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepository.swift; sourceTree = "<group>"; };
 		C088F2D52C26567500F92320 /* PHAssetImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageService.swift; sourceTree = "<group>"; };
 		C088F2D72C26569700F92320 /* PHAssetImageServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageServiceImpl.swift; sourceTree = "<group>"; };
-		C088F2D92C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageUseCaseImpl.swift; sourceTree = "<group>"; };
+		C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepositoryImpl.swift; sourceTree = "<group>"; };
 		C088F2DC2C26F0D600F92320 /* ImageGenerateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerateUseCase.swift; sourceTree = "<group>"; };
 		C088F2DF2C26F0EA00F92320 /* ImageGenerateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerateRepository.swift; sourceTree = "<group>"; };
 		C088F2E12C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerateRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -866,8 +866,6 @@
 			children = (
 				C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */,
 				C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */,
-				C088F2D32C26564A00F92320 /* PHAssetImageUseCase.swift */,
-				C088F2D92C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -877,6 +875,8 @@
 			children = (
 				C088F2CF2C25732900F92320 /* AlbumRepository.swift */,
 				C088F2D12C25733C00F92320 /* AlbumRepositoryImpl.swift */,
+				C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */,
+				C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1159,7 +1159,7 @@
 				C017C47D2C1C3AA3009924C9 /* GeneratorHeaderView.swift in Sources */,
 				C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */,
 				C017C4932C1C3AA3009924C9 /* ImagePickerType.swift in Sources */,
-				C088F2DA2C2656BA00F92320 /* PHAssetImageUseCaseImpl.swift in Sources */,
+				C088F2DA2C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift in Sources */,
 				C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */,
 				C0113D602C37C20300071BF6 /* PhotoDetailWithShareView.swift in Sources */,
 				C0113D6C2C3A219300071BF6 /* AlertType.swift in Sources */,
@@ -1200,7 +1200,7 @@
 				C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */,
 				C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */,
 				C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */,
-				C088F2D42C26564A00F92320 /* PHAssetImageUseCase.swift in Sources */,
+				C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */,
 				C017C4812C1C3AA3009924C9 /* PhotoAngle.swift in Sources */,
 				C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */,
 				C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */,
