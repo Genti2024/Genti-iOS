@@ -131,6 +131,8 @@
 		C08BB5B02C3E28E300D4CFA9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C08BB5AF2C3E28E300D4CFA9 /* FirebaseMessaging */; };
 		C08BB5B32C3E312B00D4CFA9 /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5B22C3E312B00D4CFA9 /* UserDefaultsRepository.swift */; };
 		C08BB5B52C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5B42C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift */; };
+		C08BB5B82C3E7EC600D4CFA9 /* SplashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */; };
+		C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */; };
 		C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3522C1C3C7D0006EF83 /* SDWebImageSwiftUI */; };
 		C099C3562C1C3C8B0006EF83 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3552C1C3C8B0006EF83 /* SwiftfulUI */; };
 		C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* MainRoute.swift */; };
@@ -142,7 +144,6 @@
 		C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */; };
 		C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */; };
 		C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */; };
-		C0D74A3F2C1E9B3200A45371 /* Genti_Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */; };
 		C0D74A422C1EA68700A45371 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A412C1EA68700A45371 /* Router.swift */; };
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
 		C0D74A462C1EA6B500A45371 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Route.swift */; };
@@ -292,6 +293,8 @@
 		C088F2F32C28D77200F92320 /* HorizontalImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalImageContentView.swift; sourceTree = "<group>"; };
 		C08BB5B22C3E312B00D4CFA9 /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
 		C08BB5B42C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepositoryImpl.swift; sourceTree = "<group>"; };
+		C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashLottie.json; sourceTree = "<group>"; };
+		C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottieView+Ext.swift"; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
@@ -300,7 +303,6 @@
 		C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageFromImagePicker.swift; sourceTree = "<group>"; };
-		C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Genti_Splash.gif; sourceTree = "<group>"; };
 		C0D74A412C1EA68700A45371 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
 		C0D74A452C1EA6B500A45371 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -481,9 +483,9 @@
 		C017C41E2C1C3A3A009924C9 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				C0D74A3E2C1E9B3200A45371 /* Genti_Splash.gif */,
 				C017C3E62C1C39D0009924C9 /* Assets.xcassets */,
 				C017C4152C1C3A35009924C9 /* Font+.swift */,
+				C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */,
 				C017C4142C1C3A35009924C9 /* Fonts */,
 				C017C40E2C1C3A35009924C9 /* ProgressLottie.json */,
 				C017C3E82C1C39D0009924C9 /* LaunchScreen.storyboard */,
@@ -780,6 +782,7 @@
 				C017C4722C1C3AA3009924C9 /* Modifiers */,
 				C017C4742C1C3AA3009924C9 /* View+Ext.swift */,
 				C0113D882C3BED0400071BF6 /* LinearGradient+Ext.swift */,
+				C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -1058,9 +1061,9 @@
 			files = (
 				C017C4172C1C3A35009924C9 /* ProgressLottie.json in Resources */,
 				C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */,
-				C0D74A3F2C1E9B3200A45371 /* Genti_Splash.gif in Resources */,
 				C017C4182C1C3A35009924C9 /* Pretendard-Bold.otf in Resources */,
 				C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */,
+				C08BB5B82C3E7EC600D4CFA9 /* SplashLottie.json in Resources */,
 				C017C41C2C1C3A35009924C9 /* Pretendard-SemiBold.otf in Resources */,
 				C017C4192C1C3A35009924C9 /* Pretendard-Light.otf in Resources */,
 				C017C41B2C1C3A35009924C9 /* Pretendard-Regular.otf in Resources */,
@@ -1194,6 +1197,7 @@
 				C017C4952C1C3AA3009924C9 /* ImagePickerViewModel.swift in Sources */,
 				C08BB5B32C3E312B00D4CFA9 /* UserDefaultsRepository.swift in Sources */,
 				C017C4A62C1C3AA3009924C9 /* LoadingView.swift in Sources */,
+				C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */,
 				C02843592C326ACC00B84566 /* PageCommonPictureResponseDTO.swift in Sources */,
 				C08BB5B52C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				C02843762C32BF0700B84566 /* UserRepositoryImpl.swift in Sources */,
