@@ -11,24 +11,22 @@ import Alamofire
 struct LoginView: View {
     @Bindable var router: Router<MainRoute>
     var body: some View {
-            ZStack {
-                // Background Color
-                backgroundView()
-                // Content
-                GeometryReader(content: {
-                    geometry in
-                    VStack(spacing: 55) {
-                        mainHeaderView()
-                        socialLoginButtonsView()
-                    } //:VSTACK
-                    .position(
-                        x: geometry.size.width*0.5,
-                        y: geometry.size.height*0.58
-                    )
-                })
-            } //:ZSTACK
-            .toolbar(.hidden, for: .navigationBar)
-
+        GeometryReader(content: {
+            geometry in
+            VStack(spacing: 55) {
+                mainHeaderView()
+                socialLoginButtonsView()
+            } //:VSTACK
+            .position(
+                x: geometry.size.width*0.5,
+                y: geometry.size.height*0.58
+            )
+            .frame(width: geometry.size.width, height: geometry.size.height)
+        })
+        .background {
+            backgroundView()
+        }
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private func socialLoginButtonsView() -> some View {
@@ -38,15 +36,13 @@ struct LoginView: View {
         } //:VSTACK
     }
     private func kakaoLoginButton() -> some View {
-        Button {
-            // Action
-            router.routeTo(.mainTab)
-        } label: {
-            Image("Kakao_Login")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 45)
-        }
+        Image("Kakao_Login")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(height: 45)
+            .asButton {
+                router.routeTo(.mainTab)
+            }
     }
     private func appleLoginButton() -> some View {
         Image("Apple_Login")

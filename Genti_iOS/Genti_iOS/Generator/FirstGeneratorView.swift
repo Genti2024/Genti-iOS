@@ -14,20 +14,18 @@ struct FirstGeneratorView: View {
     
     var body: some View {
         GeometryReader { _ in
-            ZStack {
-                // Background Color
+            VStack(spacing: 0) {
+                headerView()
+                inpuTextView()
+                randomDescriptionView()
+                addImageView()
+                Spacer()
+                nextButtonView()
+            } //:VSTACK
+            .background {
                 Color.backgroundWhite
                     .ignoresSafeArea()
-                // Content
-                VStack(spacing: 0) {
-                    headerView()
-                    inpuTextView()
-                    randomDescriptionView()
-                    addImageView()
-                    Spacer()
-                    nextButtonView()
-                } //:VSTACK
-            } //:ZSTACK
+            }
         }
         .ignoresSafeArea(.keyboard)
         .focused($isFocused)
@@ -75,16 +73,14 @@ struct FirstGeneratorView: View {
                             .padding(12)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
-                
-                Button {
-                    // Action
-                    self.viewModel.sendAction(.randomButtonTap)
-                } label: {
-                    Image("Change")
-                        .resizable()
-                        .frame(width: 17, height: 17)
-                        .padding(10)
-                }
+
+                Image("Change")
+                    .resizable()
+                    .frame(width: 17, height: 17)
+                    .padding(10)
+                    .asButton {
+                        self.viewModel.sendAction(.randomButtonTap)
+                    }
             } //:HSTACK
             
         }
@@ -131,7 +127,7 @@ struct FirstGeneratorView: View {
     private func referenceImage() -> some View {
         if viewModel.state.referenceImages.count == 0 {
             Rectangle()
-                .fill(.red)
+                .fill(.backgroundWhite)
                 .frame(height: 138)
                 .overlay(alignment: .center) {
                     Image("AddImageIcon")
