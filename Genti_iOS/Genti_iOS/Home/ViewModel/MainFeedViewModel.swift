@@ -38,7 +38,7 @@ final class MainFeedViewModel: ViewModel {
             Task {
                 do {
                     state.feeds = try await mainFeedUseCase.fetchFeeds()
-                } catch(let error) {
+                } catch {
                     print(#fileID, #function, #line, "- error in feed api")
                 }
             }
