@@ -8,5 +8,5 @@
 import Foundation
 
 protocol FeedRepository {
-    func fetchFeeds() async throws -> [ExampleWithPictureFindResponseDTO]
+    func fetchFeeds() async throws -> [FeedEntity]
 }
