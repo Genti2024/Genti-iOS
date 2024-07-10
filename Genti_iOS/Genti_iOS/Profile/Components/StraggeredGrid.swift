@@ -55,5 +55,22 @@ struct StraggeredGrid<Content: View, T: Identifiable>: View {
             }
             .padding(.bottom, 20)
         }
+        .background {
+            BlurView(style: .light)
+                .overlay(alignment: .center) {
+                    if list.isEmpty {
+                        VStack(spacing: 37) {
+                            Image("ExclamationImage")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 43)
+                            
+                            Text("아직 내가 만든 사진이 없어요")
+                                .pretendard(.headline1)
+                                .foregroundStyle(.gray3)
+                        }
+                    }
+                }
+        }
     }
 }

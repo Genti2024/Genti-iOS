@@ -53,7 +53,7 @@ struct FirstGeneratorView: View {
             .padding(.top, 40)
     }
     private func randomDescriptionView() -> some View {
-        VStack {
+        VStack(spacing: 0) {
             Text("이런 사진은 어때요?")
                 .pretendard(.number)
                 .foregroundStyle(.gentiGreen)

@@ -56,13 +56,15 @@ struct ProfileView: View {
                     BlurView(style: .light)
                         .cornerRadius(10, corners: [.topLeft, .topRight])
                         .frame(height: 50)
-                        .shadow(type: .soft)
                         .overlay(alignment: .center) {
                             Text("내가 만든 사진")
                                 .pretendard(.normal)
                                 .foregroundStyle(.black)
                         }
                     
+                    Rectangle()
+                        .fill(.gray6)
+                        .frame(height: 2)
                     
                     StraggeredGrid(list: viewModel.state.myImages, spacing: 1) { object in
                         ImageLoaderView(urlString: object.imageURL, ratio: object.ratio, width: (Constants.screenWidth-1)/2)
@@ -77,24 +79,9 @@ struct ProfileView: View {
                                 }
                             }
                     }
-                    .background {
-                        BlurView(style: .light)
-                            .overlay(alignment: .center) {
-                                if viewModel.state.myImages.isEmpty {
-                                    VStack(spacing: 37) {
-                                        Image("ExclamationImage")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 43)
-                                        
-                                        Text("아직 내가 만든 사진이 없어요")
-                                            .pretendard(.headline1)
-                                            .foregroundStyle(.gray3)
-                                    }
-                                }
-                            }
-                    }
+
                 }
+                .shadow(type: .soft)
             }
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)

@@ -35,7 +35,7 @@ enum UserRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .fetchMyPictures:
-            return "/api/users/v1/pictures/my"
+            return "/api/v1/users/pictures/my"
         }
     }
     
