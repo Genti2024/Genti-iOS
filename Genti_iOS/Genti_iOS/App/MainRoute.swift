@@ -21,6 +21,7 @@ enum MainRoute: Route {
     case webView(url: String)
     case photoDetail(url: String)
     case completeMakeImage
+    case onboarding
     
     @ViewBuilder
     func view(from router: Router<MainRoute>) -> some View {
@@ -49,6 +50,8 @@ enum MainRoute: Route {
             PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, imageUrlString: url))
         case .completeMakeImage:
             RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl())) }
+        case .onboarding:
+            OnboardingView(viewModel: OnboardingViewModel(router: router))
         }
     }
         
@@ -56,7 +59,7 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView:
             return .push
-        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakeImage:
+        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakeImage, .onboarding:
             return .fullScreenCover
         }
     }
