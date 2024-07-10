@@ -23,9 +23,10 @@ enum UserRouter: URLRequestConvertible {
     var headers: HTTPHeaders {
         switch self {
         case .fetchMyPictures:
-            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcxNzI4MzA4OCwiZXhwIjoxNzc3MjgzMDg4fQ.rP2zPOLydDxUXvKqqNsfXSCxO6q8_O2NxhnE6pcP1WQwQqhouoR4UnVgJAiSxs47VCI7thlzbNvGo9mm-qFNig"]
+            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1MjQwNDAsImV4cCI6MTIxNzIwNTI0MDQwLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.sty_CcK9lU0_7l0iNLaLt-vycsBpmc032dOr1QgxFe0uyvoaufzA9cghU7NIOHY6T4DK7N_lWVNl_4eCaRbq9w"]
         }
     }
+
     
     var baseURL: String {
         return "https://genti.kr"
@@ -34,7 +35,7 @@ enum UserRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .fetchMyPictures:
-            return "/api/users/pictures/my"
+            return "/api/users/v1/pictures/my"
         }
     }
     

@@ -36,11 +36,11 @@ enum GeneratorRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .getPresignedUrl:
-            return "/api/presigned-url"
+            return "/api/presigned-url/v1"
         case .getPresignedUrls:
-            return "/api/presigned-url/many"
+            return "/api/presigned-url/v1/many"
         case .requestImage:
-            return "/api/users/picture-generate-requests"
+            return "/api/users/picture-generate-requests/v1"
         }
     }
     
