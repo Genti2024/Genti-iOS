@@ -38,11 +38,8 @@ final class ProfileViewModel: ViewModel {
             Task {
                 do {
                     let entity = try await profileUseCase.fetchInitalUserInfo()
-                    await MainActor.run {
-                        state.hasInProgressImage = entity.hasInProgressPhoto
-                        state.myImages = entity.completedImage.images
-                        
-                    }
+                    state.hasInProgressImage = entity.hasInProgressPhoto
+                    state.myImages = entity.completedImage.images
                     state.isLastPage = entity.completedImage.isLast
                 } catch {
                     
@@ -54,9 +51,7 @@ final class ProfileViewModel: ViewModel {
                     guard !state.isLastPage else { return }
                     state.page += 1
                     let entity = try await profileUseCase.getCompletedPhotos(page: state.page)
-                    await MainActor.run {
-                        state.myImages += entity.images
-                    }
+                    state.myImages += entity.images
                     state.isLastPage = entity.isLast
                 } catch {
                     
