@@ -38,8 +38,11 @@ final class ProfileViewModel: ViewModel {
             Task {
                 do {
                     let entity = try await profileUseCase.fetchInitalUserInfo()
-                    state.hasInProgressImage = entity.hasInProgressPhoto
-                    state.myImages = entity.completedImage.images
+                    await MainActor.run {
+                        state.hasInProgressImage = entity.hasInProgressPhoto
+                        state.myImages = entity.completedImage.images
+                        
+                    }
                     state.isLastPage = entity.completedImage.isLast
                 } catch {
                     
@@ -51,7 +54,9 @@ final class ProfileViewModel: ViewModel {
                     guard !state.isLastPage else { return }
                     state.page += 1
                     let entity = try await profileUseCase.getCompletedPhotos(page: state.page)
-                    state.myImages += entity.images
+                    await MainActor.run {
+                        state.myImages += entity.images
+                    }
                     state.isLastPage = entity.isLast
                 } catch {
                     
@@ -59,7 +64,15 @@ final class ProfileViewModel: ViewModel {
             }
             
         case .imageTap(let url):
-            router.routeTo(.photoDetailWithShare(imageUrl: url))
+            Task {
+                do {
+                    guard let image = await profileUseCase.load(from: url) else { return }
+                    await MainActor.run {
+                        router.routeTo(.photoDetailWithShare(image: image))
+                    }
+                }
+            }
+            
         case .gearButtonTap:
             router.routeTo(.setting)
         }

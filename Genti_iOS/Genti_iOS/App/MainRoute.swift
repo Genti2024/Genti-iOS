@@ -12,14 +12,14 @@ enum MainRoute: Route {
     case login
     case mainTab
     case setting
-    case photoDetailWithShare(imageUrl: String)
+    case photoDetailWithShare(image: UIImage)
     case firstGen
     case secondGen(data: RequestImageData)
     case thirdGen(data: RequestImageData)
     case requestCompleted
     case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
-    case photoDetail(url: String)
+    case photoDetail(image: UIImage)
     case completeMakeImage
     case onboarding
     
@@ -32,8 +32,8 @@ enum MainRoute: Route {
             GentiTabView(router: router)
         case .setting:
             SettingView(router: router)
-        case .photoDetailWithShare(let url):
-            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, imageUrlString: url))
+        case .photoDetailWithShare(let image):
+            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, image: image))
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
@@ -46,8 +46,8 @@ enum MainRoute: Route {
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):
             GentiWebView(router: router, urlString: url)
-        case .photoDetail(let url):
-            PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, imageUrlString: url))
+        case .photoDetail(let image):
+            PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, image: image))
         case .completeMakeImage:
             RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl())) }
         case .onboarding:
@@ -66,7 +66,7 @@ enum MainRoute: Route {
     
     static func == (lhs: MainRoute, rhs: MainRoute) -> Bool {
         switch (lhs, rhs) {
-        case (.photoDetailWithShare(let lhsUrl), .photoDetailWithShare(let rhsUrl)), (.webView(let lhsUrl), .webView(let rhsUrl)):
+        case (.webView(let lhsUrl), .webView(let rhsUrl)):
             return lhsUrl == rhsUrl
         case (.imagePicker, .imagePicker):
             return false

@@ -17,33 +17,24 @@ final class PhotoDetailViewModel: ViewModel {
     var router: Router<MainRoute>
     
     struct State {
-        var image: UIImage? = nil
+        var image: UIImage
     }
     enum Input {
-        case viewWillAppear
         case downloadButtonTap
         case xmarkTap
     }
 
     var state: State
-    var imageUrlString: String
     
-    init(imageRepository: ImageRepository, hapticRepository: HapticRepository, router: Router<MainRoute>, imageUrlString: String) {
+    init(imageRepository: ImageRepository, hapticRepository: HapticRepository, router: Router<MainRoute>, image: UIImage) {
         self.imageRepository = imageRepository
         self.hapticRepository = hapticRepository
         self.router = router
-        self.imageUrlString = imageUrlString
-        self.state = .init()
+        self.state = .init(image: image)
     }
     
     func sendAction(_ input: Input) {
         switch input {
-        case .viewWillAppear:
-            Task {
-                do {
-                    state.image = await imageRepository.load(from: imageUrlString)
-                }
-            }
         case .downloadButtonTap:
             Task {
                 do {
@@ -54,18 +45,5 @@ final class PhotoDetailViewModel: ViewModel {
         case .xmarkTap:
             router.dismissSheet()
         }
-    }
-    var getImage: Image {
-        if let image = self.state.image {
-            return Image(uiImage: image)
-        }
-        return Image(uiImage: UIImage())
-    }
-    
-    var disabled: Bool {
-        if let _ = self.state.image {
-            return false
-        }
-        return true
     }
 }

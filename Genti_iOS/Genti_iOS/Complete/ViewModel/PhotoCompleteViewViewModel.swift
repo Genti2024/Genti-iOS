@@ -114,7 +114,14 @@ final class PhotoCompleteViewViewModel: ViewModel {
     }
 
     private func navigateToPhotoExpandView() {
-        router.routeTo(.photoDetail(url: photoInfo.imageUrlString))
+        Task {
+            do {
+                guard let image = await imageRepository.load(from: photoInfo.imageUrlString) else { return }
+                await MainActor.run {
+                    self.router.routeTo(.photoDetail(image: image))
+                }
+            }
+        }
     }
 
     private func dismissRatingView() {

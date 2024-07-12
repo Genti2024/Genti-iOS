@@ -16,24 +16,19 @@ struct PhotoDetailWithShareView: View {
             let width = geometry.size.width - (2*padding)
             let height = width * 1.5
             VStack(spacing: 20) {
-                Rectangle()
-                    .fill(.clear)
+                Image(uiImage: viewModel.state.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .addDownloadButton {
+                        viewModel.sendAction(.downloadButtonTap) }
                     .frame(width: width, height: height)
-                    .overlay(alignment: .center) {
-                        viewModel.getImage
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .addDownloadButton { viewModel.sendAction(.downloadButtonTap) }
-                    }
-                    .onAppear {
-                        viewModel.sendAction(.viewWillAppear)
-                    }
+
                 
-                ShareLink(item: viewModel.getImage, preview: .init("내 사진", image: viewModel.getImage)) {
+                
+                ShareLink(item: Image(uiImage: viewModel.state.image), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image))) {
                     Text("공유하기")
-                        .shareStyle(disable: viewModel.disabled)
+                        .shareStyle()
                 }
-                .disabled(viewModel.disabled)
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
         }
@@ -44,6 +39,6 @@ struct PhotoDetailWithShareView: View {
     }
 }
 
-#Preview {
-    PhotoDetailWithShareView(viewModel: .init(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: .init(), imageUrlString: ""))
-}
+//#Preview {
+//    PhotoDetailWithShareView(viewModel: .init(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: .init(), imageUrlString: ""))
+//}
