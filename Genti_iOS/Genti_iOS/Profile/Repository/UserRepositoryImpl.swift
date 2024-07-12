@@ -23,4 +23,8 @@ final class UserRepositoryImpl: UserRepository {
     func checkInProgress() async throws -> Bool {
         return [true, false].randomElement()!
     }
+    
+    func reportPhoto(id: Int, content: String) async throws {
+        try await requestService.fetchResponse(for: UserRouter.reportPicture(id: id, content: content))
+    }
 }

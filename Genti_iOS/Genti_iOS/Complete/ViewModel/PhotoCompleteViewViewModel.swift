@@ -16,12 +16,14 @@ final class PhotoCompleteViewViewModel: ViewModel {
     
     let imageRepository: ImageRepository
     let hapticRepository: HapticRepository
+    let userRepository: UserRepository
     
-    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository, hapticRepository: HapticRepository) {
+    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository, hapticRepository: HapticRepository, userRepository: UserRepository) {
         self.photoInfo = photoInfo
         self.router = router
         self.imageRepository = imageRepository
         self.hapticRepository = hapticRepository
+        self.userRepository = userRepository
         self.state = .init()
     }
 
@@ -106,10 +108,15 @@ final class PhotoCompleteViewViewModel: ViewModel {
 
     private func submitReport() {
         Task {
-            state.isLoading = true
-            try await Task.sleep(nanoseconds: 1_000_000_000)
-            state.isLoading = false
-            state.showAlert = .reportComplete
+            do {
+                state.isLoading = true
+                _ = try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
+                state.isLoading = false
+                state.showAlert = .reportComplete
+            } catch {
+                
+            }
+            
         }
     }
 

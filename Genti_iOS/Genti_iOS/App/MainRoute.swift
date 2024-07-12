@@ -49,7 +49,7 @@ enum MainRoute: Route {
         case .photoDetail(let image):
             PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, image: image))
         case .completeMakeImage:
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl())) }
+            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))) }
         case .onboarding:
             OnboardingView(viewModel: OnboardingViewModel(router: router))
         }
