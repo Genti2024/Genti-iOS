@@ -115,6 +115,7 @@ struct FirstGeneratorView: View {
             
             
             referenceImage()
+                .frame(width: 138, height: 138)
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
@@ -126,28 +127,23 @@ struct FirstGeneratorView: View {
     @ViewBuilder
     private func referenceImage() -> some View {
         if viewModel.state.referenceImages.count == 0 {
-            Rectangle()
-                .fill(.backgroundWhite)
-                .frame(height: 138)
-                .overlay(alignment: .center) {
-                    Image("AddImageIcon")
-                        .resizable()
-                        .frame(width: 29, height: 29)
-                }
+            Image("AddImageIcon")
+                .resizable()
+                .frame(width: 29, height: 29)
+                .padding(12)
+                .background(.black.opacity(0.001))
                 .onTapGesture {
                     self.viewModel.sendAction(.addImageButtonTap)
                 }
-
         } else {
             let referenceImage = viewModel.state.referenceImages[0].asset
             PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageRepository: PHAssetImageRepositoryImpl(service: PHAssetImageServiceImpl())), asset: referenceImage)
-                .frame(width: 138, height: 138)
                 .overlay(alignment: .topTrailing) {
                     Image("ImageRemoveButton")
                         .resizable()
                         .frame(width: 15, height: 15)
                         .padding(4)
-                        .background(.black.opacity(0.001))
+                        .background(.black)
                         .onTapGesture {
                             withAnimation(.easeInOut) {
                                 viewModel.sendAction(.removeButtonTap)
