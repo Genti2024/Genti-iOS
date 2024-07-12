@@ -18,12 +18,13 @@ struct ImageLoaderView: View {
     
     var body: some View {
         Rectangle()
+            .fill(.backgroundWhite)
             .frame(width: width)
             .frame(height: width*ratio.ratio)
             .overlay {
                 WebImage(url: URL(string: urlString))
                     .resizable()
-                    .indicator(.activity)
+                    .indicator(.activity(style: .circular))
                     .aspectRatio(contentMode: resizingMode)
                     .allowsHitTesting(false)
             }

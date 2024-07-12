@@ -176,7 +176,7 @@ struct ThirdGeneratorView: View {
                     
                     HStack(spacing: 8) {
                         ForEach(viewModel.state.referenceImages) { imageAsset in
-                            PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageUseCase: PHAssetImageUseCaseImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
+                            PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageRepository: PHAssetImageRepositoryImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
                         }
                     } //:HSTACK
                 } //:VSTACK

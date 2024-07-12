@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct ShareStyleModifier: ViewModifier {
-    var disable: Bool
-    
     func body(content: Content) -> some View {
         content
             .pretendard(.headline1)
             .foregroundStyle(.white)
             .frame(height: 50)
             .frame(maxWidth: .infinity)
-            .background(disable ? .gray4 : .gentiGreen)
+            .background(.gentiGreen)
             .overlay(alignment: .leading) {
                 Image("Share")
                     .resizable()
@@ -29,7 +27,7 @@ struct ShareStyleModifier: ViewModifier {
 }
 
 extension Text {
-    func shareStyle(disable: Bool) -> some View {
-        modifier(ShareStyleModifier(disable: disable))
+    func shareStyle() -> some View {
+        modifier(ShareStyleModifier())
     }
 }

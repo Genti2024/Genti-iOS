@@ -15,7 +15,8 @@ final class FeedRepositoryImpl: FeedRepository {
         self.requestService = requestService
     }
     
-    func fetchFeeds() async throws -> [ExampleWithPictureFindResponseDTO] {
-        return try await requestService.fetchResponse(for: FeedRouter.requestFeed)
+    func fetchFeeds() async throws -> [FeedEntity] {
+        let dto: [ExampleWithPictureFindResponseDTO] = try await requestService.fetchResponse(for: FeedRouter.requestFeed)
+        return dto.map { $0.toEntity }
     }
 }

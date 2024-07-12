@@ -16,7 +16,7 @@ struct PhotoDetailView: View {
     }
     
     var body: some View {
-        viewModel.getImage
+        Image(uiImage: viewModel.state.image)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .overlay(alignment: .bottomTrailing) {
@@ -37,9 +37,6 @@ struct PhotoDetailView: View {
                     .onTapGesture {
                         print(#fileID, #function, #line, "- 배경터치했습니다")
                     }
-            }
-            .onAppear {
-                self.viewModel.sendAction(.viewWillAppear)
             }
     }
 }

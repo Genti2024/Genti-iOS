@@ -56,6 +56,7 @@ struct CustomTabView: View {
                     .frame(height: 1)
             } //:ZSTACK
         )
+        .shadow(type: .strong)
     }
 }
 
@@ -76,3 +77,5 @@ fileprivate struct CustomTabViewPreView: View {
         CustomTabViewPreView()
     } //:ZSTACK
 }
+
+

@@ -25,7 +25,7 @@ enum GeneratorRouter: URLRequestConvertible {
     var headers: HTTPHeaders {
         switch self {
         case .getPresignedUrl, .getPresignedUrls, .requestImage:
-            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImlhdCI6MTcxNzI4MzA4OCwiZXhwIjoxNzc3MjgzMDg4fQ.rP2zPOLydDxUXvKqqNsfXSCxO6q8_O2NxhnE6pcP1WQwQqhouoR4UnVgJAiSxs47VCI7thlzbNvGo9mm-qFNig"]
+            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODE1NTEsImV4cCI6MTIxNzIwNjgxNTUxLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.B2v5nNx_wIpWOeKMWR_OBQbg-5v9i0YnCQxrv3O9ydAG7ldJugvH56VnFuisZt9lpaUfNsKRpOOIMpw4oIzPgw"]
         }
     }
     

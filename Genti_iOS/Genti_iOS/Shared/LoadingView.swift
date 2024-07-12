@@ -16,7 +16,7 @@ struct LoadingView: View {
             Color.black.opacity(0.4)
                 .ignoresSafeArea()
             // Content
-            LottieView(animation: .named("ProgressLottie"))
+            LottieView(type: .loading)
                 .looping()
                 .frame(width: 100, height: 100)
         } //:ZSTACK

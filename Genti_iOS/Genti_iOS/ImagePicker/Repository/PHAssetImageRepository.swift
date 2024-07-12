@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PHAssetImageUseCase {
+protocol PHAssetImageRepository {
     func getImage(from photoInfo: PHAssetImageViewModel.PhotoInfo, completionHandler: @escaping (UIImage?, [AnyHashable : Any]?) -> Void)
     func cancelLoad()
 }

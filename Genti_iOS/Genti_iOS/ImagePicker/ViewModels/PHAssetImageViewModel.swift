@@ -36,17 +36,17 @@ final class PHAssetImageViewModel: ViewModel {
     }
     
     var state: PHAssetImageViewModel.State
-    var phassetImageUseCase: PHAssetImageUseCase
+    var phassetImageRepository: PHAssetImageRepository
     
-    init(phassetImageUseCase: PHAssetImageUseCase) {
-        self.phassetImageUseCase = phassetImageUseCase
+    init(phassetImageRepository: PHAssetImageRepository) {
+        self.phassetImageRepository = phassetImageRepository
         self.state = .init()
     }
 
     /// PHAsset으로부터 UIImage를 반환받아 state의 image에 할당해줍니다
     /// - Parameter photoInfo: PHAsset과 Size가 담겨있는 custom Struct 
     func load(from photoInfo: PHAssetImageViewModel.PhotoInfo) {
-        phassetImageUseCase.getImage(from: photoInfo) { image, _ in
+        phassetImageRepository.getImage(from: photoInfo) { image, _ in
             DispatchQueue.main.async {
                 self.state.image = image
             }
@@ -55,6 +55,6 @@ final class PHAssetImageViewModel: ViewModel {
     
     /// PHAsset에서 UIImage로의 변환을 취소합니다
     func cancel() {
-        phassetImageUseCase.cancelLoad()
+        phassetImageRepository.cancelLoad()
     }
 }

@@ -30,7 +30,7 @@ struct PhotoCompleteView: View {
                     
                     ShareLink(item: viewModel.getImage, preview: .init("내 사진", image: viewModel.getImage)) {
                         Text("공유하기")
-                            .shareStyle(disable: viewModel.disabled)
+                            .shareStyle()
                     }
                     .disabled(viewModel.disabled)
                     

@@ -14,10 +14,10 @@ struct GentiTabView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $currentTab) {
-                MainFeedView(viewModel: MainFeedViewModel(mainFeedUseCase: MainFeedUseCaseImpl(feedRepository: FeedRepositoryImpl(requestService: RequestServiceImpl()), userDefaultsRepository: UserDefaultsRepositoryImpl()), router: router))
+                MainFeedView(viewModel: MainFeedViewModel(feedRepository: FeedRepositoryImpl(requestService: RequestServiceImpl()), userDefaultsRepository: UserDefaultsRepositoryImpl(), router: router))
                     .tag(Tab.feed)
 
-                ProfileView(viewModel: ProfileViewModel(profileUseCase: ProfileUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())), router: router))
+                ProfileView(viewModel: ProfileViewModel(profileUseCase: ProfileUseCaseImpl(imageRepository: ImageRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())), router: router))
                 .tag(Tab.profile)
             }
             

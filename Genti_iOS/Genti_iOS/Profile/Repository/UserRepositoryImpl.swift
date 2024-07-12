@@ -15,7 +15,12 @@ final class UserRepositoryImpl: UserRepository {
         self.requestService = requestService
     }
     
-    func getMyPictures(page: Int) async throws -> PageCommonPictureResponseDTO {
-        return try await requestService.fetchResponse(for: UserRouter.fetchMyPictures(page: page))
+    func getMyPictures(page: Int) async throws -> MyImagesEntitiy {
+        let dto: PageCommonPictureResponseDTO = try await requestService.fetchResponse(for: UserRouter.fetchMyPictures(page: page))
+        return dto.toEntity
+    }
+    
+    func checkInProgress() async throws -> Bool {
+        return [true, false].randomElement()!
     }
 }

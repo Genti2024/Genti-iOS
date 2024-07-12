@@ -13,27 +13,30 @@ struct MainFeedView: View {
     
     var body: some View {
         ZStack {
-            // Background Color
+            VStack {
+                headerView()
+                ScrollView {
+                    scrollHederView()
+                    feedsView()
+                }
+                .refreshable {
+                    print(#fileID, #function, #line, "- refresh main feed")
+                }
+            }.zIndex(0)
+            
+            if !viewModel.state.isLogoHidden {
+                logoView().zIndex(1)
+            }
+        } //:ZSTACK
+        .background {
             Color.backgroundWhite
                 .ignoresSafeArea()
-            // Content
-            ZStack {
-                VStack {
-                    headerView()
-                    ScrollView {
-                        scrollHederView()
-                        feedsView()
-                    }
-                    .refreshable {
-                        print(#fileID, #function, #line, "- refresh main feed")
-                    }
-                }.zIndex(0)
-                
-                if !viewModel.state.isLogoHidden {
-                    logoView().zIndex(1)
-                }
-            } //:ZSTACK
-        } //:ZSTACK
+        }
+        .overlay {
+            if viewModel.state.isLoading {
+                LoadingView()
+            }
+        }
         .onFirstAppear {
             self.viewModel.sendAction(.viewWillAppear)
         }

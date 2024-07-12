@@ -53,15 +53,15 @@ final class ImagePickerViewModel: ViewModel {
     var router: Router<MainRoute>
     var state: ImagePickerViewModel.State
     let limit: Int
-    private let albumUseCase: AlbumUseCase
 
+    private let albumRepository: AlbumRepository
     var scrollViewHeight: CGFloat = 0
 
-    init(generatorViewModel: GetImageFromImagePicker, router: Router<MainRoute>, limit: Int, albumUseCase: AlbumUseCase) {
+    init(generatorViewModel: GetImageFromImagePicker, router: Router<MainRoute>, limit: Int, albumRepository: AlbumRepository) {
         self.generatorViewModel = generatorViewModel
         self.router = router
         self.limit = limit
-        self.albumUseCase = albumUseCase
+        self.albumRepository = albumRepository
         self.state = .init()
     }
     
@@ -94,9 +94,28 @@ final class ImagePickerViewModel: ViewModel {
     /// 이미지를 추가합니다
     /// 현재 이미지 pagination을 구현해놨기때문에 이미지가 계속해서 추가되어야합니다 UseCase에서 이미지를 받아와서 fetch된이미지에추가하고 인덱스값을 갱신해줍니다
     private func appendImages() {
-        guard let newImages = albumUseCase.getImageAsset(from: state.currentIndex) else { return }
+        guard let newImages = self.getImageAsset(from: state.currentIndex) else { return }
         state.fetchedImages.append(contentsOf: newImages)
         state.currentIndex += newImages.count
+    }
+    
+    /// 앨범에서 Pagination을 구현하기위한 indexset을 구합니다
+    /// - Parameter currentIndex: 현재 이미지의 인덱스
+    /// - Returns:
+    func getImageAsset(from currentIndex: Int) -> [ImageAsset]? {
+        guard let indexSet = getNextIndexSet(currentIndex: currentIndex, quantity: 50) else { return nil }
+        return albumRepository.getImageAsset(from: indexSet)
+    }
+    
+    /// pagination으로 인해 추가로 가져올 이미지들의 IndexSet을 구합니다
+    /// - Parameters:
+    ///   - currentIndex: 현재까지 가져온 이미지의 갯수
+    ///   - quantity: 한번에 가져올 이미지의 갯수
+    /// - Returns: 추가적으로 가져올 이미지의 IndexSet
+    private func getNextIndexSet(currentIndex: Int, quantity: Int) -> IndexSet? {
+        let endIndex = min(currentIndex + quantity, albumRepository.numberOfImage)
+        guard currentIndex < endIndex else { return nil }
+        return IndexSet(currentIndex..<endIndex)
     }
     
     /// 앨범이미지를 선택합니다

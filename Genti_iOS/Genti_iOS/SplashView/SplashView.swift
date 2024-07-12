@@ -8,20 +8,21 @@
 import SwiftUI
 
 import SDWebImageSwiftUI
+import Lottie
 
 struct SplashView: View {
     @Bindable var router: Router<MainRoute>
     var body: some View {
-        ZStack {
-            AnimatedImage(name: "Genti_Splash.gif")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+        LottieView(type: .splash)
+            .playing(loopMode: .playOnce)
+            .animationDidFinish { _ in
                 router.routeTo(.login)
             }
-        }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
     }
 }
+
+
+
+
