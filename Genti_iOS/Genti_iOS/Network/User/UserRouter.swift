@@ -23,7 +23,7 @@ enum UserRouter: URLRequestConvertible {
     var headers: HTTPHeaders {
         switch self {
         case .fetchMyPictures:
-            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1MjQwNDAsImV4cCI6MTIxNzIwNTI0MDQwLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.sty_CcK9lU0_7l0iNLaLt-vycsBpmc032dOr1QgxFe0uyvoaufzA9cghU7NIOHY6T4DK7N_lWVNl_4eCaRbq9w"]
+            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODE1NTEsImV4cCI6MTIxNzIwNjgxNTUxLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.B2v5nNx_wIpWOeKMWR_OBQbg-5v9i0YnCQxrv3O9ydAG7ldJugvH56VnFuisZt9lpaUfNsKRpOOIMpw4oIzPgw"]
         }
     }
 
