@@ -38,7 +38,7 @@ enum GeneratorRouter: URLRequestConvertible {
         case .getPresignedUrl:
             return "/api/v1/presigned-url/"
         case .getPresignedUrls:
-            return "/api/v1/presigned-url/many/"
+            return "/api/v1/presigned-url/many"
         case .requestImage:
             return "/api/v1/users/picture-generate-requests/"
         }

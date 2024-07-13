@@ -72,7 +72,10 @@ final class PhotoCompleteViewViewModel: ViewModel {
         case .viewWillAppear:
             Task {
                 do {
-                    state.image = await imageRepository.load(from: photoInfo.imageUrlString)
+                    let image = await imageRepository.load(from: photoInfo.imageUrlString)
+                    await MainActor.run {
+                        state.image = image
+                    }
                 }
                 
             }
