@@ -11,23 +11,17 @@ struct RatingAlertView: View {
     @Bindable var viewModel: PhotoCompleteViewViewModel
     
     var body: some View {
-        ZStack {
-            
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-            
-            Image("Rating_backgroundImage")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 270, height: 250)
-                .overlay(alignment: .top) {
-                    VStack(spacing: 0) {
-                        ratingContentView()
-                        acceptButton()
-                        cancelButton()
-                    }
+        Image("Rating_backgroundImage")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 270, height: 250)
+            .overlay(alignment: .top) {
+                VStack(spacing: 0) {
+                    ratingContentView()
+                    acceptButton()
+                    cancelButton()
                 }
-        }
+            }
     }
     
     private func ratingContentView() -> some View {

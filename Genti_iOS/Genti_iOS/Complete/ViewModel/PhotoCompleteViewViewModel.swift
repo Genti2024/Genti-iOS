@@ -112,26 +112,23 @@ final class PhotoCompleteViewViewModel: ViewModel {
     private func submitReport() {
         Task {
             do {
-                state.isLoading = true
+                await MainActor.run {
+                    state.isLoading = true
+                }
                 _ = try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
-                state.isLoading = false
-                state.showAlert = .reportComplete
+                await MainActor.run {
+                    state.isLoading = false
+                    state.showAlert = .reportComplete
+                }
             } catch {
                 
             }
-            
         }
     }
 
     private func navigateToPhotoExpandView() {
-        Task {
-            do {
-                guard let image = await imageRepository.load(from: photoInfo.imageUrlString) else { return }
-                await MainActor.run {
-                    self.router.routeTo(.photoDetail(image: image))
-                }
-            }
-        }
+        guard let image = state.image else { return }
+        self.router.routeTo(.photoDetail(image: image))
     }
 
     private func dismissRatingView() {

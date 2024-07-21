@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import PopupView
+
 struct PhotoCompleteView: View {
 
     @State var viewModel: PhotoCompleteViewViewModel
@@ -59,15 +61,20 @@ struct PhotoCompleteView: View {
                     Spacer()
                 }
                 
-                if viewModel.state.showRatingView {
-                    RatingAlertView(viewModel: viewModel)
-                }
-
                 if viewModel.state.isLoading {
                     LoadingView()
                 }
                 
             } //:ZSTACK
+        }
+        .popup(isPresented: $viewModel.state.showRatingView) {
+            RatingAlertView(viewModel: viewModel)
+        } customize: {
+            $0
+                .appearFrom(.bottomSlide)
+                .animation(.snappy(duration: 0.3))
+                .closeOnTapOutside(false)
+                .backgroundColor(.black.opacity(0.3))
         }
         .ignoresSafeArea()
         .ignoresSafeArea(.keyboard)

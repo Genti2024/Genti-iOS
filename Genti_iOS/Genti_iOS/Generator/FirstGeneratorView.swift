@@ -190,6 +190,6 @@ struct FirstGeneratorView: View {
     }
 }
 
-//#Preview {
-//    FirstGeneratorView(router: .init())
-//}
+#Preview {
+    FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: .init()))
+}

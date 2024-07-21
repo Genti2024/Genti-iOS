@@ -8,7 +8,8 @@
 import Foundation
 
 enum UserDefaultsKey: String {
-    case isFirst
+    case isFirstVisitApp
+    case isFirstGenerate
 }
 
 
