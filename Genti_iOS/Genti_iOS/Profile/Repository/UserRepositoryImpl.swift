@@ -8,6 +8,8 @@
 import Foundation
 
 final class UserRepositoryImpl: UserRepository {
+    func ratePhoto(rate: Int) async throws {}
+    
 
     let requestService: RequestService
     

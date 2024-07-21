@@ -26,6 +26,7 @@ final class SecondGeneratorViewModel: ViewModel {
         var selectedAngle: PhotoAngle? = nil
         var selectedFrame: PhotoFrame? = nil
         var selectedRatio: PhotoRatio? = nil
+        var showOnboarding: Bool = false
     }
     
     enum Input {
@@ -35,6 +36,7 @@ final class SecondGeneratorViewModel: ViewModel {
         case nextButtonTap
         case xmarkTap
         case backButtonTap
+        case viewWillAppear
     }
     
     func sendAction(_ input: Input) {
@@ -51,6 +53,10 @@ final class SecondGeneratorViewModel: ViewModel {
             self.router.dismissSheet()
         case .backButtonTap:
             self.router.dismiss()
+        case .viewWillAppear:
+            if userdefaultRepository.isFirstGenerate {
+                self.state.showOnboarding.toggle()
+            }
         }
     }
     

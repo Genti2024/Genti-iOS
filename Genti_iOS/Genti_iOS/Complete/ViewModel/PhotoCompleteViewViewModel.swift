@@ -29,14 +29,9 @@ final class PhotoCompleteViewViewModel: ViewModel {
 
     struct State {
         var image: UIImage? = nil
-        var rating: Int = 0
         var reportContent: String = ""
         var isLoading: Bool = false
-        var showRatingView: Bool = false {
-            didSet {
-                self.rating = 0
-            }
-        }
+        var showRatingView: Bool = false
         var showAlert: AlertType? = nil {
             didSet {
                 self.reportContent = ""
@@ -49,10 +44,8 @@ final class PhotoCompleteViewViewModel: ViewModel {
         case goToMainButtonTap
         case reportButtonTap
         case imageTap
-        case ratingViewSkipButtonTap
-        case ratingViewSubmitButtonTap
-        case ratingViewStarTap(rating: Int)
         case downloadButtonTap
+        case ratingActionIsDone
     }
 
     func sendAction(_ input: Input) {
@@ -63,12 +56,12 @@ final class PhotoCompleteViewViewModel: ViewModel {
             presentReportAlert()
         case .imageTap:
             navigateToPhotoExpandView()
-        case .ratingViewSkipButtonTap:
-            dismissRatingView()
-        case .ratingViewSubmitButtonTap:
-            submitRating()
-        case .ratingViewStarTap(let rating):
-            updateRating(rating)
+//        case .ratingViewSkipButtonTap:
+//            dismissRatingView()
+//        case .ratingViewSubmitButtonTap:
+//            submitRating()
+//        case .ratingViewStarTap(let rating):
+//            updateRating(rating)
         case .viewWillAppear:
             Task {
                 do {
@@ -89,6 +82,8 @@ final class PhotoCompleteViewViewModel: ViewModel {
                     }
                 }
             }
+        case .ratingActionIsDone:
+            self.router.dismissSheet()
         }
     }
 
@@ -145,7 +140,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
     }
 
     private func updateRating(_ rating: Int) {
-        state.rating = rating
+//        state.rating = rating
     }
     
     var getImage: Image {
