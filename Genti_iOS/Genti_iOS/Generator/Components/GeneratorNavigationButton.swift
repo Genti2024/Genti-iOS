@@ -27,11 +27,11 @@ struct GeneratorNavigationButton: View {
             .frame(maxWidth: .infinity)
             .background(isActive ? .gray5 : .green1)
             .clipShape(.rect(cornerRadius: 10))
-            .disabled(isActive)
             .padding(.horizontal, 28)
             .asButton(.press) {
                 action()
             }
+            .disabled(isActive)
     }
 }
 

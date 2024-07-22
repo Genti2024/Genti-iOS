@@ -48,7 +48,7 @@ final class MainFeedViewModel: ViewModel {
                 }
             }
             
-            if userDefaultsRepository.isFirstVisit {
+            if userDefaultsRepository.isFirstVisitApp {
                 self.router.routeTo(.onboarding)
             }
         case .scroll(offset: let offset):

@@ -8,7 +8,8 @@
 import Foundation
 
 protocol UserDefaultsRepository {
-    var isFirstVisit: Bool { get }
+    var isFirstVisitApp: Bool { get }
+    var isFirstGenerate: Bool { get }
 }
 
 extension UserDefaultsRepository {

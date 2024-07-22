@@ -13,8 +13,6 @@ struct ProfileView: View {
     
     var body: some View {
         GeometryReader { geometry in
-
-                // Content
                 VStack {
                     HStack {
                         Text("마이페이지")
@@ -90,7 +88,6 @@ struct ProfileView: View {
             }
 
         }
-
         .toolbar(.hidden, for: .navigationBar)
         .onFirstAppear {
             viewModel.sendAction(.viewWillAppear)

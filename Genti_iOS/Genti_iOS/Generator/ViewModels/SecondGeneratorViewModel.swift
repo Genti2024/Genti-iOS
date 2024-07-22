@@ -12,10 +12,12 @@ final class SecondGeneratorViewModel: ViewModel {
  
     var router: Router<MainRoute>
     var requestImageData: RequestImageData
-    var state: SecondGeneratorViewModel.State
+    var state: State
+    var userdefaultRepository: UserDefaultsRepository
     
-    init(requestImageData: RequestImageData, router: Router<MainRoute>) {
+    init(requestImageData: RequestImageData, router: Router<MainRoute>, userdefaultRepository: UserDefaultsRepository) {
         self.requestImageData = requestImageData
+        self.userdefaultRepository = userdefaultRepository
         self.router = router
         self.state = .init()
     }
@@ -24,6 +26,7 @@ final class SecondGeneratorViewModel: ViewModel {
         var selectedAngle: PhotoAngle? = nil
         var selectedFrame: PhotoFrame? = nil
         var selectedRatio: PhotoRatio? = nil
+        var showOnboarding: Bool = false
     }
     
     enum Input {
@@ -33,6 +36,7 @@ final class SecondGeneratorViewModel: ViewModel {
         case nextButtonTap
         case xmarkTap
         case backButtonTap
+        case viewWillAppear
     }
     
     func sendAction(_ input: Input) {
@@ -49,7 +53,15 @@ final class SecondGeneratorViewModel: ViewModel {
             self.router.dismissSheet()
         case .backButtonTap:
             self.router.dismiss()
+        case .viewWillAppear:
+            if userdefaultRepository.isFirstGenerate {
+                self.state.showOnboarding.toggle()
+            }
         }
+    }
+    
+    var isFirstGenerate: Bool {
+        return self.userdefaultRepository.isFirstGenerate
     }
     
     var angleOrFrameOrRatioIsEmpty: Bool {

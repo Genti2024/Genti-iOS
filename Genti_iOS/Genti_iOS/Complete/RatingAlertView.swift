@@ -7,27 +7,76 @@
 
 import SwiftUI
 
-struct RatingAlertView: View {
-    @Bindable var viewModel: PhotoCompleteViewViewModel
+@Observable
+final class RatingAlertViewModel: ViewModel {
     
-    var body: some View {
-        ZStack {
-            
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-            
-            Image("Rating_backgroundImage")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 270, height: 250)
-                .overlay(alignment: .top) {
-                    VStack(spacing: 0) {
-                        ratingContentView()
-                        acceptButton()
-                        cancelButton()
+    var userRepository: UserRepository
+    
+    struct State {
+        var rating: Int = 0
+        var isLoading: Bool = false
+    }
+    
+    enum Input {
+        case ratingViewSkipButtonTap
+        case ratingViewSubmitButtonTap
+        case ratingViewStarTap(rating: Int)
+    }
+    
+    var state: State
+    
+    init(userRepository: UserRepository) {
+        self.userRepository = userRepository
+        self.state = .init()
+    }
+    
+    func sendAction(_ input: Input) {
+        switch input {
+        case .ratingViewSkipButtonTap:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+        case .ratingViewSubmitButtonTap:
+            Task {
+                do {
+                    await MainActor.run {
+                        self.state.isLoading = true
+                    }
+                    try await Task.sleep(nanoseconds: 1000000000)
+                    try await userRepository.ratePhoto(rate: state.rating)
+                    
+                    await MainActor.run {
+                        self.state.isLoading = false
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
                     }
                 }
+            }
+        case .ratingViewStarTap(let rating):
+            self.state.rating = rating
         }
+    }
+}
+
+struct RatingAlertView: View {
+    @State var viewModel: RatingAlertViewModel
+    
+    var body: some View {
+        Image("Rating_backgroundImage")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 270, height: 250)
+            .overlay(alignment: .top) {
+                VStack(spacing: 0) {
+                    ratingContentView()
+                    acceptButton()
+                    cancelButton()
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+            .overlay(alignment: .center) {
+                if viewModel.state.isLoading {
+                    LoadingView()
+                }
+            }
     }
     
     private func ratingContentView() -> some View {
@@ -45,6 +94,7 @@ struct RatingAlertView: View {
             .frame(maxWidth: .infinity)
             .background(.black.opacity(0.001))
             .onTapGesture {
+                print(#fileID, #function, #line, "- 1")
                 self.viewModel.sendAction(.ratingViewSkipButtonTap)
             }
             .padding(.top, 12)
@@ -63,6 +113,7 @@ struct RatingAlertView: View {
             
             .background(.black.opacity(0.001))
             .asButton(.press, action: {
+                print(#fileID, #function, #line, "- 2")
                 self.viewModel.sendAction(.ratingViewSubmitButtonTap)
             })
             .disabled(viewModel.state.rating == 0)
@@ -76,6 +127,7 @@ struct RatingAlertView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30, height: 30)
                     .onTapGesture {
+                        print(#fileID, #function, #line, "- 3")
                         viewModel.sendAction(.ratingViewStarTap(rating: index))
                     }
             }

@@ -37,7 +37,7 @@ enum MainRoute: Route {
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
-            SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data, router: router))
+            SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data, router: router, userdefaultRepository: UserDefaultsRepositoryImpl()))
         case .thirdGen(let data):
             ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(imageGenerateUseCase: ImageGenerateUseCaseImpl(generateRepository: ImageGenerateRepositoryImpl(requsetService: RequestServiceImpl(), imageDataTransferService: ImageDataTransferServiceImpl(), uploadService: UploadServiceImpl())), requestImageData: data, router: router))
         case .imagePicker(limitCount: let limitCount, viewModel: let viewModel):
@@ -49,7 +49,7 @@ enum MainRoute: Route {
         case .photoDetail(let image):
             PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, image: image))
         case .completeMakeImage:
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl())) }
+            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))) }
         case .onboarding:
             OnboardingView(viewModel: OnboardingViewModel(router: router))
         }

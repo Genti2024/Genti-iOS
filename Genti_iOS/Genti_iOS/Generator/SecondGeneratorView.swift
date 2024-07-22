@@ -7,23 +7,30 @@
 
 import SwiftUI
 
+import PopupView
+
 struct SecondGeneratorView: View {
     @State var viewModel: SecondGeneratorViewModel
-
+    
     var body: some View {
-            ZStack {
-                // Background Color
-                Color.backgroundWhite
-                    .ignoresSafeArea()
-                // Content
-                VStack(spacing: 0) {
-                    headerView()
-                    selectViews()
-                    Spacer()
-                    nextButtonView()
-                } //:VSTACK
-            } //:ZSTACK
+        ZStack {
+            // Background Color
+            Color.backgroundWhite
+                .ignoresSafeArea()
+            // Content
+            VStack(spacing: 0) {
+                headerView()
+                selectViews()
+                Spacer()
+                nextButtonView()
+            } //:VSTACK
+        } //:ZSTACK
+        .addCustomPopup(isPresented: $viewModel.state.showOnboarding, popupType: .selectOnboarding)
+        .onAppear {
+            self.viewModel.sendAction(.viewWillAppear)
+        }
         .toolbar(.hidden, for: .navigationBar)
+
     }
     
     private func nextButtonView() -> some View {
@@ -188,6 +195,8 @@ struct SecondGeneratorView: View {
     }
 }
 
-//#Preview {
-//    SecondGeneratorView(router: .init())
-//}
+#Preview {
+    SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: .init(), router: .init(), userdefaultRepository: UserDefaultsRepositoryImpl()))
+}
+
+

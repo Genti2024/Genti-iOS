@@ -16,25 +16,22 @@ final class PhotoCompleteViewViewModel: ViewModel {
     
     let imageRepository: ImageRepository
     let hapticRepository: HapticRepository
+    let userRepository: UserRepository
     
-    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository, hapticRepository: HapticRepository) {
+    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository, hapticRepository: HapticRepository, userRepository: UserRepository) {
         self.photoInfo = photoInfo
         self.router = router
         self.imageRepository = imageRepository
         self.hapticRepository = hapticRepository
+        self.userRepository = userRepository
         self.state = .init()
     }
 
     struct State {
         var image: UIImage? = nil
-        var rating: Int = 0
         var reportContent: String = ""
         var isLoading: Bool = false
-        var showRatingView: Bool = false {
-            didSet {
-                self.rating = 0
-            }
-        }
+        var showRatingView: Bool = false
         var showAlert: AlertType? = nil {
             didSet {
                 self.reportContent = ""
@@ -47,10 +44,8 @@ final class PhotoCompleteViewViewModel: ViewModel {
         case goToMainButtonTap
         case reportButtonTap
         case imageTap
-        case ratingViewSkipButtonTap
-        case ratingViewSubmitButtonTap
-        case ratingViewStarTap(rating: Int)
         case downloadButtonTap
+        case ratingActionIsDone
     }
 
     func sendAction(_ input: Input) {
@@ -61,16 +56,19 @@ final class PhotoCompleteViewViewModel: ViewModel {
             presentReportAlert()
         case .imageTap:
             navigateToPhotoExpandView()
-        case .ratingViewSkipButtonTap:
-            dismissRatingView()
-        case .ratingViewSubmitButtonTap:
-            submitRating()
-        case .ratingViewStarTap(let rating):
-            updateRating(rating)
+//        case .ratingViewSkipButtonTap:
+//            dismissRatingView()
+//        case .ratingViewSubmitButtonTap:
+//            submitRating()
+//        case .ratingViewStarTap(let rating):
+//            updateRating(rating)
         case .viewWillAppear:
             Task {
                 do {
-                    state.image = await imageRepository.load(from: photoInfo.imageUrlString)
+                    let image = await imageRepository.load(from: photoInfo.imageUrlString)
+                    await MainActor.run {
+                        state.image = image
+                    }
                 }
                 
             }
@@ -84,6 +82,8 @@ final class PhotoCompleteViewViewModel: ViewModel {
                     }
                 }
             }
+        case .ratingActionIsDone:
+            self.router.dismissSheet()
         }
     }
 
@@ -106,22 +106,24 @@ final class PhotoCompleteViewViewModel: ViewModel {
 
     private func submitReport() {
         Task {
-            state.isLoading = true
-            try await Task.sleep(nanoseconds: 1_000_000_000)
-            state.isLoading = false
-            state.showAlert = .reportComplete
+            do {
+                await MainActor.run {
+                    state.isLoading = true
+                }
+                _ = try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
+                await MainActor.run {
+                    state.isLoading = false
+                    state.showAlert = .reportComplete
+                }
+            } catch {
+                
+            }
         }
     }
 
     private func navigateToPhotoExpandView() {
-        Task {
-            do {
-                guard let image = await imageRepository.load(from: photoInfo.imageUrlString) else { return }
-                await MainActor.run {
-                    self.router.routeTo(.photoDetail(image: image))
-                }
-            }
-        }
+        guard let image = state.image else { return }
+        self.router.routeTo(.photoDetail(image: image))
     }
 
     private func dismissRatingView() {
@@ -138,7 +140,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
     }
 
     private func updateRating(_ rating: Int) {
-        state.rating = rating
+//        state.rating = rating
     }
     
     var getImage: Image {

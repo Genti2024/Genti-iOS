@@ -12,17 +12,20 @@ import Alamofire
 enum UserRouter: URLRequestConvertible {
     
     case fetchMyPictures(page: Int)
+    case reportPicture(id: Int, content: String)
     
     var method: HTTPMethod {
         switch self {
         case .fetchMyPictures:
             return .get
+        case .reportPicture:
+            return .post
         }
     }
     
     var headers: HTTPHeaders {
         switch self {
-        case .fetchMyPictures:
+        case .fetchMyPictures, .reportPicture:
             return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODE1NTEsImV4cCI6MTIxNzIwNjgxNTUxLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.B2v5nNx_wIpWOeKMWR_OBQbg-5v9i0YnCQxrv3O9ydAG7ldJugvH56VnFuisZt9lpaUfNsKRpOOIMpw4oIzPgw"]
         }
     }
@@ -36,6 +39,8 @@ enum UserRouter: URLRequestConvertible {
         switch self {
         case .fetchMyPictures:
             return "/api/v1/users/pictures/my"
+        case .reportPicture:
+            return "/api/v1/users/reports"
         }
     }
     
@@ -56,6 +61,11 @@ enum UserRouter: URLRequestConvertible {
             
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
             
+        case .reportPicture(id: let id, content: let content):
+            var parameters: [String: Any] = [:]
+            parameters["pictureGenerateResponseId"] = id
+            parameters["content"] = content
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         }
         
         return urlRequest

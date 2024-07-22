@@ -107,6 +107,7 @@
 		C02843792C32BF1B00B84566 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02843782C32BF1B00B84566 /* ProfileUseCase.swift */; };
 		C028437B2C32BF3F00B84566 /* ProfileUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028437A2C32BF3F00B84566 /* ProfileUseCaseImpl.swift */; };
 		C028437E2C32BF5F00B84566 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028437D2C32BF5F00B84566 /* ProfileViewModel.swift */; };
+		C02D58952C46741300C42D47 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = C02D58942C46741300C42D47 /* PopupView */; };
 		C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */; };
 		C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */; };
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
@@ -134,6 +135,11 @@
 		C08BB5B82C3E7EC600D4CFA9 /* SplashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */; };
 		C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */; };
 		C08BB5BC2C3E8F6700D4CFA9 /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08BB5BB2C3E8F6700D4CFA9 /* ShadowModifier.swift */; };
+		C095967E2C4DECD100FC5ECC /* CustomPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C095967D2C4DECD100FC5ECC /* CustomPopUp.swift */; };
+		C09596802C4DECEE00FC5ECC /* PopUpType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C095967F2C4DECEE00FC5ECC /* PopUpType.swift */; };
+		C09596822C4DED1C00FC5ECC /* CustomPopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09596812C4DED1C00FC5ECC /* CustomPopupModifier.swift */; };
+		C09596872C4DED5400FC5ECC /* RatingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09596862C4DED5400FC5ECC /* RatingPopup.swift */; };
+		C09596892C4DED6800FC5ECC /* SelectOnboardingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */; };
 		C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3522C1C3C7D0006EF83 /* SDWebImageSwiftUI */; };
 		C099C3562C1C3C8B0006EF83 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3552C1C3C8B0006EF83 /* SwiftfulUI */; };
 		C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* MainRoute.swift */; };
@@ -297,6 +303,11 @@
 		C08BB5B72C3E7EC600D4CFA9 /* SplashLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashLottie.json; sourceTree = "<group>"; };
 		C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LottieView+Ext.swift"; sourceTree = "<group>"; };
 		C08BB5BB2C3E8F6700D4CFA9 /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
+		C095967D2C4DECD100FC5ECC /* CustomPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUp.swift; sourceTree = "<group>"; };
+		C095967F2C4DECEE00FC5ECC /* PopUpType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpType.swift; sourceTree = "<group>"; };
+		C09596812C4DED1C00FC5ECC /* CustomPopupModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupModifier.swift; sourceTree = "<group>"; };
+		C09596862C4DED5400FC5ECC /* RatingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPopup.swift; sourceTree = "<group>"; };
+		C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOnboardingPopup.swift; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
 		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
@@ -316,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C08BB5B02C3E28E300D4CFA9 /* FirebaseMessaging in Frameworks */,
+				C02D58952C46741300C42D47 /* PopupView in Frameworks */,
 				C099C3562C1C3C8B0006EF83 /* SwiftfulUI in Frameworks */,
 				C09A63F72C3E25EA00FAB87F /* Alamofire in Frameworks */,
 				C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */,
@@ -767,6 +779,7 @@
 		C017C4722C1C3AA3009924C9 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				C095967C2C4DECBC00FC5ECC /* CustomPopUpModifier */,
 				C0113D802C3BEAA400071BF6 /* AddDownloadButtonModifier.swift */,
 				C0113D7F2C3BEAA400071BF6 /* AddXmarkModifier.swift */,
 				C0113D7D2C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift */,
@@ -925,6 +938,26 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		C095967C2C4DECBC00FC5ECC /* CustomPopUpModifier */ = {
+			isa = PBXGroup;
+			children = (
+				C09596852C4DED4A00FC5ECC /* PopUp */,
+				C095967D2C4DECD100FC5ECC /* CustomPopUp.swift */,
+				C095967F2C4DECEE00FC5ECC /* PopUpType.swift */,
+				C09596812C4DED1C00FC5ECC /* CustomPopupModifier.swift */,
+			);
+			path = CustomPopUpModifier;
+			sourceTree = "<group>";
+		};
+		C09596852C4DED4A00FC5ECC /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				C09596862C4DED5400FC5ECC /* RatingPopup.swift */,
+				C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		C0B80E662C23C5E80071C3CD /* Inferface */ = {
 			isa = PBXGroup;
 			children = (
@@ -966,6 +999,7 @@
 				C09A63F62C3E25EA00FAB87F /* Alamofire */,
 				C08BB5AD2C3E28E300D4CFA9 /* FirebaseAnalytics */,
 				C08BB5AF2C3E28E300D4CFA9 /* FirebaseMessaging */,
+				C02D58942C46741300C42D47 /* PopupView */,
 			);
 			productName = Genti_iOS;
 			productReference = C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */;
@@ -1045,6 +1079,7 @@
 				C09A63F22C3E25D800FAB87F /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				C09A63F52C3E25EA00FAB87F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C08BB5AC2C3E28E300D4CFA9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C02D58932C46741300C42D47 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = C017C3DB2C1C39CE009924C9 /* Products */;
 			projectDirPath = "";
@@ -1112,6 +1147,7 @@
 				C0113D572C37C17400071BF6 /* ImageRepositoryImpl.swift in Sources */,
 				C017C4AF2C1C3AA3009924C9 /* GentiTabView.swift in Sources */,
 				C088F2D22C25733C00F92320 /* AlbumRepositoryImpl.swift in Sources */,
+				C095967E2C4DECD100FC5ECC /* CustomPopUp.swift in Sources */,
 				C0113D872C3BEAA400071BF6 /* AddDownloadButtonModifier.swift in Sources */,
 				C017C4A32C1C3AA3009924C9 /* BulletText.swift in Sources */,
 				C088F2EF2C27AE3400F92320 /* ViewModel.swift in Sources */,
@@ -1127,6 +1163,7 @@
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,
 				C0113D8C2C3C002F00071BF6 /* OnboardingView.swift in Sources */,
+				C09596872C4DED5400FC5ECC /* RatingPopup.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
 				C0113D852C3BEAA400071BF6 /* ShareStyleModifier.swift in Sources */,
 				C017C48A2C1C3AA3009924C9 /* SettingRow.swift in Sources */,
@@ -1172,6 +1209,7 @@
 				C0113D6C2C3A219300071BF6 /* AlertType.swift in Sources */,
 				C028436C2C32BB5D00B84566 /* FeedRepository.swift in Sources */,
 				C088F2E42C26F1A200F92320 /* ImageGenerateUseCaseImpl.swift in Sources */,
+				C09596802C4DECEE00FC5ECC /* PopUpType.swift in Sources */,
 				C0113D822C3BEAA400071BF6 /* OnFirstAppearModifier.swift in Sources */,
 				C028437E2C32BF5F00B84566 /* ProfileViewModel.swift in Sources */,
 				C017C48E2C1C3AA3009924C9 /* GentiWebView.swift in Sources */,
@@ -1179,8 +1217,10 @@
 				C088F2E72C26F20B00F92320 /* UploadService.swift in Sources */,
 				C017C4AD2C1C3AA3009924C9 /* CustomTabView.swift in Sources */,
 				C088F2D02C25732900F92320 /* AlbumRepository.swift in Sources */,
+				C09596892C4DED6800FC5ECC /* SelectOnboardingPopup.swift in Sources */,
 				C02843712C32BB8900B84566 /* MainFeedViewModel.swift in Sources */,
 				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
+				C09596822C4DED1C00FC5ECC /* CustomPopupModifier.swift in Sources */,
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
 				C028436E2C32BB6D00B84566 /* FeedRepositoryImpl.swift in Sources */,
 				C02843792C32BF1B00B84566 /* ProfileUseCase.swift in Sources */,
@@ -1570,6 +1610,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C02D58932C46741300C42D47 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.4;
+			};
+		};
 		C08BB5AC2C3E28E300D4CFA9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1613,6 +1661,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C02D58942C46741300C42D47 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C02D58932C46741300C42D47 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
 		C08BB5AD2C3E28E300D4CFA9 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C08BB5AC2C3E28E300D4CFA9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

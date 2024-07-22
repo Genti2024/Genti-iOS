@@ -24,7 +24,7 @@ struct RoutingView<Content: View, Destination: Route>: View {
                 }
         }
         .fullScreenCover(item: $router.presentingFullScreenCover) { route in
-                router.view(from: route)
+            router.view(from: route)
         }
     }
 }
