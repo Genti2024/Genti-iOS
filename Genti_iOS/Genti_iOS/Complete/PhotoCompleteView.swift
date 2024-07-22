@@ -66,7 +66,7 @@ struct PhotoCompleteView: View {
                 }
             }
         }
-        .addPopUp(isPresent: $viewModel.state.showRatingView, popUpType: .ratingPopUp)
+        .addCustomPopup(isPresented: $viewModel.state.showRatingView, popupType: .rating)
         .onReceive(NotificationCenter.default.publisher(for: .init("ratingCompleted"))) { _ in
             self.viewModel.sendAction(.ratingActionIsDone)
         }
@@ -77,91 +77,79 @@ struct PhotoCompleteView: View {
 }
 
 
-
-protocol PopUp {
+/// CustomPopup 프로토콜은 팝업 콘텐츠와 커스터마이징 옵션을 정의합니다.
+protocol CustomPopup {
     associatedtype Content: View
-    /// popUpView는 View라는 프로토콜을 채택한 어떤 종류의 객체라도 가능하다
-    var popUpView: Content { get }
-    /// 이렇게 받은 popUpView를 가지고 custom할것이기때문에 여기는 어떤뷰가 들어올지 모르니까 AnyView로 감싼다
-    /// 결국 popUpView를 나중에는 AnyView로 만들어줘야한다
-    /// 이렇게한 이유는 popup을 만드는사람 입장에서는 AnyView를 쓴다는걸 모르게하는게 훨씬 편하기 때문
-    /// 즉 그냥 Custom View를 받고 내부적으로 AnyView를 만들어서 customize해준다
+    /// contentView는 View라는 프로토콜을 채택한 어떤 종류의 객체라도 가능하다.
+    var contentView: Content { get }
+    /// 이렇게 받은 contentView를 가지고 custom할 것이기 때문에 여기는 어떤 뷰가 들어올지 모르니까 AnyView로 감싼다.
+    /// 결국 contentView를 나중에는 AnyView로 만들어줘야 한다.
+    /// 이렇게 한 이유는 popup을 만드는 사람 입장에서는 AnyView를 쓴다는 걸 모르게 하는 게 훨씬 편하기 때문.
+    /// 즉, 그냥 Custom View를 받고 내부적으로 AnyView를 만들어서 customize해준다.
     var customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters { get }
 }
 
-struct PopUpModifier: ViewModifier {
-    var isPresent: Binding<Bool>
-    var popUp: AnyPopUp
+/// CustomPopupModifier는 뷰에 팝업을 추가하는 뷰 모디파이어입니다.
+struct CustomPopupModifier: ViewModifier {
+    var isPresented: Binding<Bool>
+    var customPopup: AnyCustomPopup
     
-    init(isPresent: Binding<Bool>, popUpType: PopUpType) {
-        self.isPresent = isPresent
-        self.popUp = popUpType.object
+    init(isPresented: Binding<Bool>, popupType: PopupType) {
+        self.isPresented = isPresented
+        self.customPopup = popupType.object
     }
     
     func body(content: Content) -> some View {
         content
-            .popup(isPresented: isPresent, view: { popUp._popUpView }, customize: popUp._customize)
+            .popup(isPresented: isPresented, view: { customPopup.contentView }, customize: customPopup.customize)
     }
 }
 
+/// View 확장을 통해 쉽게 팝업을 추가할 수 있는 메서드를 제공합니다.
 extension View {
-    func addPopUp(isPresent: Binding<Bool>, popUpType: PopUpType) -> some View {
-        modifier(PopUpModifier(isPresent: isPresent, popUpType: popUpType))
+    func addCustomPopup(isPresented: Binding<Bool>, popupType: PopupType) -> some View {
+        modifier(CustomPopupModifier(isPresented: isPresented, popupType: popupType))
     }
 }
 
-
-
-struct AnyPopUp {
-    var _popUpView: AnyView
-    var _customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters
+/// AnyCustomPopup 구조체는 다양한 팝업 타입을 AnyView로 감싸서 다룰 수 있게 합니다.
+struct AnyCustomPopup {
+    var contentView: AnyView
+    var customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters
     
-    init<PopUpObject: PopUp>(popUp: PopUpObject) {
-        self._popUpView = AnyView(popUp.popUpView)
-        self._customize = popUp.customize
-    }
-    
-    var popUpView: AnyView {
-        return _popUpView
-    }
-    var customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters {
-        return _customize
+    init<PopupObject: CustomPopup>(popup: PopupObject) {
+        self.contentView = AnyView(popup.contentView)
+        self.customize = popup.customize
     }
 }
 
-enum PopUpType {
-    case selectOnboardingPopUp
-    case ratingPopUp
+/// PopupType 열거형은 다양한 팝업 타입을 정의하고, 각 타입에 맞는 팝업 객체를 생성합니다.
+enum PopupType {
+    case selectOnboarding
+    case rating
     
-    /// object타입을 some PopUp으로 하면 되지 않을까요?
-    /// some이라는건 사용시점에서 무조건 하나의 타입으로 결정되어야함
-    /// 하지만 case마다 객체가 달라짐 즉, PopUp프로토콜을 채택한 하나의 객체만 나와야하는데 case의 갯수별로 나오게됨
-    /// some은 타입을 제한하는거지만
-    /// "popup을 채택하기만했으면 괜찮아(=지금 우리가 만들고싶은로직)"는 타입의 추상화라고 할 수 있음
-    /// 하지만 associatedtype을 사용한순간 해당프로토콜을 채택한 객체는 타입이 제한됨
-    /// 결국 우리는 타입을 제한한 상황에서 타입을 추상화하려하는 상황에 마주함
-    /// 추상화하는 가장쉬운방법 any PopUp을 반환타입으로 하면된다 하지만 이렇게되면 쓸때마다 downcasting을 해줘야한다
-    var object: AnyPopUp {
+    /// 팝업 타입에 맞는 AnyCustomPopup 객체를 반환합니다.
+    var object: AnyCustomPopup {
         switch self {
-        case .selectOnboardingPopUp:
-            return AnyPopUp(popUp: SelectOnboardingPopUp())
-        case .ratingPopUp:
-            return AnyPopUp(popUp: RatingPopUp())
+        case .selectOnboarding:
+            return AnyCustomPopup(popup: SelectOnboardingPopup())
+        case .rating:
+            return AnyCustomPopup(popup: RatingPopup())
         }
     }
 }
 
-struct SelectOnboardingPopUp: PopUp {
-    /// some View는 View라는 프로토콜을 채택한 하나의 타입이라는 뜻이다
-    /// opaque type으로 사용시점에선 알수가없다(다만 하나의 타입으로 고정된다는건안다)
-    /// 하지만 구현시점에서는 Image라는걸 알수있다
-    var popUpView: some View {
-        Image(.selectOnboarding)
+/// SelectOnboardingPopup 구조체는 CustomPopup 프로토콜을 준수하며, 특정 팝업 콘텐츠와 커스터마이징 옵션을 정의합니다.
+struct SelectOnboardingPopup: CustomPopup {
+    /// contentView는 특정 팝업 콘텐츠를 나타냅니다.
+    var contentView: some View {
+        Image("selectOnboarding")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .padding(.horizontal, 16)
     }
     
+    /// customize는 팝업의 커스터마이징 옵션을 정의합니다.
     var customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters {
         return { parameters in
             parameters
@@ -173,11 +161,14 @@ struct SelectOnboardingPopUp: PopUp {
     }
 }
 
-struct RatingPopUp: PopUp {
-    var popUpView: some View {
+/// RatingPopup 구조체는 CustomPopup 프로토콜을 준수하며, 특정 팝업 콘텐츠와 커스터마이징 옵션을 정의합니다.
+struct RatingPopup: CustomPopup {
+    /// contentView는 특정 팝업 콘텐츠를 나타냅니다.
+    var contentView: some View {
         RatingAlertView(viewModel: RatingAlertViewModel(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())))
     }
     
+    /// customize는 팝업의 커스터마이징 옵션을 정의합니다.
     var customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters {
         return { parameters in
             parameters
@@ -189,6 +180,7 @@ struct RatingPopUp: PopUp {
         }
     }
 }
+
 
 
 //protocol A {

@@ -25,7 +25,7 @@ struct SecondGeneratorView: View {
                 nextButtonView()
             } //:VSTACK
         } //:ZSTACK
-        .addPopUp(isPresent: $viewModel.state.showOnboarding, popUpType: .selectOnboardingPopUp)
+        .addCustomPopup(isPresented: $viewModel.state.showOnboarding, popupType: .selectOnboarding)
         .onAppear {
             self.viewModel.sendAction(.viewWillAppear)
         }
