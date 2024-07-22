@@ -40,7 +40,7 @@ enum UserRouter: URLRequestConvertible {
         case .fetchMyPictures:
             return "/api/v1/users/pictures/my"
         case .reportPicture:
-            return "/api/v1/users/reports/"
+            return "/api/v1/users/reports"
         }
     }
     
