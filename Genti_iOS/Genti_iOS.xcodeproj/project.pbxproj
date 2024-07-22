@@ -151,6 +151,7 @@
 		C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */; };
 		C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */; };
 		C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */; };
+		C0C04DBF2C4E18F5002486C1 /* RatingAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C04DBE2C4E18F5002486C1 /* RatingAlertViewModel.swift */; };
 		C0D74A422C1EA68700A45371 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A412C1EA68700A45371 /* Router.swift */; };
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
 		C0D74A462C1EA6B500A45371 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Route.swift */; };
@@ -316,6 +317,7 @@
 		C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageFromImagePicker.swift; sourceTree = "<group>"; };
+		C0C04DBE2C4E18F5002486C1 /* RatingAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingAlertViewModel.swift; sourceTree = "<group>"; };
 		C0D74A412C1EA68700A45371 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
 		C0D74A452C1EA6B500A45371 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 		C017C3DC2C1C39CE009924C9 /* Genti_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C0C04DBC2C4E18A4002486C1 /* PopUp */,
 				C0113D8A2C3C002200071BF6 /* Onboarding */,
 				C0113D522C37C13600071BF6 /* PhotoDetail */,
 				C0D74A402C1EA66B00A45371 /* Router */,
@@ -525,7 +528,6 @@
 				C0113D632C3A207E00071BF6 /* Model */,
 				C088F2F02C28D74300F92320 /* Component */,
 				C017C4222C1C3AA3009924C9 /* PhotoCompleteView.swift */,
-				C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */,
 			);
 			path = Complete;
 			sourceTree = "<group>";
@@ -941,21 +943,10 @@
 		C095967C2C4DECBC00FC5ECC /* CustomPopUpModifier */ = {
 			isa = PBXGroup;
 			children = (
-				C09596852C4DED4A00FC5ECC /* PopUp */,
 				C095967D2C4DECD100FC5ECC /* CustomPopUp.swift */,
-				C095967F2C4DECEE00FC5ECC /* PopUpType.swift */,
 				C09596812C4DED1C00FC5ECC /* CustomPopupModifier.swift */,
 			);
 			path = CustomPopUpModifier;
-			sourceTree = "<group>";
-		};
-		C09596852C4DED4A00FC5ECC /* PopUp */ = {
-			isa = PBXGroup;
-			children = (
-				C09596862C4DED5400FC5ECC /* RatingPopup.swift */,
-				C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */,
-			);
-			path = PopUp;
 			sourceTree = "<group>";
 		};
 		C0B80E662C23C5E80071C3CD /* Inferface */ = {
@@ -964,6 +955,34 @@
 				C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */,
 			);
 			path = Inferface;
+			sourceTree = "<group>";
+		};
+		C0C04DBC2C4E18A4002486C1 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				C0C04DC02C4E1924002486C1 /* Model */,
+				C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */,
+				C0C04DBD2C4E18E6002486C1 /* ViewModel */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		C0C04DBD2C4E18E6002486C1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0C04DBE2C4E18F5002486C1 /* RatingAlertViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C0C04DC02C4E1924002486C1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C095967F2C4DECEE00FC5ECC /* PopUpType.swift */,
+				C09596862C4DED5400FC5ECC /* RatingPopup.swift */,
+				C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C0D74A402C1EA66B00A45371 /* Router */ = {
@@ -1199,6 +1218,7 @@
 				C088F2E92C26F21F00F92320 /* UploadServiceImpl.swift in Sources */,
 				C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */,
 				C0113D892C3BED0400071BF6 /* LinearGradient+Ext.swift in Sources */,
+				C0C04DBF2C4E18F5002486C1 /* RatingAlertViewModel.swift in Sources */,
 				C017C4AA2C1C3AA3009924C9 /* FeedComponent.swift in Sources */,
 				C017C47D2C1C3AA3009924C9 /* GeneratorHeaderView.swift in Sources */,
 				C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */,
