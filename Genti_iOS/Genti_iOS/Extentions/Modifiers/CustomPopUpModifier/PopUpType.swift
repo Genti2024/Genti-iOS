@@ -11,14 +11,13 @@ import Foundation
 enum PopupType {
     case selectOnboarding
     case rating
-    
-    /// 팝업 타입에 맞는 AnyCustomPopup 객체를 반환합니다.
-    var object: AnyCustomPopup {
+
+    var object: any CustomPopup {
         switch self {
         case .selectOnboarding:
-            return AnyCustomPopup(popup: SelectOnboardingPopup())
+            return SelectOnboardingPopup()
         case .rating:
-            return AnyCustomPopup(popup: RatingPopup())
+            return RatingPopup()
         }
     }
 }
