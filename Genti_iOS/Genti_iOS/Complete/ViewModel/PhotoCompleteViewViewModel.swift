@@ -32,11 +32,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
         var reportContent: String = ""
         var isLoading: Bool = false
         var showRatingView: Bool = false
-        var showAlert: AlertType? = nil {
-            didSet {
-                self.reportContent = ""
-            }
-        }
+        var showAlert: AlertType? = nil
     }
 
     enum Input {
@@ -51,17 +47,11 @@ final class PhotoCompleteViewViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .goToMainButtonTap:
-            showRatingView()
+            self.state.showRatingView = true
         case .reportButtonTap:
             presentReportAlert()
         case .imageTap:
             navigateToPhotoExpandView()
-//        case .ratingViewSkipButtonTap:
-//            dismissRatingView()
-//        case .ratingViewSubmitButtonTap:
-//            submitRating()
-//        case .ratingViewStarTap(let rating):
-//            updateRating(rating)
         case .viewWillAppear:
             Task {
                 do {
@@ -87,10 +77,6 @@ final class PhotoCompleteViewViewModel: ViewModel {
         }
     }
 
-    private func showRatingView() {
-        state.showRatingView = true
-    }
-
     private func presentReportAlert() {
         state.showAlert = .report(
             action: { [weak self] in
@@ -110,9 +96,11 @@ final class PhotoCompleteViewViewModel: ViewModel {
                 await MainActor.run {
                     state.isLoading = true
                 }
+                print(self.state.reportContent)
                 _ = try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
                 await MainActor.run {
                     state.isLoading = false
+                    state.reportContent = ""
                     state.showAlert = .reportComplete
                 }
             } catch {
@@ -124,23 +112,6 @@ final class PhotoCompleteViewViewModel: ViewModel {
     private func navigateToPhotoExpandView() {
         guard let image = state.image else { return }
         self.router.routeTo(.photoDetail(image: image))
-    }
-
-    private func dismissRatingView() {
-        router.dismissSheet()
-    }
-
-    private func submitRating() {
-        Task {
-            state.isLoading = true
-            try await Task.sleep(nanoseconds: 1_000_000_000)
-            state.isLoading = false
-            router.dismissSheet()
-        }
-    }
-
-    private func updateRating(_ rating: Int) {
-//        state.rating = rating
     }
     
     var getImage: Image {
