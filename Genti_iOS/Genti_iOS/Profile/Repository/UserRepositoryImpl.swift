@@ -8,8 +8,6 @@
 import Foundation
 
 final class UserRepositoryImpl: UserRepository {
-    func ratePhoto(rate: Int) async throws {}
-    
 
     let requestService: RequestService
     
@@ -17,16 +15,20 @@ final class UserRepositoryImpl: UserRepository {
         self.requestService = requestService
     }
     
-    func getMyPictures(page: Int) async throws -> MyImagesEntitiy {
+    func fetchPhotos(page: Int) async throws -> MyImagesEntitiy {
         let dto: PageCommonPictureResponseDTO = try await requestService.fetchResponse(for: UserRouter.fetchMyPictures(page: page))
         return dto.toEntity
     }
     
-    func checkInProgress() async throws -> Bool {
+    // MARK: - 추후 수정
+    func checkUserStatus() async throws -> Bool {
         return [true, false].randomElement()!
     }
     
     func reportPhoto(id: Int, content: String) async throws {
         try await requestService.fetchResponse(for: UserRouter.reportPicture(id: id, content: content))
     }
+    
+    // MARK: - 추후 수정
+    func scorePhoto(rate: Int) async throws {}
 }
