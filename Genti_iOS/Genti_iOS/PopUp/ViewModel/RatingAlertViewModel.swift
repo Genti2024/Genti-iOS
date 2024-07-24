@@ -41,7 +41,7 @@ final class RatingAlertViewModel: ViewModel {
                         self.state.isLoading = true
                     }
                     try await Task.sleep(nanoseconds: 1000000000)
-                    try await userRepository.ratePhoto(rate: state.rating)
+                    try await userRepository.scorePhoto(rate: state.rating)
                     
                     await MainActor.run {
                         self.state.isLoading = false

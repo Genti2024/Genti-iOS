@@ -11,26 +11,23 @@ struct PhotoDetailWithShareView: View {
     @State var viewModel: PhotoDetailViewModel
 
     var body: some View {
-        GeometryReader { geometry in
-            let padding: CGFloat = 30
-            let width = geometry.size.width - (2*padding)
-            let height = width * 1.5
-            VStack(spacing: 20) {
-                Image(uiImage: viewModel.state.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .addDownloadButton {
-                        viewModel.sendAction(.downloadButtonTap) }
-                    .frame(width: width, height: height)
-
-                
-                
-                ShareLink(item: Image(uiImage: viewModel.state.image), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image))) {
-                    Text("공유하기")
-                        .shareStyle()
+        VStack(spacing: 20) {
+            Rectangle()
+                .aspectRatio(1/1.5, contentMode: .fit)
+                .overlay(alignment: .center) {
+                    Image(uiImage: viewModel.state.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .addDownloadButton {
+                            viewModel.sendAction(.downloadButtonTap) }
                 }
+                .padding(.horizontal, 30)
+            
+            ShareLink(item: Image(uiImage: viewModel.state.image), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image))) {
+                Text("공유하기")
+                    .shareStyle()
             }
-            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+            
         }
         .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
         .presentationBackground {

@@ -19,13 +19,13 @@ final class ProfileUseCaseImpl: ProfileUseCase {
     }
     
     func fetchInitalUserInfo() async throws -> UserInfoEntity {
-        async let hasInProgressPhoto = userRepository.checkInProgress()
-        async let completedPhotos = userRepository.getMyPictures(page: 0)
+        async let hasInProgressPhoto = userRepository.checkUserStatus()
+        async let completedPhotos = userRepository.fetchPhotos(page: 0)
         return try await .init(hasInProgressPhoto: hasInProgressPhoto, completedImage: completedPhotos)
     }
 
     func getCompletedPhotos(page: Int) async throws -> MyImagesEntitiy {
-        return try await userRepository.getMyPictures(page: page)
+        return try await userRepository.fetchPhotos(page: page)
     }
     
     func load(from urlString: String) async -> UIImage? {

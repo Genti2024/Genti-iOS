@@ -26,7 +26,7 @@ struct FeedComponent: View {
     }
     
     private func mainImageView() -> some View {
-        ImageLoaderView(urlString: mainImage, ratio: ratio, width: Constants.screenWidth - 32)
+        ImageLoaderView(urlString: mainImage, ratio: ratio)
             .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 15, lineWidth: 1)
     }
     private func photoDescriptionView() -> some View {

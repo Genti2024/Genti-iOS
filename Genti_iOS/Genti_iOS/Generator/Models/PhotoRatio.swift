@@ -8,7 +8,7 @@
 import Foundation
 
 enum PhotoRatio {
-    case twoThird, threeSecond
+    case twoThird, threeSecond, square
     
     static var selections: [PhotoRatio] {
         return [.threeSecond, .twoThird]
@@ -20,6 +20,8 @@ enum PhotoRatio {
             return 3/2
         case .threeSecond:
             return 2/3
+        case .square:
+            return 1
         }
     }
     
@@ -29,6 +31,8 @@ enum PhotoRatio {
             return "Ratio_23"
         case .threeSecond:
             return "Ratio_32"
+        case .square:
+            return ""
         }
     }
     
@@ -38,6 +42,8 @@ enum PhotoRatio {
             return "RATIO_2_3"
         case .threeSecond:
             return "RATIO_3_2"
+        case .square:
+            return ""
         }
     }
     
@@ -47,6 +53,8 @@ enum PhotoRatio {
             "2:3 비율\n(가로로 긴 사진)"
         case .threeSecond:
             "3:2 비율\n(세로로 긴 사진)"
+        case .square:
+            ""
         }
     }
     

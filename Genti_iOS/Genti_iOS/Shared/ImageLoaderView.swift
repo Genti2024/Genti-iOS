@@ -14,13 +14,11 @@ struct ImageLoaderView: View {
     var urlString: String
     var resizingMode: ContentMode = .fit
     var ratio: PhotoRatio
-    var width: CGFloat
     
     var body: some View {
         Rectangle()
             .fill(.backgroundWhite)
-            .frame(width: width)
-            .frame(height: width*ratio.ratio)
+            .aspectRatio(1/ratio.ratio, contentMode: .fill)
             .overlay {
                 WebImage(url: URL(string: urlString))
                     .resizable()
