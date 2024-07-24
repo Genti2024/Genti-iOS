@@ -108,6 +108,10 @@
 		C028437B2C32BF3F00B84566 /* ProfileUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028437A2C32BF3F00B84566 /* ProfileUseCaseImpl.swift */; };
 		C028437E2C32BF5F00B84566 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028437D2C32BF5F00B84566 /* ProfileViewModel.swift */; };
 		C02D58952C46741300C42D47 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = C02D58942C46741300C42D47 /* PopupView */; };
+		C048A8FE2C50DABC00026C80 /* CollectUserInfomationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A8FD2C50DABC00026C80 /* CollectUserInfomationView.swift */; };
+		C048A9012C51B63300026C80 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9002C51B63300026C80 /* Gender.swift */; };
+		C048A9042C51B64E00026C80 /* CollectUserInfomationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */; };
+		C048A9062C51BA1500026C80 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9052C51BA1500026C80 /* Int+Ext.swift */; };
 		C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */; };
 		C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */; };
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
@@ -279,6 +283,10 @@
 		C02843782C32BF1B00B84566 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		C028437A2C32BF3F00B84566 /* ProfileUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseImpl.swift; sourceTree = "<group>"; };
 		C028437D2C32BF5F00B84566 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C048A8FD2C50DABC00026C80 /* CollectUserInfomationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectUserInfomationView.swift; sourceTree = "<group>"; };
+		C048A9002C51B63300026C80 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectUserInfomationViewModel.swift; sourceTree = "<group>"; };
+		C048A9052C51BA1500026C80 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumServiceImpl.swift; sourceTree = "<group>"; };
 		C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCase.swift; sourceTree = "<group>"; };
 		C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCaseImpl.swift; sourceTree = "<group>"; };
@@ -443,6 +451,7 @@
 		C017C3DC2C1C39CE009924C9 /* Genti_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C048A8FC2C50DAAB00026C80 /* CollectUserInfomation */,
 				C0C04DBC2C4E18A4002486C1 /* PopUp */,
 				C0113D8A2C3C002200071BF6 /* Onboarding */,
 				C0113D522C37C13600071BF6 /* PhotoDetail */,
@@ -801,6 +810,7 @@
 				C017C4742C1C3AA3009924C9 /* View+Ext.swift */,
 				C0113D882C3BED0400071BF6 /* LinearGradient+Ext.swift */,
 				C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */,
+				C048A9052C51BA1500026C80 /* Int+Ext.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -878,6 +888,32 @@
 			isa = PBXGroup;
 			children = (
 				C028437D2C32BF5F00B84566 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C048A8FC2C50DAAB00026C80 /* CollectUserInfomation */ = {
+			isa = PBXGroup;
+			children = (
+				C048A9022C51B64300026C80 /* ViewModel */,
+				C048A8FF2C51B62700026C80 /* Model */,
+				C048A8FD2C50DABC00026C80 /* CollectUserInfomationView.swift */,
+			);
+			path = CollectUserInfomation;
+			sourceTree = "<group>";
+		};
+		C048A8FF2C51B62700026C80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C048A9002C51B63300026C80 /* Gender.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C048A9022C51B64300026C80 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1159,6 +1195,7 @@
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
 				C08BB5BC2C3E8F6700D4CFA9 /* ShadowModifier.swift in Sources */,
 				C088F2F42C28D77200F92320 /* HorizontalImageContentView.swift in Sources */,
+				C048A9042C51B64E00026C80 /* CollectUserInfomationViewModel.swift in Sources */,
 				C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */,
 				C017C4882C1C3AA3009924C9 /* ThirdGeneratorView.swift in Sources */,
 				C017C4972C1C3AA3009924C9 /* PHAssetImageView.swift in Sources */,
@@ -1206,6 +1243,7 @@
 				C017C4872C1C3AA3009924C9 /* SecondGeneratorView.swift in Sources */,
 				C017C49B2C1C3AA3009924C9 /* APIResponse.swift in Sources */,
 				C088F2D82C26569700F92320 /* PHAssetImageServiceImpl.swift in Sources */,
+				C048A8FE2C50DABC00026C80 /* CollectUserInfomationView.swift in Sources */,
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
 				C0113D842C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift in Sources */,
 				C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */,
@@ -1216,6 +1254,7 @@
 				C088F2E22C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift in Sources */,
 				C088F2ED2C27AD9200F92320 /* ImageDataTransferServiceImpl.swift in Sources */,
 				C088F2E92C26F21F00F92320 /* UploadServiceImpl.swift in Sources */,
+				C048A9012C51B63300026C80 /* Gender.swift in Sources */,
 				C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */,
 				C0113D892C3BED0400071BF6 /* LinearGradient+Ext.swift in Sources */,
 				C0C04DBF2C4E18F5002486C1 /* RatingAlertViewModel.swift in Sources */,
@@ -1270,6 +1309,7 @@
 				C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */,
 				C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */,
 				C017C4812C1C3AA3009924C9 /* PhotoAngle.swift in Sources */,
+				C048A9062C51BA1500026C80 /* Int+Ext.swift in Sources */,
 				C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */,
 				C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */,
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,
