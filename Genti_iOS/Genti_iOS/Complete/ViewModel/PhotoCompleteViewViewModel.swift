@@ -96,11 +96,10 @@ final class PhotoCompleteViewViewModel: ViewModel {
                 await MainActor.run {
                     state.isLoading = true
                 }
-                print(self.state.reportContent)
                 _ = try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
                 await MainActor.run {
-                    state.isLoading = false
                     state.reportContent = ""
+                    state.isLoading = false
                     state.showAlert = .reportComplete
                 }
             } catch {
