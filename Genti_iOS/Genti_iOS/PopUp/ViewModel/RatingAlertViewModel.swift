@@ -40,7 +40,7 @@ final class RatingAlertViewModel: ViewModel {
                     await MainActor.run {
                         self.state.isLoading = true
                     }
-                    try await Task.sleep(nanoseconds: 1000000000)
+
                     try await userRepository.scorePhoto(rate: state.rating)
                     
                     await MainActor.run {
