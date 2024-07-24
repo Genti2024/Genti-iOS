@@ -30,5 +30,7 @@ final class UserRepositoryImpl: UserRepository {
     }
     
     // MARK: - 추후 수정
-    func scorePhoto(rate: Int) async throws {}
+    func scorePhoto(rate: Int) async throws {
+        return try await requestService.fetchResponse(for: UserRouter.ratePicture(id: 1, rate: rate))
+    }
 }

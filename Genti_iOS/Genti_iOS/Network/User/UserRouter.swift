@@ -13,6 +13,7 @@ enum UserRouter: URLRequestConvertible {
     
     case fetchMyPictures(page: Int)
     case reportPicture(id: Int, content: String)
+    case ratePicture(id: Int, rate: Int)
     
     var method: HTTPMethod {
         switch self {
@@ -20,12 +21,14 @@ enum UserRouter: URLRequestConvertible {
             return .get
         case .reportPicture:
             return .post
+        case .ratePicture:
+            return .post
         }
     }
     
     var headers: HTTPHeaders {
         switch self {
-        case .fetchMyPictures, .reportPicture:
+        case .fetchMyPictures, .reportPicture, .ratePicture:
             return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODE1NTEsImV4cCI6MTIxNzIwNjgxNTUxLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.B2v5nNx_wIpWOeKMWR_OBQbg-5v9i0YnCQxrv3O9ydAG7ldJugvH56VnFuisZt9lpaUfNsKRpOOIMpw4oIzPgw"]
         }
     }
@@ -41,6 +44,8 @@ enum UserRouter: URLRequestConvertible {
             return "/api/v1/users/pictures/my"
         case .reportPicture:
             return "/api/v1/users/reports"
+        case .ratePicture(let id, _):
+            return "/api/v1/users/picture-generate-responses/\(id)/rate"
         }
     }
     
@@ -50,7 +55,7 @@ enum UserRouter: URLRequestConvertible {
         urlRequest.method = method
         urlRequest.headers = headers
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         switch self {
         case .fetchMyPictures(let page):
             var parameters: [String: Any] = [:]
@@ -58,15 +63,18 @@ enum UserRouter: URLRequestConvertible {
             parameters["size"] = 4
             parameters["sortBy"] = "createdAt"
             parameters["direction"] = "desc"
-            
-            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-            
+            urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
         case .reportPicture(id: let id, content: let content):
             var parameters: [String: Any] = [:]
             parameters["pictureGenerateResponseId"] = id
             parameters["content"] = content
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-        }
+            
+        case .ratePicture(_, let rate):
+             var parameters: [String: Any] = [:]
+             parameters["star"] = rate
+             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
+         }
         
         return urlRequest
     }
