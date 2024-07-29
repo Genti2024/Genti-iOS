@@ -13,6 +13,7 @@ enum GentiError: Error {
     case clientError(code: String?, message: String?)
     case uploadFail(code: String?, message: String?)
     case unknownedError(code: String?, message: String?)
+    case tokenError(code: String?, message: String?)
     
     var code: String? {
         switch self {
@@ -20,7 +21,8 @@ enum GentiError: Error {
              .serverError(let code, _),
              .clientError(let code, _),
              .uploadFail(let code, _),
-             .unknownedError(let code, _):
+             .unknownedError(let code, _),
+             .tokenError(let code, _):
             return code
         }
     }
@@ -31,7 +33,8 @@ enum GentiError: Error {
              .serverError(_, let message),
              .clientError(_, let message),
              .uploadFail(_, let message),
-             .unknownedError(_, let message):
+             .unknownedError(_, let message),
+             .tokenError(_, let message):
             return message
         }
     }

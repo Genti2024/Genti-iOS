@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CollectUserInfomationView: View {
     
-    @State private var viewModel: CollectUserInfomationViewModel = .init()
+    @State var viewModel: CollectUserInfomationViewModel
     
     var body: some View {
         VStack(spacing: 62) {
@@ -155,5 +155,5 @@ struct CollectUserInfomationView: View {
 }
 
 #Preview {
-    CollectUserInfomationView()
+    CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: .init()))
 }

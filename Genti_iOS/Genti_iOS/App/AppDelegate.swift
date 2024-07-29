@@ -10,14 +10,25 @@ import UIKit
 
 import Firebase
 import UserNotifications
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            return AuthController.handleOpenUrl(url: url)
+        }
+        return false
+    }
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // 파이어베이스 설정
         FirebaseApp.configure()
+        KakaoSDK.initSDK(appKey: "b9b118835b605c4894f72a148aae0ad3")
         
         // 앱 실행 시 사용자에게 알림 허용 권한을 받음
         UNUserNotificationCenter.current().delegate = self

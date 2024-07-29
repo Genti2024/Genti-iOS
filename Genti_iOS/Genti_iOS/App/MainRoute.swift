@@ -10,6 +10,7 @@ import SwiftUI
 enum MainRoute: Route {
     
     case login
+    case signIn
     case mainTab
     case setting
     case photoDetailWithShare(image: UIImage)
@@ -27,7 +28,7 @@ enum MainRoute: Route {
     func view(from router: Router<MainRoute>) -> some View {
         switch self {
         case .login:
-            LoginView(router: router)
+            LoginView(viewModel: LoginViewModel(loginUseCase: LoginUserCaseImpl(tokenRepository: TokenRepositoryImpl(), loginRepository: LoginRepositoryImpl(requestService: RequestServiceImpl())), router: router))
         case .mainTab:
             GentiTabView(router: router)
         case .setting:
@@ -52,12 +53,14 @@ enum MainRoute: Route {
             RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))) }
         case .onboarding:
             OnboardingView(viewModel: OnboardingViewModel(router: router))
+        case .signIn:
+            CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: router))
         }
     }
         
     var navigationType: NavigationType {
         switch self {
-        case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView:
+        case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView, .signIn:
             return .push
         case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakeImage, .onboarding:
             return .fullScreenCover

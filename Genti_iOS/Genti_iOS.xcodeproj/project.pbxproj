@@ -108,10 +108,15 @@
 		C028437B2C32BF3F00B84566 /* ProfileUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028437A2C32BF3F00B84566 /* ProfileUseCaseImpl.swift */; };
 		C028437E2C32BF5F00B84566 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028437D2C32BF5F00B84566 /* ProfileViewModel.swift */; };
 		C02D58952C46741300C42D47 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = C02D58942C46741300C42D47 /* PopupView */; };
+		C03B74C22C57445E00582BD2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03B74C12C57445E00582BD2 /* LoginViewModel.swift */; };
 		C048A8FE2C50DABC00026C80 /* CollectUserInfomationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A8FD2C50DABC00026C80 /* CollectUserInfomationView.swift */; };
 		C048A9012C51B63300026C80 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9002C51B63300026C80 /* Gender.swift */; };
 		C048A9042C51B64E00026C80 /* CollectUserInfomationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */; };
 		C048A9062C51BA1500026C80 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9052C51BA1500026C80 /* Int+Ext.swift */; };
+		C048A90A2C5227CF00026C80 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048A9092C5227CF00026C80 /* AuthRouter.swift */; };
+		C048A90E2C573A4B00026C80 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C048A90D2C573A4B00026C80 /* KakaoSDKAuth */; };
+		C048A9102C573A4B00026C80 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = C048A90F2C573A4B00026C80 /* KakaoSDKCommon */; };
+		C048A9122C573A4B00026C80 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = C048A9112C573A4B00026C80 /* KakaoSDKUser */; };
 		C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */; };
 		C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */; };
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
@@ -283,10 +288,12 @@
 		C02843782C32BF1B00B84566 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		C028437A2C32BF3F00B84566 /* ProfileUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseImpl.swift; sourceTree = "<group>"; };
 		C028437D2C32BF5F00B84566 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C03B74C12C57445E00582BD2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C048A8FD2C50DABC00026C80 /* CollectUserInfomationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectUserInfomationView.swift; sourceTree = "<group>"; };
 		C048A9002C51B63300026C80 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectUserInfomationViewModel.swift; sourceTree = "<group>"; };
 		C048A9052C51BA1500026C80 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		C048A9092C5227CF00026C80 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumServiceImpl.swift; sourceTree = "<group>"; };
 		C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCase.swift; sourceTree = "<group>"; };
 		C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCaseImpl.swift; sourceTree = "<group>"; };
@@ -340,9 +347,12 @@
 				C02D58952C46741300C42D47 /* PopupView in Frameworks */,
 				C099C3562C1C3C8B0006EF83 /* SwiftfulUI in Frameworks */,
 				C09A63F72C3E25EA00FAB87F /* Alamofire in Frameworks */,
+				C048A9102C573A4B00026C80 /* KakaoSDKCommon in Frameworks */,
 				C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */,
 				C08BB5AE2C3E28E300D4CFA9 /* FirebaseAnalytics in Frameworks */,
 				C09A63F42C3E25D800FAB87F /* Lottie in Frameworks */,
+				C048A9122C573A4B00026C80 /* KakaoSDKUser in Frameworks */,
+				C048A90E2C573A4B00026C80 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +710,7 @@
 		C017C4592C1C3AA3009924C9 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C048A90B2C531CDE00026C80 /* Auth */,
 				C028435C2C326CA500B84566 /* User */,
 				C02843532C314C0100B84566 /* Feed */,
 				C017C4522C1C3AA3009924C9 /* Base */,
@@ -818,7 +829,9 @@
 		C017C4772C1C3AA3009924C9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				C03B74C32C57448500582BD2 /* UseCase */,
 				C017C4762C1C3AA3009924C9 /* LoginView.swift */,
+				C03B74C12C57445E00582BD2 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -892,6 +905,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C03B74C32C57448500582BD2 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		C048A8FC2C50DAAB00026C80 /* CollectUserInfomation */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +936,14 @@
 				C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C048A90B2C531CDE00026C80 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C048A9092C5227CF00026C80 /* AuthRouter.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		C088F2C92C25727F00F92320 /* UseCase */ = {
@@ -1055,6 +1083,9 @@
 				C08BB5AD2C3E28E300D4CFA9 /* FirebaseAnalytics */,
 				C08BB5AF2C3E28E300D4CFA9 /* FirebaseMessaging */,
 				C02D58942C46741300C42D47 /* PopupView */,
+				C048A90D2C573A4B00026C80 /* KakaoSDKAuth */,
+				C048A90F2C573A4B00026C80 /* KakaoSDKCommon */,
+				C048A9112C573A4B00026C80 /* KakaoSDKUser */,
 			);
 			productName = Genti_iOS;
 			productReference = C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */;
@@ -1135,6 +1166,7 @@
 				C09A63F52C3E25EA00FAB87F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C08BB5AC2C3E28E300D4CFA9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C02D58932C46741300C42D47 /* XCRemoteSwiftPackageReference "PopupView" */,
+				C048A90C2C573A4B00026C80 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = C017C3DB2C1C39CE009924C9 /* Products */;
 			projectDirPath = "";
@@ -1242,6 +1274,7 @@
 				C017C4A42C1C3AA3009924C9 /* Constants.swift in Sources */,
 				C017C4872C1C3AA3009924C9 /* SecondGeneratorView.swift in Sources */,
 				C017C49B2C1C3AA3009924C9 /* APIResponse.swift in Sources */,
+				C03B74C22C57445E00582BD2 /* LoginViewModel.swift in Sources */,
 				C088F2D82C26569700F92320 /* PHAssetImageServiceImpl.swift in Sources */,
 				C048A8FE2C50DABC00026C80 /* CollectUserInfomationView.swift in Sources */,
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
@@ -1305,6 +1338,7 @@
 				C08BB5B52C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift in Sources */,
 				C02843762C32BF0700B84566 /* UserRepositoryImpl.swift in Sources */,
 				C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */,
+				C048A90A2C5227CF00026C80 /* AuthRouter.swift in Sources */,
 				C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */,
 				C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */,
 				C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */,
@@ -1498,6 +1532,8 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진첩에추가합니다";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩에접근합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1532,6 +1568,8 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진첩에추가합니다";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩에접근합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1678,6 +1716,14 @@
 				minimumVersion = 3.0.4;
 			};
 		};
+		C048A90C2C573A4B00026C80 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.22.5;
+			};
+		};
 		C08BB5AC2C3E28E300D4CFA9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1725,6 +1771,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C02D58932C46741300C42D47 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
+		};
+		C048A90D2C573A4B00026C80 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C048A90C2C573A4B00026C80 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		C048A90F2C573A4B00026C80 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C048A90C2C573A4B00026C80 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		C048A9112C573A4B00026C80 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C048A90C2C573A4B00026C80 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 		C08BB5AD2C3E28E300D4CFA9 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -10,6 +10,8 @@ import SwiftUI
 @Observable
 final class CollectUserInfomationViewModel: ViewModel {
     
+    let router: Router<MainRoute>
+    
     var state: State
     
     struct State {
@@ -42,6 +44,7 @@ final class CollectUserInfomationViewModel: ViewModel {
             print(#fileID, #function, #line, "- tap")
             print("성별은 \(state.gender!.description)이고")
             print("태어난 년도는 \(self.birthYear)년 입니다")
+            router.routeTo(.mainTab)
         case .backgroundTap:
             if state.showPicker {
                 state.showPicker = false
@@ -49,7 +52,8 @@ final class CollectUserInfomationViewModel: ViewModel {
         }
     }
     
-    init() {
+    init(router: Router<MainRoute>) {
+        self.router = router
         self.state = .init()
     }
     
