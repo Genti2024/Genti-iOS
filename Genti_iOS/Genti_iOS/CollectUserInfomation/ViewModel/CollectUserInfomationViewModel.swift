@@ -11,6 +11,7 @@ import SwiftUI
 final class CollectUserInfomationViewModel: ViewModel {
     
     let router: Router<MainRoute>
+    let authRepository: AuthRepository
     
     var state: State
     
@@ -41,10 +42,18 @@ final class CollectUserInfomationViewModel: ViewModel {
                 self.state.showPicker.toggle()
             }
         case .completeButtonTap:
-            print(#fileID, #function, #line, "- tap")
-            print("성별은 \(state.gender!.description)이고")
-            print("태어난 년도는 \(self.birthYear)년 입니다")
-            router.routeTo(.mainTab)
+            Task {
+                do {
+                    guard let sex = state.gender?.description  else { return }
+                    try await authRepository.signIn(sex: sex, birthYear: String(describing: state.birthYear))
+                    await MainActor.run {
+                        router.routeTo(.mainTab)
+                    }
+                } catch {
+                    
+                }
+            }
+            
         case .backgroundTap:
             if state.showPicker {
                 state.showPicker = false
@@ -52,8 +61,9 @@ final class CollectUserInfomationViewModel: ViewModel {
         }
     }
     
-    init(router: Router<MainRoute>) {
+    init(router: Router<MainRoute>, authRepository: AuthRepository) {
         self.router = router
+        self.authRepository = authRepository
         self.state = .init()
     }
     
