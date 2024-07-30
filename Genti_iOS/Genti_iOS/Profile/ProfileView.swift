@@ -57,28 +57,48 @@ struct ProfileView: View {
                     .fill(.gray6)
                     .frame(height: 2)
                 
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 1),GridItem(.flexible(), spacing: 1),GridItem(.flexible(), spacing: 1)], spacing: 1) {
-                            ForEach(viewModel.state.myImages) { image in
-                                ImageLoaderView(urlString: image.imageURL, resizingMode: .fill, ratio: .square)
-                                    .onTapGesture {
-                                        viewModel.sendAction(.imageTap(image.imageURL))
-                                    }
-                                    .onAppear {
-                                        if image == viewModel.state.myImages.last {
-                                            viewModel.sendAction(.reachBottom)
-                                        }
-                                    }
-                                    .id(image.id)
+                if viewModel.state.myImages.isEmpty {
+                    BlurView(style: .systemUltraThinMaterialLight)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .overlay(alignment: .center) {
+                            VStack(spacing: 37) {
+                                Image(.exclamation)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 42, height: 86)
+                                
+                                Text("내가 만든 사진이 없어요")
+                                    .pretendard(.headline1)
+                                    .foregroundStyle(.gray3)
                             }
                         }
-                    }
-                    .onAppear {
-                        guard let firstId = viewModel.state.myImages.first?.id else { return }
-                        proxy.scrollTo(firstId, anchor: .top)
+
+                } else {
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 1),GridItem(.flexible(), spacing: 1),GridItem(.flexible(), spacing: 1)], spacing: 1) {
+                                ForEach(viewModel.state.myImages) { image in
+                                    ImageLoaderView(urlString: image.imageURL, resizingMode: .fill, ratio: .square)
+                                        .onTapGesture {
+                                            viewModel.sendAction(.imageTap(image.imageURL))
+                                        }
+                                        .onAppear {
+                                            if image == viewModel.state.myImages.last {
+                                                viewModel.sendAction(.reachBottom)
+                                            }
+                                        }
+                                        .id(image.id)
+                                }
+                            }
+                        }
+                        .onAppear {
+                            guard let firstId = viewModel.state.myImages.first?.id else { return }
+                            proxy.scrollTo(firstId, anchor: .top)
+                        }
                     }
                 }
+                
+
 
             }
             .shadow(type: .soft)
