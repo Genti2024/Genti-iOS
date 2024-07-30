@@ -14,6 +14,9 @@ struct SettingView: View {
     @State private var showResignAlert: Bool = false
     @State private var isLoading: Bool = false
     
+    let requestService: RequestService = RequestServiceImpl()
+    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
+    
     var body: some View {
         ZStack(alignment: .top) {
             // Background Color
@@ -37,9 +40,13 @@ struct SettingView: View {
                 Task {
                     do {
                         self.isLoading = true
-                        try await Task.sleep(nanoseconds: 2000000000)
-                        self.isLoading = false
-                        router.popToRoot()
+                        try await requestService.fetchResponse(for: AuthRouter.logout)
+                        
+                        await MainActor.run {
+                            userdefaultRepository.removeToken()
+                            self.isLoading = false
+                            router.popToRoot()
+                        }
                     } catch {
                         
                     }
@@ -56,9 +63,12 @@ struct SettingView: View {
                 Task {
                     do {
                         self.isLoading = true
-                        try await Task.sleep(nanoseconds: 2000000000)
-                        self.isLoading = false
-                        router.popToRoot()
+                        try await requestService.fetchResponse(for: AuthRouter.resign)
+                        await MainActor.run {
+                            userdefaultRepository.removeToken()
+                            self.isLoading = false
+                            router.popToRoot()
+                        }
                     } catch {
                         
                     }
