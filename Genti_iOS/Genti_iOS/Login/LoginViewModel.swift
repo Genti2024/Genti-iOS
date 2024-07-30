@@ -22,11 +22,13 @@ final class LoginViewModel: ViewModel {
             Task {
                 do {
                     let result = try await loginUseCase.loginWithKaKao()
-                    print(result.accessToken)
-                    print(result.refreshToken)
-                    print(result.userStatus)
-                    await MainActor.run {
-                        router.routeTo(.signIn)
+                    switch result {
+                    case .complete:
+                        self.router.routeTo(.mainTab)
+                    case .notComplete:
+                        self.router.routeTo(.signIn)
+                    case .unknown:
+                        throw GentiError.serverError(code: "UserStateError", message: "예상치못한유저상태가 전달되었습니다")
                     }
                 } catch(let error) {
                     print(error.localizedDescription)
@@ -34,8 +36,21 @@ final class LoginViewModel: ViewModel {
             }
             
         case .appleLoginTap(let result):
-            print(#fileID, #function, #line, "- dd")
-//            loginUseCase.loginWithApple(result)
+            Task {
+                do {
+                    let result = try await loginUseCase.loginWithApple(result)
+                    switch result {
+                    case .complete:
+                        self.router.routeTo(.mainTab)
+                    case .notComplete:
+                        self.router.routeTo(.signIn)
+                    case .unknown:
+                        throw GentiError.serverError(code: "UserStateError", message: "예상치못한유저상태가 전달되었습니다")
+                    }
+                } catch(let error) {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     

@@ -28,7 +28,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // 파이어베이스 설정
         FirebaseApp.configure()
-        KakaoSDK.initSDK(appKey: "b9b118835b605c4894f72a148aae0ad3")
+        KakaoSDK.initSDK(appKey: "77d47098298c42fc0400efc76b7f4874")
         
         // 앱 실행 시 사용자에게 알림 허용 권한을 받음
         UNUserNotificationCenter.current().delegate = self

@@ -79,7 +79,6 @@
 		C017C49E2C1C3AA3009924C9 /* GeneratorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4532C1C3AA3009924C9 /* GeneratorRequest.swift */; };
 		C017C49F2C1C3AA3009924C9 /* GeneratorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4542C1C3AA3009924C9 /* GeneratorRouter.swift */; };
 		C017C4A02C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4552C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift */; };
-		C017C4A12C1C3AA3009924C9 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4572C1C3AA3009924C9 /* SettingRouter.swift */; };
 		C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C45A2C1C3AA3009924C9 /* BlurView.swift */; };
 		C017C4A32C1C3AA3009924C9 /* BulletText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C45B2C1C3AA3009924C9 /* BulletText.swift */; };
 		C017C4A42C1C3AA3009924C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C45C2C1C3AA3009924C9 /* Constants.swift */; };
@@ -160,6 +159,19 @@
 		C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */; };
 		C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */; };
 		C0B80E682C23C5F80071C3CD /* GetImageFromImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */; };
+		C0BCC4A42C58787F009C89C4 /* ReissueTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4A32C58787F009C89C4 /* ReissueTokenDTO.swift */; };
+		C0BCC4A62C58788F009C89C4 /* APIEventInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4A52C58788F009C89C4 /* APIEventInterceptor.swift */; };
+		C0BCC4A82C5883FE009C89C4 /* SocialLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4A72C5883FE009C89C4 /* SocialLoginDTO.swift */; };
+		C0BCC4AB2C588423009C89C4 /* LoginUserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4AA2C588423009C89C4 /* LoginUserState.swift */; };
+		C0BCC4AD2C58842C009C89C4 /* SocialLoginEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4AC2C58842C009C89C4 /* SocialLoginEntity.swift */; };
+		C0BCC4AF2C58843E009C89C4 /* GentiSocialLoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4AE2C58843E009C89C4 /* GentiSocialLoginType.swift */; };
+		C0BCC4B12C58849E009C89C4 /* GentiTokenEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4B02C58849E009C89C4 /* GentiTokenEntity.swift */; };
+		C0BCC4B32C58857B009C89C4 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4B22C58857B009C89C4 /* LoginUseCase.swift */; };
+		C0BCC4B52C58858C009C89C4 /* LoginUserCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4B42C58858C009C89C4 /* LoginUserCaseImpl.swift */; };
+		C0BCC4B82C5885B9009C89C4 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4B72C5885B9009C89C4 /* AuthRepository.swift */; };
+		C0BCC4BA2C5885CC009C89C4 /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4B92C5885CC009C89C4 /* AuthRepositoryImpl.swift */; };
+		C0BCC4BC2C5885E8009C89C4 /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4BB2C5885E8009C89C4 /* TokenRepository.swift */; };
+		C0BCC4BE2C5885F8009C89C4 /* TokenRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCC4BD2C5885F8009C89C4 /* TokenRepositoryImpl.swift */; };
 		C0C04DBF2C4E18F5002486C1 /* RatingAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C04DBE2C4E18F5002486C1 /* RatingAlertViewModel.swift */; };
 		C0D74A422C1EA68700A45371 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A412C1EA68700A45371 /* Router.swift */; };
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
@@ -260,7 +272,6 @@
 		C017C4532C1C3AA3009924C9 /* GeneratorRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorRequest.swift; sourceTree = "<group>"; };
 		C017C4542C1C3AA3009924C9 /* GeneratorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorRouter.swift; sourceTree = "<group>"; };
 		C017C4552C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUploadImageUrlDTO.swift; sourceTree = "<group>"; };
-		C017C4572C1C3AA3009924C9 /* SettingRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		C017C45A2C1C3AA3009924C9 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		C017C45B2C1C3AA3009924C9 /* BulletText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletText.swift; sourceTree = "<group>"; };
 		C017C45C2C1C3AA3009924C9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -332,6 +343,19 @@
 		C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E642C23C5C60071C3CD /* ThirdGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageFromImagePicker.swift; sourceTree = "<group>"; };
+		C0BCC4A32C58787F009C89C4 /* ReissueTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueTokenDTO.swift; sourceTree = "<group>"; };
+		C0BCC4A52C58788F009C89C4 /* APIEventInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEventInterceptor.swift; sourceTree = "<group>"; };
+		C0BCC4A72C5883FE009C89C4 /* SocialLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginDTO.swift; sourceTree = "<group>"; };
+		C0BCC4AA2C588423009C89C4 /* LoginUserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserState.swift; sourceTree = "<group>"; };
+		C0BCC4AC2C58842C009C89C4 /* SocialLoginEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginEntity.swift; sourceTree = "<group>"; };
+		C0BCC4AE2C58843E009C89C4 /* GentiSocialLoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiSocialLoginType.swift; sourceTree = "<group>"; };
+		C0BCC4B02C58849E009C89C4 /* GentiTokenEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiTokenEntity.swift; sourceTree = "<group>"; };
+		C0BCC4B22C58857B009C89C4 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		C0BCC4B42C58858C009C89C4 /* LoginUserCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserCaseImpl.swift; sourceTree = "<group>"; };
+		C0BCC4B72C5885B9009C89C4 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		C0BCC4B92C5885CC009C89C4 /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
+		C0BCC4BB2C5885E8009C89C4 /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
+		C0BCC4BD2C5885F8009C89C4 /* TokenRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepositoryImpl.swift; sourceTree = "<group>"; };
 		C0C04DBE2C4E18F5002486C1 /* RatingAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingAlertViewModel.swift; sourceTree = "<group>"; };
 		C0D74A412C1EA68700A45371 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
@@ -685,6 +709,7 @@
 				C017C44F2C1C3AA3009924C9 /* APIResponse.swift */,
 				C017C4502C1C3AA3009924C9 /* APIService.swift */,
 				C017C4512C1C3AA3009924C9 /* GentiError.swift */,
+				C0BCC4A52C58788F009C89C4 /* APIEventInterceptor.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -699,14 +724,6 @@
 			path = Generator;
 			sourceTree = "<group>";
 		};
-		C017C4582C1C3AA3009924C9 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				C017C4572C1C3AA3009924C9 /* SettingRouter.swift */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
 		C017C4592C1C3AA3009924C9 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,7 +732,6 @@
 				C02843532C314C0100B84566 /* Feed */,
 				C017C4522C1C3AA3009924C9 /* Base */,
 				C017C4562C1C3AA3009924C9 /* Generator */,
-				C017C4582C1C3AA3009924C9 /* Setting */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -755,7 +771,6 @@
 			children = (
 				C0113D912C3D426700071BF6 /* UserDefaultsKey.swift */,
 				C017C4662C1C3AA3009924C9 /* FeedEntity.swift */,
-				C02843562C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -829,6 +844,8 @@
 		C017C4772C1C3AA3009924C9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				C0BCC4B62C5885AF009C89C4 /* Repository */,
+				C0BCC4A92C58841C009C89C4 /* Model */,
 				C03B74C32C57448500582BD2 /* UseCase */,
 				C017C4762C1C3AA3009924C9 /* LoginView.swift */,
 				C03B74C12C57445E00582BD2 /* LoginViewModel.swift */,
@@ -847,6 +864,7 @@
 		C02843532C314C0100B84566 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				C02843562C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift */,
 				C02843542C314C1E00B84566 /* FeedRouter.swift */,
 			);
 			path = Feed;
@@ -908,6 +926,8 @@
 		C03B74C32C57448500582BD2 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				C0BCC4B22C58857B009C89C4 /* LoginUseCase.swift */,
+				C0BCC4B42C58858C009C89C4 /* LoginUserCaseImpl.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -942,6 +962,8 @@
 			isa = PBXGroup;
 			children = (
 				C048A9092C5227CF00026C80 /* AuthRouter.swift */,
+				C0BCC4A32C58787F009C89C4 /* ReissueTokenDTO.swift */,
+				C0BCC4A72C5883FE009C89C4 /* SocialLoginDTO.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1019,6 +1041,28 @@
 				C0B80E672C23C5F80071C3CD /* GetImageFromImagePicker.swift */,
 			);
 			path = Inferface;
+			sourceTree = "<group>";
+		};
+		C0BCC4A92C58841C009C89C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0BCC4AA2C588423009C89C4 /* LoginUserState.swift */,
+				C0BCC4AC2C58842C009C89C4 /* SocialLoginEntity.swift */,
+				C0BCC4AE2C58843E009C89C4 /* GentiSocialLoginType.swift */,
+				C0BCC4B02C58849E009C89C4 /* GentiTokenEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0BCC4B62C5885AF009C89C4 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				C0BCC4B72C5885B9009C89C4 /* AuthRepository.swift */,
+				C0BCC4B92C5885CC009C89C4 /* AuthRepositoryImpl.swift */,
+				C0BCC4BB2C5885E8009C89C4 /* TokenRepository.swift */,
+				C0BCC4BD2C5885F8009C89C4 /* TokenRepositoryImpl.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		C0C04DBC2C4E18A4002486C1 /* PopUp */ = {
@@ -1219,6 +1263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0BCC4AB2C588423009C89C4 /* LoginUserState.swift in Sources */,
 				C017C4922C1C3AA3009924C9 /* ImageAsset.swift in Sources */,
 				C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */,
 				C088F2EB2C27AD7200F92320 /* ImageDataTransferService.swift in Sources */,
@@ -1240,6 +1285,7 @@
 				C017C4A32C1C3AA3009924C9 /* BulletText.swift in Sources */,
 				C088F2EF2C27AE3400F92320 /* ViewModel.swift in Sources */,
 				C0D74A422C1EA68700A45371 /* Router.swift in Sources */,
+				C0BCC4A42C58787F009C89C4 /* ReissueTokenDTO.swift in Sources */,
 				C0113D5E2C37C1D700071BF6 /* PhotoDetailViewModel.swift in Sources */,
 				C017C49E2C1C3AA3009924C9 /* GeneratorRequest.swift in Sources */,
 				C017C47C2C1C3AA3009924C9 /* RatingAlertView.swift in Sources */,
@@ -1252,9 +1298,11 @@
 				C017C47E2C1C3AA3009924C9 /* GeneratorNavigationButton.swift in Sources */,
 				C0113D8C2C3C002F00071BF6 /* OnboardingView.swift in Sources */,
 				C09596872C4DED5400FC5ECC /* RatingPopup.swift in Sources */,
+				C0BCC4B12C58849E009C89C4 /* GentiTokenEntity.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
 				C0113D852C3BEAA400071BF6 /* ShareStyleModifier.swift in Sources */,
 				C017C48A2C1C3AA3009924C9 /* SettingRow.swift in Sources */,
+				C0BCC4B32C58857B009C89C4 /* LoginUseCase.swift in Sources */,
 				C017C47F2C1C3AA3009924C9 /* Caution.swift in Sources */,
 				C028437B2C32BF3F00B84566 /* ProfileUseCaseImpl.swift in Sources */,
 				C0113D922C3D426700071BF6 /* UserDefaultsKey.swift in Sources */,
@@ -1263,6 +1311,7 @@
 				C017C4962C1C3AA3009924C9 /* PHAssetImageViewModel.swift in Sources */,
 				C0113D832C3BEAA400071BF6 /* LimitLengthModifier.swift in Sources */,
 				C017C4832C1C3AA3009924C9 /* PhotoRatio.swift in Sources */,
+				C0BCC4BA2C5885CC009C89C4 /* AuthRepositoryImpl.swift in Sources */,
 				C017C48D2C1C3AA3009924C9 /* MyImagesEntitiy.swift in Sources */,
 				C0113D812C3BEAA400071BF6 /* CustomAlertModifier.swift in Sources */,
 				C017C4A92C1C3AA3009924C9 /* SplashView.swift in Sources */,
@@ -1279,6 +1328,7 @@
 				C048A8FE2C50DABC00026C80 /* CollectUserInfomationView.swift in Sources */,
 				C017C4942C1C3AA3009924C9 /* AlbumService.swift in Sources */,
 				C0113D842C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift in Sources */,
+				C0BCC4A62C58788F009C89C4 /* APIEventInterceptor.swift in Sources */,
 				C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
 				C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */,
@@ -1311,9 +1361,11 @@
 				C088F2D02C25732900F92320 /* AlbumRepository.swift in Sources */,
 				C09596892C4DED6800FC5ECC /* SelectOnboardingPopup.swift in Sources */,
 				C02843712C32BB8900B84566 /* MainFeedViewModel.swift in Sources */,
+				C0BCC4B82C5885B9009C89C4 /* AuthRepository.swift in Sources */,
 				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
 				C09596822C4DED1C00FC5ECC /* CustomPopupModifier.swift in Sources */,
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
+				C0BCC4BE2C5885F8009C89C4 /* TokenRepositoryImpl.swift in Sources */,
 				C028436E2C32BB6D00B84566 /* FeedRepositoryImpl.swift in Sources */,
 				C02843792C32BF1B00B84566 /* ProfileUseCase.swift in Sources */,
 				C0B80E602C23C59B0071C3CD /* FirstGeneratorViewModel.swift in Sources */,
@@ -1325,7 +1377,7 @@
 				C02843742C32BEF100B84566 /* UserRepository.swift in Sources */,
 				C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */,
 				C0113D672C3A208F00071BF6 /* CompletePhotoEntity.swift in Sources */,
-				C017C4A12C1C3AA3009924C9 /* SettingRouter.swift in Sources */,
+				C0BCC4A82C5883FE009C89C4 /* SocialLoginDTO.swift in Sources */,
 				C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
 				C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */,
@@ -1341,7 +1393,9 @@
 				C048A90A2C5227CF00026C80 /* AuthRouter.swift in Sources */,
 				C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */,
 				C017C47A2C1C3AA3009924C9 /* PhotoCompleteView.swift in Sources */,
+				C0BCC4BC2C5885E8009C89C4 /* TokenRepository.swift in Sources */,
 				C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */,
+				C0BCC4B52C58858C009C89C4 /* LoginUserCaseImpl.swift in Sources */,
 				C017C4812C1C3AA3009924C9 /* PhotoAngle.swift in Sources */,
 				C048A9062C51BA1500026C80 /* Int+Ext.swift in Sources */,
 				C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */,
@@ -1349,8 +1403,10 @@
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,
 				C0113D5B2C37C1A700071BF6 /* HapticRepositoryImpl.swift in Sources */,
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,
+				C0BCC4AD2C58842C009C89C4 /* SocialLoginEntity.swift in Sources */,
 				C017C4912C1C3AA3009924C9 /* SettingView.swift in Sources */,
 				C088F2E02C26F0EA00F92320 /* ImageGenerateRepository.swift in Sources */,
+				C0BCC4AF2C58843E009C89C4 /* GentiSocialLoginType.swift in Sources */,
 				C02843572C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

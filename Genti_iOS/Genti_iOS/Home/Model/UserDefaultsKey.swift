@@ -10,6 +10,8 @@ import Foundation
 enum UserDefaultsKey: String {
     case isFirstVisitApp
     case isFirstGenerate
+    case accessToken
+    case refreshToken
 }
 
 
