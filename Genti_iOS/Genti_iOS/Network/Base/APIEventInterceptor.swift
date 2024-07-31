@@ -11,7 +11,6 @@ import Alamofire
 
 final class APIEventInterceptor: RequestInterceptor {
     let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
-    let authRepository: AuthRepository = AuthRepositoryImpl(requestService: RequestServiceImpl())
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         guard urlRequest.url?.absoluteString.hasPrefix("https://genti.kr") == true,
@@ -21,27 +20,44 @@ final class APIEventInterceptor: RequestInterceptor {
               }
 
         var urlRequest = urlRequest
-        urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
         completion(.success(urlRequest))
     }
     
-    func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
+
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
             completion(.doNotRetryWithError(error))
             return
         }
-        print("✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
-        print("토큰이 자동으로 갱신되었습니다")
-        print("✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
-        Task {
-            do {
-                let tokens = userdefaultRepository.getToken()
-                let result = try await authRepository.reissueToken(token: tokens)
-                userdefaultRepository.setToken(token: result)
-                completion(.retry)
-                
-            } catch(let error) {
+        /// 401이 들어오면 무조건 토큰 재갱신 로직 출발
+        let tokens = userdefaultRepository.getToken()
+        guard let accessToken = tokens.accessToken, let refreshToken = tokens.refreshToken else {
+            completion(.doNotRetry)
+            return
+        }
+        AF.request(AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken))).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let result = try JSONDecoder().decode(APIResponse<ReissueTokenDTO>.self, from: data)
+                    if result.errorCode != "AUTH-00001" {
+                        print(#fileID, #function, #line, "- 토큰 만료 문제 X")
+                        completion(.doNotRetry)
+                        return
+                    }
+                    print(#fileID, #function, #line, "- 토큰 만료 문제 O")
+                    self.userdefaultRepository.setToken(token: .init(accessToken: result.response?.accessToken, refreshToken: result.response?.refreshToken))
+                    print(#fileID, #function, #line, "- 새로 받은 토큰으로 교체")
+                    completion(.retry)
+                    return
+                } catch {
+                    completion(.doNotRetryWithError(error))
+                    return
+                }
+            case .failure(let error):
                 completion(.doNotRetryWithError(error))
+                return
             }
         }
     }
