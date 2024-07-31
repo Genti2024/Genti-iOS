@@ -53,34 +53,39 @@ final class PhotoCompleteViewViewModel: ViewModel {
         case .imageTap:
             navigateToPhotoExpandView()
         case .viewWillAppear:
-            Task {
-                do {
-                    let image = await imageRepository.load(from: photoInfo.imageUrlString)
-                    await MainActor.run {
-                        state.image = image
-                    }
-                }
-                
-            }
+            Task { await setImage() }
         case .downloadButtonTap:
-            Task {
-                do {
-                    if await imageRepository.writeToPhotoAlbum(image: state.image) {
-                        hapticRepository.notification(type: .success)
-                    } else {
-                        hapticRepository.notification(type: .error)
-                    }
-                }
-            }
+            Task { await downloadImage() }
         case .ratingActionIsDone:
             self.router.dismissSheet()
+        }
+    }
+    
+    @MainActor
+    func downloadImage() async {
+        do {
+            if await imageRepository.writeToPhotoAlbum(image: state.image) {
+                hapticRepository.notification(type: .success)
+            } else {
+                hapticRepository.notification(type: .error)
+            }
+        }
+    }
+    
+    @MainActor
+    func setImage() async {
+        do {
+            let image = await imageRepository.load(from: photoInfo.imageUrlString)
+            state.image = image
         }
     }
 
     private func presentReportAlert() {
         state.showAlert = .report(
-            action: { [weak self] in
-                self?.submitReport()
+            action: {
+                Task {
+                    await self.submitReport()
+                }
             },
             placeholder: "",
             text: .init(
@@ -90,21 +95,16 @@ final class PhotoCompleteViewViewModel: ViewModel {
         )
     }
 
-    private func submitReport() {
-        Task {
-            do {
-                await MainActor.run {
-                    state.isLoading = true
-                }
-                _ = try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
-                await MainActor.run {
-                    state.reportContent = ""
-                    state.isLoading = false
-                    state.showAlert = .reportComplete
-                }
-            } catch {
-                
-            }
+    @MainActor
+    func submitReport() async {
+        do {
+            state.isLoading = true
+            try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
+            state.reportContent = ""
+            state.isLoading = false
+            state.showAlert = .reportComplete
+        } catch {
+            
         }
     }
 

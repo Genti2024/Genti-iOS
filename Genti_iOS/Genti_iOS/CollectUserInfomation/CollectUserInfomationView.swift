@@ -24,6 +24,7 @@ struct CollectUserInfomationView: View {
         .background(
             backgroundView()
         )
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     func headerView() -> some View {
@@ -154,6 +155,6 @@ struct CollectUserInfomationView: View {
     }
 }
 
-#Preview {
-    CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: .init()))
-}
+//#Preview {
+//    CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: .init()))
+//}

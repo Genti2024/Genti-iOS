@@ -10,6 +10,13 @@ import Foundation
 protocol UserDefaultsRepository {
     var isFirstVisitApp: Bool { get }
     var isFirstGenerate: Bool { get }
+    func setToken(token: GentiTokenEntity)
+    func getToken() -> GentiTokenEntity
+    func removeToken()
+    func setUserRole(userRole: LoginUserState)
+    func getUserRole() -> LoginUserState?
+    func removeUserRole()
+    
 }
 
 extension UserDefaultsRepository {
@@ -21,5 +28,9 @@ extension UserDefaultsRepository {
     
     func get(forKey: UserDefaultsKey) -> Any? {
         return UserDefaults.standard.object(forKey: forKey.rawValue)
+    }
+    
+    func remove(forKey: UserDefaultsKey) {
+        UserDefaults.standard.removeObject(forKey: forKey.rawValue)
     }
 }

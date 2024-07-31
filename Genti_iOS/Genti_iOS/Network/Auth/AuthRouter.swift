@@ -12,22 +12,22 @@ import Alamofire
 enum AuthRouter: URLRequestConvertible {
     
     case login(token: String, type: GentiSocialLoginType)
+    case signIn(sex: String, birthData: String)
+    case reissueToken(token: GentiTokenEntity)
+    case logout
+    case resign
     
     
     var method: HTTPMethod {
         switch self {
-        case .login:
+        case .login, .reissueToken, .signIn:
             return .post
+        case .logout:
+            return .get
+        case .resign:
+            return .delete
         }
     }
-    
-    var headers: HTTPHeaders {
-        switch self {
-        case .login:
-            return .init()
-        }
-    }
-
     
     var baseURL: String {
         return "https://genti.kr"
@@ -36,7 +36,15 @@ enum AuthRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .login:
-            return "/login/v1/oauth2/code/apple"
+            return "/auth/v1/login/oauth2/token"
+        case .reissueToken:
+            return "/auth/v1/reissue"
+        case .signIn:
+            return "/api/v1/users/signup"
+        case .logout:
+            return "/auth/v1/logout"
+        case .resign:
+            return "/api/v1/users"
         }
     }
     
@@ -44,37 +52,29 @@ enum AuthRouter: URLRequestConvertible {
         let url = try baseURL.asURL().appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
         urlRequest.method = method
-        urlRequest.headers = headers
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         switch self {
-        case .login(let token, _):
+        case .login(let token, let type):
             var parameters: [String: Any] = [:]
             parameters["token"] = token
+            parameters["oauthPlatform"] = type.parameter
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        case .reissueToken(let token):
+            var parameters: [String: Any] = [:]
+            parameters["accessToken"] = token.accessToken
+            parameters["refreshToken"] = token.refreshToken
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        case .signIn(let sex, let birthData):
+            var parameters: [String: Any] = [:]
+            parameters["birthDate"] = birthData
+            parameters["sex"] = sex
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        case .logout, .resign:
+            urlRequest.httpBody = nil
         }
 
         return urlRequest
     }
     
 }
-
-// MARK: - Response
-struct AppleLoginEntity: Codable {
-    let userID: Int
-    let userName, email: String
-    let isNewUser: Bool
-    let token: Token
-
-    enum CodingKeys: String, CodingKey {
-        case userID = "userId"
-        case userName, email, isNewUser, token
-    }
-    
-    // MARK: - Token
-    struct Token: Codable {
-        let accessToken, refreshToken: String
-    }
-
-}
-

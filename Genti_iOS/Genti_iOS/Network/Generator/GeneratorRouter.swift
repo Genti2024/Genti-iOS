@@ -22,13 +22,6 @@ enum GeneratorRouter: URLRequestConvertible {
         }
     }
     
-    var headers: HTTPHeaders {
-        switch self {
-        case .getPresignedUrl, .getPresignedUrls, .requestImage:
-            return ["Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODE1NTEsImV4cCI6MTIxNzIwNjgxNTUxLCJ1c2VySWQiOiIyIiwicm9sZSI6IlJPTEVfVVNFUiIsInR5cGUiOiJhY2Nlc3MifQ.B2v5nNx_wIpWOeKMWR_OBQbg-5v9i0YnCQxrv3O9ydAG7ldJugvH56VnFuisZt9lpaUfNsKRpOOIMpw4oIzPgw"]
-        }
-    }
-    
     var baseURL: String {
         return "https://genti.kr"
     }
@@ -48,7 +41,6 @@ enum GeneratorRouter: URLRequestConvertible {
         let url = try baseURL.asURL().appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
         urlRequest.method = method
-        urlRequest.headers = headers
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         

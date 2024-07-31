@@ -28,7 +28,7 @@ enum MainRoute: Route {
     func view(from router: Router<MainRoute>) -> some View {
         switch self {
         case .login:
-            LoginView(viewModel: LoginViewModel(loginUseCase: LoginUserCaseImpl(tokenRepository: TokenRepositoryImpl(), loginRepository: LoginRepositoryImpl(requestService: RequestServiceImpl())), router: router))
+            LoginView(viewModel: LoginViewModel(loginUseCase: LoginUserCaseImpl(tokenRepository: TokenRepositoryImpl(), loginRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .mainTab:
             GentiTabView(router: router)
         case .setting:
@@ -54,7 +54,7 @@ enum MainRoute: Route {
         case .onboarding:
             OnboardingView(viewModel: OnboardingViewModel(router: router))
         case .signIn:
-            CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: router))
+            CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: router, authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl())))
         }
     }
         

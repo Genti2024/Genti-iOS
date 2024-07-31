@@ -13,9 +13,9 @@ enum Gender: CaseIterable {
     var description: String {
         switch self {
         case .boy:
-            return "남자"
+            return "M"
         case .girl:
-            return "여자"
+            return "F"
         }
     }
 }

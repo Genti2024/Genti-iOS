@@ -14,6 +14,9 @@ struct SettingView: View {
     @State private var showResignAlert: Bool = false
     @State private var isLoading: Bool = false
     
+    let requestService: RequestService = RequestServiceImpl()
+    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
+    
     var body: some View {
         ZStack(alignment: .top) {
             // Background Color
@@ -34,17 +37,7 @@ struct SettingView: View {
         .toolbar(.hidden, for: .tabBar)
         .alert("정말 로그아웃 하시겠어요?", isPresented: $showLogoutAlert) {
             Button("로그아웃") {
-                Task {
-                    do {
-                        self.isLoading = true
-                        try await Task.sleep(nanoseconds: 2000000000)
-                        self.isLoading = false
-                        router.popToRoot()
-                    } catch {
-                        
-                    }
-                }
-
+                Task { await logout() }
             }
             Button("취소하기", role: .cancel, action: {})
         } message: {
@@ -53,23 +46,41 @@ struct SettingView: View {
         
         .alert("정말 탈퇴 하시겠어요?", isPresented: $showResignAlert) {
             Button("탈퇴하기") {
-                Task {
-                    do {
-                        self.isLoading = true
-                        try await Task.sleep(nanoseconds: 2000000000)
-                        self.isLoading = false
-                        router.popToRoot()
-                    } catch {
-                        
-                    }
-                }
-
+                Task { await resign() }
             }
             Button("취소하기", role: .cancel, action: {})
         } message: {
             Text("생성한 사진 내역이 모두 사라집니다.\n주의해주세요!")
         }
 
+    }
+    
+    @MainActor
+    func resign() async {
+        do {
+            self.isLoading = true
+            try await requestService.fetchResponse(for: AuthRouter.resign)
+            userdefaultRepository.removeToken()
+            userdefaultRepository.removeUserRole()
+            self.isLoading = false
+            router.popToRoot()
+        } catch {
+            
+        }
+    }
+    
+    @MainActor
+    func logout() async {
+        do {
+            self.isLoading = true
+            try await requestService.fetchResponse(for: AuthRouter.logout)
+            userdefaultRepository.removeToken()
+            userdefaultRepository.removeUserRole()
+            self.isLoading = false
+            router.popToRoot()
+        } catch(let error) {
+            print(error)
+        }
     }
     
     private func backgroundView() -> some View {

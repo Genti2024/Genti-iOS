@@ -10,38 +10,13 @@ import AuthenticationServices
 
 @Observable
 final class LoginViewModel: ViewModel {
-    let loginUseCase: LoginUseCase
     
     let router: Router<MainRoute>
+    let loginUseCase: LoginUseCase
     
     var state: State
     
-    func sendAction(_ input: Input) {
-        switch input {
-        case .kakaoLoginTap:
-            Task {
-                do {
-                    let result = try await loginUseCase.loginWithKaKao()
-                    print(result.accessToken)
-                    print(result.refreshToken)
-                    print(result.userStatus)
-                    await MainActor.run {
-                        router.routeTo(.signIn)
-                    }
-                } catch(let error) {
-                    print(error.localizedDescription)
-                }
-            }
-            
-        case .appleLoginTap(let result):
-            print(#fileID, #function, #line, "- dd")
-//            loginUseCase.loginWithApple(result)
-        }
-    }
-    
-    struct State {
-        
-    }
+    struct State {}
     
     enum Input {
         case kakaoLoginTap
@@ -52,5 +27,49 @@ final class LoginViewModel: ViewModel {
         self.loginUseCase = loginUseCase
         self.router = router
         self.state = .init()
+    }
+    
+    func sendAction(_ input: Input) {
+        switch input {
+        case .kakaoLoginTap:
+            Task {
+                await kakaoLogin()
+            }
+            
+        case .appleLoginTap(let result):
+            Task {
+                await appleLogin(result)
+            }
+        }
+    }
+    
+    @MainActor
+    func kakaoLogin() async {
+        do {
+            let result = try await loginUseCase.loginWithKaKao()
+            switch result {
+            case .complete:
+                self.router.routeTo(.mainTab)
+            case .notComplete:
+                self.router.routeTo(.signIn)
+            }
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
+    }
+    
+    @MainActor
+    func appleLogin(_ result: Result<ASAuthorization, any Error>) async {
+        do {
+            let result = try await loginUseCase.loginWithApple(result)
+            switch result {
+            case .complete:
+                self.router.routeTo(.mainTab)
+            case .notComplete:
+                self.router.routeTo(.signIn)
+            }
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
     }
 }
