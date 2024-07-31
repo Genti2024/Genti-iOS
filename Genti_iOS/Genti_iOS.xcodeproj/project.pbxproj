@@ -94,6 +94,9 @@
 		C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4742C1C3AA3009924C9 /* View+Ext.swift */; };
 		C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4762C1C3AA3009924C9 /* LoginView.swift */; };
 		C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */; };
+		C0275D832C59EA8A00A68D31 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */; };
+		C0275D862C59F0B500A68D31 /* SplashUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D852C59F0B500A68D31 /* SplashUseCase.swift */; };
+		C0275D882C59F0C300A68D31 /* SplashUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D872C59F0C300A68D31 /* SplashUseCaseImpl.swift */; };
 		C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02843542C314C1E00B84566 /* FeedRouter.swift */; };
 		C02843572C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02843562C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift */; };
 		C02843592C326ACC00B84566 /* PageCommonPictureResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02843582C326ACC00B84566 /* PageCommonPictureResponseDTO.swift */; };
@@ -287,6 +290,9 @@
 		C017C4742C1C3AA3009924C9 /* View+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		C017C4762C1C3AA3009924C9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		C0275D852C59F0B500A68D31 /* SplashUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUseCase.swift; sourceTree = "<group>"; };
+		C0275D872C59F0C300A68D31 /* SplashUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUseCaseImpl.swift; sourceTree = "<group>"; };
 		C02843542C314C1E00B84566 /* FeedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
 		C02843562C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleWithPictureFindResponseDTO.swift; sourceTree = "<group>"; };
 		C02843582C326ACC00B84566 /* PageCommonPictureResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCommonPictureResponseDTO.swift; sourceTree = "<group>"; };
@@ -753,7 +759,9 @@
 		C017C4632C1C3AA3009924C9 /* SplashView */ = {
 			isa = PBXGroup;
 			children = (
+				C0275D842C59F0AC00A68D31 /* UseCase */,
 				C017C4622C1C3AA3009924C9 /* SplashView.swift */,
+				C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */,
 			);
 			path = SplashView;
 			sourceTree = "<group>";
@@ -859,6 +867,15 @@
 				C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C0275D842C59F0AC00A68D31 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				C0275D852C59F0B500A68D31 /* SplashUseCase.swift */,
+				C0275D872C59F0C300A68D31 /* SplashUseCaseImpl.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		C02843532C314C0100B84566 /* Feed */ = {
@@ -1367,9 +1384,11 @@
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
 				C0BCC4BE2C5885F8009C89C4 /* TokenRepositoryImpl.swift in Sources */,
 				C028436E2C32BB6D00B84566 /* FeedRepositoryImpl.swift in Sources */,
+				C0275D882C59F0C300A68D31 /* SplashUseCaseImpl.swift in Sources */,
 				C02843792C32BF1B00B84566 /* ProfileUseCase.swift in Sources */,
 				C0B80E602C23C59B0071C3CD /* FirstGeneratorViewModel.swift in Sources */,
 				C088F2DD2C26F0D600F92320 /* ImageGenerateUseCase.swift in Sources */,
+				C0275D862C59F0B500A68D31 /* SplashUseCase.swift in Sources */,
 				C0113D8E2C3D39E700071BF6 /* OnboardingViewModel.swift in Sources */,
 				C017C4AE2C1C3AA3009924C9 /* Tab.swift in Sources */,
 				C017C49D2C1C3AA3009924C9 /* GentiError.swift in Sources */,
@@ -1388,6 +1407,7 @@
 				C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */,
 				C02843592C326ACC00B84566 /* PageCommonPictureResponseDTO.swift in Sources */,
 				C08BB5B52C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift in Sources */,
+				C0275D832C59EA8A00A68D31 /* SplashViewModel.swift in Sources */,
 				C02843762C32BF0700B84566 /* UserRepositoryImpl.swift in Sources */,
 				C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */,
 				C048A90A2C5227CF00026C80 /* AuthRouter.swift in Sources */,
