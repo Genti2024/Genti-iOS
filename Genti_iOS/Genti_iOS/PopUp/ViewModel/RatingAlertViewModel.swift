@@ -35,22 +35,21 @@ final class RatingAlertViewModel: ViewModel {
         case .ratingViewSkipButtonTap:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
         case .ratingViewSubmitButtonTap:
-            Task {
-                do {
-                    await MainActor.run {
-                        self.state.isLoading = true
-                    }
-
-                    try await userRepository.scorePhoto(rate: state.rating)
-                    
-                    await MainActor.run {
-                        self.state.isLoading = false
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
-                    }
-                }
-            }
+            Task { await submitRating() }
         case .ratingViewStarTap(let rating):
             self.state.rating = rating
+        }
+    }
+    
+    @MainActor
+    func submitRating() async {
+        do {
+            self.state.isLoading = true
+            try await userRepository.scorePhoto(rate: state.rating)
+            self.state.isLoading = false
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+        } catch {
+            
         }
     }
 }

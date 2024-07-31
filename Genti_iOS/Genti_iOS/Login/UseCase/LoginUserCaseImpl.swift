@@ -20,6 +20,7 @@ final class LoginUserCaseImpl: LoginUseCase {
         self.userdefaultRepository = userdefaultRepository
     }
     
+    @MainActor
     func loginWithKaKao() async throws -> LoginUserState {
         let token = try await tokenRepository.getKaKaoToken()
         let result = try await loginRepository.login(token: token, type: .kakao) 
@@ -28,6 +29,7 @@ final class LoginUserCaseImpl: LoginUseCase {
         return result.userStatus
     }
     
+    @MainActor
     func loginWithApple(_ result: Result<ASAuthorization, any Error>) async throws -> LoginUserState {
         let token = try tokenRepository.getAppleToken(result)
         let result = try await loginRepository.login(token: token, type: .apple)
