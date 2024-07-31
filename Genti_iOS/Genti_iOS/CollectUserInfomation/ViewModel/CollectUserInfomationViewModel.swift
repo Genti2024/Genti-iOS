@@ -30,6 +30,12 @@ final class CollectUserInfomationViewModel: ViewModel {
         case completeButtonTap
     }
     
+    init(router: Router<MainRoute>, authRepository: AuthRepository) {
+        self.router = router
+        self.authRepository = authRepository
+        self.state = .init()
+    }
+    
     func sendAction(_ input: Input) {
         switch input {
         case .genderSelect(let gender):
@@ -43,16 +49,7 @@ final class CollectUserInfomationViewModel: ViewModel {
             }
         case .completeButtonTap:
             Task {
-                do {
-                    guard let sex = state.gender?.description  else { return }
-                    try await authRepository.signIn(sex: sex, birthYear: String(describing: state.birthYear))
-                    await MainActor.run {
-                        userdefaultRepository.setUserRole(userRole: .complete)
-                        router.routeTo(.mainTab)
-                    }
-                } catch {
-                    
-                }
+                await postUserInformation()
             }
             
         case .backgroundTap:
@@ -62,12 +59,20 @@ final class CollectUserInfomationViewModel: ViewModel {
         }
     }
     
-    init(router: Router<MainRoute>, authRepository: AuthRepository) {
-        self.router = router
-        self.authRepository = authRepository
-        self.state = .init()
+    @MainActor
+    func postUserInformation() async {
+        do {
+            guard let sex = state.gender?.description  else { return }
+            try await authRepository.signIn(sex: sex, birthYear: String(describing: state.birthYear))
+            userdefaultRepository.setUserRole(userRole: .complete)
+            router.routeTo(.mainTab)
+        } catch {
+            
+        }
     }
-    
+}
+
+extension CollectUserInfomationViewModel {
     var birthYear: String {
         return self.state.birthYear.formatterStyle(.none)
     }
