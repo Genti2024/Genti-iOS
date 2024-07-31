@@ -12,7 +12,7 @@ final class CollectUserInfomationViewModel: ViewModel {
     
     let router: Router<MainRoute>
     let authRepository: AuthRepository
-    
+    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
     var state: State
     
     struct State {
@@ -47,6 +47,7 @@ final class CollectUserInfomationViewModel: ViewModel {
                     guard let sex = state.gender?.description  else { return }
                     try await authRepository.signIn(sex: sex, birthYear: String(describing: state.birthYear))
                     await MainActor.run {
+                        userdefaultRepository.setUserRole(userRole: .complete)
                         router.routeTo(.mainTab)
                     }
                 } catch {

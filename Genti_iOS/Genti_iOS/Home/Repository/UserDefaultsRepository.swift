@@ -13,6 +13,9 @@ protocol UserDefaultsRepository {
     func setToken(token: GentiTokenEntity)
     func getToken() -> GentiTokenEntity
     func removeToken()
+    func setUserRole(userRole: LoginUserState)
+    func getUserRole() -> LoginUserState?
+    func removeUserRole()
     
 }
 

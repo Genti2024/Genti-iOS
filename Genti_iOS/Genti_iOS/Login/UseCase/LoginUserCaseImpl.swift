@@ -22,7 +22,8 @@ final class LoginUserCaseImpl: LoginUseCase {
     
     func loginWithKaKao() async throws -> LoginUserState {
         let token = try await tokenRepository.getKaKaoToken()
-        let result = try await loginRepository.login(token: token, type: .kakao)
+        let result = try await loginRepository.login(token: token, type: .kakao) 
+        self.userdefaultRepository.setUserRole(userRole: result.userStatus)
         self.userdefaultRepository.setToken(token: .init(accessToken: result.accessToken, refreshToken: result.refreshToken))
         return result.userStatus
     }
@@ -30,6 +31,7 @@ final class LoginUserCaseImpl: LoginUseCase {
     func loginWithApple(_ result: Result<ASAuthorization, any Error>) async throws -> LoginUserState {
         let token = try tokenRepository.getAppleToken(result)
         let result = try await loginRepository.login(token: token, type: .apple)
+        self.userdefaultRepository.setUserRole(userRole: result.userStatus)
         self.userdefaultRepository.setToken(token: .init(accessToken: result.accessToken, refreshToken: result.refreshToken))
         return result.userStatus
     }

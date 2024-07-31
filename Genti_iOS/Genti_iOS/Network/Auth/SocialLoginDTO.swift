@@ -19,7 +19,7 @@ struct SocialLoginDTO: Codable {
         case "USER":
             return .complete
         default:
-            return .unknown
+            return .notComplete
         }
     }
 }

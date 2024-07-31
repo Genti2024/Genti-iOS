@@ -8,6 +8,17 @@
 import Foundation
 
 struct UserDefaultsRepositoryImpl: UserDefaultsRepository {
+    func getUserRole() -> LoginUserState? {
+        guard let userRoleRawValue = self.get(forKey: .userRole) as? String, let userRole = LoginUserState(rawValue: userRoleRawValue) else {
+            return nil
+        }
+        return userRole
+    }
+    
+    func setUserRole(userRole: LoginUserState) {
+        self.set(to: userRole.rawValue, forKey: .userRole)
+    }
+    
     
     func getToken() -> GentiTokenEntity {
         guard let accessToken = self.get(forKey: .accessToken) as? String, let refreshToken = self.get(forKey: .refreshToken) as? String else {
@@ -24,6 +35,10 @@ struct UserDefaultsRepositoryImpl: UserDefaultsRepository {
     func removeToken() {
         self.remove(forKey: .accessToken)
         self.remove(forKey: .refreshToken)
+    }
+    
+    func removeUserRole() {
+        self.remove(forKey: .userRole)
     }
     
     var isFirstGenerate: Bool {

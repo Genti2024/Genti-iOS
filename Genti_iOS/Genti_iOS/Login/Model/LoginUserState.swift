@@ -7,9 +7,8 @@
 
 import Foundation
 
-enum LoginUserState {
+enum LoginUserState: String {
     case complete
     case notComplete
-    case unknown
 }
 
