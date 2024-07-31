@@ -35,45 +35,50 @@ final class ProfileViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .viewWillAppear:
-            Task {
-                do {
-                    state.page = 0
-                    state.myImages = []
-                    state.isLastPage = false
-                    state.hasInProgressImage = false
-                    let entity = try await profileUseCase.fetchInitalUserInfo()
-                    state.hasInProgressImage = entity.hasInProgressPhoto
-                    state.myImages = entity.completedImage.images
-                    state.isLastPage = entity.completedImage.isLast
-                } catch {
-                    
-                }
-            }
+            Task { await setInitalState() }
         case .reachBottom:
-            Task {
-                do {
-                    guard !state.isLastPage else { return }
-                    state.page += 1
-                    let entity = try await profileUseCase.getCompletedPhotos(page: state.page)
-                    state.myImages += entity.images
-                    state.isLastPage = entity.isLast
-                } catch {
-                    
-                }
-            }
-            
+            Task { await myImagePagination() }
         case .imageTap(let url):
-            Task {
-                do {
-                    guard let image = await profileUseCase.load(from: url) else { return }
-                    await MainActor.run {
-                        router.routeTo(.photoDetailWithShare(image: image))
-                    }
-                }
-            }
-            
+            Task { await showMyImage(url: url) }
         case .gearButtonTap:
             router.routeTo(.setting)
+        }
+    }
+    
+    @MainActor
+    func setInitalState() async {
+        do {
+            state.page = 0
+            state.myImages = []
+            state.isLastPage = false
+            state.hasInProgressImage = false
+            let entity = try await profileUseCase.fetchInitalUserInfo()
+            state.hasInProgressImage = entity.hasInProgressPhoto
+            state.myImages = entity.completedImage.images
+            state.isLastPage = entity.completedImage.isLast
+        } catch {
+            
+        }
+    }
+    
+    @MainActor
+    func myImagePagination() async {
+        do {
+            guard !state.isLastPage else { return }
+            state.page += 1
+            let entity = try await profileUseCase.getCompletedPhotos(page: state.page)
+            state.myImages += entity.images
+            state.isLastPage = entity.isLast
+        } catch {
+            
+        }
+    }
+    
+    @MainActor
+    func showMyImage(url: String) async {
+        do {
+            guard let image = await profileUseCase.load(from: url) else { return }
+            router.routeTo(.photoDetailWithShare(image: image))
         }
     }
 }
