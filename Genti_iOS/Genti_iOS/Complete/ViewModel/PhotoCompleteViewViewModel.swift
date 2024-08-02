@@ -116,16 +116,15 @@ final class PhotoCompleteViewViewModel: ViewModel {
             try await userRepository.reportPhoto(responseId: self.photoInfo.responseId, content: self.state.reportContent)
             state.reportContent = ""
             state.isLoading = false
-            state.showAlert = .reportComplete
+            state.showAlert = .reportComplete(action: { self.router.dismissSheet() })
         } catch(let error) {
             state.reportContent = ""
+            state.isLoading = false
             guard let error = error as? GentiError else {
-                state.isLoading = false
-                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                state.showAlert = .reportUnknownedError(error: error, action: { self.router.dismissSheet() })
                 return
             }
-            state.isLoading = false
-            state.showAlert = .reportGentiError(error: error, action: nil)
+            state.showAlert = .reportGentiError(error: error, action: { self.router.dismissSheet() })
         }
     }
 

@@ -33,6 +33,7 @@ final class MainFeedViewModel: ViewModel {
         var feeds: [FeedEntity] = []
         var isLogoHidden: Bool = false
         var isLoading: Bool = false
+        var showAlert: AlertType? = nil
     }
     
     func sendAction(_ input: Input) {
@@ -50,18 +51,22 @@ final class MainFeedViewModel: ViewModel {
     
     @MainActor
     func fetchFeed() async {
-        defer { state.isLoading = false }
         do {
             state.isLoading = true
             state.feeds = try await feedRepository.fetchFeeds()
-            
-            // MARK: - bool이 아니라 구조체를 넣자
+            state.isLoading = false
         } catch(let error) {
-            print(#fileID, #function, #line, "- \(error.localizedDescription)")
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
     
     func checkCompleteImageFromBackgroundNotification() {
+        // MARK: - bool이 아니라 구조체를 넣자
         guard let isShow = userDefaultsRepository.get(forKey: .showImage) as? Bool else { return }
         if isShow {
             router.routeTo(.completeMakeImage(imageInfo: .init()))

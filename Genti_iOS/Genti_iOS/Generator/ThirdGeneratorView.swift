@@ -27,6 +27,7 @@ struct ThirdGeneratorView: View {
                 }
             } //:ZSTACK
             .toolbar(.hidden, for: .navigationBar)
+            .customAlert(alertType: $viewModel.state.showAlert)
     }
     
     private func completeButtonView() -> some View {

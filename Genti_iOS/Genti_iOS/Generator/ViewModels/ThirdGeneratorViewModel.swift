@@ -14,6 +14,7 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     struct State {
         var referenceImages: [ImageAsset] = []
         var isLoading: Bool = false
+        var showAlert: AlertType? = nil
     }
     
     enum Input {
@@ -33,16 +34,24 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         case .xmarkTap:
             router.dismissSheet()
         case .nextButtonTap:
-            Task {
-                do {
-                    state.isLoading = true
-                    try await imageGenerateUseCase.requestImage(from: self.requestData())
-                    state.isLoading = false
-                    router.routeTo(.requestCompleted)
-                } catch(let error) {
-                    print(error as! GentiError)
-                }
+            Task { await completeImageRequest() }
+        }
+    }
+    
+    @MainActor
+    func completeImageRequest() async {
+        do {
+            state.isLoading = true
+            try await imageGenerateUseCase.requestImage(from: self.requestData())
+            state.isLoading = false
+            router.routeTo(.requestCompleted)
+        } catch(let error) {
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
             }
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
     
