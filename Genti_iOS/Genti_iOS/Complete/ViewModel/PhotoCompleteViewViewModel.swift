@@ -57,7 +57,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
         case .downloadButtonTap:
             Task { await downloadImage() }
         case .ratingActionIsDone:
-            self.router.dismissSheet()
+            Task { await self.checkImage() }
         }
     }
     
@@ -79,14 +79,28 @@ final class PhotoCompleteViewViewModel: ViewModel {
             state.image = image
         }
     }
+    
+    @MainActor
+    func checkImage() async {
+        do {
+            state.isLoading = true
+            try await userRepository.checkCompletedImage(responeId: photoInfo.responseId)
+            state.isLoading = false
+            self.router.dismissSheet()
+        } catch(let error) {
+            guard let error = error as? GentiError else {
+                state.isLoading = false
+                state.showAlert = .reportUnknownedError(error: error, action: { self.router.dismissSheet() })
+                return
+            }
+            state.isLoading = false
+            state.showAlert = .reportGentiError(error: error, action: { self.router.dismissSheet() })
+        }
+    }
 
     private func presentReportAlert() {
         state.showAlert = .report(
-            action: {
-                Task {
-                    await self.submitReport()
-                }
-            },
+            action: { Task { await self.submitReport() } },
             placeholder: "",
             text: .init(
                 get: { [weak self] in self?.state.reportContent ?? "" },
@@ -99,12 +113,19 @@ final class PhotoCompleteViewViewModel: ViewModel {
     func submitReport() async {
         do {
             state.isLoading = true
-            try await userRepository.reportPhoto(id: self.photoInfo.id, content: self.state.reportContent)
+            try await userRepository.reportPhoto(responseId: self.photoInfo.responseId, content: self.state.reportContent)
             state.reportContent = ""
             state.isLoading = false
             state.showAlert = .reportComplete
-        } catch {
-            
+        } catch(let error) {
+            state.reportContent = ""
+            guard let error = error as? GentiError else {
+                state.isLoading = false
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.isLoading = false
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
 

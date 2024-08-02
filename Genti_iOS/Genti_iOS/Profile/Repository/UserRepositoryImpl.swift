@@ -20,17 +20,48 @@ final class UserRepositoryImpl: UserRepository {
         return dto.toEntity
     }
     
-    // MARK: - 추후 수정
-    func checkUserStatus() async throws -> Bool {
-        return [true, false].randomElement()!
+    func getUserState() async throws -> UserState {
+        let dto: UserStateDTO = try await requestService.fetchResponse(for: UserRouter.getUserState)
+        switch dto.status {
+        case "IN_PROGRESS":
+            return .inProgress
+        case "AWAIT_USER_VERIFICATION":
+            guard let requestId = dto.pictureGenerateRequestId else { return .error }
+            guard let photoInfo = dto.pictureGenerateResponse else { return .error }
+            return .awaitUserVerification(.init(requestId: requestId, photoInfo: photoInfo))
+        case "CANCELED":
+            guard let requestId = dto.pictureGenerateRequestId else { return .error }
+            return .canceled(requestId: requestId)
+        case "NEW_REQUEST_AVAILABLE":
+            return .canMake
+        default:
+            return .error
+        }
     }
     
-    func reportPhoto(id: Int, content: String) async throws {
-        try await requestService.fetchResponse(for: UserRouter.reportPicture(id: id, content: content))
+    func checkUserInProgress() async throws -> Bool {
+        let dto: UserStateDTO = try await requestService.fetchResponse(for: UserRouter.getUserState)
+        switch dto.status {
+        case "IN_PROGRESS":
+            return true
+        default:
+            return false
+        }
     }
     
-    // MARK: - 추후 수정
-    func scorePhoto(rate: Int) async throws {
-        return try await requestService.fetchResponse(for: UserRouter.ratePicture(id: 1, rate: rate))
+    func reportPhoto(responseId: Int, content: String) async throws {
+        try await requestService.fetchResponse(for: UserRouter.reportPicture(responseId: responseId, content: content))
+    }
+    
+    func scorePhoto(responseId: Int, rate: Int) async throws {
+        try await requestService.fetchResponse(for: UserRouter.ratePicture(responseId: responseId, rate: rate))
+    }
+    
+    func checkCompletedImage(responeId: Int) async throws {
+        try await requestService.fetchResponse(for: UserRouter.checkCompletedImage(responeId: responeId))
+    }
+    
+    func checkCanceledImage(requestId: Int) async throws {
+        try await requestService.fetchResponse(for: UserRouter.checkCanceledImage(requestId: requestId))
     }
 }

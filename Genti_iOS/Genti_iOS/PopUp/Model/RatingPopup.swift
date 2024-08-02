@@ -10,9 +10,15 @@ import SwiftUI
 import PopupView
 
 struct RatingPopup: CustomPopup {
+    
+    let photoInfo: CompletePhotoEntity
+    
+    init(photoInfo: CompletePhotoEntity) {
+        self.photoInfo = photoInfo
+    }
 
     var contentView: some View {
-        RatingAlertView(viewModel: RatingAlertViewModel(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())))
+        RatingAlertView(viewModel: RatingAlertViewModel(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()), photoInfo: photoInfo))
     }
 
     var customize: (Popup<AnyView>.PopupParameters) -> Popup<AnyView>.PopupParameters {

@@ -9,7 +9,10 @@ import Foundation
 
 protocol UserRepository {
     func fetchPhotos(page: Int) async throws -> MyImagesEntitiy
-    func checkUserStatus() async throws -> Bool
-    func reportPhoto(id: Int, content: String) async throws
-    func scorePhoto(rate: Int) async throws
+    func checkUserInProgress() async throws -> Bool
+    func reportPhoto(responseId: Int, content: String) async throws
+    func scorePhoto(responseId: Int, rate: Int) async throws
+    func getUserState() async throws -> UserState
+    func checkCompletedImage(responeId: Int) async throws
+    func checkCanceledImage(requestId: Int) async throws
 }
