@@ -116,10 +116,16 @@ struct ProfileView: View {
             }
 
         }
+        .overlay(alignment: .center) {
+            if viewModel.state.isLoading {
+                LoadingView()
+            }
+        }
         .toolbar(.hidden, for: .navigationBar)
         .onFirstAppear {
             viewModel.sendAction(.viewWillAppear)
         }
+        .customAlert(alertType: $viewModel.state.showAlert)
         .refreshable {
             print(#fileID, #function, #line, "- refresh profile")
         }
