@@ -25,6 +25,7 @@ struct CollectUserInfomationView: View {
             backgroundView()
         )
         .toolbar(.hidden, for: .navigationBar)
+        .customAlert(alertType: $viewModel.state.showAlert)
     }
     
     func headerView() -> some View {
