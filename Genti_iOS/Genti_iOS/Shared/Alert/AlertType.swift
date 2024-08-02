@@ -15,6 +15,8 @@ enum AlertType {
     case reportComplete
     case logout(action: AlertAction)
     case resign(action: AlertAction)
+    case reportUnknownedError(error: Error, action: AlertAction?)
+    case reportGentiError(error: GentiError, action: AlertAction?)
     
     var data: Alert {
         switch self {
@@ -36,6 +38,13 @@ enum AlertType {
             return .init(title: "정말 탈퇴 하시겠어요?",
                          message: "생성한 사진 내역이 모두 사라집니다.\n주의해주세요!",
                          actions: [.init(title: "취소하기", style: .cancel), .init(title: "탈퇴하기", action: action)])
+        case .reportUnknownedError(let error, let action):
+            return .init(title: "알수없는문제", message: error.localizedDescription, actions: [.init(title: "확인", action: action)])
+        case .reportGentiError(let error, let action):
+            guard let title = error.code, let message = error.message else {
+                return .init(title: "비어있음", message: "비어있음", actions: [.init(title: "확인", action: action)])
+            }
+            return .init(title: title, message: message, actions: [.init(title: "확인", action: action)])
         }
     }
 }
