@@ -13,7 +13,7 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
+    var userdefultRepository = UserDefaultsRepositoryImpl()
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
@@ -31,9 +31,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         
-        guard let _ = connectionOptions.notificationResponse else { return }
-        // 만약에 앱이 꺼진상태에서 push notification받았을 때
-        
+        if let response = connectionOptions.notificationResponse {
+            if response.notification.request.content.body == "test" {
+                userdefultRepository.set(to: true, forKey: .showImage)
+            }
+        }
         return
         
     }

@@ -39,20 +39,39 @@ final class MainFeedViewModel: ViewModel {
         switch input {
         case .viewWillAppear:
             Task {
-                do {
-                    state.isLoading = true
-                    state.feeds = try await feedRepository.fetchFeeds()
-                    state.isLoading = false
-                } catch {
-                    print(#fileID, #function, #line, "- error in feed api")
-                }
+                await fetchFeed()
             }
-            
-            if userDefaultsRepository.isFirstVisitApp {
-                self.router.routeTo(.onboarding)
-            }
+            checkCompleteImageFromBackgroundNotification()
+            checkUserFirstVisit()
         case .scroll(offset: let offset):
             state.isLogoHidden = offset < 165 ? true : false
+        }
+    }
+    
+    @MainActor
+    func fetchFeed() async {
+        defer { state.isLoading = false }
+        do {
+            state.isLoading = true
+            state.feeds = try await feedRepository.fetchFeeds()
+            
+            // MARK: - bool이 아니라 구조체를 넣자
+        } catch(let error) {
+            print(#fileID, #function, #line, "- \(error.localizedDescription)")
+        }
+    }
+    
+    func checkCompleteImageFromBackgroundNotification() {
+        guard let isShow = userDefaultsRepository.get(forKey: .showImage) as? Bool else { return }
+        if isShow {
+            router.routeTo(.completeMakeImage(imageInfo: .init()))
+            userDefaultsRepository.remove(forKey: .showImage)
+        }
+    }
+    
+    func checkUserFirstVisit() {
+        if userDefaultsRepository.isFirstVisitApp {
+            self.router.routeTo(.onboarding)
         }
     }
 }

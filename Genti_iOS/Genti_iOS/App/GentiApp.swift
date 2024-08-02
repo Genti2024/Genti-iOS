@@ -13,7 +13,6 @@ struct GentiApp: View {
         RoutingView(Router<MainRoute>()) { router in
             SplashView(splashViewModel: SplashViewModel(router: router, splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
                 .onNotificationRecieved(name: Notification.Name(rawValue: "PushNotificationReceived")) { _ in
-                    router.routeTo(.completeMakeImage)
                     print(#fileID, #function, #line, "- noti received")
                 }
         }

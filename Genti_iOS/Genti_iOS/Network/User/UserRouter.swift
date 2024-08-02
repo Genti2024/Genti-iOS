@@ -9,26 +9,35 @@ import Foundation
 
 import Alamofire
 
+enum UserState {
+    case inProgress
+    case canMake
+    case awaitUserVerification(CompletePhotoEntity)
+    case canceled(requestId: Int)
+    case error
+}
+
 enum UserRouter: URLRequestConvertible {
     
     case fetchMyPictures(page: Int)
-    case reportPicture(id: Int, content: String)
-    case ratePicture(id: Int, rate: Int)
+    case reportPicture(responseId: Int, content: String)
+    case ratePicture(responseId: Int, rate: Int)
+    case getUserState
+    case checkCompletedImage(responeId: Int)
+    case checkCanceledImage(requestId: Int)
     
     var method: HTTPMethod {
         switch self {
-        case .fetchMyPictures:
+        case .fetchMyPictures, .getUserState, .checkCanceledImage:
             return .get
-        case .reportPicture:
-            return .post
-        case .ratePicture:
+        case .reportPicture, .ratePicture, .checkCompletedImage:
             return .post
         }
     }
     
     var headers: HTTPHeaders {
         switch self {
-        case .fetchMyPictures, .reportPicture, .ratePicture:
+        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage:
             return []
         }
     }
@@ -44,8 +53,14 @@ enum UserRouter: URLRequestConvertible {
             return "/api/v1/users/pictures/my"
         case .reportPicture:
             return "/api/v1/users/reports"
-        case .ratePicture(let id, _):
-            return "/api/v1/users/picture-generate-responses/\(id)/rate"
+        case .ratePicture(let responseId, _):
+            return "/api/v1/users/picture-generate-responses/\(responseId)/rate"
+        case .getUserState:
+            return "/api/v1/users/picture-generate-requests/pending"
+        case .checkCompletedImage(let responseId):
+            return "/api/v1/users/picture-generate-responses/\(responseId)/verify"
+        case .checkCanceledImage(let requestId):
+            return "/api/v1/users/picture-generate-requests/\(requestId)/confirm-cancel-status"
         }
     }
     
@@ -64,18 +79,19 @@ enum UserRouter: URLRequestConvertible {
             parameters["sortBy"] = "createdAt"
             parameters["direction"] = "desc"
             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
-        case .reportPicture(id: let id, content: let content):
+        case .reportPicture(let responseId, content: let content):
             var parameters: [String: Any] = [:]
-            parameters["pictureGenerateResponseId"] = id
+            parameters["pictureGenerateResponseId"] = responseId
             parameters["content"] = content
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
             
         case .ratePicture(_, let rate):
-             var parameters: [String: Any] = [:]
-             parameters["star"] = rate
-             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
-         }
-        
+            var parameters: [String: Any] = [:]
+            parameters["star"] = rate
+            urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
+        case .getUserState, .checkCompletedImage, .checkCanceledImage:
+            return urlRequest
+        }
         return urlRequest
     }
     
