@@ -14,9 +14,11 @@ final class TabViewModel: ViewModel {
     var router: Router<MainRoute>
     
     var state: State
+    
     struct State {
         var currentTab: Tab = .feed
-        
+        var isLoading: Bool = false
+        var showAlert: AlertType? = nil
     }
     enum Input {
         case feedIconTap
@@ -31,26 +33,7 @@ final class TabViewModel: ViewModel {
             state.currentTab = .profile
         case .cameraIconTap:
             Task {
-                switch try await tabViewUseCase.getUserState() {
-                case .inProgress:
-                    router.routeTo(.waiting)
-                case .canMake:
-                    router.routeTo(.firstGen)
-                case .awaitUserVerification(let completePhotoEntity):
-                    router.routeTo(.completeMakeImage(imageInfo: completePhotoEntity))
-                case .canceled(let requestId):
-                    // MARK: - 취소되었을떄
-                    Task {
-                        do {
-                            try await tabViewUseCase.checkCanceledImage(requestId: requestId)
-                        } catch(let error) {
-                            print(error)
-                        }
-                    }
-                    router.routeTo(.firstGen)
-                case .error:
-                    print(#fileID, #function, #line, "- 에러발생")
-                }
+                await handleUserState()
             }
         }
     }
@@ -59,6 +42,48 @@ final class TabViewModel: ViewModel {
         self.tabViewUseCase = tabViewUseCase
         self.router = router
         self.state = .init()
+    }
+    
+    @MainActor
+    func handleUserState() async {
+        do {
+            state.isLoading = true
+            switch try await tabViewUseCase.getUserState() {
+            case .inProgress:
+                router.routeTo(.waiting)
+            case .canMake:
+                router.routeTo(.firstGen)
+            case .awaitUserVerification(let completePhotoEntity):
+                router.routeTo(.completeMakeImage(imageInfo: completePhotoEntity))
+            case .canceled(let requestId):
+                await handleCanceledState(requestId: requestId)
+            case .error:
+                print(#fileID, #function, #line, "- 에러 발생")
+            }
+            state.isLoading = false
+        } catch(let error) {
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
+        }
+    }
+
+    @MainActor
+    func handleCanceledState(requestId: Int) async {
+        do {
+            try await tabViewUseCase.checkCanceledImage(requestId: requestId)
+            router.routeTo(.firstGen)
+        } catch(let error) {
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
+        }
     }
     
 }

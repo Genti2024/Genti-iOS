@@ -26,6 +26,12 @@ struct GentiTabView: View {
             
             CustomTabView(viewModel: $viewModel)
         } //: ZSTACK
+        .overlay(alignment: .center) {
+            if viewModel.state.isLoading {
+                LoadingView()
+            }
+        }
+        .customAlert(alertType: $viewModel.state.showAlert)
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)
     }
