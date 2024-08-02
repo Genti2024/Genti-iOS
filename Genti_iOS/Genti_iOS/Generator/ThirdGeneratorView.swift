@@ -189,6 +189,6 @@ struct ThirdGeneratorView: View {
     }
 }
 
-//#Preview {
-//    ThirdGeneratorView(router: .init())
-//}
+#Preview {
+    ThirdGeneratorView(viewModel: ThirdGeneratorViewModel(imageGenerateUseCase: ImageGenerateUseCaseImpl(generateRepository: ImageGenerateRepositoryImpl(requsetService: RequestServiceImpl(), imageDataTransferService: ImageDataTransferServiceImpl(), uploadService: UploadServiceImpl())), requestImageData: RequestImageData(), router: .init()))
+}

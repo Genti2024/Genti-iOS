@@ -32,8 +32,8 @@ struct Caution {
     
     static var beforeAfterImages: [BeforeAfter] {
         return [
-            .init(before: "FaceExample1", after: "AfterImage1"),
-            .init(before: "FaceExample2", after: "AfterImage2")
+            .init(before: "BeforeImage1", after: "AfterImage1"),
+            .init(before: "BeforeImage2", after: "AfterImage2")
         ]
     }
 }

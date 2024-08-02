@@ -97,9 +97,6 @@ struct ProfileView: View {
                         }
                     }
                 }
-                
-
-
             }
             .shadow(type: .soft)
         }
@@ -116,14 +113,12 @@ struct ProfileView: View {
             }
 
         }
-        .overlay(alignment: .center) {
-            if viewModel.state.isLoading {
-                LoadingView()
-            }
-        }
         .toolbar(.hidden, for: .navigationBar)
         .onFirstAppear {
             viewModel.sendAction(.viewWillAppear)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init("profileReload"))) { _ in
+            self.viewModel.sendAction(.reload)
         }
         .customAlert(alertType: $viewModel.state.showAlert)
         .refreshable {

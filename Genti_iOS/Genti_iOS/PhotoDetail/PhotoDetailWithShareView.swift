@@ -13,6 +13,7 @@ struct PhotoDetailWithShareView: View {
     var body: some View {
         VStack(spacing: 20) {
             Rectangle()
+                .fill(.clear)
                 .aspectRatio(1/1.5, contentMode: .fit)
                 .overlay(alignment: .center) {
                     Image(uiImage: viewModel.state.image)

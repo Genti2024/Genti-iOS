@@ -77,6 +77,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
         do {
             let image = await imageRepository.load(from: photoInfo.imageUrlString)
             state.image = image
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
         }
     }
     

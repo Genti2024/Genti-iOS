@@ -75,6 +75,7 @@ final class TabViewModel: ViewModel {
     func handleCanceledState(requestId: Int) async {
         do {
             try await tabViewUseCase.checkCanceledImage(requestId: requestId)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
             router.routeTo(.firstGen)
         } catch(let error) {
             state.isLoading = false

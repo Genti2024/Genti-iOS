@@ -23,7 +23,6 @@ final class ProfileViewModel: ViewModel {
         var myImages: [MyImagesEntitiy.Image] = []
         var isLastPage: Bool = false
         var hasInProgressImage: Bool = false
-        var isLoading: Bool = false
         var showAlert: AlertType? = nil
     }
     enum Input {
@@ -31,6 +30,7 @@ final class ProfileViewModel: ViewModel {
         case reachBottom
         case imageTap(String)
         case gearButtonTap
+        case reload
     }
 
     var state: State
@@ -44,13 +44,14 @@ final class ProfileViewModel: ViewModel {
             Task { await showMyImage(url: url) }
         case .gearButtonTap:
             router.routeTo(.setting)
+        case .reload:
+            Task { await reload() }
         }
     }
     
     @MainActor
     func setInitalState() async {
         do {
-            state.isLoading = true
             state.page = 0
             state.myImages = []
             state.isLastPage = false
@@ -59,9 +60,7 @@ final class ProfileViewModel: ViewModel {
             state.hasInProgressImage = entity.hasInProgressPhoto
             state.myImages = entity.completedImage.images
             state.isLastPage = entity.completedImage.isLast
-            state.isLoading = false
         } catch(let error) {
-            state.isLoading = false
             guard let error = error as? GentiError else {
                 state.showAlert = .reportUnknownedError(error: error, action: nil)
                 return
@@ -69,6 +68,26 @@ final class ProfileViewModel: ViewModel {
             state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
+    
+    @MainActor
+    func reload() async {
+        do {
+            state.page = 0
+            state.isLastPage = false
+            state.hasInProgressImage = false
+            let entity = try await profileUseCase.fetchInitalUserInfo()
+            state.hasInProgressImage = entity.hasInProgressPhoto
+            state.myImages = entity.completedImage.images
+            state.isLastPage = entity.completedImage.isLast
+        } catch(let error) {
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
+        }
+    }
+    
     
     @MainActor
     func myImagePagination() async {

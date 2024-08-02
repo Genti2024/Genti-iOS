@@ -43,6 +43,7 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         do {
             state.isLoading = true
             try await imageGenerateUseCase.requestImage(from: self.requestData())
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
             state.isLoading = false
             router.routeTo(.requestCompleted)
         } catch(let error) {
