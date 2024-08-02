@@ -30,23 +30,22 @@ final class APIEventInterceptor: RequestInterceptor {
             completion(.doNotRetryWithError(error))
             return
         }
-        /// 401이 들어오면 무조건 토큰 재갱신 로직 출발
+        
         let tokens = userdefaultRepository.getToken()
         guard let accessToken = tokens.accessToken, let refreshToken = tokens.refreshToken else {
             completion(.doNotRetryWithError(GentiError.tokenError(code: "로컬db토큰오류", message: "토큰이 없습니다")))
             return
         }
+        
         AF.request(AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken))).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
                     let result = try JSONDecoder().decode(APIResponse<ReissueTokenDTO>.self, from: data)
-                    if result.errorCode != "AUTH-00001" {
-                        print(#fileID, #function, #line, "- 토큰 만료 문제 X")
+                    if !result.success {
                         completion(.doNotRetryWithError(GentiError.tokenError(code: result.errorCode, message: result.errorMessage)))
                         return
                     }
-                    print(#fileID, #function, #line, "- 토큰 만료 문제 O")
                     self.userdefaultRepository.setToken(token: .init(accessToken: result.response?.accessToken, refreshToken: result.response?.refreshToken))
                     print(#fileID, #function, #line, "- 새로 받은 토큰으로 교체")
                     completion(.retry)
