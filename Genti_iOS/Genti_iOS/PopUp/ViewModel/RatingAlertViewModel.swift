@@ -24,9 +24,11 @@ final class RatingAlertViewModel: ViewModel {
     }
     
     var state: State
-    
-    init(userRepository: UserRepository) {
+    var photoInfo: CompletePhotoEntity
+
+    init(userRepository: UserRepository, photoInfo: CompletePhotoEntity) {
         self.userRepository = userRepository
+        self.photoInfo = photoInfo
         self.state = .init()
     }
     
@@ -43,13 +45,15 @@ final class RatingAlertViewModel: ViewModel {
     
     @MainActor
     func submitRating() async {
+        defer {
+            state.isLoading = false
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+        }
         do {
             self.state.isLoading = true
-            try await userRepository.scorePhoto(rate: state.rating)
-            self.state.isLoading = false
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
-        } catch {
-            
+            try await userRepository.scorePhoto(responseId: photoInfo.responseId, rate: state.rating)
+        } catch(let error) {
+            print(error)
         }
     }
 }

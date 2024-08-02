@@ -13,6 +13,7 @@ enum UserDefaultsKey: String {
     case accessToken
     case refreshToken
     case userRole
+    case showImage
 }
 
 

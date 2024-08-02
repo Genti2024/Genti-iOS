@@ -119,6 +119,9 @@
 		C048A90E2C573A4B00026C80 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C048A90D2C573A4B00026C80 /* KakaoSDKAuth */; };
 		C048A9102C573A4B00026C80 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = C048A90F2C573A4B00026C80 /* KakaoSDKCommon */; };
 		C048A9122C573A4B00026C80 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = C048A9112C573A4B00026C80 /* KakaoSDKUser */; };
+		C049674D2C5C87FE0097C732 /* TabViewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049674C2C5C87FE0097C732 /* TabViewUseCase.swift */; };
+		C049674F2C5C880F0097C732 /* TabViewUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049674E2C5C880F0097C732 /* TabViewUseCaseImpl.swift */; };
+		C04967512C5C88550097C732 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967502C5C88550097C732 /* TabViewModel.swift */; };
 		C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */; };
 		C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */; };
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
@@ -179,6 +182,7 @@
 		C0D74A422C1EA68700A45371 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A412C1EA68700A45371 /* Router.swift */; };
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
 		C0D74A462C1EA6B500A45371 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Route.swift */; };
+		C0D942C42C5A48A70044649A /* UserStateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D942C32C5A48A70044649A /* UserStateDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,6 +315,9 @@
 		C048A9032C51B64E00026C80 /* CollectUserInfomationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectUserInfomationViewModel.swift; sourceTree = "<group>"; };
 		C048A9052C51BA1500026C80 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		C048A9092C5227CF00026C80 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
+		C049674C2C5C87FE0097C732 /* TabViewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewUseCase.swift; sourceTree = "<group>"; };
+		C049674E2C5C880F0097C732 /* TabViewUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewUseCaseImpl.swift; sourceTree = "<group>"; };
+		C04967502C5C88550097C732 /* TabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
 		C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumServiceImpl.swift; sourceTree = "<group>"; };
 		C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCase.swift; sourceTree = "<group>"; };
 		C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCaseImpl.swift; sourceTree = "<group>"; };
@@ -366,6 +373,7 @@
 		C0D74A412C1EA68700A45371 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
 		C0D74A452C1EA6B500A45371 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		C0D942C32C5A48A70044649A /* UserStateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -814,6 +822,8 @@
 		C017C4702C1C3AA3009924C9 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
+				C049674B2C5C879B0097C732 /* UseCase */,
+				C049674A2C5C878E0097C732 /* ViewModel */,
 				C017C46C2C1C3AA3009924C9 /* Components */,
 				C017C46E2C1C3AA3009924C9 /* Model */,
 				C017C46F2C1C3AA3009924C9 /* GentiTabView.swift */,
@@ -891,6 +901,7 @@
 			isa = PBXGroup;
 			children = (
 				C028435D2C326CAE00B84566 /* UserRouter.swift */,
+				C0D942C32C5A48A70044649A /* UserStateDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -983,6 +994,23 @@
 				C0BCC4A72C5883FE009C89C4 /* SocialLoginDTO.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		C049674A2C5C878E0097C732 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C04967502C5C88550097C732 /* TabViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C049674B2C5C879B0097C732 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				C049674C2C5C87FE0097C732 /* TabViewUseCase.swift */,
+				C049674E2C5C880F0097C732 /* TabViewUseCaseImpl.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		C088F2C92C25727F00F92320 /* UseCase */ = {
@@ -1304,6 +1332,7 @@
 				C0D74A422C1EA68700A45371 /* Router.swift in Sources */,
 				C0BCC4A42C58787F009C89C4 /* ReissueTokenDTO.swift in Sources */,
 				C0113D5E2C37C1D700071BF6 /* PhotoDetailViewModel.swift in Sources */,
+				C04967512C5C88550097C732 /* TabViewModel.swift in Sources */,
 				C017C49E2C1C3AA3009924C9 /* GeneratorRequest.swift in Sources */,
 				C017C47C2C1C3AA3009924C9 /* RatingAlertView.swift in Sources */,
 				C017C49C2C1C3AA3009924C9 /* APIService.swift in Sources */,
@@ -1320,6 +1349,7 @@
 				C0113D852C3BEAA400071BF6 /* ShareStyleModifier.swift in Sources */,
 				C017C48A2C1C3AA3009924C9 /* SettingRow.swift in Sources */,
 				C0BCC4B32C58857B009C89C4 /* LoginUseCase.swift in Sources */,
+				C049674F2C5C880F0097C732 /* TabViewUseCaseImpl.swift in Sources */,
 				C017C47F2C1C3AA3009924C9 /* Caution.swift in Sources */,
 				C028437B2C32BF3F00B84566 /* ProfileUseCaseImpl.swift in Sources */,
 				C0113D922C3D426700071BF6 /* UserDefaultsKey.swift in Sources */,
@@ -1400,6 +1430,7 @@
 				C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
 				C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */,
+				C049674D2C5C87FE0097C732 /* TabViewUseCase.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,
 				C017C4952C1C3AA3009924C9 /* ImagePickerViewModel.swift in Sources */,
 				C08BB5B32C3E312B00D4CFA9 /* UserDefaultsRepository.swift in Sources */,
@@ -1407,6 +1438,7 @@
 				C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */,
 				C02843592C326ACC00B84566 /* PageCommonPictureResponseDTO.swift in Sources */,
 				C08BB5B52C3E313800D4CFA9 /* UserDefaultsRepositoryImpl.swift in Sources */,
+				C0D942C42C5A48A70044649A /* UserStateDTO.swift in Sources */,
 				C0275D832C59EA8A00A68D31 /* SplashViewModel.swift in Sources */,
 				C02843762C32BF0700B84566 /* UserRepositoryImpl.swift in Sources */,
 				C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */,

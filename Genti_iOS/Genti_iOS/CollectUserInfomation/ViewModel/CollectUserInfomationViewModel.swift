@@ -21,6 +21,8 @@ final class CollectUserInfomationViewModel: ViewModel {
         var birthYear: Int = 2025
         var showPicker: Bool = false
         var firstTap: Bool = false
+        var showAlert: AlertType? = nil
+        var isLoading: Bool = false
     }
     
     enum Input {
@@ -48,10 +50,7 @@ final class CollectUserInfomationViewModel: ViewModel {
                 self.state.showPicker.toggle()
             }
         case .completeButtonTap:
-            Task {
-                await postUserInformation()
-            }
-            
+            Task { await postUserInformation() }
         case .backgroundTap:
             if state.showPicker {
                 state.showPicker = false
@@ -62,12 +61,21 @@ final class CollectUserInfomationViewModel: ViewModel {
     @MainActor
     func postUserInformation() async {
         do {
+            state.isLoading = true
             guard let sex = state.gender?.description  else { return }
             try await authRepository.signIn(sex: sex, birthYear: String(describing: state.birthYear))
             userdefaultRepository.setUserRole(userRole: .complete)
+            state.isLoading = false
             router.routeTo(.mainTab)
-        } catch {
-            
+        } catch(let error) {
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: { self.router.popToRoot() })
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: {
+                self.router.popToRoot()
+            })
         }
     }
 }

@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct CustomTabView: View {
-    @Bindable var router: Router<MainRoute>
-    @Binding var currentTab: Tab
+
+    @Binding var viewModel: TabViewModel
+    
     var body: some View {
         HStack(alignment: .center) {
-            Image(currentTab == .feed ? "Feed_fill" : "Feed_empty")
+            Image(viewModel.state.currentTab == .feed ? "Feed_fill" : "Feed_empty")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    currentTab = .feed
+                    viewModel.sendAction(.feedIconTap)
                 }
             Spacer()
             
@@ -28,19 +29,19 @@ struct CustomTabView: View {
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    router.routeTo(.firstGen)
+                    viewModel.sendAction(.cameraIconTap)
                 }
 
 
             Spacer()
-            Image(currentTab == .profile ? "User_fill" : "User_empty")
+            Image(viewModel.state.currentTab == .profile ? "User_fill" : "User_empty")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
-                    currentTab = .profile
+                    viewModel.sendAction(.profileIconTap)
                 }
         }
         .frame(height: 50)
@@ -59,23 +60,3 @@ struct CustomTabView: View {
         .shadow(type: .strong)
     }
 }
-
-fileprivate struct CustomTabViewPreView: View {
-    @State private var selected: Tab = .feed
-    var body: some View {
-        CustomTabView(router: .init(), currentTab: $selected)
-    }
-}
-
-
-#Preview {
-    ZStack(alignment: .bottom) {
-        // Background Color
-        Color.black
-            .ignoresSafeArea()
-        // Content
-        CustomTabViewPreView()
-    } //:ZSTACK
-}
-
-

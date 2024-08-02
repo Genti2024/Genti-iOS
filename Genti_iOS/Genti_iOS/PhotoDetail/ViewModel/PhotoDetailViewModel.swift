@@ -23,7 +23,7 @@ final class PhotoDetailViewModel: ViewModel {
         case downloadButtonTap
         case xmarkTap
     }
-
+    
     var state: State
     
     init(imageRepository: ImageRepository, hapticRepository: HapticRepository, router: Router<MainRoute>, image: UIImage) {
@@ -36,14 +36,17 @@ final class PhotoDetailViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .downloadButtonTap:
-            Task {
-                do {
-                    let writeSuccess = await imageRepository.writeToPhotoAlbum(image: state.image)
-                    hapticRepository.notification(type: writeSuccess ? .success : .error)
-                }
-            }
+            Task { await download() }
         case .xmarkTap:
             router.dismissSheet()
+        }
+    }
+    
+    @MainActor
+    func download() async {
+        do {
+            let writeSuccess = await imageRepository.writeToPhotoAlbum(image: state.image)
+            hapticRepository.notification(type: writeSuccess ? .success : .error)
         }
     }
 }

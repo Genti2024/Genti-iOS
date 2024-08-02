@@ -40,6 +40,7 @@ struct MainFeedView: View {
         .onFirstAppear {
             self.viewModel.sendAction(.viewWillAppear)
         }
+        .customAlert(alertType: $viewModel.state.showAlert)
     }
     
     private func feedsView() -> some View {

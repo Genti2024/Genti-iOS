@@ -16,7 +16,10 @@ final class LoginViewModel: ViewModel {
     
     var state: State
     
-    struct State {}
+    struct State {
+        var isLoading: Bool = false
+        var showAlert: AlertType? = nil
+    }
     
     enum Input {
         case kakaoLoginTap
@@ -32,21 +35,18 @@ final class LoginViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .kakaoLoginTap:
-            Task {
-                await kakaoLogin()
-            }
-            
+            Task { await kakaoLogin() }
         case .appleLoginTap(let result):
-            Task {
-                await appleLogin(result)
-            }
+            Task { await appleLogin(result) }
         }
     }
     
     @MainActor
     func kakaoLogin() async {
         do {
+            state.isLoading = true
             let result = try await loginUseCase.loginWithKaKao()
+            state.isLoading = false
             switch result {
             case .complete:
                 self.router.routeTo(.mainTab)
@@ -54,7 +54,12 @@ final class LoginViewModel: ViewModel {
                 self.router.routeTo(.signIn)
             }
         } catch(let error) {
-            print(error.localizedDescription)
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
     

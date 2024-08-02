@@ -24,7 +24,13 @@ struct CollectUserInfomationView: View {
         .background(
             backgroundView()
         )
+        .overlay(alignment: .center) {
+            if viewModel.state.isLoading {
+                LoadingView()
+            }
+        }
         .toolbar(.hidden, for: .navigationBar)
+        .customAlert(alertType: $viewModel.state.showAlert)
     }
     
     func headerView() -> some View {

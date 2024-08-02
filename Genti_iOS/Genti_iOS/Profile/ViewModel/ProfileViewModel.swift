@@ -23,6 +23,8 @@ final class ProfileViewModel: ViewModel {
         var myImages: [MyImagesEntitiy.Image] = []
         var isLastPage: Bool = false
         var hasInProgressImage: Bool = false
+        var isLoading: Bool = false
+        var showAlert: AlertType? = nil
     }
     enum Input {
         case viewWillAppear
@@ -48,6 +50,7 @@ final class ProfileViewModel: ViewModel {
     @MainActor
     func setInitalState() async {
         do {
+            state.isLoading = true
             state.page = 0
             state.myImages = []
             state.isLastPage = false
@@ -56,8 +59,14 @@ final class ProfileViewModel: ViewModel {
             state.hasInProgressImage = entity.hasInProgressPhoto
             state.myImages = entity.completedImage.images
             state.isLastPage = entity.completedImage.isLast
-        } catch {
-            
+            state.isLoading = false
+        } catch(let error) {
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
     
@@ -69,8 +78,12 @@ final class ProfileViewModel: ViewModel {
             let entity = try await profileUseCase.getCompletedPhotos(page: state.page)
             state.myImages += entity.images
             state.isLastPage = entity.isLast
-        } catch {
-            
+        } catch(let error) {
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
     
