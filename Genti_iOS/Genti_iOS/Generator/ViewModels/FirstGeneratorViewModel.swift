@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Photos
 
 @Observable 
 final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
@@ -19,6 +20,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         var currentRandomDescriptionExample: String = ""
         var photoDescription: String = ""
         var referenceImages: [ImageAsset] = []
+        var showAlert: AlertType? = nil
     }
     
     enum Input {
@@ -45,7 +47,26 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         case .inputDescription(let text):
             state.photoDescription = text
         case .addImageButtonTap:
-            self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+            switch PHPhotoLibrary.authorizationStatus() {
+            case .denied:
+                print("거부")
+                self.state.showAlert = .albumAuthorization
+            case .authorized:
+                print("허용")
+                self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+            case .notDetermined, .restricted:
+                print("아직 결정하지 않은 상태")
+                PHPhotoLibrary.requestAuthorization { state in
+                    if state == .authorized {
+                        self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+                    } else {
+                        self.state.showAlert = .albumAuthorization
+                    }
+                }
+            default:
+                break
+            }
+            
         case .nextButtonTap:
             self.router.routeTo(.secondGen(data: self.requestData()))
         case .xmarkTap:

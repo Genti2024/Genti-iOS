@@ -37,6 +37,7 @@ struct FirstGeneratorView: View {
             isFocused = true
             self.viewModel.sendAction(.viewWillAppear)
         }
+        .customAlert(alertType: $viewModel.state.showAlert)
     }
     
     private func nextButtonView() -> some View {
