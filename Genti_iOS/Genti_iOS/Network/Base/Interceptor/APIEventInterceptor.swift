@@ -13,7 +13,7 @@ final class APIEventInterceptor: RequestInterceptor {
     let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        guard urlRequest.url?.absoluteString.hasPrefix("https://genti.kr") == true,
+        guard urlRequest.url?.absoluteString.hasPrefix("http://ec2-15-165-111-211.ap-northeast-2.compute.amazonaws.com") == true,
               let accessToken = userdefaultRepository.get(forKey: .accessToken) as? String else {
                   completion(.success(urlRequest))
                   return
@@ -36,29 +36,29 @@ final class APIEventInterceptor: RequestInterceptor {
             completion(.doNotRetryWithError(GentiError.tokenError(code: "로컬db토큰오류", message: "토큰이 없습니다")))
             return
         }
-        
-        AF.request(AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken))).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let result = try JSONDecoder().decode(APIResponse<ReissueTokenDTO>.self, from: data)
-                    if !result.success {
-                        completion(.doNotRetryWithError(GentiError.tokenError(code: result.errorCode, message: result.errorMessage)))
+
+        API.retrySession.request(AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken)))
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(APIResponse<ReissueTokenDTO>.self, from: data)
+                        if !result.success {
+                            completion(.doNotRetryWithError(GentiError.tokenError(code: result.errorCode, message: result.errorMessage)))
+                            return
+                        }
+                        self.userdefaultRepository.setToken(token: .init(accessToken: result.response?.accessToken, refreshToken: result.response?.refreshToken))
+                        print(#fileID, #function, #line, "- 새로 받은 토큰으로 교체")
+                        completion(.retry)
+                        return
+                    } catch {
+                        completion(.doNotRetryWithError(error))
                         return
                     }
-                    self.userdefaultRepository.setToken(token: .init(accessToken: result.response?.accessToken, refreshToken: result.response?.refreshToken))
-                    print(#fileID, #function, #line, "- 새로 받은 토큰으로 교체")
-                    completion(.retry)
-                    return
-                } catch {
+                case .failure(let error):
                     completion(.doNotRetryWithError(error))
                     return
                 }
-            case .failure(let error):
-                completion(.doNotRetryWithError(error))
-                return
             }
-        }
     }
 }
-
