@@ -52,10 +52,6 @@ final class ProfileViewModel: ViewModel {
     @MainActor
     func setInitalState() async {
         do {
-            state.page = 0
-            state.myImages = []
-            state.isLastPage = false
-            state.hasInProgressImage = false
             let entity = try await profileUseCase.fetchInitalUserInfo()
             state.hasInProgressImage = entity.hasInProgressPhoto
             state.myImages = entity.completedImage.images
@@ -74,7 +70,6 @@ final class ProfileViewModel: ViewModel {
         do {
             state.page = 0
             state.isLastPage = false
-            state.hasInProgressImage = false
             let entity = try await profileUseCase.fetchInitalUserInfo()
             state.hasInProgressImage = entity.hasInProgressPhoto
             state.myImages = entity.completedImage.images

@@ -121,9 +121,6 @@ struct ProfileView: View {
             self.viewModel.sendAction(.reload)
         }
         .customAlert(alertType: $viewModel.state.showAlert)
-        .refreshable {
-            print(#fileID, #function, #line, "- refresh profile")
-        }
     }
 }
 
