@@ -152,6 +152,7 @@ struct CollectUserInfomationView: View {
         Picker("BirthYearPicker", selection: $viewModel.state.birthYear) {
             ForEach(viewModel.state.years, id: \.self) { i in
                 Text("\(i.formatterStyle(.none))")
+                    .foregroundStyle(.black)
             }
         }
         .pickerStyle(.wheel)
@@ -161,6 +162,6 @@ struct CollectUserInfomationView: View {
     }
 }
 
-//#Preview {
-//    CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: .init()))
-//}
+#Preview {
+    CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: .init(), authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl())))
+}
