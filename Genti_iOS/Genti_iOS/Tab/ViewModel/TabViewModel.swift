@@ -58,7 +58,7 @@ final class TabViewModel: ViewModel {
             case .canceled(let requestId):
                 await handleCanceledState(requestId: requestId)
             case .error:
-                print(#fileID, #function, #line, "- 에러 발생")
+                state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
             }
             state.isLoading = false
         } catch(let error) {

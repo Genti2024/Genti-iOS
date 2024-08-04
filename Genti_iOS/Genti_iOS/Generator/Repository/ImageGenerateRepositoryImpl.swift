@@ -27,8 +27,9 @@ final class ImageGenerateRepositoryImpl: ImageGenerateRepository {
             let response: GetUploadImageUrlDTO = try await self.requsetService.fetchResponse(for: GeneratorRouter.getPresignedUrl(fileName: fileName))
             let imageData = try await imageDataTransferService.requestImageData(for: phAsset)
             return try await uploadService.upload(s3Key: response.s3Key, imageData: imageData, presignedURLString: response.url)
-        } catch {
-            throw GentiError.uploadFail(code: "AWS", message: "AWS에 업로드 실패")
+        } catch(let error) {
+            
+            throw GentiError.uploadFail(code: "AWS", message: "AWS에 한장 업로드 실패\(error.localizedDescription)")
         }
     }
     
@@ -48,8 +49,8 @@ final class ImageGenerateRepositoryImpl: ImageGenerateRepository {
                     .reduce(into: [String?](), {$0.append($1)})
                     .compactMap{$0}
             }
-        } catch {
-            throw GentiError.uploadFail(code: "AWS", message: "AWS에 여러 장 업로드 실패")
+        } catch(let error) {
+            throw GentiError.uploadFail(code: "AWS", message: "AWS에 여러 장 업로드 실패 \(error.localizedDescription)")
         }
     }
     

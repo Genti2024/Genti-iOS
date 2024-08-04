@@ -17,6 +17,7 @@ enum AlertType {
     case resign(action: AlertAction)
     case reportUnknownedError(error: Error, action: AlertAction?)
     case reportGentiError(error: GentiError, action: AlertAction?)
+    case albumAuthorization
     
     var data: Alert {
         switch self {
@@ -45,6 +46,8 @@ enum AlertType {
                 return .init(title: "비어있음", message: "비어있음", actions: [.init(title: "확인", action: action)])
             }
             return .init(title: title, message: message, actions: [.init(title: "확인", action: action)])
+        case .albumAuthorization:
+            return .init(title: "앨범접근이 필요해요", message: "나만의 사진을 만들기위해서는 앨법접근권한이 필요해요", actions: [.init(title: "설정으로가기", action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil) }), .init(title: "괜찮아요", style: .cancel)])
         }
     }
 }

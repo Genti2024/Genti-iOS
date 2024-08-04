@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Photos
 
 @Observable 
 final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
@@ -19,6 +20,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         var currentRandomDescriptionExample: String = ""
         var photoDescription: String = ""
         var referenceImages: [ImageAsset] = []
+        var showAlert: AlertType? = nil
     }
     
     enum Input {
@@ -45,7 +47,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         case .inputDescription(let text):
             state.photoDescription = text
         case .addImageButtonTap:
-            self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+            showImagePicker()
         case .nextButtonTap:
             self.router.routeTo(.secondGen(data: self.requestData()))
         case .xmarkTap:
@@ -80,6 +82,26 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
             return requestImageData.set(description: self.state.photoDescription, reference: nil)
         } else {
             return requestImageData.set(description: self.state.photoDescription, reference: state.referenceImages[0])
+        }
+    }
+    
+    func showImagePicker() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied:
+            self.state.showAlert = .albumAuthorization
+        case .authorized:
+            self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization { state in
+                if state == .authorized {
+                    self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+                } else {
+                    self.state.showAlert = .albumAuthorization
+                }
+            }
+        default:
+            self.state.showAlert = .reportGentiError(error: GentiError.unknownedError(code: "죄송합니다", message: "앱을 종료후 다시 실행시켜주세요"), action: nil)
+            break
         }
     }
 }

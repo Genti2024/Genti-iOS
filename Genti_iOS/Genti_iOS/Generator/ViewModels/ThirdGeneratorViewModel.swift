@@ -28,7 +28,7 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     func sendAction(_ input: Input) {
         switch input {
         case .addImageButtonTap, .reChoiceButtonTap:
-            router.routeTo(.imagePicker(limitCount: 3, viewModel: self))
+            showImagePicker()
         case .backButtonTap:
             router.dismiss()
         case .xmarkTap:
@@ -77,5 +77,25 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     
     func requestData() -> RequestImageData {
         return requestImageData.set(faces: state.referenceImages)
+    }
+    
+    func showImagePicker() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied:
+            self.state.showAlert = .albumAuthorization
+        case .authorized:
+            self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+        case .notDetermined, .restricted:
+            PHPhotoLibrary.requestAuthorization { state in
+                if state == .authorized {
+                    self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+                } else {
+                    self.state.showAlert = .albumAuthorization
+                }
+            }
+        default:
+            self.state.showAlert = .reportGentiError(error: GentiError.unknownedError(code: "죄송합니다", message: "앱을 종료후 다시 실행시켜주세요"), action: nil)
+            break
+        }
     }
 }
