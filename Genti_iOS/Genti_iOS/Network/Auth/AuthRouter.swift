@@ -28,7 +28,7 @@ enum AuthRouter: URLRequestConvertible {
     }
     
     var baseURL: String {
-        return "https://genti.kr"
+        return "http://ec2-15-165-111-211.ap-northeast-2.compute.amazonaws.com"
     }
     
     var path: String {
@@ -40,7 +40,7 @@ enum AuthRouter: URLRequestConvertible {
         case .signIn:
             return "/api/v1/users/signup"
         case .logout:
-            return "/auth/v1/logout"
+            return "/api/v1/users/logout"
         case .resign:
             return "/api/v1/users"
         }

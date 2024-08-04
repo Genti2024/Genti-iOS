@@ -44,7 +44,7 @@ enum UserRouter: URLRequestConvertible {
 
     
     var baseURL: String {
-        return "https://genti.kr"
+        return "http://ec2-15-165-111-211.ap-northeast-2.compute.amazonaws.com"
     }
     
     var path: String {
