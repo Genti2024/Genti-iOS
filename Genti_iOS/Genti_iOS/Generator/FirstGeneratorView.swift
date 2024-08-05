@@ -59,7 +59,9 @@ struct FirstGeneratorView: View {
                 .pretendard(.number)
                 .foregroundStyle(.gentiGreen)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            HStack(spacing: 7) {
+                .padding(.bottom, 2)
+            
+            HStack(spacing: 0) {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.white)
                     .strokeBorder(.gentiGreen, style: .init(lineWidth: 1))
@@ -78,7 +80,10 @@ struct FirstGeneratorView: View {
                 Image("Change")
                     .resizable()
                     .frame(width: 17, height: 17)
-                    .padding(10)
+                    .padding(.top, 8)
+                    .padding(.bottom, 8)
+                    .padding(.leading, 10)
+                    .background(.black.opacity(0.001))
                     .asButton {
                         self.viewModel.sendAction(.randomButtonTap)
                     }
@@ -86,7 +91,7 @@ struct FirstGeneratorView: View {
             
         }
         .padding(.horizontal, 29)
-        .padding(.top, 10)
+        .padding(.top, 25)
     }
     private func inpuTextView() -> some View {
         VStack(spacing: 0) {
