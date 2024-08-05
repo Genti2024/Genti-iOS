@@ -67,9 +67,13 @@ struct MainFeedView: View {
                 .pretendard(.number)
                 .foregroundStyle(.gentiGreen)
                 .underline()
-                .frame(height: 16)
+                .frame(height: 25)
+                .background(.black.opacity(0.001))
+                .onTapGesture {
+                    viewModel.sendAction(.genfluencerExplainTap)
+                }
             Spacer()
-                .frame(height: 20)
+                .frame(height: 11)
             Text("*여러분이 만든 사진은 자동으로 업로드 되지 않아요")
                 .foregroundStyle(.gray2)
                 .pretendard(.description)
