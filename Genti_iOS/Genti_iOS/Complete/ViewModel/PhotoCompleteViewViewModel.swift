@@ -33,6 +33,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
         var isLoading: Bool = false
         var showRatingView: Bool = false
         var showAlert: AlertType? = nil
+        var showToast: ToastType? = nil
     }
 
     enum Input {
@@ -66,8 +67,10 @@ final class PhotoCompleteViewViewModel: ViewModel {
         do {
             if await imageRepository.writeToPhotoAlbum(image: state.image) {
                 hapticRepository.notification(type: .success)
+                state.showToast = .success
             } else {
                 hapticRepository.notification(type: .error)
+                state.showToast = .failure
             }
         }
     }

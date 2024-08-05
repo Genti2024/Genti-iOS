@@ -123,6 +123,8 @@
 		C049674F2C5C880F0097C732 /* TabViewUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049674E2C5C880F0097C732 /* TabViewUseCaseImpl.swift */; };
 		C04967512C5C88550097C732 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967502C5C88550097C732 /* TabViewModel.swift */; };
 		C04967532C5F46C60097C732 /* APIRetryInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967522C5F46C60097C732 /* APIRetryInterceptor.swift */; };
+		C049678F2C607D3A0097C732 /* ToastType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049678E2C607D3A0097C732 /* ToastType.swift */; };
+		C04967912C6080FB0097C732 /* CustomToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967902C6080FB0097C732 /* CustomToastModifier.swift */; };
 		C088F2C62C25716E00F92320 /* AlbumServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */; };
 		C088F2CB2C2572DB00F92320 /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */; };
 		C088F2CD2C2572EB00F92320 /* AlbumUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */; };
@@ -320,6 +322,8 @@
 		C049674E2C5C880F0097C732 /* TabViewUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewUseCaseImpl.swift; sourceTree = "<group>"; };
 		C04967502C5C88550097C732 /* TabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
 		C04967522C5F46C60097C732 /* APIRetryInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRetryInterceptor.swift; sourceTree = "<group>"; };
+		C049678E2C607D3A0097C732 /* ToastType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastType.swift; sourceTree = "<group>"; };
+		C04967902C6080FB0097C732 /* CustomToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToastModifier.swift; sourceTree = "<group>"; };
 		C088F2C52C25716E00F92320 /* AlbumServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumServiceImpl.swift; sourceTree = "<group>"; };
 		C088F2CA2C2572DB00F92320 /* AlbumUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCase.swift; sourceTree = "<group>"; };
 		C088F2CC2C2572EB00F92320 /* AlbumUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCaseImpl.swift; sourceTree = "<group>"; };
@@ -755,6 +759,7 @@
 		C017C4612C1C3AA3009924C9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C049678B2C607CE80097C732 /* Toast */,
 				C0113D682C3A215300071BF6 /* Alert */,
 				C017C45A2C1C3AA3009924C9 /* BlurView.swift */,
 				C017C45B2C1C3AA3009924C9 /* BulletText.swift */,
@@ -845,6 +850,7 @@
 				C0113D7B2C3BEAA400071BF6 /* OnFirstAppearModifier.swift */,
 				C0113D7E2C3BEAA400071BF6 /* ShareStyleModifier.swift */,
 				C08BB5BB2C3E8F6700D4CFA9 /* ShadowModifier.swift */,
+				C04967902C6080FB0097C732 /* CustomToastModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -1022,6 +1028,14 @@
 				C04967522C5F46C60097C732 /* APIRetryInterceptor.swift */,
 			);
 			path = Interceptor;
+			sourceTree = "<group>";
+		};
+		C049678B2C607CE80097C732 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				C049678E2C607D3A0097C732 /* ToastType.swift */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		C088F2C92C25727F00F92320 /* UseCase */ = {
@@ -1326,6 +1340,7 @@
 				C017C49F2C1C3AA3009924C9 /* GeneratorRouter.swift in Sources */,
 				C017C4A52C1C3AA3009924C9 /* ImageLoaderView.swift in Sources */,
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
+				C04967912C6080FB0097C732 /* CustomToastModifier.swift in Sources */,
 				C08BB5BC2C3E8F6700D4CFA9 /* ShadowModifier.swift in Sources */,
 				C088F2F42C28D77200F92320 /* HorizontalImageContentView.swift in Sources */,
 				C048A9042C51B64E00026C80 /* CollectUserInfomationViewModel.swift in Sources */,
@@ -1404,6 +1419,7 @@
 				C017C47D2C1C3AA3009924C9 /* GeneratorHeaderView.swift in Sources */,
 				C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */,
 				C017C4932C1C3AA3009924C9 /* ImagePickerType.swift in Sources */,
+				C049678F2C607D3A0097C732 /* ToastType.swift in Sources */,
 				C088F2DA2C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift in Sources */,
 				C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */,
 				C0113D602C37C20300071BF6 /* PhotoDetailWithShareView.swift in Sources */,
@@ -1647,7 +1663,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1683,7 +1699,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
