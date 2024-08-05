@@ -23,6 +23,7 @@ struct ImageLoaderView: View {
                 WebImage(url: URL(string: urlString))
                     .resizable()
                     .indicator(.activity(style: .circular))
+                    .tint(.gentiGreen)
                     .aspectRatio(contentMode: resizingMode)
                     .allowsHitTesting(false)
             }

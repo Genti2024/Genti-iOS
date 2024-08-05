@@ -142,7 +142,7 @@ struct FirstGeneratorView: View {
                 .overlay(alignment: .topTrailing) {
                     Image("ImageRemoveButton")
                         .resizable()
-                        .frame(width: 15, height: 15)
+                        .frame(width: 11, height: 11)
                         .padding(4)
                         .background(.black)
                         .onTapGesture {
