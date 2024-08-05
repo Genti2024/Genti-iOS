@@ -60,6 +60,7 @@ struct PhotoCompleteView: View {
                 Color.backgroundWhite
                     .ignoresSafeArea()
             }
+            .customToast(toastType: $viewModel.state.showToast)
             .overlay(alignment: .center) {
                 if viewModel.state.isLoading {
                     LoadingView()
@@ -74,4 +75,8 @@ struct PhotoCompleteView: View {
         .ignoresSafeArea(.keyboard)
         .customAlert(alertType: $viewModel.state.showAlert)
     }
+}
+
+#Preview {
+    PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: .init(), imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())))
 }
