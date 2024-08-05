@@ -27,6 +27,7 @@ final class MainFeedViewModel: ViewModel {
     enum Input {
         case viewWillAppear
         case scroll(offset: Double)
+        case genfluencerExplainTap
     }
     
     struct State {
@@ -46,6 +47,8 @@ final class MainFeedViewModel: ViewModel {
             checkUserFirstVisit()
         case .scroll(offset: let offset):
             state.isLogoHidden = offset < 165 ? true : false
+        case .genfluencerExplainTap:
+            router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/57a00e1d610b4c1786c6ab1fdb4c4659?pvs=4"))
         }
     }
     
