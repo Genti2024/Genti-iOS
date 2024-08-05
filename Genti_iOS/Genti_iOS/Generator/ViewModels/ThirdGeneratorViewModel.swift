@@ -84,11 +84,11 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         case .denied:
             self.state.showAlert = .albumAuthorization
         case .authorized:
-            self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+            self.router.routeTo(.imagePicker(limitCount: 3, viewModel: self))
         case .notDetermined, .restricted:
             PHPhotoLibrary.requestAuthorization { state in
                 if state == .authorized {
-                    self.router.routeTo(.imagePicker(limitCount: 1, viewModel: self))
+                    self.router.routeTo(.imagePicker(limitCount: 3, viewModel: self))
                 } else {
                     self.state.showAlert = .albumAuthorization
                 }
