@@ -41,7 +41,11 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     
     func sendAction(_ input: Input) {
         switch input {
-        case .randomButtonTap, .viewWillAppear:
+        case .viewWillAppear:
+            randomDescription = randomDescription.shuffled()
+            state.currentIndex = (state.currentIndex + 1) % randomDescription.count
+            state.currentRandomDescriptionExample = randomDescription[state.currentIndex]
+        case .randomButtonTap:
             state.currentIndex = (state.currentIndex + 1) % randomDescription.count
             state.currentRandomDescriptionExample = randomDescription[state.currentIndex]
         case .inputDescription(let text):
@@ -57,7 +61,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         }
     }
     
-    private let randomDescription: [String] = [
+    private var randomDescription: [String] = [
         "프랑스 야경을 즐기는 모습을 그려주세요. 항공점퍼를 입고 테라스에 서 있는 모습이에요.1",
         "프랑스 야경을 즐기는 모습을 그려주세모습을 그려주세요. 항공점퍼를 입고 테라스모습을 그려주세요.2",
         "프랑스 야경을 즐기는 모습을 그려. 항공점퍼를 입고주세요. 항공점퍼를 입고. 항공점퍼를 입고 테라스에 서 있는 모습이에요.3",

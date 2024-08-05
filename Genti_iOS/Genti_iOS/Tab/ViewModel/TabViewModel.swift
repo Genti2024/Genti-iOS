@@ -48,18 +48,19 @@ final class TabViewModel: ViewModel {
     func handleUserState() async {
         do {
             state.isLoading = true
-            switch try await tabViewUseCase.getUserState() {
-            case .inProgress:
-                router.routeTo(.waiting)
-            case .canMake:
-                router.routeTo(.firstGen)
-            case .awaitUserVerification(let completePhotoEntity):
-                router.routeTo(.completeMakeImage(imageInfo: completePhotoEntity))
-            case .canceled(let requestId):
-                await handleCanceledState(requestId: requestId)
-            case .error:
-                state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
-            }
+            router.routeTo(.firstGen)
+//            switch try await tabViewUseCase.getUserState() {
+//            case .inProgress:
+//                router.routeTo(.waiting)
+//            case .canMake:
+//                router.routeTo(.firstGen)
+//            case .awaitUserVerification(let completePhotoEntity):
+//                router.routeTo(.completeMakeImage(imageInfo: completePhotoEntity))
+//            case .canceled(let requestId):
+//                await handleCanceledState(requestId: requestId)
+//            case .error:
+//                state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
+//            }
             state.isLoading = false
         } catch(let error) {
             state.isLoading = false
