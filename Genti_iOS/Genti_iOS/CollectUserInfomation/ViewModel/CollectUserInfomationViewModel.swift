@@ -16,7 +16,7 @@ final class CollectUserInfomationViewModel: ViewModel {
     var state: State
     
     struct State {
-        let years: [Int] = Array(1970...2025)
+        let years: [Int] = Array(1950...2025)
         var gender: Gender? = nil
         var birthYear: Int = 2025
         var showPicker: Bool = false

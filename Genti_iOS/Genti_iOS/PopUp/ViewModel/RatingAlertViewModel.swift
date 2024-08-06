@@ -35,7 +35,7 @@ final class RatingAlertViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .ratingViewSkipButtonTap:
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+            Task { await skipRating() }
         case .ratingViewSubmitButtonTap:
             Task { await submitRating() }
         case .ratingViewStarTap(let rating):
@@ -52,6 +52,20 @@ final class RatingAlertViewModel: ViewModel {
         do {
             self.state.isLoading = true
             try await userRepository.scorePhoto(responseId: photoInfo.responseId, rate: state.rating)
+        } catch(let error) {
+            print(error)
+        }
+    }
+    
+    @MainActor
+    func skipRating() async {
+        defer {
+            state.isLoading = false
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+        }
+        do {
+            self.state.isLoading = true
+            try await userRepository.checkCompletedImage(responeId: photoInfo.responseId)
         } catch(let error) {
             print(error)
         }

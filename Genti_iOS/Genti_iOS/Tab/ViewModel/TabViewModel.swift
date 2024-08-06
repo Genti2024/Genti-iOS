@@ -54,7 +54,7 @@ final class TabViewModel: ViewModel {
             case .canMake:
                 router.routeTo(.firstGen)
             case .awaitUserVerification(let completePhotoEntity):
-                router.routeTo(.completeMakeImage(imageInfo: completePhotoEntity))
+                state.showAlert = .photoCompleted(action: { self.router.routeTo(.completeMakeImage(imageInfo: completePhotoEntity))})
             case .canceled(let requestId):
                 await handleCanceledState(requestId: requestId)
             case .error:
@@ -76,7 +76,8 @@ final class TabViewModel: ViewModel {
         do {
             try await tabViewUseCase.checkCanceledImage(requestId: requestId)
             NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
-            router.routeTo(.firstGen)
+            state.showAlert = .photoRequestCanceled(action: {self.router.routeTo(.firstGen)})
+            
         } catch(let error) {
             state.isLoading = false
             guard let error = error as? GentiError else {

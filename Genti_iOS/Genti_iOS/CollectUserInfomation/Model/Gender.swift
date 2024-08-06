@@ -15,7 +15,16 @@ enum Gender: CaseIterable {
         case .boy:
             return "M"
         case .girl:
-            return "F"
+            return "W"
+        }
+    }
+    
+    var rawValue: String {
+        switch self {
+        case .boy:
+            return "남자"
+        case .girl:
+            return "여자"
         }
     }
 }
