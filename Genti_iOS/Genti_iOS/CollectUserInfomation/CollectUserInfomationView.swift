@@ -106,7 +106,7 @@ struct CollectUserInfomationView: View {
     }
     
     private func genderSelectButton(_ gender: Gender) -> some View {
-        Text("\(gender.description)")
+        Text("\(gender.rawValue)")
             .pretendard(viewModel.genderFont(gender))
             .frame(width: 137, height: 39)
             .foregroundStyle(viewModel.genderForegoundStyle(gender))
