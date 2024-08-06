@@ -22,4 +22,14 @@ final class TabViewUseCaseImpl: TabViewUseCase {
     func checkCanceledImage(requestId: Int) async throws {
         try await userRepository.checkCanceledImage(requestId: requestId)
     }
+    
+    func hasCanceledCase() async throws -> (Bool, Int?) {
+        let userState = try await userRepository.getUserState()
+        switch userState {
+        case .canceled(let requestId):
+            return (true, requestId)
+        default:
+            return (false, nil)
+        }
+    }
 }

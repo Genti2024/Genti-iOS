@@ -24,6 +24,7 @@ final class TabViewModel: ViewModel {
         case feedIconTap
         case profileIconTap
         case cameraIconTap
+        case viewWillAppear
     }
     func sendAction(_ input: Input) {
         switch input {
@@ -32,9 +33,9 @@ final class TabViewModel: ViewModel {
         case .profileIconTap:
             state.currentTab = .profile
         case .cameraIconTap:
-            Task {
-                await handleUserState()
-            }
+            Task { await handleUserState() }
+        case .viewWillAppear:
+            Task { await handleCanceledCase() }
         }
     }
     
@@ -42,6 +43,25 @@ final class TabViewModel: ViewModel {
         self.tabViewUseCase = tabViewUseCase
         self.router = router
         self.state = .init()
+    }
+    
+    @MainActor
+    func handleCanceledCase() async {
+        do {
+            let cancelCase = try await tabViewUseCase.hasCanceledCase()
+            if cancelCase.0 {
+                guard let requestId = cancelCase.1 else { return }
+                await handleCanceledState(requestId: requestId)
+            }
+        } catch(let error) {
+            state.isLoading = false
+            guard let error = error as? GentiError else {
+                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                return
+            }
+            state.showAlert = .reportGentiError(error: error, action: nil)
+        }
+
     }
     
     @MainActor
