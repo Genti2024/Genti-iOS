@@ -20,7 +20,7 @@ final class UploadServiceImpl: UploadService {
                     case .success:
                         continuation.resume(returning: s3Key)
                     case .failure(let error):
-                        continuation.resume(throwing: GentiError.uploadFail(code: "AWS", message: "AWS에 업로드 실패"))
+                        continuation.resume(throwing: GentiError.uploadFail(code: "AWS", message: "AWS에 업로드 실패 \(error.localizedDescription)"))
                     }
                 }
         }

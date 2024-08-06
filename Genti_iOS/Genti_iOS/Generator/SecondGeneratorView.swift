@@ -60,7 +60,7 @@ struct SecondGeneratorView: View {
     
     private func ratioSelectView() -> some View {
         VStack(spacing: 8) {
-            Text("사진의 비율을을 선택해주세요📷")
+            Text("사진의 비율을 선택해주세요📷")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
                 .frame(height: 22)
