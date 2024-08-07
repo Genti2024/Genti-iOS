@@ -35,7 +35,7 @@ struct PhotoDetailView: View {
             .presentationBackground {
                 BlurView(style: .systemUltraThinMaterialDark)
                     .onTapGesture {
-                        print(#fileID, #function, #line, "- 배경터치했습니다")
+                        viewModel.sendAction(.backgroundTap)
                     }
             }
     }

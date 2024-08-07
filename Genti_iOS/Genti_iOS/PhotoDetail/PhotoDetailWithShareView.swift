@@ -33,6 +33,9 @@ struct PhotoDetailWithShareView: View {
         .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
         .presentationBackground {
             BlurView(style: .systemThinMaterialDark)
+                .onTapGesture {
+                    viewModel.sendAction(.backgroundTap)
+                }
         }
     }
 }

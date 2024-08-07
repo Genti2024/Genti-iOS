@@ -22,6 +22,7 @@ final class PhotoDetailViewModel: ViewModel {
     enum Input {
         case downloadButtonTap
         case xmarkTap
+        case backgroundTap
     }
     
     var state: State
@@ -37,7 +38,7 @@ final class PhotoDetailViewModel: ViewModel {
         switch input {
         case .downloadButtonTap:
             Task { await download() }
-        case .xmarkTap:
+        case .xmarkTap, .backgroundTap:
             router.dismissSheet()
         }
     }
