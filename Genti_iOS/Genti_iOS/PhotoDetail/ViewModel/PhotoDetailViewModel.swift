@@ -18,6 +18,7 @@ final class PhotoDetailViewModel: ViewModel {
     
     struct State {
         var image: UIImage
+        var showToast: ToastType? = nil
     }
     enum Input {
         case downloadButtonTap
@@ -48,6 +49,7 @@ final class PhotoDetailViewModel: ViewModel {
         do {
             let writeSuccess = await imageRepository.writeToPhotoAlbum(image: state.image)
             hapticRepository.notification(type: writeSuccess ? .success : .error)
+            state.showToast = .success
         }
     }
 }

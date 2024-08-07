@@ -9,11 +9,7 @@ import SwiftUI
 
 struct PhotoDetailView: View {
 
-    let viewModel: PhotoDetailViewModel
-    
-    init(viewModel: PhotoDetailViewModel) {
-        self.viewModel = viewModel
-    }
+    @State var viewModel: PhotoDetailViewModel
     
     var body: some View {
         Image(uiImage: viewModel.state.image)
@@ -32,12 +28,15 @@ struct PhotoDetailView: View {
             }
             .padding(.horizontal, 28)
             .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
+            .customToast(toastType: $viewModel.state.showToast)
             .presentationBackground {
                 BlurView(style: .systemUltraThinMaterialDark)
                     .onTapGesture {
                         viewModel.sendAction(.backgroundTap)
                     }
             }
+
+        
     }
 }
 
