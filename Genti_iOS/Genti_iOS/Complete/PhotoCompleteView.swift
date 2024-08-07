@@ -18,9 +18,9 @@ struct PhotoCompleteView: View {
             
             VStack(spacing: 0) {
                 if viewModel.photoInfo.imageRatio == .threeSecond {
-                    VerticalImageContentView(viewModel: viewModel)
-                } else {
                     HorizontalImageContentView(viewModel: viewModel)
+                } else {
+                    VerticalImageContentView(viewModel: viewModel)
                 }
                 
                 Spacer()

@@ -58,7 +58,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
         case .downloadButtonTap:
             Task { await downloadImage() }
         case .ratingActionIsDone:
-            Task { await self.checkImage() }
+            self.router.dismissSheet()
         }
     }
     
@@ -81,24 +81,6 @@ final class PhotoCompleteViewViewModel: ViewModel {
             let image = await imageRepository.load(from: photoInfo.imageUrlString)
             state.image = image
             NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
-        }
-    }
-    
-    @MainActor
-    func checkImage() async {
-        do {
-            state.isLoading = true
-            try await userRepository.checkCompletedImage(responeId: photoInfo.responseId)
-            state.isLoading = false
-            self.router.dismissSheet()
-        } catch(let error) {
-            guard let error = error as? GentiError else {
-                state.isLoading = false
-                state.showAlert = .reportUnknownedError(error: error, action: { self.router.dismissSheet() })
-                return
-            }
-            state.isLoading = false
-            state.showAlert = .reportGentiError(error: error, action: { self.router.dismissSheet() })
         }
     }
 

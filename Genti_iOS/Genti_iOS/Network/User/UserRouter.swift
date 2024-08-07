@@ -76,7 +76,7 @@ enum UserRouter: URLRequestConvertible {
             var parameters: [String: Any] = [:]
             parameters["page"] = page
             parameters["size"] = 4
-            parameters["sortBy"] = "createdAt"
+            parameters["sortBy"] = "id"
             parameters["direction"] = "desc"
             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
         case .reportPicture(let responseId, content: let content):
