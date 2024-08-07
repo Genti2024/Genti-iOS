@@ -26,6 +26,9 @@ struct GentiTabView: View {
             
             CustomTabView(viewModel: $viewModel)
         } //: ZSTACK
+        .onAppear {
+            self.viewModel.sendAction(.viewWillAppear)
+        }
         .overlay(alignment: .center) {
             if viewModel.state.isLoading {
                 LoadingView()
