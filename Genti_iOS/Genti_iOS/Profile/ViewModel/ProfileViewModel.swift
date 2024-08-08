@@ -53,15 +53,9 @@ final class ProfileViewModel: ViewModel {
     func setInitalState() async {
         do {
             let entity = try await profileUseCase.fetchInitalUserInfo()
-            state.hasInProgressImage = entity.hasInProgressPhoto
-            state.myImages = entity.completedImage.images
-            state.isLastPage = entity.completedImage.isLast
+            setState(entity)
         } catch(let error) {
-            guard let error = error as? GentiError else {
-                state.showAlert = .reportUnknownedError(error: error, action: nil)
-                return
-            }
-            state.showAlert = .reportGentiError(error: error, action: nil)
+            handleError(error)
         }
     }
     
@@ -71,15 +65,9 @@ final class ProfileViewModel: ViewModel {
             state.page = 0
             state.isLastPage = false
             let entity = try await profileUseCase.fetchInitalUserInfo()
-            state.hasInProgressImage = entity.hasInProgressPhoto
-            state.myImages = entity.completedImage.images
-            state.isLastPage = entity.completedImage.isLast
+            setState(entity)
         } catch(let error) {
-            guard let error = error as? GentiError else {
-                state.showAlert = .reportUnknownedError(error: error, action: nil)
-                return
-            }
-            state.showAlert = .reportGentiError(error: error, action: nil)
+            handleError(error)
         }
     }
     
@@ -93,11 +81,7 @@ final class ProfileViewModel: ViewModel {
             state.myImages += entity.images
             state.isLastPage = entity.isLast
         } catch(let error) {
-            guard let error = error as? GentiError else {
-                state.showAlert = .reportUnknownedError(error: error, action: nil)
-                return
-            }
-            state.showAlert = .reportGentiError(error: error, action: nil)
+            handleError(error)
         }
     }
     
@@ -107,5 +91,19 @@ final class ProfileViewModel: ViewModel {
             guard let image = await profileUseCase.load(from: url) else { return }
             router.routeTo(.photoDetailWithShare(image: image))
         }
+    }
+    
+    private func setState(_ entity: UserInfoEntity) {
+        state.hasInProgressImage = entity.hasInProgressPhoto
+        state.myImages = entity.completedImage.images
+        state.isLastPage = entity.completedImage.isLast
+    }
+    
+    private func handleError(_ error: Error) {
+        guard let error = error as? GentiError else {
+            state.showAlert = .reportUnknownedError(error: error, action: nil)
+            return
+        }
+        state.showAlert = .reportGentiError(error: error, action: nil)
     }
 }

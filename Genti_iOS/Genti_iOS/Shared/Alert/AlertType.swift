@@ -11,7 +11,7 @@ enum AlertType {
     
     typealias AlertAction = (()->Void)
     
-    case report(action: AlertAction?, placeholder: String, text: Binding<String>)
+    case report(action: AlertAction?, cancelAction: AlertAction?, placeholder: String, text: Binding<String>)
     case reportComplete(action: AlertAction?)
     case logout(action: AlertAction?)
     case resign(action: AlertAction?)
@@ -23,10 +23,10 @@ enum AlertType {
     
     var data: Alert {
         switch self {
-        case .report(let action, let placeholder, let text):
+        case .report(let action, let cancelAction,  let placeholder, let text):
             return .init(title: "어떤 오류사항이 있었나요?",
                          message: "구체적으로 작성해주실수록 오류 확인이\n빠르게 진행됩니다!",
-                         actions: [.init(title: "취소", style: .cancel),.init(title: "제출하기", action: action)],
+                         actions: [.init(title: "취소", style: .cancel, action: cancelAction),.init(title: "제출하기", action: action)],
                          textFieldPlaceholder: placeholder,
                          textFieldText: text)
         case .reportComplete(let action):

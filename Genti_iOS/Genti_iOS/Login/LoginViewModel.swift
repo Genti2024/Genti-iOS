@@ -16,6 +16,12 @@ final class LoginViewModel: ViewModel {
     
     var state: State
     
+    init(loginUseCase: LoginUseCase, router: Router<MainRoute>) {
+        self.loginUseCase = loginUseCase
+        self.router = router
+        self.state = .init()
+    }
+    
     struct State {
         var isLoading: Bool = false
         var showAlert: AlertType? = nil
@@ -24,12 +30,6 @@ final class LoginViewModel: ViewModel {
     enum Input {
         case kakaoLoginTap
         case appleLoginTap(Result<ASAuthorization, any Error>)
-    }
-    
-    init(loginUseCase: LoginUseCase, router: Router<MainRoute>) {
-        self.loginUseCase = loginUseCase
-        self.router = router
-        self.state = .init()
     }
     
     func sendAction(_ input: Input) {
@@ -47,34 +47,39 @@ final class LoginViewModel: ViewModel {
             state.isLoading = true
             let result = try await loginUseCase.loginWithKaKao()
             state.isLoading = false
-            switch result {
-            case .complete:
-                self.router.routeTo(.mainTab)
-            case .notComplete:
-                self.router.routeTo(.signIn)
-            }
+            push(from: result)
         } catch(let error) {
-            state.isLoading = false
-            guard let error = error as? GentiError else {
-                state.showAlert = .reportUnknownedError(error: error, action: nil)
-                return
-            }
-            state.showAlert = .reportGentiError(error: error, action: nil)
+            handleError(error)
         }
     }
     
     @MainActor
     func appleLogin(_ result: Result<ASAuthorization, any Error>) async {
         do {
+            state.isLoading = true
             let result = try await loginUseCase.loginWithApple(result)
-            switch result {
-            case .complete:
-                self.router.routeTo(.mainTab)
-            case .notComplete:
-                self.router.routeTo(.signIn)
-            }
+            state.isLoading = false
+            push(from: result)
         } catch(let error) {
-            print(error.localizedDescription)
+            handleError(error)
+        }
+    }
+    
+    private func handleError(_ error: Error) {
+        state.isLoading = false
+        guard let error = error as? GentiError else {
+            state.showAlert = .reportUnknownedError(error: error, action: nil)
+            return
+        }
+        state.showAlert = .reportGentiError(error: error, action: nil)
+    }
+    
+    private func push(from loginState: LoginUserState) {
+        switch loginState {
+        case .complete:
+            self.router.routeTo(.mainTab)
+        case .notComplete:
+            self.router.routeTo(.signIn)
         }
     }
 }

@@ -29,9 +29,7 @@ final class SplashViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .splashAnimationFinished:
-            Task {
-                await autoLogin()
-            }
+            Task { await autoLogin() }
         }
     }
     
