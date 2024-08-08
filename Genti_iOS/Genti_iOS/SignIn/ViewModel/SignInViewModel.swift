@@ -8,11 +8,12 @@
 import SwiftUI
 
 @Observable
-final class CollectUserInfomationViewModel: ViewModel {
+final class SignInViewModel: ViewModel {
+    
+    let signInUseCase: SignInUseCase
     
     let router: Router<MainRoute>
-    let authRepository: AuthRepository
-    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
+    
     var state: State
     
     struct State {
@@ -32,9 +33,9 @@ final class CollectUserInfomationViewModel: ViewModel {
         case completeButtonTap
     }
     
-    init(router: Router<MainRoute>, authRepository: AuthRepository) {
+    init(signInUseCase: SignInUseCase, router: Router<MainRoute>) {
+        self.signInUseCase = signInUseCase
         self.router = router
-        self.authRepository = authRepository
         self.state = .init()
     }
     
@@ -45,10 +46,8 @@ final class CollectUserInfomationViewModel: ViewModel {
         case .birthYearSelect:
             if !self.state.firstTap {
                 self.state.firstTap = true
-                self.state.showPicker.toggle()
-            } else {
-                self.state.showPicker.toggle()
             }
+            self.state.showPicker.toggle()
         case .completeButtonTap:
             Task { await postUserInformation() }
         case .backgroundTap:
@@ -62,9 +61,7 @@ final class CollectUserInfomationViewModel: ViewModel {
     func postUserInformation() async {
         do {
             state.isLoading = true
-            guard let sex = state.gender?.description  else { return }
-            try await authRepository.signIn(sex: sex, birthYear: String(describing: state.birthYear))
-            userdefaultRepository.setUserRole(userRole: .complete)
+            try await signInUseCase.signIn(gender: state.gender, birthYear: state.birthYear)
             state.isLoading = false
             router.routeTo(.mainTab)
         } catch(let error) {
@@ -73,14 +70,12 @@ final class CollectUserInfomationViewModel: ViewModel {
                 state.showAlert = .reportUnknownedError(error: error, action: { self.router.popToRoot() })
                 return
             }
-            state.showAlert = .reportGentiError(error: error, action: {
-                self.router.popToRoot()
-            })
+            state.showAlert = .reportGentiError(error: error, action: nil)
         }
     }
 }
 
-extension CollectUserInfomationViewModel {
+extension SignInViewModel {
     var birthYear: String {
         return self.state.birthYear.formatterStyle(.none)
     }

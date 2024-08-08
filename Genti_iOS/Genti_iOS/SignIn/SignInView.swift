@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct CollectUserInfomationView: View {
+struct SignInView: View {
     
-    @State var viewModel: CollectUserInfomationViewModel
+    @State var viewModel: SignInViewModel
     
     var body: some View {
         VStack(spacing: 62) {
@@ -163,5 +163,5 @@ struct CollectUserInfomationView: View {
 }
 
 #Preview {
-    CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: .init(), authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl())))
+    SignInView(viewModel: SignInViewModel(signInUseCase: SignInUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: .init()))
 }
