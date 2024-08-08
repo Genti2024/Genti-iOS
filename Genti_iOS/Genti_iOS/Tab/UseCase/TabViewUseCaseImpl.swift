@@ -21,15 +21,21 @@ final class TabViewUseCaseImpl: TabViewUseCase {
     
     func checkCanceledImage(requestId: Int) async throws {
         try await userRepository.checkCanceledImage(requestId: requestId)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
     }
     
-    func hasCanceledCase() async throws -> (Bool, Int?) {
+    func hasCanceledCase() async throws -> UserRequestCancelState {
         let userState = try await userRepository.getUserState()
         switch userState {
         case .canceled(let requestId):
-            return (true, requestId)
+            return .init(canceled: true, requestId: requestId)
         default:
-            return (false, nil)
+            return .init(canceled: false, requestId: nil)
         }
     }
+}
+
+struct UserRequestCancelState {
+    let canceled: Bool
+    let requestId: Int?
 }
