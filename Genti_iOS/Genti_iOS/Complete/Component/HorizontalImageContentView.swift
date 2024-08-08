@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HorizontalImageContentView: View {
     
-    @Bindable var viewModel: PhotoCompleteViewViewModel
+    @Bindable var viewModel: CompletedPhotoViewViewModel
     
     var body: some View {
         VStack(spacing: 0) {

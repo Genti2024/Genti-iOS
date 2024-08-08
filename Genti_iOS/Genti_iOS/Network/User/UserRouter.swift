@@ -12,7 +12,7 @@ import Alamofire
 enum UserState {
     case inProgress
     case canMake
-    case awaitUserVerification(CompletePhotoEntity)
+    case awaitUserVerification(CompletedPhotoEntity)
     case canceled(requestId: Int)
     case error
 }

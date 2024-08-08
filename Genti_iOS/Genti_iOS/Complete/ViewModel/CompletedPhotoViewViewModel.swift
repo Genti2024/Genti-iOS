@@ -8,22 +8,18 @@
 import SwiftUI
 
 @Observable
-final class PhotoCompleteViewViewModel: ViewModel {
+final class CompletedPhotoViewViewModel: ViewModel {
 
-    var photoInfo: CompletePhotoEntity
+    var photoInfo: CompletedPhotoEntity
     var router: Router<MainRoute>
     var state: State
     
-    let imageRepository: ImageRepository
-    let hapticRepository: HapticRepository
-    let userRepository: UserRepository
+    let completedPhotoUseCase: CompletedPhotoUseCase
     
-    init(photoInfo: CompletePhotoEntity, router: Router<MainRoute>, imageRepository: ImageRepository, hapticRepository: HapticRepository, userRepository: UserRepository) {
+    init(photoInfo: CompletedPhotoEntity, router: Router<MainRoute>, completedPhotoUseCase: CompletedPhotoUseCase) {
         self.photoInfo = photoInfo
         self.router = router
-        self.imageRepository = imageRepository
-        self.hapticRepository = hapticRepository
-        self.userRepository = userRepository
+        self.completedPhotoUseCase = completedPhotoUseCase
         self.state = .init()
     }
 
@@ -65,11 +61,9 @@ final class PhotoCompleteViewViewModel: ViewModel {
     @MainActor
     func downloadImage() async {
         do {
-            if await imageRepository.writeToPhotoAlbum(image: state.image) {
-                hapticRepository.notification(type: .success)
+            if await completedPhotoUseCase.downloadImage(to: state.image) {
                 state.showToast = .success
             } else {
-                hapticRepository.notification(type: .error)
                 state.showToast = .failure
             }
         }
@@ -78,15 +72,15 @@ final class PhotoCompleteViewViewModel: ViewModel {
     @MainActor
     func setImage() async {
         do {
-            let image = await imageRepository.load(from: photoInfo.imageUrlString)
-            state.image = image
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
+            let completedPhoto = await completedPhotoUseCase.loadImage(url: photoInfo.imageUrlString)
+            state.image = completedPhoto
         }
     }
 
     private func presentReportAlert() {
         state.showAlert = .report(
             action: { Task { await self.submitReport() } },
+            cancelAction: { self.state.reportContent = "" },
             placeholder: "",
             text: .init(
                 get: { [weak self] in self?.state.reportContent ?? "" },
@@ -99,7 +93,7 @@ final class PhotoCompleteViewViewModel: ViewModel {
     func submitReport() async {
         do {
             state.isLoading = true
-            try await userRepository.reportPhoto(responseId: self.photoInfo.responseId, content: self.state.reportContent)
+            try await completedPhotoUseCase.reportPhoto(responseId: photoInfo.responseId, content: state.reportContent)
             state.reportContent = ""
             state.isLoading = false
             state.showAlert = .reportComplete(action: { self.router.dismissSheet() })

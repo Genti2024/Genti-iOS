@@ -24,9 +24,9 @@ final class RatingAlertViewModel: ViewModel {
     }
     
     var state: State
-    var photoInfo: CompletePhotoEntity
+    var photoInfo: CompletedPhotoEntity
 
-    init(userRepository: UserRepository, photoInfo: CompletePhotoEntity) {
+    init(userRepository: UserRepository, photoInfo: CompletedPhotoEntity) {
         self.userRepository = userRepository
         self.photoInfo = photoInfo
         self.state = .init()

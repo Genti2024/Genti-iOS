@@ -22,7 +22,7 @@ enum MainRoute: Route {
     case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
     case photoDetail(image: UIImage)
-    case completeMakeImage(imageInfo: CompletePhotoEntity)
+    case completeMakePhoto(photoInfo: CompletedPhotoEntity)
     case onboarding
     
     @ViewBuilder
@@ -35,7 +35,7 @@ enum MainRoute: Route {
         case .setting:
             SettingView(router: router)
         case .photoDetailWithShare(let image):
-            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, image: image))
+            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, image: image))
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
@@ -49,13 +49,13 @@ enum MainRoute: Route {
         case .webView(url: let url):
             GentiWebView(router: router, urlString: url)
         case .photoDetail(let image):
-            PhotoDetailView(viewModel: PhotoDetailViewModel(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), router: router, image: image))
-        case .completeMakeImage(let imageInfo):
-            RoutingView(router) { PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: imageInfo, router: $0, imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))) }
+            PhotoDetailView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, image: image))
+        case .completeMakePhoto(let photoInfo):
+            RoutingView(router) { CompletedPhotoView(viewModel: CompletedPhotoViewViewModel(photoInfo: photoInfo, router: $0, completedPhotoUseCase: CompletedPhotoUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())))) }
         case .onboarding:
             OnboardingView(viewModel: OnboardingViewModel(router: router))
         case .signIn:
-            CollectUserInfomationView(viewModel: CollectUserInfomationViewModel(router: router, authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl())))
+            SignInView(viewModel: SignInViewModel(signInUseCase: SignInUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         }
     }
         
@@ -63,7 +63,7 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView, .signIn:
             return .push
-        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakeImage, .onboarding, .waiting:
+        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakePhoto, .onboarding, .waiting:
             return .fullScreenCover
         }
     }

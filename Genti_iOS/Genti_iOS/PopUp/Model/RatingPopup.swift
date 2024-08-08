@@ -11,9 +11,9 @@ import PopupView
 
 struct RatingPopup: CustomPopup {
     
-    let photoInfo: CompletePhotoEntity
+    let photoInfo: CompletedPhotoEntity
     
-    init(photoInfo: CompletePhotoEntity) {
+    init(photoInfo: CompletedPhotoEntity) {
         self.photoInfo = photoInfo
     }
 

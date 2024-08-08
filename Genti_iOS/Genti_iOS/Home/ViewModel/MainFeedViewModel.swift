@@ -40,9 +40,7 @@ final class MainFeedViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .viewWillAppear:
-            Task {
-                await fetchFeed()
-            }
+            Task { await fetchFeed() }
             checkCompleteImageFromBackgroundNotification()
             checkUserFirstVisit()
         case .scroll(offset: let offset):
@@ -72,7 +70,7 @@ final class MainFeedViewModel: ViewModel {
         // MARK: - bool이 아니라 구조체를 넣자
         guard let isShow = userDefaultsRepository.get(forKey: .showImage) as? Bool else { return }
         if isShow {
-            router.routeTo(.completeMakeImage(imageInfo: .init()))
+            router.routeTo(.completeMakePhoto(photoInfo: .init()))
             userDefaultsRepository.remove(forKey: .showImage)
         }
     }
