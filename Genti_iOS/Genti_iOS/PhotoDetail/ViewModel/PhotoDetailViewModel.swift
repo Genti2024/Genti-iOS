@@ -11,8 +11,7 @@ import UIKit
 @Observable
 final class PhotoDetailViewModel: ViewModel {
     
-    let imageRepository: ImageRepository
-    let hapticRepository: HapticRepository
+    let photoDetailUseCase: PhotoDetailUseCase
     
     var router: Router<MainRoute>
     
@@ -28,9 +27,8 @@ final class PhotoDetailViewModel: ViewModel {
     
     var state: State
     
-    init(imageRepository: ImageRepository, hapticRepository: HapticRepository, router: Router<MainRoute>, image: UIImage) {
-        self.imageRepository = imageRepository
-        self.hapticRepository = hapticRepository
+    init(photoDetailUseCase: PhotoDetailUseCase, router: Router<MainRoute>, image: UIImage) {
+        self.photoDetailUseCase = photoDetailUseCase
         self.router = router
         self.state = .init(image: image)
     }
@@ -47,9 +45,12 @@ final class PhotoDetailViewModel: ViewModel {
     @MainActor
     func download() async {
         do {
-            let writeSuccess = await imageRepository.writeToPhotoAlbum(image: state.image)
-            hapticRepository.notification(type: writeSuccess ? .success : .error)
-            state.showToast = .success
+            if await photoDetailUseCase.downloadImage(to: state.image) {
+                state.showToast = .success
+            } else {
+                state.showToast = .failure
+            }
+            
         }
     }
 }
