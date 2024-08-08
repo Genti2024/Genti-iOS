@@ -9,9 +9,9 @@ import SwiftUI
 
 import PopupView
 
-struct PhotoCompleteView: View {
+struct CompletedPhotoView: View {
 
-    @State var viewModel: PhotoCompleteViewViewModel
+    @State var viewModel: CompletedPhotoViewViewModel
 
     var body: some View {
         GeometryReader { geometry in
@@ -78,5 +78,5 @@ struct PhotoCompleteView: View {
 }
 
 #Preview {
-    PhotoCompleteView(viewModel: PhotoCompleteViewViewModel(photoInfo: .init(), router: .init(), imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())))
+    CompletedPhotoView(viewModel: CompletedPhotoViewViewModel(photoInfo: .init(), router: .init(), completedPhotoUseCase: CompletedPhotoUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))))
 }

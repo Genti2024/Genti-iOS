@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CompletePhotoEntity {
+struct CompletedPhotoEntity {
     var requestId: Int
     var responseId: Int
     var imageUrlString: String
