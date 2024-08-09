@@ -9,5 +9,5 @@ import Foundation
 
 struct UserInfoEntity {
     var hasInProgressPhoto: Bool
-    var completedImage: MyImagesEntitiy
+    var completedImage: [MyImagesEntitiy]
 }

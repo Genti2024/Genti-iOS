@@ -63,8 +63,8 @@ enum AlertType {
                          message: "다른 사진을 만들기 전에\n완성된 사진을 확인할까요?",
                          actions: [.init(title: "사진 확인하기", action: action)])
         case .photoRequestCanceled(action: let action):
-            return .init(title: "정말 죄송합니다.",
-                         message: "서버에 오류가 발생해서\n사진이 만들어지지 않았어요.",
+            return .init(title: "정말 죄송합니다",
+                         message: "서버에 오류가 발생해서\n사진이 만들어지지 않았어요",
                          actions: [.init(title: "사진 다시 생성하기", action: action)])
         }
     }

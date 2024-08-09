@@ -10,7 +10,7 @@ import UIKit
 
 protocol ProfileUseCase {
     func fetchInitalUserInfo() async throws -> UserInfoEntity
-    func getCompletedPhotos(page: Int) async throws -> MyImagesEntitiy
+    func getCompletedPhotos() async throws -> [MyImagesEntitiy]
     func load(from urlString: String) async -> UIImage?
 }
 
@@ -26,12 +26,12 @@ final class ProfileUseCaseImpl: ProfileUseCase {
     
     func fetchInitalUserInfo() async throws -> UserInfoEntity {
         async let hasInProgressPhoto = userRepository.checkUserInProgress()
-        async let completedPhotos = userRepository.fetchPhotos(page: 0)
+        async let completedPhotos = userRepository.fetchPhotos()
         return try await .init(hasInProgressPhoto: hasInProgressPhoto, completedImage: completedPhotos)
     }
 
-    func getCompletedPhotos(page: Int) async throws -> MyImagesEntitiy {
-        return try await userRepository.fetchPhotos(page: page)
+    func getCompletedPhotos() async throws -> [MyImagesEntitiy] {
+        return try await userRepository.fetchPhotos()
     }
     
     func load(from urlString: String) async -> UIImage? {

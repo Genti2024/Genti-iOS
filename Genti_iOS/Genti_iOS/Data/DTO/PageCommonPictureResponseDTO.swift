@@ -8,25 +8,20 @@
 import Foundation
 
 struct PageCommonPictureResponseDTO: Codable {
-    let content: [Content]
-    let first, last, empty: Bool
+    let id: Int
+    let url: String
+    let pictureRatio: String
     
-    struct Content: Codable {
-        let id: Int
-        let url: String
-        let key, pictureRatio, type: String
-        
-        var ratio: PhotoRatio {
-            if pictureRatio == "RATIO_3_2" {
-                return .threeSecond
-            }
-            return .twoThird
+    var ratio: PhotoRatio {
+        if pictureRatio == "RATIO_3_2" {
+            return .threeSecond
         }
+        return .twoThird
     }
 }
 
 extension PageCommonPictureResponseDTO {
     var toEntity: MyImagesEntitiy {
-        return .init(isLast: self.last, images: self.content.map{.init(id: $0.id, imageURL: $0.url, ratio: $0.ratio)})
+        return .init(id: self.id, imageURL: self.url, ratio: self.ratio)
     }
 }

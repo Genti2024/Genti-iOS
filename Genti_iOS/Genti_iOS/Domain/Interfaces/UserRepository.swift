@@ -8,7 +8,7 @@
 import Foundation
 
 protocol UserRepository {
-    func fetchPhotos(page: Int) async throws -> MyImagesEntitiy
+    func fetchPhotos() async throws -> [MyImagesEntitiy]
     func checkUserInProgress() async throws -> Bool
     func reportPhoto(responseId: Int, content: String) async throws
     func scorePhoto(responseId: Int, rate: Int) async throws

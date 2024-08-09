@@ -82,11 +82,6 @@ struct ProfileView: View {
                                         .onTapGesture {
                                             viewModel.sendAction(.imageTap(image.imageURL))
                                         }
-                                        .onAppear {
-                                            if image == viewModel.state.myImages.last {
-                                                viewModel.sendAction(.reachBottom)
-                                            }
-                                        }
                                         .id(image.id)
                                 }
                             }

@@ -7,14 +7,10 @@
 
 import Foundation
 
-struct MyImagesEntitiy {
-    var isLast: Bool
-    var images: [MyImagesEntitiy.Image]
-    struct Image: Identifiable, Hashable {
-        var id: Int
-        var imageURL: String
-        var ratio: PhotoRatio
-    }
+struct MyImagesEntitiy: Identifiable {
+    var id: Int
+    var imageURL: String
+    var ratio: PhotoRatio
 }
 
 

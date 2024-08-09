@@ -19,7 +19,7 @@ enum UserState {
 
 enum UserRouter: URLRequestConvertible {
     
-    case fetchMyPictures(page: Int)
+    case fetchMyPictures
     case reportPicture(responseId: Int, content: String)
     case ratePicture(responseId: Int, rate: Int)
     case getUserState
@@ -50,7 +50,7 @@ enum UserRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .fetchMyPictures:
-            return "/api/v1/users/pictures/my"
+            return "/api/v1/users/pictures"
         case .reportPicture:
             return "/api/v1/users/reports"
         case .ratePicture(let responseId, _):
@@ -72,13 +72,6 @@ enum UserRouter: URLRequestConvertible {
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         switch self {
-        case .fetchMyPictures(let page):
-            var parameters: [String: Any] = [:]
-            parameters["page"] = page
-            parameters["size"] = 4
-            parameters["sortBy"] = "id"
-            parameters["direction"] = "desc"
-            urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
         case .reportPicture(let responseId, content: let content):
             var parameters: [String: Any] = [:]
             parameters["pictureGenerateResponseId"] = responseId
@@ -89,7 +82,7 @@ enum UserRouter: URLRequestConvertible {
             var parameters: [String: Any] = [:]
             parameters["star"] = rate
             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
-        case .getUserState, .checkCompletedImage, .checkCanceledImage:
+        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures:
             return urlRequest
         }
         return urlRequest

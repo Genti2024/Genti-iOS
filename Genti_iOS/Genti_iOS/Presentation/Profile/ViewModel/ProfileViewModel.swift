@@ -19,15 +19,12 @@ final class ProfileViewModel: ViewModel {
     }
     
     struct State {
-        var page: Int = 0
-        var myImages: [MyImagesEntitiy.Image] = []
-        var isLastPage: Bool = false
+        var myImages: [MyImagesEntitiy] = []
         var hasInProgressImage: Bool = false
         var showAlert: AlertType? = nil
     }
     enum Input {
         case viewWillAppear
-        case reachBottom
         case imageTap(String)
         case gearButtonTap
         case reload
@@ -38,8 +35,6 @@ final class ProfileViewModel: ViewModel {
         switch input {
         case .viewWillAppear:
             Task { await setInitalState() }
-        case .reachBottom:
-            Task { await myImagePagination() }
         case .imageTap(let url):
             Task { await showMyImage(url: url) }
         case .gearButtonTap:
@@ -62,24 +57,8 @@ final class ProfileViewModel: ViewModel {
     @MainActor
     func reload() async {
         do {
-            state.page = 0
-            state.isLastPage = false
             let entity = try await profileUseCase.fetchInitalUserInfo()
             setState(entity)
-        } catch(let error) {
-            handleError(error)
-        }
-    }
-    
-    
-    @MainActor
-    func myImagePagination() async {
-        do {
-            guard !state.isLastPage else { return }
-            state.page += 1
-            let entity = try await profileUseCase.getCompletedPhotos(page: state.page)
-            state.myImages += entity.images
-            state.isLastPage = entity.isLast
         } catch(let error) {
             handleError(error)
         }
@@ -95,8 +74,6 @@ final class ProfileViewModel: ViewModel {
     
     private func setState(_ entity: UserInfoEntity) {
         state.hasInProgressImage = entity.hasInProgressPhoto
-        state.myImages = entity.completedImage.images
-        state.isLastPage = entity.completedImage.isLast
     }
     
     private func handleError(_ error: Error) {

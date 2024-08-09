@@ -94,14 +94,18 @@ struct FirstGeneratorView: View {
         .padding(.top, 25)
     }
     private func inpuTextView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 2) {
             Text("만들고 싶은 사진을 설명해주세요✏️")
                 .pretendard(.normal)
                 .foregroundStyle(.black)
             
+            Text("성적이거나 폭력적인 사진은 만들어지지 않아요")
+                .pretendard(.description)
+                .foregroundStyle(.gray3)
+            
             descriptionTextEditor()
                 .padding(.horizontal, 29)
-                .padding(.top, 14)
+                .padding(.top, 13)
             
         } //:VSTACK
         .padding(.top, 32)
