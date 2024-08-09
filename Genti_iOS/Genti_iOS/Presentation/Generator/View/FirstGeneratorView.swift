@@ -113,7 +113,7 @@ struct FirstGeneratorView: View {
     private func addImageView() -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 3) {
-                Text("참고사진이 있다면 추가해주세요")
+                Text("참고할 구도의 사진이 있다면 추가해주세요")
                     .pretendard(.normal)
                     .foregroundStyle(.black)
                     .padding(.bottom, 5)
