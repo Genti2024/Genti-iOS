@@ -24,9 +24,9 @@ extension ExampleWithPictureFindResponseDTO {
     }
     
     var ratio: PhotoRatio {
-        if self.picture.pictureRatio == "RATIO_3_2" {
-            return .threeSecond
+        if self.picture.pictureRatio == "RATIO_SERO" {
+            return .sero
         }
-        return .twoThird
+        return .garo
     }
 }

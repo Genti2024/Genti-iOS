@@ -8,18 +8,18 @@
 import Foundation
 
 enum PhotoRatio {
-    case twoThird, threeSecond, square
+    case garo, sero, square
     
     static var selections: [PhotoRatio] {
-        return [.threeSecond, .twoThird]
+        return [.sero, .garo]
     }
     
-    var ratio: CGFloat {
+    var multiplyValue: CGFloat {
         switch self {
-        case .twoThird:
-            return 3/2
-        case .threeSecond:
+        case .garo:
             return 2/3
+        case .sero:
+            return 3/2
         case .square:
             return 1
         }
@@ -27,10 +27,10 @@ enum PhotoRatio {
     
     var image: String {
         switch self {
-        case .twoThird:
-            return "Ratio_23"
-        case .threeSecond:
-            return "Ratio_32"
+        case .garo:
+            return "Ratio_garo"
+        case .sero:
+            return "Ratio_sero"
         case .square:
             return ""
         }
@@ -38,10 +38,10 @@ enum PhotoRatio {
     
     var requsetString: String {
         switch self {
-        case .twoThird:
-            return "RATIO_2_3"
-        case .threeSecond:
-            return "RATIO_3_2"
+        case .garo:
+            return "RATIO_GARO"
+        case .sero:
+            return "RATIO_SERO"
         case .square:
             return ""
         }
@@ -49,9 +49,9 @@ enum PhotoRatio {
     
     var description: String {
         switch self {
-        case .twoThird:
+        case .garo:
             "2:3 비율\n(가로로 긴 사진)"
-        case .threeSecond:
+        case .sero:
             "3:2 비율\n(세로로 긴 사진)"
         case .square:
             ""

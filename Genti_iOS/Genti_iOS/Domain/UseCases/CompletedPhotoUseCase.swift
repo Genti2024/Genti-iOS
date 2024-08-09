@@ -33,11 +33,8 @@ final class CompletedPhotoUseCaseImpl: CompletedPhotoUseCase {
         return writeSuccess
     }
     
-    @MainActor
     func loadImage(url: String) async -> UIImage? {
-        let image = await imageRepository.load(from: url)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
-        return image
+        return await imageRepository.load(from: url)
     }
     
     func reportPhoto(responseId: Int, content: String) async throws {

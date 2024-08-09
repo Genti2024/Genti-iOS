@@ -13,10 +13,10 @@ struct PageCommonPictureResponseDTO: Codable {
     let pictureRatio: String
     
     var ratio: PhotoRatio {
-        if pictureRatio == "RATIO_3_2" {
-            return .threeSecond
+        if pictureRatio == "RATIO_SERO" {
+            return .sero
         }
-        return .twoThird
+        return .garo
     }
 }
 

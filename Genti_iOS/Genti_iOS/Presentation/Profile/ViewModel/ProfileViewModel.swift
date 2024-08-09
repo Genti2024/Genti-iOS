@@ -31,6 +31,7 @@ final class ProfileViewModel: ViewModel {
     }
 
     var state: State
+    
     func sendAction(_ input: Input) {
         switch input {
         case .imageTap(let url):
@@ -60,6 +61,7 @@ final class ProfileViewModel: ViewModel {
         }
     }
     
+    @MainActor
     private func setState(_ entity: UserInfoEntity) {
         state.hasInProgressImage = entity.hasInProgressPhoto
         state.myImages = entity.completedImage

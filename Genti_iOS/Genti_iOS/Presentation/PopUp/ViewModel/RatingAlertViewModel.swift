@@ -48,6 +48,7 @@ final class RatingAlertViewModel: ViewModel {
         defer {
             state.isLoading = false
             NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
         }
         do {
             self.state.isLoading = true
@@ -62,6 +63,7 @@ final class RatingAlertViewModel: ViewModel {
         defer {
             state.isLoading = false
             NotificationCenter.default.post(name: Notification.Name(rawValue: "ratingCompleted"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
         }
         do {
             self.state.isLoading = true

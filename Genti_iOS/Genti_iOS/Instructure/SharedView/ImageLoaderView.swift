@@ -18,7 +18,7 @@ struct ImageLoaderView: View {
     var body: some View {
         Rectangle()
             .fill(.backgroundWhite)
-            .aspectRatio(1/ratio.ratio, contentMode: .fill)
+            .aspectRatio(1/ratio.multiplyValue, contentMode: .fill)
             .overlay {
                 WebImage(url: URL(string: urlString))
                     .resizable()

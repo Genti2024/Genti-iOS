@@ -17,10 +17,10 @@ struct CompletedPhotoView: View {
         GeometryReader { geometry in
             
             VStack(spacing: 0) {
-                if viewModel.photoInfo.imageRatio == .threeSecond {
-                    VerticalImageContentView(viewModel: viewModel)
+                if viewModel.photoInfo.imageRatio == .sero {
+                    SeroImageContentView(viewModel: viewModel)
                 } else {
-                    HorizontalImageContentView(viewModel: viewModel)
+                    GaroImageContentView(viewModel: viewModel)
                 }
                 
                 Spacer()
