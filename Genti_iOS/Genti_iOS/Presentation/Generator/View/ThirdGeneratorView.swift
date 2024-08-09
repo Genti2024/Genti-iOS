@@ -163,7 +163,7 @@ struct ThirdGeneratorView: View {
             } else {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        Text("사진 수정하기")
+                        Text("사진 다시 선택하기")
                             .pretendard(.description)
                             .foregroundStyle(.gray4)
                         Image("ImageFix")
