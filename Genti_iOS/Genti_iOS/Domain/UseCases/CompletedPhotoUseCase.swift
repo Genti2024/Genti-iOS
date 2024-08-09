@@ -25,6 +25,7 @@ final class CompletedPhotoUseCaseImpl: CompletedPhotoUseCase {
         self.userRepository = userRepository
     }
     
+    @MainActor
     func downloadImage(to uiImage: UIImage?) async -> Bool {
         guard let uiImage = uiImage else { return false }
         let writeSuccess = await imageRepository.writeToPhotoAlbum(image: uiImage)
@@ -32,6 +33,7 @@ final class CompletedPhotoUseCaseImpl: CompletedPhotoUseCase {
         return writeSuccess
     }
     
+    @MainActor
     func loadImage(url: String) async -> UIImage? {
         let image = await imageRepository.load(from: url)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)

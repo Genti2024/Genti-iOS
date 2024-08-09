@@ -88,6 +88,7 @@ struct SecondGeneratorView: View {
 
                             }
                             .onTapGesture {
+                                print(ratio)
                                 viewModel.sendAction(.ratioTap(ratio))
                             }
                     }

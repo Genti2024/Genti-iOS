@@ -19,6 +19,7 @@ final class ImageGenerateUseCaseImpl: ImageGenerateUseCase {
         self.generateRepository = generateRepository
     }
     
+    @MainActor
     func requestImage(from userData: RequestImageData) async throws {
         async let referenceS3Key = generateRepository.getS3Key(from: userData.referenceImageAsset?.asset)
         async let facesS3Keys = generateRepository.getS3Key(from: userData.faceImageAssets.map{ $0.asset })

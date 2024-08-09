@@ -21,6 +21,7 @@ final class PhotoDetailUseCaseImpl: PhotoDetailUseCase {
         self.hapticRepository = hapticRepository
     }
     
+    @MainActor
     func downloadImage(to uiImage: UIImage) async -> Bool {
         let writeSuccess = await imageRepository.writeToPhotoAlbum(image: uiImage)
         hapticRepository.notification(type: writeSuccess ? .success : .error)

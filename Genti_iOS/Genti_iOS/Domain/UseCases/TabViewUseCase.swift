@@ -25,6 +25,7 @@ final class TabViewUseCaseImpl: TabViewUseCase {
         return try await userRepository.getUserState()
     }
     
+    @MainActor
     func checkCanceledImage(requestId: Int) async throws {
         try await userRepository.checkCanceledImage(requestId: requestId)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
