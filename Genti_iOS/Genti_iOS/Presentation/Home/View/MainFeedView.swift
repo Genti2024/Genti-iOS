@@ -20,7 +20,7 @@ struct MainFeedView: View {
                     feedsView()
                 }
                 .refreshable {
-                    print(#fileID, #function, #line, "- refresh main feed")
+                    viewModel.sendAction(.refresh)
                 }
             }.zIndex(0)
             
