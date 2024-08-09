@@ -33,24 +33,12 @@ final class ProfileViewModel: ViewModel {
     var state: State
     func sendAction(_ input: Input) {
         switch input {
-        case .viewWillAppear:
-            Task { await setInitalState() }
         case .imageTap(let url):
             Task { await showMyImage(url: url) }
         case .gearButtonTap:
             router.routeTo(.setting)
-        case .reload:
+        case .reload, .viewWillAppear:
             Task { await reload() }
-        }
-    }
-    
-    @MainActor
-    func setInitalState() async {
-        do {
-            let entity = try await profileUseCase.fetchInitalUserInfo()
-            setState(entity)
-        } catch(let error) {
-            handleError(error)
         }
     }
     
@@ -74,6 +62,7 @@ final class ProfileViewModel: ViewModel {
     
     private func setState(_ entity: UserInfoEntity) {
         state.hasInProgressImage = entity.hasInProgressPhoto
+        state.myImages = entity.completedImage
     }
     
     private func handleError(_ error: Error) {
