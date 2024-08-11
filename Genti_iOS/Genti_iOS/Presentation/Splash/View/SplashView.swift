@@ -7,28 +7,25 @@
 
 import SwiftUI
 
+import Lottie
+
 struct SplashView: View {
     @State var splashViewModel: SplashViewModel
     
     var body: some View {
-        Text("스플래시뷰입니다")
-            .foregroundStyle(.black)
-            .pretendard(.headline1)
-            .onAppear {
-                Task {
-                    do {
-                        try await Task.sleep(nanoseconds: 1000000000)
-                        await MainActor.run {
-                            self.splashViewModel.sendAction(.splashAnimationFinished)
-                        }
-                    }
-
-                }
+        LottieView(type: .splash)
+            .playing()
+            .animationDidFinish { _ in
+                self.splashViewModel.sendAction(.splashAnimationFinished)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .ignoresSafeArea()
             .background {
                 Color.backgroundWhite
-                    .ignoresSafeArea()
             }
     }
+}
+
+#Preview {
+    SplashView(splashViewModel: .init(router: .init(), splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
 }

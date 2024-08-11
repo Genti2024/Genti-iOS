@@ -12,6 +12,7 @@ import Lottie
 enum LottieType {
     case splash
     case loading
+    case waiting
     
     var rawValue: String {
         switch self {
@@ -19,6 +20,8 @@ enum LottieType {
             return "SplashLottie"
         case .loading:
             return "ProgressLottie"
+        case .waiting:
+            return "RequestWaitingLottie"
         }
     }
 }
