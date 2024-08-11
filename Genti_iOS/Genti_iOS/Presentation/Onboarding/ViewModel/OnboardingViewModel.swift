@@ -33,6 +33,7 @@ final class OnboardingViewModel: ViewModel {
     
     struct State {
         var step: OnboardingStep = .first
+        var onboardingImage: [String] = ["Onboarding11", "Onboarding12", "Onboarding13"]
     }
     
     enum Input {

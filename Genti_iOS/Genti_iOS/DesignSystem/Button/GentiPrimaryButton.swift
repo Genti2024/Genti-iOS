@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct GeneratorNavigationButton: View {
+struct GentiPrimaryButton: View {
     
     let action: () -> Void
     let isActive: Bool
     let title: String
     
-    init(isActive: Bool, title: String = "다음으로", _ action: @escaping () -> Void) {
+    init(title: String, isActive: Bool, _ action: @escaping () -> Void) {
         self.action = action
         self.isActive = isActive
         self.title = title
@@ -22,26 +22,22 @@ struct GeneratorNavigationButton: View {
     var body: some View {
         Text(title)
             .pretendard(.headline1)
-            .foregroundStyle(isActive ? .black : .white)
+            .foregroundStyle(isActive ? .white : .gray3)
             .frame(height: 50)
             .frame(maxWidth: .infinity)
-            .background(isActive ? .gray5 : .green1)
+            .background(isActive ? .green1 : .gray6)
             .clipShape(.rect(cornerRadius: 10))
             .padding(.horizontal, 28)
             .asButton(.press) {
                 action()
             }
-            .disabled(isActive)
+            .disabled(!isActive)
     }
 }
 
 #Preview {
     VStack(spacing: 10) {
-        GeneratorNavigationButton(isActive: true) {}
-        GeneratorNavigationButton(isActive: true) {}
-        GeneratorNavigationButton(isActive: false) {}
-        GeneratorNavigationButton(isActive: true, title: "테스트") {}
-        GeneratorNavigationButton(isActive: false, title: "테스트") {}
+        GentiPrimaryButton(title: "테스트", isActive: true) {}
+        GentiPrimaryButton(title: "테스트", isActive: false) {}
     }
-
 }

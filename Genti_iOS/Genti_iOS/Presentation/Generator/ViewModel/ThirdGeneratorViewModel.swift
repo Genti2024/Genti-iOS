@@ -72,8 +72,8 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         self.state.referenceImages = assets
     }
     
-    var facesIsEmpty: Bool {
-        return state.referenceImages.isEmpty
+    var isActive: Bool {
+        return !state.referenceImages.isEmpty
     }
     
     func requestData() -> RequestImageData {

@@ -9,11 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @State private var viewModel: OnboardingViewModel
-    
-    init(viewModel: OnboardingViewModel) {
-        self.viewModel = viewModel
-    }
+    @State var viewModel: OnboardingViewModel
     
     var body: some View {
         VStack {
@@ -26,25 +22,13 @@ struct OnboardingView: View {
             Spacer()
             
             if viewModel.isFirstStep {
-                
                 VStack(spacing: 16) {
-                    Image(.onboarding11)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 178)
-                        
-                    
-                    Image(.onboarding12)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 178)
-                    
-                    Image(.onboarding13)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 178)
-                        
-                    
+                    ForEach(viewModel.state.onboardingImage, id: \.self) {
+                        Image($0)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 178)
+                    }
                 } //:VSTACK
                 .transition(.move(edge: .leading))
             } else {
@@ -66,20 +50,10 @@ struct OnboardingView: View {
                 }
             }
             
-            Text(viewModel.setButtonTitle)
-                .pretendard(.headline1)
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .background(.green1)
-                .clipShape(.rect(cornerRadius: 10))
-                .padding(.horizontal, 27)
-                .padding(.bottom, 18)
-                .padding(.top, 18)
-                .asButton {
-                    viewModel.sendAction(.nextButtonTap)
-                }
-
+            GentiPrimaryButton(title: viewModel.setButtonTitle, isActive: true) {
+                viewModel.sendAction(.nextButtonTap)
+            }
+            .padding(.vertical, 18)
         }
         .frame(maxWidth: .infinity)
         .animation(.snappy, value: viewModel.state.step)

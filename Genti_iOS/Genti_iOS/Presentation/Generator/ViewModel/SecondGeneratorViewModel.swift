@@ -64,10 +64,10 @@ final class SecondGeneratorViewModel: ViewModel {
         return self.userdefaultRepository.isFirstGenerate
     }
     
-    var angleOrFrameOrRatioIsEmpty: Bool {
-        return state.selectedAngle == nil || state.selectedFrame == nil || state.selectedRatio == nil
+    var isActive: Bool {
+        return !(state.selectedAngle == nil || state.selectedFrame == nil || state.selectedRatio == nil)
     }
-    
+
     func requestData() -> RequestImageData {
         return requestImageData.set(angle: self.state.selectedAngle,
                                     frame: self.state.selectedFrame,

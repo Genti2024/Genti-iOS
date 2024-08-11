@@ -91,31 +91,31 @@ extension SignInViewModel {
         if gender == self.state.gender {
             return .green1
         }
-        return .gray2
+        return .gray3
     }
     
-    var isComplete: Bool {
+    var isActive: Bool {
         return state.gender != nil && state.firstTap
     }
     
-    var completeButtonFont: Font.PretendardType {
-        if isComplete {
-            return .headline1
-        }
-        return .headline2
-    }
-    
-    var completeButtonBackground: Color {
-        if isComplete {
-            return .gentiGreen
-        }
-        return .gray6
-    }
-    
-    var completeButtonForeground: Color {
-        if isComplete {
-            return .white
-        }
-        return .gray2
-    }
+//    var completeButtonFont: Font.PretendardType {
+//        if isActive {
+//            return .headline1
+//        }
+//        return .headline2
+//    }
+//    
+//    var completeButtonBackground: Color {
+//        if isComplete {
+//            return .gentiGreen
+//        }
+//        return .gray6
+//    }
+//    
+//    var completeButtonForeground: Color {
+//        if isComplete {
+//            return .white
+//        }
+//        return .gray2
+//    }
 }
