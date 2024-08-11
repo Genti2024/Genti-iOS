@@ -54,19 +54,10 @@ struct GenerateRequestCompleteView: View {
                 
                 Spacer(minLength: 0)
                 
-                Text("피드로 돌아가기")
-                    .pretendard(.headline1)
-                    .foregroundStyle(.black)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .background(.gentiGreen)
-                    .clipShape(.rect(cornerRadius: 10))
-                    .padding(.horizontal, 31)
-                    .padding(.bottom, 30)
-                    .buttonStyle(.plain)
-                    .asButton {
-                        router.dismissSheet()
-                    }
+                GentiPrimaryButton(title: "피드로 돌아가기", isActive: true) {
+                    router.dismissSheet()
+                }
+                .padding(.bottom, 30)
             } //:VSTACK
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)

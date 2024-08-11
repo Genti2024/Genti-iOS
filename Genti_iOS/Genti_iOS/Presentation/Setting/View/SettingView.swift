@@ -124,12 +124,23 @@ struct SettingView: View {
             SettingRow(title: "개인정보처리방침") {
                 router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/e0f2e17a3a60437b8e62423f61cca2a9"))
             }
-            SettingRow(title: "앱 버전 정보") {
-                router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/iOS-4f75393b25e84ceeb2cff037a671146d"))
-            }
+                
             SettingRow(title: "사업자 정보") {
                 router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/39d39ae82a3a436fa053e5287ff9742c"))
             }
+            
+            Text("앱 버전 정보")
+                .pretendard(.normal)
+                .foregroundStyle(.black)
+                .frame(height: 40)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(alignment: .trailing) {
+                    Text("1.0.0")
+                        .pretendard(.normal)
+                        .foregroundStyle(.gray3)
+                }
+                .padding(.leading, 20)
+            
         }
         .padding(20)
         .background(.gray6)
@@ -140,9 +151,17 @@ struct SettingView: View {
             SettingRow(title: "로그아웃") {
                 self.showLogoutAlert = true
             }
-            SettingRow(title: "회원탈퇴") {
-                self.showResignAlert = true
-            }
+            
+            Text("회원탈퇴")
+                .pretendard(.normal)
+                .foregroundStyle(.gray3)
+                .frame(height: 40)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 20)
+                .background(.black.opacity(0.001))
+                .onTapGesture {
+                    self.showResignAlert = true
+                }
         }
         .padding(20)
         .background(.gray6)

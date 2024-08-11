@@ -41,7 +41,7 @@ struct FirstGeneratorView: View {
     }
     
     private func nextButtonView() -> some View {
-        GeneratorNavigationButton(isActive: viewModel.descriptionIsEmpty) {
+        GentiPrimaryButton(title: "다음으로", isActive: viewModel.isActive) {
             self.viewModel.sendAction(.nextButtonTap)
         }
         .padding(.bottom, 32)
@@ -113,7 +113,7 @@ struct FirstGeneratorView: View {
     private func addImageView() -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 3) {
-                Text("참고사진이 있다면 추가해주세요")
+                Text("참고할 구도의 사진이 있다면 추가해주세요")
                     .pretendard(.normal)
                     .foregroundStyle(.black)
                     .padding(.bottom, 5)
@@ -183,7 +183,7 @@ struct FirstGeneratorView: View {
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
             
-            if viewModel.descriptionIsEmpty {
+            if viewModel.state.photoDescription.isEmpty {
                 Text("""
                     의상과 배경을 포함해서 설명해 주세요!  * 헤어스타일을 변경하는 기능은 준비 중이에요 * 너무 특정한 배경과 의상은 구현이 어려울 수 있어요 (반포 한강 공원, 나이키 티셔츠 등)
                     """)

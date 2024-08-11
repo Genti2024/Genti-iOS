@@ -23,7 +23,7 @@ struct ThirdGeneratorView: View {
                     completeButtonView()
                 } //:VSTACK
                 if viewModel.state.isLoading {
-                    LoadingView()
+                    RequestWaitingView()
                 }
             } //:ZSTACK
             .toolbar(.hidden, for: .navigationBar)
@@ -31,7 +31,7 @@ struct ThirdGeneratorView: View {
     }
     
     private func completeButtonView() -> some View {
-        GeneratorNavigationButton(isActive: viewModel.facesIsEmpty, title: "사진 생성하기") {
+        GentiPrimaryButton(title: "사진 생성하기", isActive: viewModel.isActive) {
             viewModel.sendAction(.nextButtonTap)
         }
         .padding(.bottom, 32)
@@ -150,7 +150,7 @@ struct ThirdGeneratorView: View {
                 .foregroundStyle(.black)
                 .frame(height: 22)
             
-            if viewModel.facesIsEmpty {
+            if viewModel.state.referenceImages.isEmpty {
                 Image("AddImageIcon")
                     .resizable()
                     .frame(width: 29, height: 29)
@@ -163,7 +163,7 @@ struct ThirdGeneratorView: View {
             } else {
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        Text("사진 수정하기")
+                        Text("사진 다시 선택하기")
                             .pretendard(.description)
                             .foregroundStyle(.gray4)
                         Image("ImageFix")

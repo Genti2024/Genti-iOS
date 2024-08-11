@@ -67,7 +67,7 @@ struct ProfileView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 42, height: 86)
                                 
-                                Text("내가 만든 사진이 없어요")
+                                Text("아직 내가 만든 사진이 없어요")
                                     .pretendard(.headline1)
                                     .foregroundStyle(.gray3)
                             }

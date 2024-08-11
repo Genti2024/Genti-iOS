@@ -56,10 +56,9 @@ struct SignInView: View {
             
             HStack(spacing: 23) {
                 ForEach(Gender.allCases, id: \.self) { gender in
-                    genderSelectButton(gender)
-                        .onTapGesture {
-                            viewModel.sendAction(.genderSelect(gender))
-                        }
+                    GentiBorderButton(title: gender.rawValue, isActive: gender == viewModel.state.gender) {
+                        viewModel.sendAction(.genderSelect(gender))
+                    }
                 }
             }
         } //:VSTACK
@@ -82,7 +81,9 @@ struct SignInView: View {
             
             Spacer(minLength: 10)
             
-            completeButton()
+            GentiPrimaryButton(title: "입력 완료", isActive: viewModel.isActive) {
+                viewModel.sendAction(.completeButtonTap)
+            }
         } //:VSTACK
     }
     
@@ -105,19 +106,10 @@ struct SignInView: View {
         }
     }
     
-    private func genderSelectButton(_ gender: Gender) -> some View {
-        Text("\(gender.rawValue)")
-            .pretendard(viewModel.genderFont(gender))
-            .frame(width: 137, height: 39)
-            .foregroundStyle(viewModel.genderForegoundStyle(gender))
-            .cornerRadiusWithBorder(style: viewModel.genderForegoundStyle(gender), radius: 8, lineWidth: 1)
-            .background(.black.opacity(0.001))
-    }
-    
     private func birthYearSelectedView() -> some View {
         Text("\(viewModel.birthYear)년")
             .pretendard(.headline2)
-            .foregroundStyle(.gentiGreen)
+            .foregroundStyle(.green1)
             .frame(width: 297, height: 39)
             .cornerRadiusWithBorder(style: .green1, radius: 8, lineWidth: 1)
             .background(.black.opacity(0.01))
@@ -130,22 +122,6 @@ struct SignInView: View {
             .frame(width: 297, height: 39)
             .cornerRadiusWithBorder(style: .gray2, radius: 8, lineWidth: 1)
             .background(.black.opacity(0.001))
-    }
-    
-    private func completeButton() -> some View {
-        Text("입력 완료")
-            .pretendard(viewModel.completeButtonFont)
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .background(viewModel.completeButtonBackground)
-            .foregroundStyle(viewModel.completeButtonForeground)
-            .clipShape(.rect(cornerRadius: 10))
-            .padding(.horizontal, 28)
-            .padding(.bottom, 18)
-            .asButton {
-                viewModel.sendAction(.completeButtonTap)
-            }
-            .disabled(!viewModel.isComplete)
     }
     
     private func birthYearPicker() -> some View {

@@ -1,19 +1,19 @@
 //
-//  LoadingView.swift
-//  Genti
+//  RequestWaitingView.swift
+//  Genti_iOS
 //
-//  Created by uiskim on 6/5/24.
+//  Created by uiskim on 8/11/24.
 //
 
 import SwiftUI
 
 import Lottie
 
-struct LoadingView: View {
+struct RequestWaitingView: View {
     var body: some View {
-        LottieView(type: .loading)
-            .looping()
-            .frame(width: 100, height: 100)
+        LottieView(type: .waiting)
+            .playing(loopMode: .loop)
+            .frame(width: 250, height: 250)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background {
                 Color.black.opacity(0.4)
@@ -23,5 +23,5 @@ struct LoadingView: View {
 }
 
 #Preview {
-    LoadingView()
+    RequestWaitingView()
 }

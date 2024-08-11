@@ -28,7 +28,7 @@ final class Router<Destination: Route> {
     }
     
     public func popToRoot() {
-        path.removeLast(path.count)
+        path.removeLast(path.count-1)
     }
     
     public func dismiss() {

@@ -71,8 +71,8 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         self.state.referenceImages = []
     }
 
-    var descriptionIsEmpty: Bool {
-        return state.photoDescription.isEmpty
+    var isActive: Bool {
+        return !state.photoDescription.isEmpty
     }
     
     func requestData() -> RequestImageData {

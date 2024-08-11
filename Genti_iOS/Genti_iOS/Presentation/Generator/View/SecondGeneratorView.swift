@@ -34,14 +34,14 @@ struct SecondGeneratorView: View {
     }
     
     private func nextButtonView() -> some View {
-        GeneratorNavigationButton(isActive: viewModel.angleOrFrameOrRatioIsEmpty) {
+        GentiPrimaryButton(title: "다음으로", isActive: viewModel.isActive) {
             viewModel.sendAction(.nextButtonTap)
         }
         .padding(.bottom, 32)
     }
     
     private func selectViews() -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 20) {
             ratioSelectView()
             angleSelectView()
             frameSelectView()
