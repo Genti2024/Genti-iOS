@@ -32,9 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         if let response = connectionOptions.notificationResponse {
-            if response.notification.request.content.body == "test" {
-                userdefultRepository.set(to: true, forKey: .showImage)
-            }
+            userdefultRepository.set(to: true, forKey: .showImage)
         }
         return
         

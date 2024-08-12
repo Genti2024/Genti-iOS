@@ -11,6 +11,7 @@ enum MainRoute: Route {
     
     case login
     case signIn
+    case onboarding
     case mainTab
     case setting
     case photoDetailWithShare(image: UIImage)
@@ -23,7 +24,7 @@ enum MainRoute: Route {
     case webView(url: String)
     case photoDetail(image: UIImage)
     case completeMakePhoto(photoInfo: CompletedPhotoEntity)
-    case onboarding
+
     
     @ViewBuilder
     func view(from router: Router<MainRoute>) -> some View {
