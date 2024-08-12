@@ -31,10 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         
-        if let response = connectionOptions.notificationResponse {
-            if response.notification.request.content.body == "test" {
-                userdefultRepository.set(to: true, forKey: .showImage)
-            }
+        if let _ = connectionOptions.notificationResponse {
+            userdefultRepository.set(to: true, forKey: .showImage)
         }
         return
         

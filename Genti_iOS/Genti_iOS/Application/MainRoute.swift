@@ -11,6 +11,7 @@ enum MainRoute: Route {
     
     case login
     case signIn
+    case onboarding
     case mainTab
     case setting
     case photoDetailWithShare(image: UIImage)
@@ -23,7 +24,7 @@ enum MainRoute: Route {
     case webView(url: String)
     case photoDetail(image: UIImage)
     case completeMakePhoto(photoInfo: CompletedPhotoEntity)
-    case onboarding
+
     
     @ViewBuilder
     func view(from router: Router<MainRoute>) -> some View {
@@ -31,7 +32,7 @@ enum MainRoute: Route {
         case .login:
             LoginView(viewModel: LoginViewModel(loginUseCase: LoginUserCaseImpl(tokenRepository: TokenRepositoryImpl(), loginRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .mainTab:
-            GentiTabView(viewModel: TabViewModel(tabViewUseCase: TabViewUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())), router: router))
+            GentiTabView(viewModel: TabViewModel(tabViewUseCase: TabViewUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .setting:
             SettingView(router: router)
         case .photoDetailWithShare(let image):

@@ -14,7 +14,8 @@ final class Router<Destination: Route> {
     public var presentingFullScreenCover: Destination?
     var isPresented: Binding<Destination?> = .constant(.none)
     
-    @ViewBuilder public func view(from route: Destination) -> some View {
+    @ViewBuilder
+    public func view(from route: Destination) -> some View {
         route.view(from: router(routeType: route.navigationType))
     }
     
@@ -39,6 +40,17 @@ final class Router<Destination: Route> {
     
     public func dismissSheet() {
         isPresented.wrappedValue = nil
+    }
+    
+    public func dismissSheet(_ handler: @escaping () -> Void) {
+        if let _ = self.presentingFullScreenCover {
+            self.presentingFullScreenCover = nil
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+                handler()
+            }
+            return
+        }
+        handler()
     }
     
     private func push(_ appRoute: Destination) {

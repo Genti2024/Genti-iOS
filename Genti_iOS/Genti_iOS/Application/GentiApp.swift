@@ -12,9 +12,6 @@ struct GentiApp: View {
     var body: some View {
         RoutingView(Router<MainRoute>()) { router in
             SplashView(splashViewModel: SplashViewModel(router: router, splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
-                .onNotificationRecieved(name: Notification.Name(rawValue: "PushNotificationReceived")) { _ in
-                    print(#fileID, #function, #line, "- noti received")
-                }
         }
     }
 }

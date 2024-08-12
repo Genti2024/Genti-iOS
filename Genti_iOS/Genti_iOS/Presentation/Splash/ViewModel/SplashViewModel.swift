@@ -36,6 +36,7 @@ final class SplashViewModel: ViewModel {
     @MainActor
     func autoLogin() async {
         if await splashUseCase.canAutoLogin() {
+            router.routeTo(.login)
             router.routeTo(.mainTab)
         } else {
             router.routeTo(.login)
