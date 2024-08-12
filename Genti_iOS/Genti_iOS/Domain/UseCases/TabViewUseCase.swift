@@ -11,25 +11,24 @@ protocol TabViewUseCase {
     func getUserState() async throws -> UserState
     func checkCanceledImage(requestId: Int) async throws
     func hasCanceledCase() async throws -> UserRequestCancelState
-    func checkBackgroundNotification() -> Bool
+    func hasNonCheckCompletedImageFromPush() -> Bool
 }
 
 final class TabViewUseCaseImpl: TabViewUseCase {
 
-    
-    
     let userRepository: UserRepository
-    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
+    let userdefaultRepository: UserDefaultsRepository
     
-    init(userRepository: UserRepository) {
+    init(userRepository: UserRepository, userdefaultRepository: UserDefaultsRepository) {
         self.userRepository = userRepository
+        self.userdefaultRepository = userdefaultRepository
     }
     
     func getUserState() async throws -> UserState {
         return try await userRepository.getUserState()
     }
     
-    func checkBackgroundNotification() -> Bool {
+    func hasNonCheckCompletedImageFromPush() -> Bool {
         guard let hasBackgroundNotification = userdefaultRepository.get(forKey: .showImage) as? Bool else { return false }
         userdefaultRepository.remove(forKey: .showImage)
         return hasBackgroundNotification

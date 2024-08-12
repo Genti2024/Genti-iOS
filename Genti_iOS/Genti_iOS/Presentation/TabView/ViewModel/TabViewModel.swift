@@ -50,7 +50,7 @@ final class TabViewModel: ViewModel {
     }
     
     func checkBackgroundPushNotification() {
-        if tabViewUseCase.checkBackgroundNotification() {
+        if tabViewUseCase.hasNonCheckCompletedImageFromPush() {
             self.router.routeTo(.completeMakePhoto(photoInfo: .init()))
         }
     }

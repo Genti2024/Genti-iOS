@@ -32,7 +32,7 @@ enum MainRoute: Route {
         case .login:
             LoginView(viewModel: LoginViewModel(loginUseCase: LoginUserCaseImpl(tokenRepository: TokenRepositoryImpl(), loginRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .mainTab:
-            GentiTabView(viewModel: TabViewModel(tabViewUseCase: TabViewUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())), router: router))
+            GentiTabView(viewModel: TabViewModel(tabViewUseCase: TabViewUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .setting:
             SettingView(router: router)
         case .photoDetailWithShare(let image):
