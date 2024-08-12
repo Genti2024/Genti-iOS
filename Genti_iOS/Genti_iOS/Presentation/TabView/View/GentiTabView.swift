@@ -35,6 +35,9 @@ struct GentiTabView: View {
             }
         }
         .customAlert(alertType: $viewModel.state.showAlert)
+        .onNotificationRecieved(name: Notification.Name(rawValue: "PushNotificationReceived")) { _ in
+            self.viewModel.sendAction(.pushReceived)
+        }
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)
     }

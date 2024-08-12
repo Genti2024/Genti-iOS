@@ -25,6 +25,7 @@ final class TabViewModel: ViewModel {
         case profileIconTap
         case cameraIconTap
         case viewWillAppear
+        case pushReceived
     }
     func sendAction(_ input: Input) {
         switch input {
@@ -36,6 +37,8 @@ final class TabViewModel: ViewModel {
             Task { await handleUserState() }
         case .viewWillAppear:
             Task { await handleCanceledCase() }
+        case .pushReceived:
+            router.dismissSheet { self.router.routeTo(.completeMakePhoto(photoInfo: .init())) }
         }
     }
     
