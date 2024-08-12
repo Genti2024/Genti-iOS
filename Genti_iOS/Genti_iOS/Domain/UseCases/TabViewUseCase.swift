@@ -11,11 +11,15 @@ protocol TabViewUseCase {
     func getUserState() async throws -> UserState
     func checkCanceledImage(requestId: Int) async throws
     func hasCanceledCase() async throws -> UserRequestCancelState
+    func checkBackgroundNotification() -> Bool
 }
 
 final class TabViewUseCaseImpl: TabViewUseCase {
+
+    
     
     let userRepository: UserRepository
+    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
     
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
@@ -23,6 +27,12 @@ final class TabViewUseCaseImpl: TabViewUseCase {
     
     func getUserState() async throws -> UserState {
         return try await userRepository.getUserState()
+    }
+    
+    func checkBackgroundNotification() -> Bool {
+        guard let hasBackgroundNotification = userdefaultRepository.get(forKey: .showImage) as? Bool else { return false }
+        userdefaultRepository.remove(forKey: .showImage)
+        return hasBackgroundNotification
     }
     
     @MainActor

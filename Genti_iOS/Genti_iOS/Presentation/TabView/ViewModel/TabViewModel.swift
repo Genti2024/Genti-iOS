@@ -37,6 +37,7 @@ final class TabViewModel: ViewModel {
             Task { await handleUserState() }
         case .viewWillAppear:
             Task { await handleCanceledCase() }
+            checkBackgroundPushNotification()
         case .pushReceived:
             router.dismissSheet { self.router.routeTo(.completeMakePhoto(photoInfo: .init())) }
         }
@@ -46,6 +47,12 @@ final class TabViewModel: ViewModel {
         self.tabViewUseCase = tabViewUseCase
         self.router = router
         self.state = .init()
+    }
+    
+    func checkBackgroundPushNotification() {
+        if tabViewUseCase.checkBackgroundNotification() {
+            self.router.routeTo(.completeMakePhoto(photoInfo: .init()))
+        }
     }
     
     @MainActor
