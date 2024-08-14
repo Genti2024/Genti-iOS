@@ -30,6 +30,9 @@ struct CompletedPhotoView: View {
                         .shareStyle()
                 }
                 .disabled(viewModel.disabled)
+                .onTapGesture {
+                    self.viewModel.sendAction(.shareButtonTap)
+                }
                 
                 Spacer()
                     .frame(height: 18)

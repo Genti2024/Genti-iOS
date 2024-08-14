@@ -20,13 +20,16 @@ struct PhotoDetailWithShareView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .addDownloadButton {
-                            viewModel.sendAction(.downloadButtonTap) }
+                            viewModel.sendAction(.downloadButtonTap(from: .detailWithShare)) }
                 }
                 .padding(.horizontal, 30)
             
             ShareLink(item: Image(uiImage: viewModel.state.image), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image))) {
                 Text("공유하기")
                     .shareStyle()
+            }
+            .onTapGesture {
+                viewModel.sendAction(.shareButtonTap)
             }
             
         }

@@ -43,6 +43,7 @@ final class ImagePickerViewModel: ViewModel {
             router.dismissSheet()
         case .addImageButtonTap:
             generatorViewModel.setReferenceImageAssets(assets: state.selectedImages)
+            if limit == 3 { EventLogManager.shared.logEvent(.addThreeUserPickture) }
             router.dismissSheet()
         case .viewDidAppear:
             state.selectedImages.removeAll()

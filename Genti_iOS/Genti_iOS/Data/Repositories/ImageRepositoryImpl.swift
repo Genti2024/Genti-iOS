@@ -27,6 +27,7 @@ final class ImageRepositoryImpl: NSObject, ImageRepository {
             self.continuation = continuation
             guard let image = image else { return continuation.resume(returning: false) }
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
+            EventLogManager.shared.addUserPropertyCount(to: .downloadPhoto)
         }
     }
 

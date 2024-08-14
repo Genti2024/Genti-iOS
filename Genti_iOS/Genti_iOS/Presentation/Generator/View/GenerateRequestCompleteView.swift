@@ -55,6 +55,7 @@ struct GenerateRequestCompleteView: View {
                 Spacer(minLength: 0)
                 
                 GentiPrimaryButton(title: "피드로 돌아가기", isActive: true) {
+                    EventLogManager.shared.logEvent(.clickButton(page: .requestCompleted, buttonName: "gomain"))
                     router.dismissSheet()
                 }
                 .padding(.bottom, 30)

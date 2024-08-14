@@ -16,8 +16,8 @@ struct OnboardingView: View {
             Image(.gentiLOGO)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: viewModel.setLogoWidth, height: viewModel.setLogoHight)
-                .padding(.top, viewModel.setLogoTopPadding)
+                .frame(width: viewModel.state.step.setLogoWidth, height: viewModel.state.step.setLogoHight)
+                .padding(.top, viewModel.state.step.setLogoTopPadding)
             
             Spacer()
             
@@ -50,7 +50,7 @@ struct OnboardingView: View {
                 }
             }
             
-            GentiPrimaryButton(title: viewModel.setButtonTitle, isActive: true) {
+            GentiPrimaryButton(title: viewModel.state.step.setButtonTitle, isActive: true) {
                 viewModel.sendAction(.nextButtonTap)
             }
             .padding(.vertical, 18)

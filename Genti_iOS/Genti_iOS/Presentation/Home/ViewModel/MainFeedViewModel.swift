@@ -46,9 +46,14 @@ final class MainFeedViewModel: ViewModel {
             checkUserFirstVisit()
         case .scroll(offset: let offset):
             state.isLogoHidden = offset < 165 ? true : false
+            if offset > 165*3 {
+                EventLogManager.shared.addUserPropertyCount(to: .scrollMainView)
+                EventLogManager.shared.logEvent(.scrollMainView)}
         case .genfluencerExplainTap:
             router.routeTo(.webView(url: "https://stealth-goose-156.notion.site/57a00e1d610b4c1786c6ab1fdb4c4659?pvs=4"))
         case .refresh:
+            EventLogManager.shared.addUserPropertyCount(to: .refreshMainView)
+            EventLogManager.shared.logEvent(.refreshMainView)
             state.feeds = state.feeds.shuffled()
         }
     }

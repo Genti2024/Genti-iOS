@@ -35,6 +35,7 @@ final class ProfileViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .imageTap(let url):
+            EventLogManager.shared.logEvent(.enlargePhoto)
             Task { await showMyImage(url: url) }
         case .gearButtonTap:
             router.routeTo(.setting)

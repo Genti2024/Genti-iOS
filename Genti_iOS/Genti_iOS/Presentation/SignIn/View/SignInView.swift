@@ -29,6 +29,9 @@ struct SignInView: View {
                 LoadingView()
             }
         }
+        .onAppear {
+            self.viewModel.sendAction(.viewWillAppear)
+        }
         .toolbar(.hidden, for: .navigationBar)
         .customAlert(alertType: $viewModel.state.showAlert)
     }

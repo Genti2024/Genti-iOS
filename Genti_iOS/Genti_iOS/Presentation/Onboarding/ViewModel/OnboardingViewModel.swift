@@ -22,11 +22,14 @@ final class OnboardingViewModel: ViewModel {
         case .nextButtonTap:
             switch state.step {
             case .first:
+                EventLogManager.shared.logEvent(.clickButton(page: .onboarding1, buttonName: "next"))
                 state.step = .second
             case .second:
+                EventLogManager.shared.logEvent(.clickButton(page: .onboarding2, buttonName: "gogenti"))
                 self.router.dismissSheet()
             }
         case .xmarkTap:
+            EventLogManager.shared.logEvent(.clickButton(page: .onboarding1, buttonName: "exit"))
             self.router.dismissSheet()
         }
     }
@@ -39,42 +42,6 @@ final class OnboardingViewModel: ViewModel {
     enum Input {
         case nextButtonTap
         case xmarkTap
-    }
-    
-    var setLogoWidth: CGFloat {
-        switch state.step {
-        case .first:
-            return 68
-        case .second:
-            return 154
-        }
-    }
-    
-    var setLogoHight: CGFloat {
-        switch state.step {
-        case .first:
-            return 23
-        case .second:
-            return 51
-        }
-    }
-    
-    var setLogoTopPadding: CGFloat {
-        switch state.step {
-        case .first:
-            return 15
-        case .second:
-            return 26
-        }
-    }
-    
-    var setButtonTitle: String {
-        switch state.step {
-        case .first:
-            return "다음으로"
-        case .second:
-            return "젠티하러 가기"
-        }
     }
     
     func setPageControl(from step: OnboardingStep) -> Color {
