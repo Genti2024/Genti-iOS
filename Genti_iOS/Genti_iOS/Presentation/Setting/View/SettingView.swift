@@ -62,10 +62,12 @@ struct SettingView: View {
             try await requestService.fetchResponse(for: AuthRouter.resign)
             userdefaultRepository.removeToken()
             userdefaultRepository.removeUserRole()
+            EventLogManager.shared.logEvent(.resign)
             self.isLoading = false
             router.popToRoot()
-        } catch {
-            
+        } catch(let error) {
+            self.isLoading = false
+            print(error)
         }
     }
     
@@ -76,9 +78,11 @@ struct SettingView: View {
             try await requestService.fetchResponse(for: AuthRouter.logout)
             userdefaultRepository.removeToken()
             userdefaultRepository.removeUserRole()
+            EventLogManager.shared.logEvent(.logout)
             self.isLoading = false
             router.popToRoot()
         } catch(let error) {
+            self.isLoading = false
             print(error)
         }
     }

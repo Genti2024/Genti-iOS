@@ -23,6 +23,7 @@ final class PhotoDetailViewModel: ViewModel {
         case downloadButtonTap
         case xmarkTap
         case backgroundTap
+        case shareButtonTap
     }
     
     var state: State
@@ -39,6 +40,8 @@ final class PhotoDetailViewModel: ViewModel {
             Task { await download() }
         case .xmarkTap, .backgroundTap:
             router.dismissSheet()
+        case .shareButtonTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "mypage", buttonName: "picshare"))
         }
     }
     
@@ -46,6 +49,7 @@ final class PhotoDetailViewModel: ViewModel {
     func download() async {
         do {
             if await photoDetailUseCase.downloadImage(to: state.image) {
+                EventLogManager.shared.logEvent(.clickButton(pageName: "mypage", buttonName: "picdownload"))
                 state.showToast = .success
             } else {
                 state.showToast = .failure

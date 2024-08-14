@@ -28,6 +28,9 @@ struct PhotoDetailWithShareView: View {
                 Text("공유하기")
                     .shareStyle()
             }
+            .onTapGesture {
+                viewModel.sendAction(.shareButtonTap)
+            }
             
         }
         .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
