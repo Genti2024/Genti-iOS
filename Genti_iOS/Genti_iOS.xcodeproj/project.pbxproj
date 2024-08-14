@@ -184,6 +184,10 @@
 		C0D74A462C1EA6B500A45371 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Route.swift */; };
 		C0D942C42C5A48A70044649A /* UserStateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D942C32C5A48A70044649A /* UserStateDTO.swift */; };
 		C0DE626D2C6C33CB005937B0 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = C0DE626C2C6C33CB005937B0 /* Amplitude */; };
+		C0DE62702C6C4576005937B0 /* EventLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE626F2C6C4575005937B0 /* EventLogManager.swift */; };
+		C0DE62722C6C61C0005937B0 /* DetailViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62712C6C61C0005937B0 /* DetailViewType.swift */; };
+		C0DE62752C6C631C005937B0 /* LogEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62742C6C631C005937B0 /* LogEventType.swift */; };
+		C0DE62772C6C6338005937B0 /* LogUserPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -375,6 +379,10 @@
 		C0D74A432C1EA6A200A45371 /* RoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
 		C0D74A452C1EA6B500A45371 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		C0D942C32C5A48A70044649A /* UserStateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateDTO.swift; sourceTree = "<group>"; };
+		C0DE626F2C6C4575005937B0 /* EventLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogManager.swift; sourceTree = "<group>"; };
+		C0DE62712C6C61C0005937B0 /* DetailViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewType.swift; sourceTree = "<group>"; };
+		C0DE62742C6C631C005937B0 /* LogEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventType.swift; sourceTree = "<group>"; };
+		C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUserPropertyType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,6 +835,7 @@
 		C04967B62C6491FC0097C732 /* Instructure */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE626E2C6C4562005937B0 /* EventLog */,
 				C017C45C2C1C3AA3009924C9 /* Constants.swift */,
 				C04967B82C64920C0097C732 /* SharedProtocol */,
 				C04967CE2C64979A0097C732 /* SharedView */,
@@ -1000,7 +1009,6 @@
 		C04967C82C6496B80097C732 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				C04967CA2C6496C00097C732 /* ViewModel */,
 				C04967C92C6496BC0097C732 /* View */,
 			);
 			path = Setting;
@@ -1013,13 +1021,6 @@
 				C017C4402C1C3AA3009924C9 /* SettingView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		C04967CA2C6496C00097C732 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C04967CB2C6496CB0097C732 /* WebView */ = {
@@ -1110,6 +1111,7 @@
 				C049678E2C607D3A0097C732 /* ToastType.swift */,
 				C017C46D2C1C3AA3009924C9 /* Tab.swift */,
 				C0113D6B2C3A219300071BF6 /* AlertType.swift */,
+				C0DE62712C6C61C0005937B0 /* DetailViewType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1164,6 +1166,24 @@
 				C0D74A452C1EA6B500A45371 /* Route.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		C0DE626E2C6C4562005937B0 /* EventLog */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE62732C6C6306005937B0 /* Model */,
+				C0DE626F2C6C4575005937B0 /* EventLogManager.swift */,
+			);
+			path = EventLog;
+			sourceTree = "<group>";
+		};
+		C0DE62732C6C6306005937B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE62742C6C631C005937B0 /* LogEventType.swift */,
+				C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1334,6 +1354,7 @@
 				C04967972C647B390097C732 /* PhotoDetailUseCase.swift in Sources */,
 				C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */,
 				C088F2EB2C27AD7200F92320 /* ImageDataTransferService.swift in Sources */,
+				C0DE62752C6C631C005937B0 /* LogEventType.swift in Sources */,
 				C017C49F2C1C3AA3009924C9 /* GeneratorRouter.swift in Sources */,
 				C017C4A52C1C3AA3009924C9 /* ImageLoaderView.swift in Sources */,
 				C017C4982C1C3AA3009924C9 /* PopupImagePickerView.swift in Sources */,
@@ -1365,6 +1386,7 @@
 				C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */,
 				C0113D6F2C3A21B100071BF6 /* CompletedPhotoViewViewModel.swift in Sources */,
 				C017C4992C1C3AA3009924C9 /* API.swift in Sources */,
+				C0DE62722C6C61C0005937B0 /* DetailViewType.swift in Sources */,
 				C017C47E2C1C3AA3009924C9 /* GentiPrimaryButton.swift in Sources */,
 				C0113D8C2C3C002F00071BF6 /* OnboardingView.swift in Sources */,
 				C09596872C4DED5400FC5ECC /* RatingPopup.swift in Sources */,
@@ -1430,6 +1452,7 @@
 				C02843712C32BB8900B84566 /* MainFeedViewModel.swift in Sources */,
 				C0BCC4B82C5885B9009C89C4 /* AuthRepository.swift in Sources */,
 				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
+				C0DE62772C6C6338005937B0 /* LogUserPropertyType.swift in Sources */,
 				C09596822C4DED1C00FC5ECC /* CustomPopupModifier.swift in Sources */,
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
 				C0BCC4BE2C5885F8009C89C4 /* TokenRepositoryImpl.swift in Sources */,
@@ -1472,6 +1495,7 @@
 				C048A9062C51BA1500026C80 /* Int+Ext.swift in Sources */,
 				C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */,
 				C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */,
+				C0DE62702C6C4576005937B0 /* EventLogManager.swift in Sources */,
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,
 				C0113D5B2C37C1A700071BF6 /* HapticRepositoryImpl.swift in Sources */,
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,

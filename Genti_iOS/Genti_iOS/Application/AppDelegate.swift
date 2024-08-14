@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+import Amplitude
 import Firebase
 import UserNotifications
 import KakaoSDKCommon
@@ -29,6 +30,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // 파이어베이스 설정
         FirebaseApp.configure()
         KakaoSDK.initSDK(appKey: "77d47098298c42fc0400efc76b7f4874")
+        
+        // 앰플리튜드 설정
+        Amplitude.instance().defaultTracking.sessions = true
+        Amplitude.instance().defaultTracking.screenViews = true
+        Amplitude.instance().defaultTracking = AMPDefaultTrackingOptions.initWithAllEnabled()
+        Amplitude.instance().initializeApiKey("9c4392f841b51333441bc80b223af1b6")
+        
+        let identify = AMPIdentify()
+            .setOnce("user_share", value: NSNumber(value: 0))
+            .setOnce("user_picturedownload", value: NSNumber(value: 0))
+            .setOnce("user_main_scroll", value: NSNumber(value: 0))
+            .setOnce("user_promptsuggest_refresh", value: NSNumber(value: 0))
+        guard let identify = identify else { return true }
+        Amplitude.instance().identify(identify)
+        
         
         // 앱 실행 시 사용자에게 알림 허용 권한을 받음
         UNUserNotificationCenter.current().delegate = self
