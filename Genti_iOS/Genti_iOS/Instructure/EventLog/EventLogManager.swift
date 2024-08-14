@@ -12,7 +12,8 @@ import Amplitude
 final class EventLogManager {
     
     static let shared = EventLogManager()
-    
+    private let addCountQueue = DispatchQueue(label: "addPropertyCountQueue", attributes: .concurrent)
+
     private init() {}
     
     func logEvent(_ type: LogEventType) {
@@ -20,9 +21,11 @@ final class EventLogManager {
     }
     
     func addUserPropertyCount(to type: LogUserPropertyType) {
-        let identify = AMPIdentify().add(type.propertyName, value: NSNumber(value: 1))
-        guard let identify = identify else {return}
-        Amplitude.instance().identify(identify)
+        addCountQueue.async(flags: .barrier) {
+            let identify = AMPIdentify().add(type.propertyName, value: NSNumber(value: 1))
+            guard let identify = identify else {return}
+            Amplitude.instance().identify(identify)
+        }
     }
 
     func addUserProperty(to type: LogUserPropertyType) {
