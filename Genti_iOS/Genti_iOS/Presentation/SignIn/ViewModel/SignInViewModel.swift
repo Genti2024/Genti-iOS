@@ -27,6 +27,7 @@ final class SignInViewModel: ViewModel {
     }
     
     enum Input {
+        case viewWillAppear
         case backgroundTap
         case genderSelect(Gender)
         case birthYearSelect
@@ -41,6 +42,8 @@ final class SignInViewModel: ViewModel {
     
     func sendAction(_ input: Input) {
         switch input {
+        case .viewWillAppear:
+            EventLogManager.shared.logEvent(.viewInfoget)
         case .genderSelect(let gender):
             self.state.gender = gender
         case .birthYearSelect:
@@ -54,6 +57,7 @@ final class SignInViewModel: ViewModel {
             if state.showPicker {
                 state.showPicker = false
             }
+
         }
     }
     
@@ -62,6 +66,7 @@ final class SignInViewModel: ViewModel {
         do {
             state.isLoading = true
             try await signInUseCase.signIn(gender: state.gender, birthYear: state.birthYear)
+            EventLogManager.shared.logEvent(.completeInfoget)
             state.isLoading = false
             router.routeTo(.mainTab)
         } catch(let error) {
