@@ -58,6 +58,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
         case .ratingActionIsDone:
             self.router.dismissSheet()
         case .shareButtonTap:
+            EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)
             EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "picshare"))
         }
     }

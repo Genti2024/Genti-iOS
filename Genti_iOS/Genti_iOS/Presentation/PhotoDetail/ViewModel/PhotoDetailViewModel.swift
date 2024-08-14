@@ -42,6 +42,7 @@ final class PhotoDetailViewModel: ViewModel {
             router.dismissSheet()
         case .shareButtonTap:
             EventLogManager.shared.logEvent(.clickButton(pageName: "mypage", buttonName: "picshare"))
+            EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)
         }
     }
     
