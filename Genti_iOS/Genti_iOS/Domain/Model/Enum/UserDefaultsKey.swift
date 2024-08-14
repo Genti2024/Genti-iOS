@@ -14,6 +14,7 @@ enum UserDefaultsKey: String {
     case refreshToken
     case userRole
     case showImage
+    case loginType
 }
 
 

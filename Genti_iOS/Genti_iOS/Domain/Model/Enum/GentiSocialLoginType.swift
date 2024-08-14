@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GentiSocialLoginType {
+enum GentiSocialLoginType: String {
     case kakao, apple
     
     var parameter: String {

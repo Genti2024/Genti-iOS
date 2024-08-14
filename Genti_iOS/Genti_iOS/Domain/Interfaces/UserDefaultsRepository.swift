@@ -16,6 +16,8 @@ protocol UserDefaultsRepository {
     func setUserRole(userRole: LoginUserState)
     func getUserRole() -> LoginUserState?
     func removeUserRole()
+    func setLoginType(type: GentiSocialLoginType)
+    func getLoginType() -> GentiSocialLoginType?
     
 }
 

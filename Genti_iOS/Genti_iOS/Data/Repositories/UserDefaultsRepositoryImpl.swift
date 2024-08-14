@@ -8,6 +8,17 @@
 import Foundation
 
 struct UserDefaultsRepositoryImpl: UserDefaultsRepository {
+    func setLoginType(type: GentiSocialLoginType) {
+        self.set(to: type.rawValue, forKey: .loginType)
+    }
+    
+    func getLoginType() -> GentiSocialLoginType? {
+        guard let loginTypeRawValue = self.get(forKey: .loginType) as? String, let loginType = GentiSocialLoginType(rawValue: loginTypeRawValue) else {
+            return nil
+        }
+        return loginType
+    }
+    
     func getUserRole() -> LoginUserState? {
         guard let userRoleRawValue = self.get(forKey: .userRole) as? String, let userRole = LoginUserState(rawValue: userRoleRawValue) else {
             return nil

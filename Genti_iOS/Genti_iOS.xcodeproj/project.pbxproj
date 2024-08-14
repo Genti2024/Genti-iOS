@@ -183,6 +183,7 @@
 		C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A432C1EA6A200A45371 /* RoutingView.swift */; };
 		C0D74A462C1EA6B500A45371 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D74A452C1EA6B500A45371 /* Route.swift */; };
 		C0D942C42C5A48A70044649A /* UserStateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D942C32C5A48A70044649A /* UserStateDTO.swift */; };
+		C0DE626D2C6C33CB005937B0 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = C0DE626C2C6C33CB005937B0 /* Amplitude */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,6 +391,7 @@
 				C08BB5AE2C3E28E300D4CFA9 /* FirebaseAnalytics in Frameworks */,
 				C09A63F42C3E25D800FAB87F /* Lottie in Frameworks */,
 				C048A9122C573A4B00026C80 /* KakaoSDKUser in Frameworks */,
+				C0DE626D2C6C33CB005937B0 /* Amplitude in Frameworks */,
 				C048A90E2C573A4B00026C80 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1191,6 +1193,7 @@
 				C048A90D2C573A4B00026C80 /* KakaoSDKAuth */,
 				C048A90F2C573A4B00026C80 /* KakaoSDKCommon */,
 				C048A9112C573A4B00026C80 /* KakaoSDKUser */,
+				C0DE626C2C6C33CB005937B0 /* Amplitude */,
 			);
 			productName = Genti_iOS;
 			productReference = C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */;
@@ -1272,6 +1275,7 @@
 				C08BB5AC2C3E28E300D4CFA9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C02D58932C46741300C42D47 /* XCRemoteSwiftPackageReference "PopupView" */,
 				C048A90C2C573A4B00026C80 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				C0DE626B2C6C33CB005937B0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
 			);
 			productRefGroup = C017C3DB2C1C39CE009924C9 /* Products */;
 			projectDirPath = "";
@@ -1900,6 +1904,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		C0DE626B2C6C33CB005937B0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-iOS.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1952,6 +1964,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C09A63F52C3E25EA00FAB87F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		C0DE626C2C6C33CB005937B0 /* Amplitude */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0DE626B2C6C33CB005937B0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */;
+			productName = Amplitude;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
