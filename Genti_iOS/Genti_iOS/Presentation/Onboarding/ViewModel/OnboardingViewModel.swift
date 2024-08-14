@@ -44,42 +44,6 @@ final class OnboardingViewModel: ViewModel {
         case xmarkTap
     }
     
-    var setLogoWidth: CGFloat {
-        switch state.step {
-        case .first:
-            return 68
-        case .second:
-            return 154
-        }
-    }
-    
-    var setLogoHight: CGFloat {
-        switch state.step {
-        case .first:
-            return 23
-        case .second:
-            return 51
-        }
-    }
-    
-    var setLogoTopPadding: CGFloat {
-        switch state.step {
-        case .first:
-            return 15
-        case .second:
-            return 26
-        }
-    }
-    
-    var setButtonTitle: String {
-        switch state.step {
-        case .first:
-            return "다음으로"
-        case .second:
-            return "젠티하러 가기"
-        }
-    }
-    
     func setPageControl(from step: OnboardingStep) -> Color {
         if step == state.step {
             return .gentiGreen
