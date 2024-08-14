@@ -40,11 +40,17 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     
     func sendAction(_ input: Input) {
         switch input {
-        case .addImageButtonTap, .reChoiceButtonTap:
+        case .addImageButtonTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "create3", buttonName: "selectpic"))
+            showImagePicker()
+        case .reChoiceButtonTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "create3", buttonName: "reselectpic"))
             showImagePicker()
         case .backButtonTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "create3", buttonName: "back"))
             router.dismiss()
         case .xmarkTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "create3", buttonName: "exit"))
             router.dismissSheet()
         case .nextButtonTap:
             Task { await completeImageRequest() }
@@ -56,6 +62,7 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         do {
             state.isLoading = true
             try await imageGenerateUseCase.requestImage(from: self.requestData())
+            EventLogManager.shared.logEvent(.clickButton(pageName: "create3", buttonName: "createpic"))
             state.isLoading = false
             router.routeTo(.requestCompleted)
         } catch(let error) {
