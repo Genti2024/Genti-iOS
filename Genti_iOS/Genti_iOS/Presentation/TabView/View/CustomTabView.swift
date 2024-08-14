@@ -20,6 +20,7 @@ struct CustomTabView: View {
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
+                    EventLogManager.shared.logEvent(.clickMainTab)
                     viewModel.sendAction(.feedIconTap)
                 }
             Spacer()
@@ -29,6 +30,7 @@ struct CustomTabView: View {
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
+                    EventLogManager.shared.logEvent(.clickCreateTab)
                     viewModel.sendAction(.cameraIconTap)
                 }
 
@@ -41,6 +43,7 @@ struct CustomTabView: View {
                 .padding(3)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
+                    EventLogManager.shared.logEvent(.clickMyPageTab)
                     viewModel.sendAction(.profileIconTap)
                 }
         }
