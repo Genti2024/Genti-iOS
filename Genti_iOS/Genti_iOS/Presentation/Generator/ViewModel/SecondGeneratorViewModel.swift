@@ -49,13 +49,13 @@ final class SecondGeneratorViewModel: ViewModel {
         case .ratioTap(let photoRatio):
             state.selectedRatio = photoRatio
         case .nextButtonTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "create2", buttonName: "next"))
+            EventLogManager.shared.logEvent(.clickButton(page: .secondGenerator, buttonName: "next"))
             self.router.routeTo(.thirdGen(data: self.requestData()))
         case .xmarkTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "create2", buttonName: "exit"))
+            EventLogManager.shared.logEvent(.clickButton(page: .secondGenerator, buttonName: "exit"))
             self.router.dismissSheet()
         case .backButtonTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "create2", buttonName: "back"))
+            EventLogManager.shared.logEvent(.clickButton(page: .secondGenerator, buttonName: "back"))
             self.router.dismiss()
         case .viewWillAppear:
             if userdefaultRepository.isFirstGenerate {

@@ -22,14 +22,14 @@ final class OnboardingViewModel: ViewModel {
         case .nextButtonTap:
             switch state.step {
             case .first:
-                EventLogManager.shared.logEvent(.clickButton(pageName: "onboarding1", buttonName: "next"))
+                EventLogManager.shared.logEvent(.clickButton(page: .onboarding1, buttonName: "next"))
                 state.step = .second
             case .second:
-                EventLogManager.shared.logEvent(.clickButton(pageName: "onboarding2", buttonName: "gogenti"))
+                EventLogManager.shared.logEvent(.clickButton(page: .onboarding2, buttonName: "gogenti"))
                 self.router.dismissSheet()
             }
         case .xmarkTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "onboarding1", buttonName: "exit"))
+            EventLogManager.shared.logEvent(.clickButton(page: .onboarding1, buttonName: "exit"))
             self.router.dismissSheet()
         }
     }

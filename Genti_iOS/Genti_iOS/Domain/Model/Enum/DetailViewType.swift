@@ -11,12 +11,12 @@ enum DetailViewType {
     case detail
     case detailWithShare
     
-    var pageName: String {
+    var initalPage: PageType {
         switch self {
         case .detail:
-            return "picdone"
+            return .compltedPhoto
         case .detailWithShare:
-            return "mypage"
+            return .profile
         }
     }
 }

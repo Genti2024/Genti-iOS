@@ -9,7 +9,7 @@ import Foundation
 
 enum LogEventType {
     case singIn(type: GentiSocialLoginType)
-    case clickButton(pageName: String, buttonName: String)
+    case clickButton(page: PageType, buttonName: String)
     case viewInfoget
     case completeInfoget
     case scrollMainView
@@ -31,7 +31,7 @@ enum LogEventType {
         switch self {
         case .singIn:
             return "sign_in"
-        case .clickButton(let pageName, let buttonName):
+        case .clickButton:
             return "click_button"
         case .viewInfoget:
             return "view_infoget"
@@ -72,8 +72,8 @@ enum LogEventType {
         switch self {
         case .singIn(let type):
             return ["signup_method": type.rawValue]
-        case .clickButton(let pageName, let buttonName):
-            return ["page_name": pageName, "button_name": buttonName]
+        case .clickButton(let page, let buttonName):
+            return ["page_name": page.pageName, "button_name": buttonName]
         default:
             return nil
         }

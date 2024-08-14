@@ -188,6 +188,7 @@
 		C0DE62722C6C61C0005937B0 /* DetailViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62712C6C61C0005937B0 /* DetailViewType.swift */; };
 		C0DE62752C6C631C005937B0 /* LogEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62742C6C631C005937B0 /* LogEventType.swift */; };
 		C0DE62772C6C6338005937B0 /* LogUserPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */; };
+		C0DE62792C6C882D005937B0 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62782C6C882D005937B0 /* PageType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,6 +384,7 @@
 		C0DE62712C6C61C0005937B0 /* DetailViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewType.swift; sourceTree = "<group>"; };
 		C0DE62742C6C631C005937B0 /* LogEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventType.swift; sourceTree = "<group>"; };
 		C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUserPropertyType.swift; sourceTree = "<group>"; };
+		C0DE62782C6C882D005937B0 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1182,6 +1184,7 @@
 			children = (
 				C0DE62742C6C631C005937B0 /* LogEventType.swift */,
 				C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */,
+				C0DE62782C6C882D005937B0 /* PageType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1501,6 +1504,7 @@
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,
 				C0BCC4AD2C58842C009C89C4 /* SocialLoginEntity.swift in Sources */,
 				C017C4912C1C3AA3009924C9 /* SettingView.swift in Sources */,
+				C0DE62792C6C882D005937B0 /* PageType.swift in Sources */,
 				C088F2E02C26F0EA00F92320 /* ImageGenerateRepository.swift in Sources */,
 				C0BCC4AF2C58843E009C89C4 /* GentiSocialLoginType.swift in Sources */,
 				C02843572C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift in Sources */,

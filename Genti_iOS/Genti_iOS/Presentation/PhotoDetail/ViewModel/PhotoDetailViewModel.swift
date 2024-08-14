@@ -41,7 +41,7 @@ final class PhotoDetailViewModel: ViewModel {
         case .xmarkTap, .backgroundTap:
             router.dismissSheet()
         case .shareButtonTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "mypage", buttonName: "picshare"))
+            EventLogManager.shared.logEvent(.clickButton(page: .profile, buttonName: "picshare"))
             EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)
         }
     }
@@ -50,7 +50,7 @@ final class PhotoDetailViewModel: ViewModel {
     func download(type: DetailViewType) async {
         do {
             if await photoDetailUseCase.downloadImage(to: state.image) {
-                EventLogManager.shared.logEvent(.clickButton(pageName: type.pageName, buttonName: "picdownload"))
+                EventLogManager.shared.logEvent(.clickButton(page: type.initalPage, buttonName: "picdownload"))
                 state.showToast = .success
             } else {
                 state.showToast = .failure

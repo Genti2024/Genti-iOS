@@ -45,7 +45,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
     func sendAction(_ input: Input) {
         switch input {
         case .goToMainButtonTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "gomain"))
+            EventLogManager.shared.logEvent(.clickButton(page: .compltedPhoto, buttonName: "gomain"))
             self.state.showRatingView = true
         case .reportButtonTap:
             presentReportAlert()
@@ -59,7 +59,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
             self.router.dismissSheet()
         case .shareButtonTap:
             EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)
-            EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "picshare"))
+            EventLogManager.shared.logEvent(.clickButton(page: .compltedPhoto, buttonName: "picshare"))
         }
     }
     
@@ -67,7 +67,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
     func downloadImage() async {
         do {
             if await completedPhotoUseCase.downloadImage(to: state.image) {
-                EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "picdownload"))
+                EventLogManager.shared.logEvent(.clickButton(page: .compltedPhoto, buttonName: "picdownload"))
                 state.showToast = .success
             } else {
                 state.showToast = .failure

@@ -46,7 +46,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
             state.currentIndex = (state.currentIndex + 1) % randomDescription.count
             state.currentRandomDescriptionExample = randomDescription[state.currentIndex]
         case .randomButtonTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "create1", buttonName: "promptsuggest_refresh"))
+            EventLogManager.shared.logEvent(.clickButton(page: .firstGenerator, buttonName: "promptsuggest_refresh"))
             state.currentIndex = (state.currentIndex + 1) % randomDescription.count
             state.currentRandomDescriptionExample = randomDescription[state.currentIndex]
         case .inputDescription(let text):
@@ -54,10 +54,10 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         case .addImageButtonTap:
             showImagePicker()
         case .nextButtonTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "create1", buttonName: "next"))
+            EventLogManager.shared.logEvent(.clickButton(page: .firstGenerator, buttonName: "next"))
             self.router.routeTo(.secondGen(data: self.requestData()))
         case .xmarkTap:
-            EventLogManager.shared.logEvent(.clickButton(pageName: "create1", buttonName: "exit"))
+            EventLogManager.shared.logEvent(.clickButton(page: .firstGenerator, buttonName: "exit"))
             self.router.dismissSheet()
         case .removeButtonTap:
             self.removeReferenceImage()
