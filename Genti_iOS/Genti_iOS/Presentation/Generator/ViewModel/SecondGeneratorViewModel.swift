@@ -37,6 +37,7 @@ final class SecondGeneratorViewModel: ViewModel {
         case xmarkTap
         case backButtonTap
         case viewWillAppear
+        case disabledButtonTap
     }
     
     func sendAction(_ input: Input) {
@@ -57,6 +58,8 @@ final class SecondGeneratorViewModel: ViewModel {
             if userdefaultRepository.isFirstGenerate {
                 self.state.showOnboarding.toggle()
             }
+        case .disabledButtonTap:
+            EventLogManager.shared.logEvent(.clickDisableButtonInSecondGeneratorView)
         }
     }
     

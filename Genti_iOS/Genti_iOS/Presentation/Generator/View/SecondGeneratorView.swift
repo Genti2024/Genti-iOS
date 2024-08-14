@@ -37,6 +37,11 @@ struct SecondGeneratorView: View {
         GentiPrimaryButton(title: "다음으로", isActive: viewModel.isActive) {
             viewModel.sendAction(.nextButtonTap)
         }
+        .onTapGesture {
+            if !viewModel.isActive {
+                viewModel.sendAction(.disabledButtonTap)
+            }
+        }
         .padding(.bottom, 32)
     }
     
