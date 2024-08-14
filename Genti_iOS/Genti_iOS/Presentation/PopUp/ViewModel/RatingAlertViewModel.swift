@@ -53,6 +53,7 @@ final class RatingAlertViewModel: ViewModel {
         do {
             self.state.isLoading = true
             try await userRepository.scorePhoto(responseId: photoInfo.responseId, rate: state.rating)
+            EventLogManager.shared.logEvent(.sendPhotoRating)
         } catch(let error) {
             print(error)
         }
@@ -68,6 +69,7 @@ final class RatingAlertViewModel: ViewModel {
         do {
             self.state.isLoading = true
             try await userRepository.checkCompletedImage(responeId: photoInfo.responseId)
+            EventLogManager.shared.logEvent(.skipPhotoRating)
         } catch(let error) {
             print(error)
         }

@@ -20,7 +20,7 @@ final class PhotoDetailViewModel: ViewModel {
         var showToast: ToastType? = nil
     }
     enum Input {
-        case downloadButtonTap
+        case downloadButtonTap(from: DetailViewType)
         case xmarkTap
         case backgroundTap
         case shareButtonTap
@@ -36,8 +36,8 @@ final class PhotoDetailViewModel: ViewModel {
     
     func sendAction(_ input: Input) {
         switch input {
-        case .downloadButtonTap:
-            Task { await download() }
+        case .downloadButtonTap(let type):
+            Task { await download(type: type) }
         case .xmarkTap, .backgroundTap:
             router.dismissSheet()
         case .shareButtonTap:
@@ -46,15 +46,14 @@ final class PhotoDetailViewModel: ViewModel {
     }
     
     @MainActor
-    func download() async {
+    func download(type: DetailViewType) async {
         do {
             if await photoDetailUseCase.downloadImage(to: state.image) {
-                EventLogManager.shared.logEvent(.clickButton(pageName: "mypage", buttonName: "picdownload"))
+                EventLogManager.shared.logEvent(.clickButton(pageName: type.pageName, buttonName: "picdownload"))
                 state.showToast = .success
             } else {
                 state.showToast = .failure
             }
-            
         }
     }
 }

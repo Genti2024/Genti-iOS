@@ -23,7 +23,7 @@ struct PhotoDetailView: View {
                     .padding(.trailing, 10)
                     .padding(.bottom, 10)
                     .asButton {
-                        self.viewModel.sendAction(.downloadButtonTap)
+                        self.viewModel.sendAction(.downloadButtonTap(from: .detail))
                     }
             }
             .padding(.horizontal, 28)

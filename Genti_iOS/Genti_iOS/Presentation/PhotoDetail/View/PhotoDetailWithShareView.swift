@@ -20,7 +20,7 @@ struct PhotoDetailWithShareView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .addDownloadButton {
-                            viewModel.sendAction(.downloadButtonTap) }
+                            viewModel.sendAction(.downloadButtonTap(from: .detailWithShare)) }
                 }
                 .padding(.horizontal, 30)
             

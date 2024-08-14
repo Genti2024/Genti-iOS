@@ -39,11 +39,13 @@ final class CompletedPhotoViewViewModel: ViewModel {
         case imageTap
         case downloadButtonTap
         case ratingActionIsDone
+        case shareButtonTap
     }
 
     func sendAction(_ input: Input) {
         switch input {
         case .goToMainButtonTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "gomain"))
             self.state.showRatingView = true
         case .reportButtonTap:
             presentReportAlert()
@@ -55,6 +57,8 @@ final class CompletedPhotoViewViewModel: ViewModel {
             Task { await downloadImage() }
         case .ratingActionIsDone:
             self.router.dismissSheet()
+        case .shareButtonTap:
+            EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "picshare"))
         }
     }
     
@@ -62,6 +66,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
     func downloadImage() async {
         do {
             if await completedPhotoUseCase.downloadImage(to: state.image) {
+                EventLogManager.shared.logEvent(.clickButton(pageName: "picdone", buttonName: "picdownload"))
                 state.showToast = .success
             } else {
                 state.showToast = .failure
@@ -96,6 +101,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
             try await completedPhotoUseCase.reportPhoto(responseId: photoInfo.responseId, content: state.reportContent)
             state.reportContent = ""
             state.isLoading = false
+            EventLogManager.shared.logEvent(.reportPhoto)
             state.showAlert = .reportComplete(action: { self.router.dismissSheet() })
         } catch(let error) {
             state.reportContent = ""
@@ -110,6 +116,7 @@ final class CompletedPhotoViewViewModel: ViewModel {
 
     private func navigateToPhotoExpandView() {
         guard let image = state.image else { return }
+        EventLogManager.shared.logEvent(.enlargePhoto)
         self.router.routeTo(.photoDetail(image: image))
     }
     
