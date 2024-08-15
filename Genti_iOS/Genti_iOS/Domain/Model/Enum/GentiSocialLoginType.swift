@@ -8,7 +8,8 @@
 import Foundation
 
 enum GentiSocialLoginType: String {
-    case kakao, apple
+    case kakao = "KAKAO"
+    case apple = "APPLE"
     
     var parameter: String {
         switch self {

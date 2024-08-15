@@ -10,5 +10,6 @@ import AuthenticationServices
 
 protocol TokenRepository {
     func getAppleToken(_ result: Result<ASAuthorization, any Error>) throws -> String
+    func getAppleAuthToken(_ credential: ASAuthorizationAppleIDCredential) throws -> String
     func getKaKaoToken() async throws -> String
 }

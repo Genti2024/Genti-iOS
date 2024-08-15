@@ -23,7 +23,6 @@ final class LoginViewModel: ViewModel {
     }
     
     struct State {
-        var isLoading: Bool = false
         var showAlert: AlertType? = nil
     }
     
@@ -44,9 +43,7 @@ final class LoginViewModel: ViewModel {
     @MainActor
     func kakaoLogin() async {
         do {
-            state.isLoading = true
             let result = try await loginUseCase.loginWithKaKao()
-            state.isLoading = false
             push(from: result)
         } catch(let error) {
             handleError(error)
@@ -56,9 +53,8 @@ final class LoginViewModel: ViewModel {
     @MainActor
     func appleLogin(_ result: Result<ASAuthorization, any Error>) async {
         do {
-            state.isLoading = true
             let result = try await loginUseCase.loginWithApple(result)
-            state.isLoading = false
+            try await Task.sleep(nanoseconds: 300000000)
             push(from: result)
         } catch(let error) {
             handleError(error)
@@ -66,7 +62,6 @@ final class LoginViewModel: ViewModel {
     }
     
     private func handleError(_ error: Error) {
-        state.isLoading = false
         guard let error = error as? GentiError else {
             state.showAlert = .reportUnknownedError(error: error, action: nil)
             return

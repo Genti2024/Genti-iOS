@@ -15,14 +15,15 @@ enum AuthRouter: URLRequestConvertible {
     case signIn(sex: String, birthData: String)
     case reissueToken(token: GentiTokenEntity)
     case logout
-    case resign
+    case resignKakao
+    case resignAppleTest(authorizationToken: String)
     
     
     var method: HTTPMethod {
         switch self {
-        case .login, .reissueToken, .signIn, .logout:
+        case .login, .reissueToken, .signIn, .logout, .resignAppleTest:
             return .post
-        case .resign:
+        case .resignKakao:
             return .delete
         }
     }
@@ -41,8 +42,10 @@ enum AuthRouter: URLRequestConvertible {
             return "/api/v1/users/signup"
         case .logout:
             return "/api/v1/users/logout"
-        case .resign:
-            return "/api/v1/users"
+        case .resignKakao:
+            return "/api/v1/users/kakao"
+        case .resignAppleTest:
+            return "/api/v1/users/apple/sendtoken"
         }
     }
     
@@ -68,8 +71,12 @@ enum AuthRouter: URLRequestConvertible {
             parameters["birthDate"] = birthData
             parameters["sex"] = sex
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-        case .logout, .resign:
+        case .logout, .resignKakao:
             urlRequest.httpBody = nil
+        case .resignAppleTest(let authorizationToken):
+            var parameters: [String: Any] = [:]
+            parameters["authorizationCode"] = authorizationToken
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         }
 
         return urlRequest

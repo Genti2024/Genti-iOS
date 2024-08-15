@@ -24,7 +24,8 @@ final class SignInUseCaseImpl: SignInUseCase {
     @MainActor
     func signIn(gender: Gender?, birthYear: Int) async throws {
         guard let sex = gender?.description  else { return }
-        try await authRepository.signIn(sex: sex, birthYear: String(describing: birthYear))
+        let signInEntity = try await authRepository.signIn(sex: sex, birthYear: String(describing: birthYear))
+        userdefaultRepository.setLoginType(type: signInEntity.socialLoginType)
         userdefaultRepository.setUserRole(userRole: .complete)
     }
 }

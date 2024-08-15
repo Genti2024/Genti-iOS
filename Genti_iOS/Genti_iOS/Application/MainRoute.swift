@@ -34,7 +34,7 @@ enum MainRoute: Route {
         case .mainTab:
             GentiTabView(viewModel: TabViewModel(tabViewUseCase: TabViewUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .setting:
-            SettingView(router: router)
+            SettingView(viewModel: SettingViewModel(router: router))
         case .photoDetailWithShare(let image):
             PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, image: image))
         case .firstGen:

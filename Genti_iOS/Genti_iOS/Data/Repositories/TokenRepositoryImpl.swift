@@ -10,6 +10,10 @@ import AuthenticationServices
 import KakaoSDKUser
 
 final class TokenRepositoryImpl: TokenRepository {
+    func getAppleAuthToken(_ credential: ASAuthorizationAppleIDCredential) throws -> String {
+        return try getAuthorizationToken(from: credential)
+    }
+    
 
     func getAppleToken(_ result: Result<ASAuthorization, any Error>) throws -> String {
         switch result {
@@ -76,6 +80,15 @@ final class TokenRepositoryImpl: TokenRepository {
             return identityToken
         } else {
             throw GentiError.tokenError(code: "Apple Token", message: "identityToken을 찾을 수 없습니다")
+        }
+    }
+    
+    private func getAuthorizationToken(from appleIDCredential: ASAuthorizationAppleIDCredential) throws -> String {
+        if let authTokenData = appleIDCredential.authorizationCode,
+           let authToken = String(data: authTokenData, encoding: .utf8) {
+            return authToken
+        } else {
+            throw GentiError.tokenError(code: "Apple Token", message: "authToken을 찾을 수 없습니다")
         }
     }
 

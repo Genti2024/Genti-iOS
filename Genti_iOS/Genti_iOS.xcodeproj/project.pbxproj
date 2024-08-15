@@ -30,6 +30,8 @@
 		C0113D8E2C3D39E700071BF6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D8D2C3D39E700071BF6 /* OnboardingViewModel.swift */; };
 		C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D8F2C3D3A0900071BF6 /* OnboardingStep.swift */; };
 		C0113D922C3D426700071BF6 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D912C3D426700071BF6 /* UserDefaultsKey.swift */; };
+		C01423E52C6D9B4900004683 /* SignInUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01423E42C6D9B4900004683 /* SignInUserDTO.swift */; };
+		C01423E72C6D9B9800004683 /* SignInUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01423E62C6D9B9800004683 /* SignInUserEntity.swift */; };
 		C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */; };
 		C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */; };
 		C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C3E62C1C39D0009924C9 /* Assets.xcassets */; };
@@ -232,6 +234,8 @@
 		C0113D8D2C3D39E700071BF6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		C0113D8F2C3D3A0900071BF6 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		C0113D912C3D426700071BF6 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		C01423E42C6D9B4900004683 /* SignInUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserDTO.swift; sourceTree = "<group>"; };
+		C01423E62C6D9B9800004683 /* SignInUserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserEntity.swift; sourceTree = "<group>"; };
 		C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -626,6 +630,7 @@
 				C0113D662C3A208F00071BF6 /* CompletedPhotoEntity.swift */,
 				C017C43B2C1C3AA3009924C9 /* MyImagesEntitiy.swift */,
 				C04967CC2C6496FA0097C732 /* UserInfoEntity.swift */,
+				C01423E62C6D9B9800004683 /* SignInUserEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -956,6 +961,7 @@
 				C0D942C32C5A48A70044649A /* UserStateDTO.swift */,
 				C02843562C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift */,
 				C017C4552C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift */,
+				C01423E42C6D9B4900004683 /* SignInUserDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1395,6 +1401,7 @@
 				C09596872C4DED5400FC5ECC /* RatingPopup.swift in Sources */,
 				C0BCC4B12C58849E009C89C4 /* GentiTokenEntity.swift in Sources */,
 				C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */,
+				C01423E52C6D9B4900004683 /* SignInUserDTO.swift in Sources */,
 				C0113D852C3BEAA400071BF6 /* ShareStyleModifier.swift in Sources */,
 				C017C48A2C1C3AA3009924C9 /* SettingRow.swift in Sources */,
 				C0BCC4B32C58857B009C89C4 /* LoginUseCase.swift in Sources */,
@@ -1466,6 +1473,7 @@
 				C0275D862C59F0B500A68D31 /* SplashUseCase.swift in Sources */,
 				C0113D8E2C3D39E700071BF6 /* OnboardingViewModel.swift in Sources */,
 				C017C4AE2C1C3AA3009924C9 /* Tab.swift in Sources */,
+				C01423E72C6D9B9800004683 /* SignInUserEntity.swift in Sources */,
 				C017C49D2C1C3AA3009924C9 /* GentiError.swift in Sources */,
 				C017C4A02C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift in Sources */,
 				C02843742C32BEF100B84566 /* UserRepository.swift in Sources */,
