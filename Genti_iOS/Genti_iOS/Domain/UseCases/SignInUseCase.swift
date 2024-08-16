@@ -25,6 +25,18 @@ final class SignInUseCaseImpl: SignInUseCase {
     func signIn(gender: Gender?, birthYear: Int) async throws {
         guard let sex = gender?.description  else { return }
         let signInEntity = try await authRepository.signIn(sex: sex, birthYear: String(describing: birthYear))
+        self.setEvent(signInEntity)
+        self.setUserDefaults(signInEntity)
+    }
+    
+    private func setEvent(_ signInEntity: SignInUserEntity) {
+        EventLogManager.shared.logEvent(.completeInfoget)
+        EventLogManager.shared.addUserProperty(to: .userEmail(email: signInEntity.email))
+        EventLogManager.shared.addUserProperty(to: .userGender(gender: signInEntity.gender))
+        EventLogManager.shared.addUserProperty(to: .userBirthYear(birthYear: signInEntity.birthYear))
+    }
+    
+    private func setUserDefaults(_ signInEntity: SignInUserEntity) {
         userdefaultRepository.setLoginType(type: signInEntity.socialLoginType)
         userdefaultRepository.setUserRole(userRole: .complete)
     }
