@@ -54,7 +54,7 @@ final class LoginViewModel: ViewModel {
     func appleLogin(_ result: Result<ASAuthorization, any Error>) async {
         do {
             let result = try await loginUseCase.loginWithApple(result)
-            try await Task.sleep(nanoseconds: 500000000)
+            try await Task.sleep(nanoseconds: 300000000)
             push(from: result)
         } catch(let error) {
             handleError(error)
