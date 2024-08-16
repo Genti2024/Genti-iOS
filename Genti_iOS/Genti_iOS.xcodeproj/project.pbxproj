@@ -32,6 +32,8 @@
 		C0113D922C3D426700071BF6 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D912C3D426700071BF6 /* UserDefaultsKey.swift */; };
 		C01423E52C6D9B4900004683 /* SignInUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01423E42C6D9B4900004683 /* SignInUserDTO.swift */; };
 		C01423E72C6D9B9800004683 /* SignInUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01423E62C6D9B9800004683 /* SignInUserEntity.swift */; };
+		C01423E92C6ED2EB00004683 /* SettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01423E82C6ED2EB00004683 /* SettingUseCase.swift */; };
+		C01423EC2C6ED5B400004683 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01423EB2C6ED5B400004683 /* SettingViewModel.swift */; };
 		C017C3DE2C1C39CE009924C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */; };
 		C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */; };
 		C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C3E62C1C39D0009924C9 /* Assets.xcassets */; };
@@ -236,6 +238,8 @@
 		C0113D912C3D426700071BF6 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		C01423E42C6D9B4900004683 /* SignInUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserDTO.swift; sourceTree = "<group>"; };
 		C01423E62C6D9B9800004683 /* SignInUserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserEntity.swift; sourceTree = "<group>"; };
+		C01423E82C6ED2EB00004683 /* SettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUseCase.swift; sourceTree = "<group>"; };
+		C01423EB2C6ED5B400004683 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		C017C3DA2C1C39CE009924C9 /* Genti_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Genti_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3DD2C1C39CE009924C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C017C3DF2C1C39CE009924C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -427,6 +431,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C01423EA2C6ED59E00004683 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C01423EB2C6ED5B400004683 /* SettingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C017C3D12C1C39CE009924C9 = {
 			isa = PBXGroup;
 			children = (
@@ -567,20 +579,20 @@
 		C049679C2C648F6D0097C732 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				C04967D42C6498530097C732 /* TabView */,
 				C04967CF2C6497DE0097C732 /* Splash */,
-				C04967CB2C6496CB0097C732 /* WebView */,
+				C04967BF2C6493E40097C732 /* Login */,
+				C049679D2C648F8A0097C732 /* SignIn */,
+				C04967A82C6490890097C732 /* Onboarding */,
+				C04967D42C6498530097C732 /* TabView */,
 				C04967C82C6496B80097C732 /* Setting */,
 				C04967C52C6496800097C732 /* Profile */,
-				C04967BF2C6493E40097C732 /* Login */,
 				C04967BC2C6493270097C732 /* ImagePicker */,
 				C04967B92C64927F0097C732 /* Home */,
 				C04967B32C6491790097C732 /* Generator */,
 				C04967B02C64912A0097C732 /* CompletedPhoto */,
 				C04967AB2C6490BA0097C732 /* PhotoDetail */,
-				C04967A82C6490890097C732 /* Onboarding */,
 				C04967A52C6490510097C732 /* PopUp */,
-				C049679D2C648F8A0097C732 /* SignIn */,
+				C04967CB2C6496CB0097C732 /* WebView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -647,6 +659,7 @@
 				C04967992C6480720097C732 /* CompletedPhotoUseCase.swift */,
 				C04967962C647B390097C732 /* PhotoDetailUseCase.swift */,
 				C04967932C647A5B0097C732 /* SignInUseCase.swift */,
+				C01423E82C6ED2EB00004683 /* SettingUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1017,6 +1030,7 @@
 		C04967C82C6496B80097C732 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				C01423EA2C6ED59E00004683 /* ViewModel */,
 				C04967C92C6496BC0097C732 /* View */,
 			);
 			path = Setting;
@@ -1461,6 +1475,7 @@
 				C09596892C4DED6800FC5ECC /* SelectOnboardingPopup.swift in Sources */,
 				C02843712C32BB8900B84566 /* MainFeedViewModel.swift in Sources */,
 				C0BCC4B82C5885B9009C89C4 /* AuthRepository.swift in Sources */,
+				C01423E92C6ED2EB00004683 /* SettingUseCase.swift in Sources */,
 				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
 				C0DE62772C6C6338005937B0 /* LogUserPropertyType.swift in Sources */,
 				C09596822C4DED1C00FC5ECC /* CustomPopupModifier.swift in Sources */,
@@ -1512,6 +1527,7 @@
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,
 				C0BCC4AD2C58842C009C89C4 /* SocialLoginEntity.swift in Sources */,
 				C017C4912C1C3AA3009924C9 /* SettingView.swift in Sources */,
+				C01423EC2C6ED5B400004683 /* SettingViewModel.swift in Sources */,
 				C0DE62792C6C882D005937B0 /* PageType.swift in Sources */,
 				C088F2E02C26F0EA00F92320 /* ImageGenerateRepository.swift in Sources */,
 				C0BCC4AF2C58843E009C89C4 /* GentiSocialLoginType.swift in Sources */,
@@ -1691,7 +1707,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1733,7 +1749,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
