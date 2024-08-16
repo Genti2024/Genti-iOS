@@ -14,13 +14,13 @@ final class TokenRepositoryImpl: TokenRepository {
         return try getAuthorizationToken(from: credential)
     }
     
-
-    func getAppleToken(_ result: Result<ASAuthorization, any Error>) throws -> String {
+    func getAppleToken(_ result: Result<ASAuthorization, Error>) throws -> String {
         switch result {
         case .success(let authResults):
             return try handleAppleSuccess(authResults)
         case .failure(let error):
-            return try handleAppleFailure(error)
+            try handleAppleFailure(error)
+            return ""
         }
     }
     
@@ -36,7 +36,12 @@ final class TokenRepositoryImpl: TokenRepository {
         return try await withCheckedThrowingContinuation { continuation in
             UserApi.shared.loginWithKakaoTalk { oAuthToken, error in
                 guard error == nil else {
-                    continuation.resume(throwing: GentiError.tokenError(code: "Kakao Token", message: "카카오로그인실패\(String(describing: error?.localizedDescription))"))
+                    guard let errorDescription = error?.localizedDescription else { return }
+                    if errorDescription.contains("The operation couldn’t be completed") {
+                        continuation.resume(throwing: GentiError.tokenError(code: "NOTCOMPLETE", message: "로그인중간에포기"))
+                        return
+                    }
+                    continuation.resume(throwing: GentiError.tokenError(code: "Kakao Token", message: errorDescription))
                     return
                 }
                 guard let oAuthToken = oAuthToken else {
@@ -53,7 +58,12 @@ final class TokenRepositoryImpl: TokenRepository {
         return try await withCheckedThrowingContinuation { continuation in
             UserApi.shared.loginWithKakaoAccount { oAuthToken, error in
                 guard error == nil else {
-                    continuation.resume(throwing: GentiError.tokenError(code: "Kakao Token", message: "카카오로그인실패\(String(describing: error?.localizedDescription))"))
+                    guard let errorDescription = error?.localizedDescription else { return }
+                    if errorDescription.contains("The operation couldn’t be completed") {
+                        continuation.resume(throwing: GentiError.tokenError(code: "NOTCOMPLETE", message: "로그인중간에포기"))
+                        return
+                    }
+                    continuation.resume(throwing: GentiError.tokenError(code: "Kakao Token", message: errorDescription))
                     return
                 }
                 guard let oAuthToken = oAuthToken else {
@@ -92,7 +102,11 @@ final class TokenRepositoryImpl: TokenRepository {
         }
     }
 
-    private func handleAppleFailure(_ error: Error) throws -> String {
-        throw GentiError.tokenError(code: "Apple Token", message: "애플 로그인 실패 \(error.localizedDescription)")
+    private func handleAppleFailure(_ error: Error) throws {
+        let errorDescription = error.localizedDescription
+        if errorDescription.contains("The operation couldn’t be completed") {
+            throw GentiError.tokenError(code: "NOTCOMPLETE", message: "로그인중간에포기")
+        }
+        throw GentiError.tokenError(code: "Apple Token", message: "\(error.localizedDescription)")
     }
 }
