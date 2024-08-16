@@ -31,9 +31,12 @@ final class SignInUseCaseImpl: SignInUseCase {
     
     private func setEvent(_ signInEntity: SignInUserEntity) {
         EventLogManager.shared.logEvent(.completeInfoget)
+        EventLogManager.shared.logEvent(.singIn(type: signInEntity.socialLoginType))
         EventLogManager.shared.addUserProperty(to: .userEmail(email: signInEntity.email))
-        EventLogManager.shared.addUserProperty(to: .userGender(gender: signInEntity.gender))
+        EventLogManager.shared.addUserProperty(to: .userLoginType(loginType: signInEntity.socialLoginType))
+        EventLogManager.shared.addUserProperty(to: .userNickname(nickname: signInEntity.nickname))
         EventLogManager.shared.addUserProperty(to: .userBirthYear(birthYear: signInEntity.birthYear))
+        EventLogManager.shared.addUserProperty(to: .userGender(gender: signInEntity.gender))
     }
     
     private func setUserDefaults(_ signInEntity: SignInUserEntity) {
