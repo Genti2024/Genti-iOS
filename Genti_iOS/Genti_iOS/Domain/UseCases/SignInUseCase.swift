@@ -41,6 +41,6 @@ final class SignInUseCaseImpl: SignInUseCase {
     
     private func setUserDefaults(_ signInEntity: SignInUserEntity) {
         userdefaultRepository.setLoginType(type: signInEntity.socialLoginType)
-        userdefaultRepository.setUserRole(userRole: .complete)
+        userdefaultRepository.setUserRole(userRole: .signInComplete)
     }
 }

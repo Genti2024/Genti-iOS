@@ -11,7 +11,7 @@ import UIKit
 protocol ProfileUseCase {
     func fetchInitalUserInfo() async throws -> UserInfoEntity
     func getCompletedPhotos() async throws -> [MyImagesEntitiy]
-    func load(from urlString: String) async -> UIImage?
+    func showPhotoDetail(from urlString: String) async -> UIImage?
 }
 
 final class ProfileUseCaseImpl: ProfileUseCase {
@@ -34,7 +34,7 @@ final class ProfileUseCaseImpl: ProfileUseCase {
         return try await userRepository.fetchPhotos()
     }
     
-    func load(from urlString: String) async -> UIImage? {
+    func showPhotoDetail(from urlString: String) async -> UIImage? {
         return await imageRepository.load(from: urlString)
     }
 }

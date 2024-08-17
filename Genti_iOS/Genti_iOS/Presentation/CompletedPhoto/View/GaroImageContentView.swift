@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GaroImageContentView: View {
     
-    @Bindable var viewModel: CompletedPhotoViewViewModel
+    @Bindable var viewModel: CompletedPhotoViewModel
     
     var body: some View {
         VStack(spacing: 0) {

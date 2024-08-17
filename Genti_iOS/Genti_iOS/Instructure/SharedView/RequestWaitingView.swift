@@ -16,7 +16,7 @@ struct RequestWaitingView: View {
             .frame(width: 250, height: 250)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background {
-                Color.black.opacity(0.4)
+                Color.black.opacity(0.3)
                     .ignoresSafeArea()
             }
     }

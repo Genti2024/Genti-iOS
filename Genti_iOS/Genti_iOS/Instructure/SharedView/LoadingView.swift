@@ -16,7 +16,7 @@ struct LoadingView: View {
             .frame(width: 100, height: 100)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background {
-                Color.black.opacity(0.4)
+                Color.black.opacity(0.2)
                     .ignoresSafeArea()
             }
     }

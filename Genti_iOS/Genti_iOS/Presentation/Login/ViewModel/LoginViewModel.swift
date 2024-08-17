@@ -72,9 +72,9 @@ final class LoginViewModel: ViewModel {
     
     private func push(from loginState: LoginUserState) {
         switch loginState {
-        case .complete:
+        case .signInComplete:
             self.router.routeTo(.mainTab)
-        case .notComplete:
+        case .signInNotComplete:
             self.router.routeTo(.signIn)
         }
     }
