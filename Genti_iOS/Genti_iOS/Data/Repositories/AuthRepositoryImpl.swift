@@ -15,13 +15,22 @@ final class AuthRepositoryImpl: AuthRepository {
         self.requestService = requestService
     }
     
-    func login(token: String, type: GentiSocialLoginType) async throws -> SocialLoginEntity {
-        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.login(token: token, type: type))
+    func resign() async throws {
+        try await requestService.fetchResponse(for: AuthRouter.resign)
+    }
+    
+    func kakaoLogin(token: String) async throws -> SocialLoginEntity {
+        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.kakaoLogin(token: token))
+        return dto.toEntity
+    }
+    
+    func appleLogin(authorizationCode: String, identityToken: String) async throws -> SocialLoginEntity {
+        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.appleLogin(authorizationCode: authorizationCode, identityToken: identityToken))
         return dto.toEntity
     }
     
     func signIn(sex: String, birthYear: String) async throws -> SignInUserEntity {
-        let dto: SignInUserDTO = try await requestService.fetchResponse(for: AuthRouter.signIn(sex: sex, birthData: birthYear))
+        let dto: SignInUserDTO = try await requestService.fetchResponse(for: AuthRouter.signIn(sex: sex, birthYear: birthYear))
         guard let entity = dto.toEntitiy() else {
             throw GentiError.clientError(code: "회원가입유저", message: "데이터변환오류")
         }
@@ -37,11 +46,4 @@ final class AuthRepositoryImpl: AuthRepository {
         try await requestService.fetchResponse(for: AuthRouter.logout)
     }
     
-    func resignKakao() async throws {
-        try await requestService.fetchResponse(for: AuthRouter.resignKakao)
-    }
-    
-    func resignApple(authToken: String) async throws {
-        try await requestService.fetchResponse(for: AuthRouter.resignAppleTest(authorizationToken: authToken))
-    }
 }

@@ -12,8 +12,7 @@ import Combine
 final class SettingViewModel: NSObject, ViewModel {
     var cancelBag = Set<AnyCancellable>()
     var router: Router<MainRoute>
-    let requestService: RequestService = RequestServiceImpl()
-    let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
+
     let settingUseCase: SettingUseCase = SettingUseCaseImpl()
     var state: State
     
@@ -58,27 +57,15 @@ final class SettingViewModel: NSObject, ViewModel {
         self.router = router
         self.state = .init()
         super.init()
-        
-        self.settingUseCase.kakaoResignCompleteSubject.merge(with: self.settingUseCase.appleResignCompleteSubject
-            .delay(for: .seconds(0.5), scheduler: RunLoop.main))
-            .sink { _ in router.popToRoot() }
-            .store(in: &self.cancelBag)
-        
-        self.settingUseCase.isLoading
-            .sink { self.state.isLoading = $0 }
-            .store(in: &self.cancelBag)
-        
-        self.settingUseCase.errorSubject
-            .sink { gentError in
-                self.state.showAlert = .reportGentiError(error: gentError, action: nil)
-            }
-            .store(in: &self.cancelBag)
     }
     
     @MainActor
     func resign() async {
+        defer { self.state.isLoading = false }
         do {
+            self.state.isLoading = true
             try await settingUseCase.resign()
+            router.popToRoot()
         } catch(let error) {
             self.handleError(error)
         }
@@ -86,6 +73,7 @@ final class SettingViewModel: NSObject, ViewModel {
     
     @MainActor
     func logout() async {
+        defer { self.state.isLoading = false }
         do {
             self.state.isLoading = true
             try await settingUseCase.logout()

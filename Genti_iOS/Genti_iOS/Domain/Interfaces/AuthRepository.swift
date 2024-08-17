@@ -8,10 +8,10 @@
 import Foundation
 
 protocol AuthRepository {
-    func login(token: String, type: GentiSocialLoginType) async throws -> SocialLoginEntity
+    func kakaoLogin(token: String) async throws -> SocialLoginEntity
+    func appleLogin(authorizationCode: String, identityToken: String) async throws -> SocialLoginEntity
     func reissueToken(token: GentiTokenEntity) async throws -> GentiTokenEntity
     func signIn(sex: String, birthYear: String) async throws -> SignInUserEntity
     func logout() async throws
-    func resignApple(authToken: String) async throws
-    func resignKakao() async throws
+    func resign() async throws
 }

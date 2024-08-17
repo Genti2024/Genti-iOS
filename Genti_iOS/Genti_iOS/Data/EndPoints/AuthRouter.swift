@@ -11,19 +11,19 @@ import Alamofire
 
 enum AuthRouter: URLRequestConvertible {
     
-    case login(token: String, type: GentiSocialLoginType)
-    case signIn(sex: String, birthData: String)
+    case kakaoLogin(token: String)
+    case appleLogin(authorizationCode: String, identityToken: String)
+    case signIn(sex: String, birthYear: String)
     case reissueToken(token: GentiTokenEntity)
     case logout
-    case resignKakao
-    case resignAppleTest(authorizationToken: String)
+    case resign
     
     
     var method: HTTPMethod {
         switch self {
-        case .login, .reissueToken, .signIn, .logout, .resignAppleTest:
+        case .reissueToken, .signIn, .logout, .kakaoLogin, .appleLogin:
             return .post
-        case .resignKakao:
+        case .resign:
             return .delete
         }
     }
@@ -34,18 +34,18 @@ enum AuthRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .login:
-            return "/auth/v1/login/oauth2/token"
+        case .kakaoLogin:
+            return "/auth/v1/login/oauth2/token/kakao"
+        case .appleLogin:
+            return "/auth/v1/login/oauth2/token/apple"
         case .reissueToken:
             return "/auth/v1/reissue"
         case .signIn:
             return "/api/v1/users/signup"
         case .logout:
             return "/api/v1/users/logout"
-        case .resignKakao:
-            return "/api/v1/users/kakao"
-        case .resignAppleTest:
-            return "/api/v1/users/apple/sendtoken"
+        case .resign:
+            return "/api/v1/users"
         }
     }
     
@@ -54,12 +54,15 @@ enum AuthRouter: URLRequestConvertible {
         var urlRequest = URLRequest(url: url)
         urlRequest.method = method
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
         switch self {
-        case .login(let token, let type):
+        case .kakaoLogin(let token):
             var parameters: [String: Any] = [:]
-            parameters["token"] = token
-            parameters["oauthPlatform"] = type.parameter
+            parameters["accessToken"] = token
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        case .appleLogin(let authCode, let identityToken):
+            var parameters: [String: Any] = [:]
+            parameters["authorizationCode"] = authCode
+            parameters["identityToken"] = identityToken
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         case .reissueToken(let token):
             var parameters: [String: Any] = [:]
@@ -68,15 +71,11 @@ enum AuthRouter: URLRequestConvertible {
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         case .signIn(let sex, let birthData):
             var parameters: [String: Any] = [:]
-            parameters["birthDate"] = birthData
+            parameters["birthYear"] = birthData
             parameters["sex"] = sex
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-        case .logout, .resignKakao:
+        case .logout, .resign:
             urlRequest.httpBody = nil
-        case .resignAppleTest(let authorizationToken):
-            var parameters: [String: Any] = [:]
-            parameters["authorizationCode"] = authorizationToken
-            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         }
 
         return urlRequest

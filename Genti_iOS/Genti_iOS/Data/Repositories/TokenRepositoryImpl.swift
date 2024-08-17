@@ -9,18 +9,20 @@ import Foundation
 import AuthenticationServices
 import KakaoSDKUser
 
+struct AppleLoginToken {
+    let authorizationCode: String
+    let identityToken: String
+}
+
 final class TokenRepositoryImpl: TokenRepository {
-    func getAppleAuthToken(_ credential: ASAuthorizationAppleIDCredential) throws -> String {
-        return try getAuthorizationToken(from: credential)
-    }
-    
-    func getAppleToken(_ result: Result<ASAuthorization, Error>) throws -> String {
+
+    func getAppleToken(_ result: Result<ASAuthorization, Error>) throws -> AppleLoginToken {
         switch result {
         case .success(let authResults):
             return try handleAppleSuccess(authResults)
         case .failure(let error):
             try handleAppleFailure(error)
-            return ""
+            return .init(authorizationCode: "", identityToken: "")
         }
     }
     
@@ -75,10 +77,12 @@ final class TokenRepositoryImpl: TokenRepository {
         }
     }
     
-    private func handleAppleSuccess(_ authResults: ASAuthorization) throws -> String {
+    private func handleAppleSuccess(_ authResults: ASAuthorization) throws -> AppleLoginToken {
         switch authResults.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            return try getIdentityToken(from: appleIDCredential)
+            let identityToken = try getIdentityToken(from: appleIDCredential)
+            let authrizationCode = try getAuthorizationToken(from: appleIDCredential)
+            return .init(authorizationCode: authrizationCode, identityToken: identityToken)
         default:
             throw GentiError.tokenError(code: "Apple Token", message: "Apple login 인증 실패")
         }
