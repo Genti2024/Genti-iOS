@@ -8,16 +8,16 @@
 import Foundation
 
 struct SignInUserDTO: Codable {
-    let email: String
+    let email: String?
     let lastLoginOauthPlatform: String
     let sex: String
     let nickname: String
-    let birthDate: String
+    let birthYear: String
 }
 
 extension SignInUserDTO {
     func toEntitiy() -> SignInUserEntity? {
-        guard let loginType = GentiSocialLoginType(rawValue: self.lastLoginOauthPlatform), let gender = Gender(rawValue: self.sex), let birthYear = Int(self.birthDate) else { return nil }
-        return .init(email: self.email, socialLoginType: loginType, gender: gender, nickname: self.nickname, birthYear: birthYear)
+        guard let loginType = GentiSocialLoginType(rawValue: self.lastLoginOauthPlatform), let gender = Gender(rawValue: self.sex), let birthYear = Int(self.birthYear) else { return nil }
+        return .init(email: self.email ?? "null입니다", socialLoginType: loginType, gender: gender, nickname: self.nickname, birthYear: birthYear)
     }
 }
