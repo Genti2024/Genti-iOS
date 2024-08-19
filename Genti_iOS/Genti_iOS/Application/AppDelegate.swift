@@ -33,9 +33,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // 앰플리튜드 설정
         Amplitude.instance().defaultTracking.sessions = true
-        Amplitude.instance().defaultTracking.screenViews = true
-        Amplitude.instance().defaultTracking = AMPDefaultTrackingOptions.initWithAllEnabled()
-        Amplitude.instance().initializeApiKey("9c4392f841b51333441bc80b223af1b6")
+        Amplitude.instance().initializeApiKey("c107ca36ad5f32ff5d2b8e41eaa161fc")
         
         let identify = AMPIdentify()
             .setOnce("user_share", value: NSNumber(value: 0))
