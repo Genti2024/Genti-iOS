@@ -55,7 +55,7 @@ struct OnboardingView: View {
             }
             .padding(.vertical, 18)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .animation(.snappy, value: viewModel.state.step)
         .background(alignment: .topTrailing) {
             ZStack {
