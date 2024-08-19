@@ -11,7 +11,7 @@ import PopupView
 
 struct CompletedPhotoView: View {
 
-    @State var viewModel: CompletedPhotoViewViewModel
+    @State var viewModel: CompletedPhotoViewModel
 
     var body: some View {
         GeometryReader { geometry in
@@ -81,5 +81,5 @@ struct CompletedPhotoView: View {
 }
 
 #Preview {
-    CompletedPhotoView(viewModel: CompletedPhotoViewViewModel(photoInfo: .init(), router: .init(), completedPhotoUseCase: CompletedPhotoUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))))
+    CompletedPhotoView(viewModel: CompletedPhotoViewModel(photoInfo: .init(), router: .init(), completedPhotoUseCase: CompletedPhotoUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()))))
 }

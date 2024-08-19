@@ -20,6 +20,7 @@ final class TabViewModel: ViewModel {
         var isLoading: Bool = false
         var showAlert: AlertType? = nil
     }
+    
     enum Input {
         case feedIconTap
         case profileIconTap

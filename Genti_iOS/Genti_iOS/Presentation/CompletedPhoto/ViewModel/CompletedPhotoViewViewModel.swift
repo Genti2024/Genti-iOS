@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-final class CompletedPhotoViewViewModel: ViewModel {
+final class CompletedPhotoViewModel: ViewModel {
 
     var photoInfo: CompletedPhotoEntity
     var router: Router<MainRoute>

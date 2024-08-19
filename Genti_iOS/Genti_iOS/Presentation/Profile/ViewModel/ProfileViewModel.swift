@@ -23,6 +23,7 @@ final class ProfileViewModel: ViewModel {
         var hasInProgressImage: Bool = false
         var showAlert: AlertType? = nil
     }
+    
     enum Input {
         case viewWillAppear
         case imageTap(String)
@@ -57,7 +58,7 @@ final class ProfileViewModel: ViewModel {
     @MainActor
     func showMyImage(url: String) async {
         do {
-            guard let image = await profileUseCase.load(from: url) else { return }
+            guard let image = await profileUseCase.showPhotoDetail(from: url) else { return }
             router.routeTo(.photoDetailWithShare(image: image))
         }
     }

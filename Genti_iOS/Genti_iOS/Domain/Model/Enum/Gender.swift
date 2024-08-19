@@ -7,8 +7,9 @@
 
 import Foundation
 
-enum Gender: CaseIterable {
-    case boy, girl
+enum Gender: String, CaseIterable {
+    case boy = "남"
+    case girl = "여"
     
     var description: String {
         switch self {

@@ -15,11 +15,11 @@ struct SocialLoginDTO: Codable {
     var userStatus: LoginUserState {
         switch userRoleString {
         case "OAUTH_FIRST_JOIN":
-            return .notComplete
+            return .signInNotComplete
         case "USER":
-            return .complete
+            return .signInComplete
         default:
-            return .notComplete
+            return .signInNotComplete
         }
     }
 }

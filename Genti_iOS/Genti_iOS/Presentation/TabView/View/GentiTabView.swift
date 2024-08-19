@@ -10,10 +10,6 @@ import SwiftUI
 struct GentiTabView: View {
     @State var viewModel: TabViewModel
     
-    init(viewModel: TabViewModel) {
-        self.viewModel = viewModel
-    }
-    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $viewModel.state.currentTab) {

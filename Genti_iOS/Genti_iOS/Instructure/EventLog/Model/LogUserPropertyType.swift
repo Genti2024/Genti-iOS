@@ -9,6 +9,10 @@ import Foundation
 
 enum LogUserPropertyType {
     case userEmail(email: String)
+    case userGender(gender: Gender)
+    case userBirthYear(birthYear: Int)
+    case userLoginType(loginType: GentiSocialLoginType)
+    case userNickname(nickname: String)
     case shareButtonTap
     case downloadPhoto
     case scrollMainView
@@ -26,6 +30,14 @@ enum LogUserPropertyType {
             return "user_main_scroll"
         case .refreshMainView:
             return "user_promptsuggest_refresh"
+        case .userGender:
+            return "user_sex"
+        case .userBirthYear:
+            return "user_birth_year"
+        case .userLoginType:
+            return "user_platform"
+        case .userNickname:
+            return "user_nickname"
         }
     }
     
@@ -33,6 +45,14 @@ enum LogUserPropertyType {
         switch self {
         case .userEmail(let email):
             return ["email": email]
+        case .userGender(let gender):
+            return ["sex": gender.rawValue]
+        case .userBirthYear(let birthYear):
+            return ["birthYear": birthYear]
+        case .userNickname(let nickname):
+            return ["nickname": nickname]
+        case .userLoginType(let loginType):
+            return ["loginType": loginType.parameter]
         default:
             return nil
         }
