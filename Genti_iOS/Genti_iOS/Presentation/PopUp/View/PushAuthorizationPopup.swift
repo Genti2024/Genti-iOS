@@ -45,8 +45,11 @@ struct PushAuthorizationPopup: CustomPopup {
                                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSetting"), object: nil)
                                     }
                                 } else {
-                                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {didAllow,Error in
+                                    // 최초엔 일로옴
+                                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: { didAllow,Error in
                                         DispatchQueue.main.async {
+                                            if didAllow { EventLogManager.shared.logEvent(.clickButton(page: .pushAuthorizationAlert, buttonName: "goalarm")) }
+                                            EventLogManager.shared.addUserProperty(to: .agreePushNotification(isAgree: didAllow))
                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "PopupDismiss"), object: nil)
                                         }
                                     })

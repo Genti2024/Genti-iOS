@@ -96,10 +96,12 @@ final class TabViewModel: ViewModel {
             case .canMake:
                 router.routeTo(.firstGen)
             case .awaitUserVerification(let completePhotoEntity):
+                EventLogManager.shared.logEvent(.pushNotificationTap(true))
                 self.router.dismissSheet {
                     self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))
                 }
             case .canceled(let requestId):
+                EventLogManager.shared.logEvent(.pushNotificationTap(false))
                 await handleCanceledState(requestId: requestId)
             case .error:
                 state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)

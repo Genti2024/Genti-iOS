@@ -66,6 +66,7 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
             state.isLoading = true
             try await imageGenerateUseCase.requestImage(from: self.requestData())
             EventLogManager.shared.logEvent(.clickButton(page: .thirdGenerator, buttonName: "createpic"))
+            EventLogManager.shared.addUserPropertyCount(to: .createNewPhoto)
             state.isLoading = false
             router.routeTo(.requestCompleted)
             

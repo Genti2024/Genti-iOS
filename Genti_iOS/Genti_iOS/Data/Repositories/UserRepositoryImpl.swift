@@ -23,8 +23,10 @@ final class UserRepositoryImpl: UserRepository {
     func checkUserHasCanceledOrAwaitedRequest() async throws -> Bool {
         let dto: UserStateDTO = try await requestService.fetchResponse(for: UserRouter.getUserState)
         if dto.status == "CANCELED" {
+            EventLogManager.shared.logEvent(.pushNotificationTap(false))
             return true
         } else if dto.status == "AWAIT_USER_VERIFICATION" {
+            EventLogManager.shared.logEvent(.pushNotificationTap(true))
             return true
         } else {
             return false

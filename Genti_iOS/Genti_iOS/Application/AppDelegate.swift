@@ -42,6 +42,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             .setOnce("user_picturedownload", value: NSNumber(value: 0))
             .setOnce("user_main_scroll", value: NSNumber(value: 0))
             .setOnce("user_promptsuggest_refresh", value: NSNumber(value: 0))
+            .setOnce("user_piccreate", value: NSNumber(value: 0))
         guard let identify = identify else { return true }
         Amplitude.instance().identify(identify)
         
@@ -55,6 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        
         NotificationCenter.default.post(
             name: NSNotification.Name(rawValue: "PushNotificationReceived"),
             object: nil,

@@ -17,6 +17,8 @@ enum LogUserPropertyType {
     case downloadPhoto
     case scrollMainView
     case refreshMainView
+    case createNewPhoto
+    case agreePushNotification(isAgree: Bool)
     
     var propertyName: String {
         switch self {
@@ -38,6 +40,10 @@ enum LogUserPropertyType {
             return "user_platform"
         case .userNickname:
             return "user_nickname"
+        case .createNewPhoto:
+            return "user_piccreate"
+        case .agreePushNotification:
+            return "user_alarm"
         }
     }
     
@@ -53,6 +59,8 @@ enum LogUserPropertyType {
             return ["nickname": nickname]
         case .userLoginType(let loginType):
             return ["loginType": loginType.parameter]
+        case .agreePushNotification(let agree):
+            return ["alarm": agree ? "true" : "false"]
         default:
             return nil
         }
