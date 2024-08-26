@@ -11,6 +11,7 @@ import Foundation
 enum PopupType {
     case selectOnboarding
     case rating(CompletedPhotoEntity)
+    case pushAuthorization
 
     var object: any CustomPopup {
         switch self {
@@ -18,6 +19,8 @@ enum PopupType {
             return SelectOnboardingPopup()
         case .rating(let photoInfo):
             return RatingPopup(photoInfo: photoInfo)
+        case .pushAuthorization:
+            return PushAuthorizationPopup()
         }
     }
 }
