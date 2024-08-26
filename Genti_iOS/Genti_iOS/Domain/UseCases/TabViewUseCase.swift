@@ -30,7 +30,7 @@ final class TabViewUseCaseImpl: TabViewUseCase {
     func showCompleteStateWhenUserInitalAccess() async throws -> Bool {
         let hasCanceledOrAwaitedRequest = try await userRepository.checkUserHasCanceledOrAwaitedRequest()
         let hasPushFromBackground = self.hasPushFromBackground()
-        return hasCanceledOrAwaitedRequest && hasPushFromBackground
+        return hasCanceledOrAwaitedRequest || hasPushFromBackground
     }
     
     @MainActor

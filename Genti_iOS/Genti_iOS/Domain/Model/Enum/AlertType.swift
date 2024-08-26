@@ -72,7 +72,7 @@ enum AlertType {
                          message: "나만의 사진을 만들기위해서는 알림권한이 필요해요",
                          actions: [.init(title: "설정으로가기", action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { _ in
                 action!()
-            } }), .init(title: "괜찮아요", style: .cancel)])
+            } }), .init(title: "괜찮아요", style: .cancel, action: action)])
         }
     }
 }
