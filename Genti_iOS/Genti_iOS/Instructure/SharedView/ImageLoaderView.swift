@@ -8,6 +8,7 @@
 import SwiftUI
 
 import SDWebImageSwiftUI
+import Lottie
 
 struct ImageLoaderView: View {
     
@@ -22,8 +23,11 @@ struct ImageLoaderView: View {
             .overlay {
                 WebImage(url: URL(string: urlString))
                     .resizable()
-                    .indicator(.activity(style: .circular))
-                    .tint(.gentiGreen)
+                    .indicator(.init(content: { _, _ in
+                        LottieView(type: .imageLoading)
+                            .looping()
+                            .frame(width: 80, height: 80)
+                    }))
                     .aspectRatio(contentMode: resizingMode)
                     .allowsHitTesting(false)
             }

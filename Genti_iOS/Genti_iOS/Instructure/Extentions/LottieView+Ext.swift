@@ -13,6 +13,7 @@ enum LottieType {
     case splash
     case loading
     case waiting
+    case imageLoading
     
     var rawValue: String {
         switch self {
@@ -22,6 +23,8 @@ enum LottieType {
             return "ProgressLottie"
         case .waiting:
             return "RequestWaitingLottie"
+        case .imageLoading:
+            return "imageLoading"
         }
     }
 }
