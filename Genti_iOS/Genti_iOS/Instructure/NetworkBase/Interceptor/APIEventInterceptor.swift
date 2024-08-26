@@ -13,7 +13,7 @@ final class APIEventInterceptor: RequestInterceptor {
     let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        guard urlRequest.url?.absoluteString.hasPrefix("https://dev.genti.kr") == true,
+        guard urlRequest.url?.absoluteString.hasPrefix(Constants.baseURL) == true,
               let accessToken = userdefaultRepository.get(forKey: .accessToken) as? String else {
                   completion(.success(urlRequest))
                   return
@@ -47,7 +47,12 @@ final class APIEventInterceptor: RequestInterceptor {
                             completion(.doNotRetryWithError(GentiError.tokenError(code: result.errorCode, message: result.errorMessage)))
                             return
                         }
-                        self.userdefaultRepository.setToken(token: .init(accessToken: result.response?.accessToken, refreshToken: result.response?.refreshToken))
+                        guard let accessToken = result.response?.accessToken, let refreshToken = result.response?.refreshToken else {
+                            completion(.doNotRetryWithError(GentiError.tokenError(code: "TOKEN", message: "성공했는데토큰이 안담겨옴, 서버오류")))
+                            return
+                        }
+                        self.userdefaultRepository.setAccessToken(token: accessToken)
+                        self.userdefaultRepository.setRefreshToken(token: refreshToken)
                         print(#fileID, #function, #line, "- 새로 받은 토큰으로 교체")
                         completion(.retry)
                         return

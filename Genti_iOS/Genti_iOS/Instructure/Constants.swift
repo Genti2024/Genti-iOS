@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 enum Constants {
+    static let baseURL = "https://dev.genti.kr"
+    
     static let randomImage = "https://picsum.photos/600/600"
     
     static func text(length: Int) -> String {

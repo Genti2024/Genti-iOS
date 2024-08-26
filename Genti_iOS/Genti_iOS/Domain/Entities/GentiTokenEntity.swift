@@ -10,4 +10,5 @@ import Foundation
 struct GentiTokenEntity {
     var accessToken: String?
     var refreshToken: String?
+    var fcmToken: String?
 }
