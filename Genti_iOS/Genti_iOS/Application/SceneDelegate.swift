@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         if let _ = connectionOptions.notificationResponse {
-            userdefultRepository.set(to: true, forKey: .showImage)
+            userdefultRepository.set(to: true, forKey: .getPushFromBackground)
         }
         return
         

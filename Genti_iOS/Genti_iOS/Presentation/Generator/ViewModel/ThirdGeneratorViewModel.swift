@@ -57,6 +57,9 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         }
     }
     
+    
+
+    
     @MainActor
     func completeImageRequest() async {
         do {
@@ -65,6 +68,7 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
             EventLogManager.shared.logEvent(.clickButton(page: .thirdGenerator, buttonName: "createpic"))
             state.isLoading = false
             router.routeTo(.requestCompleted)
+            
         } catch(let error) {
             state.isLoading = false
             guard let error = error as? GentiError else {

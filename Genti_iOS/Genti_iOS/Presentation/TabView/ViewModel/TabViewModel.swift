@@ -37,10 +37,13 @@ final class TabViewModel: ViewModel {
         case .cameraIconTap:
             Task { await handleUserState() }
         case .viewWillAppear:
-            Task { await handleCanceledCase() }
-            checkBackgroundPushNotification()
+            // 만약에 유저가 백그라운드에서 push를 안누른 경우
+            // 앱에진입했을때 userdefault에 background푸시 flag가 false인데(push가 왔는데 확인X) 유저상태가 await 혹은 canceled인 경우
+            // -> 자동으로 앱실행시 완료뷰 혹은 취소뷰를 보여줘야한다
+            Task { await showRequestResult() }
         case .pushReceived:
-            router.dismissSheet { self.router.routeTo(.completeMakePhoto(photoInfo: .init())) }
+            // 유저가 푸시를 누른 경우
+            Task { await handleUserStateFromPush() }
         }
     }
     
@@ -50,24 +53,15 @@ final class TabViewModel: ViewModel {
         self.state = .init()
     }
     
-    func checkBackgroundPushNotification() {
-        if tabViewUseCase.hasNonCheckCompletedImageFromPush() {
-            self.router.routeTo(.completeMakePhoto(photoInfo: .init()))
-        }
-    }
-    
     @MainActor
-    func handleCanceledCase() async {
+    func showRequestResult() async {
         do {
-            let cancelState = try await tabViewUseCase.hasCanceledCase()
-            if cancelState.canceled {
-                guard let requestId = cancelState.requestId else { return }
-                await handleCanceledState(requestId: requestId)
+            if try await tabViewUseCase.showCompleteStateWhenUserInitalAccess() {
+                self.sendAction(.cameraIconTap)
             }
         } catch(let error) {
-            handleError(error)
+            self.handleError(error)
         }
-
     }
     
     @MainActor
@@ -91,12 +85,36 @@ final class TabViewModel: ViewModel {
             handleError(error)
         }
     }
+    
+    @MainActor
+    func handleUserStateFromPush() async {
+        do {
+            state.isLoading = true
+            switch try await tabViewUseCase.getUserState() {
+            case .inProgress:
+                router.routeTo(.waiting)
+            case .canMake:
+                router.routeTo(.firstGen)
+            case .awaitUserVerification(let completePhotoEntity):
+                self.router.dismissSheet {
+                    self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))
+                }
+            case .canceled(let requestId):
+                await handleCanceledState(requestId: requestId)
+            case .error:
+                state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
+            }
+            state.isLoading = false
+        } catch(let error) {
+            handleError(error)
+        }
+    }
 
     @MainActor
     func handleCanceledState(requestId: Int) async {
         do {
             try await tabViewUseCase.checkCanceledImage(requestId: requestId)
-            state.showAlert = .photoRequestCanceled(action: {self.router.routeTo(.firstGen)})
+            state.showAlert = .photoRequestCanceled(action: { self.router.routeTo(.firstGen) })
         } catch(let error) {
             handleError(error)
         }

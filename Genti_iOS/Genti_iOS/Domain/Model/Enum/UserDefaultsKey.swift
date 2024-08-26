@@ -12,8 +12,9 @@ enum UserDefaultsKey: String {
     case isFirstGenerate
     case accessToken
     case refreshToken
+    case fcmToken
     case userRole
-    case showImage
+    case getPushFromBackground
     case loginType
 }
 

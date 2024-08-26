@@ -37,7 +37,6 @@ final class MainFeedViewModel: ViewModel {
     struct State {
         var feeds: [FeedEntity] = []
         var isLogoHidden: Bool = false
-        var isLoading: Bool = false
         var showAlert: AlertType? = nil
     }
 
@@ -54,7 +53,6 @@ final class MainFeedViewModel: ViewModel {
         switch input {
         case .viewWillAppear:
             Task { await fetchFeed() }
-            checkCompleteImageFromBackgroundNotification()
             checkUserFirstVisit()
         case .scroll(offset: let offset):
             handleScroll(offset: offset)
@@ -70,24 +68,13 @@ final class MainFeedViewModel: ViewModel {
     @MainActor
     func fetchFeed() async {
         do {
-            state.isLoading = true
             state.feeds = try await feedRepository.fetchFeeds()
-            state.isLoading = false
         } catch(let error) {
-            state.isLoading = false
             guard let error = error as? GentiError else {
                 state.showAlert = .reportUnknownedError(error: error, action: nil)
                 return
             }
             state.showAlert = .reportGentiError(error: error, action: nil)
-        }
-    }
-
-    func checkCompleteImageFromBackgroundNotification() {
-        guard let isShow = userDefaultsRepository.get(forKey: .showImage) as? Bool else { return }
-        if isShow {
-            router.routeTo(.completeMakePhoto(photoInfo: .init()))
-            userDefaultsRepository.remove(forKey: .showImage)
         }
     }
 

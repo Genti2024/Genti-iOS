@@ -32,11 +32,6 @@ struct MainFeedView: View {
             Color.backgroundWhite
                 .ignoresSafeArea()
         }
-        .overlay {
-            if viewModel.state.isLoading {
-                LoadingView()
-            }
-        }
         .onFirstAppear {
             self.viewModel.sendAction(.viewWillAppear)
         }
