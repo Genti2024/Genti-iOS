@@ -19,11 +19,11 @@ final class ImageDataTransferServiceImpl: ImageDataTransferService {
             requestOptions.isSynchronous = false
             requestOptions.deliveryMode = .highQualityFormat
             
-            PHImageManager.default().requestImageDataAndOrientation(for: asset, options: requestOptions) { (imageData, dataUTI, orientation, info) in
-                if let imageData = imageData {
+            PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: requestOptions) { image, info in
+                if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
                     continuation.resume(returning: imageData)
                 } else {
-                    continuation.resume(throwing: GentiError.clientError(code: "Unwrapping", message: "UIImage to Data변환 실패"))
+                    continuation.resume(throwing: GentiError.clientError(code: "Unwrapping", message: "UIImage to Data 변환 실패"))
                 }
             }
         }
