@@ -18,9 +18,15 @@ final class ImageDataTransferServiceImpl: ImageDataTransferService {
             let requestOptions = PHImageRequestOptions()
             requestOptions.isSynchronous = false
             requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.version = .current
+            requestOptions.isNetworkAccessAllowed = true
             
             PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: requestOptions) { image, info in
-                if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
+                guard let image = image else {
+                    continuation.resume(throwing: GentiError.clientError(code: "IMAGE", message: "추출할 수 없는 이미지 입니다"))
+                    return
+                }
+                if let imageData = image.jpegData(compressionQuality: 0.5) {
                     continuation.resume(returning: imageData)
                 } else {
                     continuation.resume(throwing: GentiError.clientError(code: "Unwrapping", message: "UIImage to Data 변환 실패"))
