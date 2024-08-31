@@ -4,6 +4,7 @@
 ```
 내 마음대로 표현하는, 하나뿐인 AI 사진 제작 서비스
 ```
+[앱스토어 링크](https://apps.apple.com/us/app/젠티-genti-내-마음대로-만드는-ai-사진/id6596739805)
 
 <br>
 
@@ -28,7 +29,7 @@
 <br>
 
 ## TECH STACK
-- swiftUI
+- swiftUI
 - ViewStateMVVM
 - swift concurrency
 - Alamofire
