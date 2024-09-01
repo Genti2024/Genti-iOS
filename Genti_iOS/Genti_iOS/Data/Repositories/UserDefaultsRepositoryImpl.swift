@@ -32,15 +32,22 @@ struct UserDefaultsRepositoryImpl: UserDefaultsRepository {
     
     
     func getToken() -> GentiTokenEntity {
-        guard let accessToken = self.get(forKey: .accessToken) as? String, let refreshToken = self.get(forKey: .refreshToken) as? String else {
-            return .init(accessToken: nil, refreshToken: nil)
+        guard let accessToken = self.get(forKey: .accessToken) as? String, let refreshToken = self.get(forKey: .refreshToken) as? String, let fcmToken = self.get(forKey: .fcmToken) as? String else {
+            return .init(accessToken: nil, refreshToken: nil, fcmToken: nil)
         }
-        return .init(accessToken: accessToken, refreshToken: refreshToken)
+        return .init(accessToken: accessToken, refreshToken: refreshToken, fcmToken: fcmToken)
     }
     
-    func setToken(token: GentiTokenEntity) {
-        self.set(to: token.accessToken, forKey: .accessToken)
-        self.set(to: token.refreshToken, forKey: .refreshToken)
+    func setAccessToken(token: String) {
+        self.set(to: token, forKey: .accessToken)
+    }
+    
+    func setRefreshToken(token: String) {
+        self.set(to: token, forKey: .refreshToken)
+    }
+    
+    func setFcmToken(token: String) {
+        self.set(to: token, forKey: .fcmToken)
     }
     
     func removeToken() {

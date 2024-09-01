@@ -28,7 +28,8 @@ final class LoginUserCaseImpl: LoginUseCase {
     @MainActor
     func loginWithKaKao() async throws -> LoginUserState {
         let token = try await tokenRepository.getKaKaoToken()
-        let result = try await loginRepository.kakaoLogin(token: token)
+        let fcmToken = try getFcmToken()
+        let result = try await loginRepository.kakaoLogin(token: token, fcmToken: fcmToken)
         self.setUserdefaults(from: result, loginType: .kakao)
         return result.userStatus
     }
@@ -36,7 +37,8 @@ final class LoginUserCaseImpl: LoginUseCase {
     @MainActor
     func loginWithApple(_ result: Result<ASAuthorization, any Error>) async throws -> LoginUserState {
         let token = try tokenRepository.getAppleToken(result)
-        let result = try await loginRepository.appleLogin(authorizationCode: token.authorizationCode, identityToken: token.identityToken)
+        let fcmToken = try getFcmToken()
+        let result = try await loginRepository.appleLogin(authorizationCode: token.authorizationCode, identityToken: token.identityToken, fcmToken: fcmToken)
         self.setUserdefaults(from: result, loginType: .apple)
         return result.userStatus
     }
@@ -44,6 +46,14 @@ final class LoginUserCaseImpl: LoginUseCase {
     private func setUserdefaults(from result: SocialLoginEntity, loginType: GentiSocialLoginType) {
         self.userdefaultRepository.setLoginType(type: loginType)
         self.userdefaultRepository.setUserRole(userRole: result.userStatus)
-        self.userdefaultRepository.setToken(token: .init(accessToken: result.accessToken, refreshToken: result.refreshToken))
+        self.userdefaultRepository.setAccessToken(token: result.accessToken)
+        self.userdefaultRepository.setRefreshToken(token: result.refreshToken)
+    }
+    
+    private func getFcmToken() throws -> String {
+        guard let fcmToken = userdefaultRepository.get(forKey: .fcmToken) as? String else {
+            throw GentiError.tokenError(code: "FCMTOKEN", message: "fcmToken이 local DB에 없습니다")
+        }
+        return fcmToken
     }
 }

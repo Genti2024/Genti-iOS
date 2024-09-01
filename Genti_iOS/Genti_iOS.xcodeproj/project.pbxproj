@@ -41,7 +41,6 @@
 		C017C3F52C1C39D0009924C9 /* Genti_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3F42C1C39D0009924C9 /* Genti_iOSTests.swift */; };
 		C017C3FF2C1C39D0009924C9 /* Genti_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C3FE2C1C39D0009924C9 /* Genti_iOSUITests.swift */; };
 		C017C4012C1C39D0009924C9 /* Genti_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4002C1C39D0009924C9 /* Genti_iOSUITestsLaunchTests.swift */; };
-		C017C4172C1C3A35009924C9 /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C017C40E2C1C3A35009924C9 /* ProgressLottie.json */; };
 		C017C4182C1C3A35009924C9 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C017C40F2C1C3A35009924C9 /* Pretendard-Bold.otf */; };
 		C017C4192C1C3A35009924C9 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C017C4102C1C3A35009924C9 /* Pretendard-Light.otf */; };
 		C017C41A2C1C3A35009924C9 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C017C4112C1C3A35009924C9 /* Pretendard-Medium.otf */; };
@@ -97,6 +96,8 @@
 		C017C4B22C1C3AA3009924C9 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4742C1C3AA3009924C9 /* View+Ext.swift */; };
 		C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4762C1C3AA3009924C9 /* LoginView.swift */; };
 		C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */; };
+		C0192F232C7C17AC00EB9D7D /* imageLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = C0192F222C7C17AC00EB9D7D /* imageLoading.json */; };
+		C0192F252C7C180F00EB9D7D /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0192F242C7C180F00EB9D7D /* ProgressLottie.json */; };
 		C0275D832C59EA8A00A68D31 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */; };
 		C0275D862C59F0B500A68D31 /* SplashUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D852C59F0B500A68D31 /* SplashUseCase.swift */; };
 		C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02843542C314C1E00B84566 /* FeedRouter.swift */; };
@@ -158,13 +159,15 @@
 		C099C3532C1C3C7D0006EF83 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3522C1C3C7D0006EF83 /* SDWebImageSwiftUI */; };
 		C099C3562C1C3C8B0006EF83 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = C099C3552C1C3C8B0006EF83 /* SwiftfulUI */; };
 		C099C35D2C1C3DC00006EF83 /* MainRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C35C2C1C3DC00006EF83 /* MainRoute.swift */; };
-		C099C35F2C1C408B0006EF83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */; };
 		C09A63F42C3E25D800FAB87F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C09A63F32C3E25D800FAB87F /* Lottie */; };
 		C09A63F72C3E25EA00FAB87F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C09A63F62C3E25EA00FAB87F /* Alamofire */; };
 		C0A7C6442C683F8F00FAA7F1 /* SplashLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0A7C6432C683F8E00FAA7F1 /* SplashLottie.json */; };
 		C0A7C6462C68413200FAA7F1 /* RequestWaitingLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0A7C6452C68413200FAA7F1 /* RequestWaitingLottie.json */; };
 		C0A7C6482C68415D00FAA7F1 /* RequestWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A7C6472C68415D00FAA7F1 /* RequestWaitingView.swift */; };
 		C0A7C64C2C68533400FAA7F1 /* GentiBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A7C64B2C68533400FAA7F1 /* GentiBorderButton.swift */; };
+		C0B192622C7857F200D198A2 /* NotificationPermissionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B192612C7857F200D198A2 /* NotificationPermissionCheck.swift */; };
+		C0B192642C79925A00D198A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0B192632C79925A00D198A2 /* GoogleService-Info.plist */; };
+		C0B192662C7C073800D198A2 /* PushAuthorizationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B192652C7C073800D198A2 /* PushAuthorizationPopup.swift */; };
 		C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E5D2C23C57C0071C3CD /* RequestImageData.swift */; };
 		C0B80E602C23C59B0071C3CD /* FirstGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E5F2C23C59B0071C3CD /* FirstGeneratorViewModel.swift */; };
 		C0B80E622C23C5AE0071C3CD /* SecondGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */; };
@@ -251,7 +254,6 @@
 		C017C3FA2C1C39D0009924C9 /* Genti_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Genti_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C017C3FE2C1C39D0009924C9 /* Genti_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genti_iOSUITests.swift; sourceTree = "<group>"; };
 		C017C4002C1C39D0009924C9 /* Genti_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genti_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C017C40E2C1C3A35009924C9 /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 		C017C40F2C1C3A35009924C9 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		C017C4102C1C3A35009924C9 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C017C4112C1C3A35009924C9 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -307,6 +309,8 @@
 		C017C4742C1C3AA3009924C9 /* View+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		C017C4762C1C3AA3009924C9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C0192F222C7C17AC00EB9D7D /* imageLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = imageLoading.json; sourceTree = "<group>"; };
+		C0192F242C7C180F00EB9D7D /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 		C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		C0275D852C59F0B500A68D31 /* SplashUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUseCase.swift; sourceTree = "<group>"; };
 		C02843542C314C1E00B84566 /* FeedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
@@ -360,12 +364,14 @@
 		C09596862C4DED5400FC5ECC /* RatingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPopup.swift; sourceTree = "<group>"; };
 		C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOnboardingPopup.swift; sourceTree = "<group>"; };
 		C099C35C2C1C3DC00006EF83 /* MainRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoute.swift; sourceTree = "<group>"; };
-		C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C099C3602C1C44C30006EF83 /* Genti_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Genti_iOS.entitlements; sourceTree = "<group>"; };
 		C0A7C6432C683F8E00FAA7F1 /* SplashLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashLottie.json; sourceTree = "<group>"; };
 		C0A7C6452C68413200FAA7F1 /* RequestWaitingLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RequestWaitingLottie.json; sourceTree = "<group>"; };
 		C0A7C6472C68415D00FAA7F1 /* RequestWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestWaitingView.swift; sourceTree = "<group>"; };
 		C0A7C64B2C68533400FAA7F1 /* GentiBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiBorderButton.swift; sourceTree = "<group>"; };
+		C0B192612C7857F200D198A2 /* NotificationPermissionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionCheck.swift; sourceTree = "<group>"; };
+		C0B192632C79925A00D198A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0B192652C7C073800D198A2 /* PushAuthorizationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAuthorizationPopup.swift; sourceTree = "<group>"; };
 		C0B80E5D2C23C57C0071C3CD /* RequestImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestImageData.swift; sourceTree = "<group>"; };
 		C0B80E5F2C23C59B0071C3CD /* FirstGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstGeneratorViewModel.swift; sourceTree = "<group>"; };
 		C0B80E612C23C5AE0071C3CD /* SecondGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondGeneratorViewModel.swift; sourceTree = "<group>"; };
@@ -471,7 +477,7 @@
 				C017C4792C1C3AA3009924C9 /* Preview Content */,
 				C017C41E2C1C3A3A009924C9 /* DesignSystem */,
 				C017C3EB2C1C39D0009924C9 /* Info.plist */,
-				C099C35E2C1C408B0006EF83 /* GoogleService-Info.plist */,
+				C0B192632C79925A00D198A2 /* GoogleService-Info.plist */,
 			);
 			path = Genti_iOS;
 			sourceTree = "<group>";
@@ -702,6 +708,9 @@
 		C04967A62C64905A0097C732 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */,
+				C09596862C4DED5400FC5ECC /* RatingPopup.swift */,
+				C0B192652C7C073800D198A2 /* PushAuthorizationPopup.swift */,
 				C017C4242C1C3AA3009924C9 /* RatingAlertView.swift */,
 			);
 			path = View;
@@ -855,6 +864,7 @@
 		C04967B62C6491FC0097C732 /* Instructure */ = {
 			isa = PBXGroup;
 			children = (
+				C0B192602C7857E800D198A2 /* SharedStruct */,
 				C0DE626E2C6C4562005937B0 /* EventLog */,
 				C017C45C2C1C3AA3009924C9 /* Constants.swift */,
 				C04967B82C64920C0097C732 /* SharedProtocol */,
@@ -1142,8 +1152,6 @@
 			isa = PBXGroup;
 			children = (
 				C04967D22C64982A0097C732 /* UserRequestCancelState.swift */,
-				C09596882C4DED6800FC5ECC /* SelectOnboardingPopup.swift */,
-				C09596862C4DED5400FC5ECC /* RatingPopup.swift */,
 				C0B80E5D2C23C57C0071C3CD /* RequestImageData.swift */,
 				C017C4292C1C3AA3009924C9 /* Caution.swift */,
 				C017C4422C1C3AA3009924C9 /* ImageAsset.swift */,
@@ -1164,9 +1172,10 @@
 		C0A7C6492C68416500FAA7F1 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				C0192F222C7C17AC00EB9D7D /* imageLoading.json */,
 				C0A7C6432C683F8E00FAA7F1 /* SplashLottie.json */,
 				C0A7C6452C68413200FAA7F1 /* RequestWaitingLottie.json */,
-				C017C40E2C1C3A35009924C9 /* ProgressLottie.json */,
+				C0192F242C7C180F00EB9D7D /* ProgressLottie.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1178,6 +1187,14 @@
 				C0A7C64B2C68533400FAA7F1 /* GentiBorderButton.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		C0B192602C7857E800D198A2 /* SharedStruct */ = {
+			isa = PBXGroup;
+			children = (
+				C0B192612C7857F200D198A2 /* NotificationPermissionCheck.swift */,
+			);
+			path = SharedStruct;
 			sourceTree = "<group>";
 		};
 		C0D74A402C1EA66B00A45371 /* Router */ = {
@@ -1336,15 +1353,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C017C4172C1C3A35009924C9 /* ProgressLottie.json in Resources */,
+				C0192F252C7C180F00EB9D7D /* ProgressLottie.json in Resources */,
 				C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */,
 				C017C4182C1C3A35009924C9 /* Pretendard-Bold.otf in Resources */,
 				C0A7C6442C683F8F00FAA7F1 /* SplashLottie.json in Resources */,
 				C017C3E72C1C39D0009924C9 /* Assets.xcassets in Resources */,
+				C0B192642C79925A00D198A2 /* GoogleService-Info.plist in Resources */,
 				C017C41C2C1C3A35009924C9 /* Pretendard-SemiBold.otf in Resources */,
 				C017C4192C1C3A35009924C9 /* Pretendard-Light.otf in Resources */,
+				C0192F232C7C17AC00EB9D7D /* imageLoading.json in Resources */,
 				C017C41B2C1C3A35009924C9 /* Pretendard-Regular.otf in Resources */,
-				C099C35F2C1C408B0006EF83 /* GoogleService-Info.plist in Resources */,
 				C017C3EA2C1C39D0009924C9 /* Base in Resources */,
 				C0A7C6462C68413200FAA7F1 /* RequestWaitingLottie.json in Resources */,
 				C017C41A2C1C3A35009924C9 /* Pretendard-Medium.otf in Resources */,
@@ -1502,6 +1520,7 @@
 				C0A7C6482C68415D00FAA7F1 /* RequestWaitingView.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,
 				C017C4952C1C3AA3009924C9 /* ImagePickerViewModel.swift in Sources */,
+				C0B192622C7857F200D198A2 /* NotificationPermissionCheck.swift in Sources */,
 				C08BB5B32C3E312B00D4CFA9 /* UserDefaultsRepository.swift in Sources */,
 				C017C4A62C1C3AA3009924C9 /* LoadingView.swift in Sources */,
 				C08BB5BA2C3E8B3E00D4CFA9 /* LottieView+Ext.swift in Sources */,
@@ -1523,6 +1542,7 @@
 				C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */,
 				C0DE62702C6C4576005937B0 /* EventLogManager.swift in Sources */,
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,
+				C0B192662C7C073800D198A2 /* PushAuthorizationPopup.swift in Sources */,
 				C0113D5B2C37C1A700071BF6 /* HapticRepositoryImpl.swift in Sources */,
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,
 				C0BCC4AD2C58842C009C89C4 /* SocialLoginEntity.swift in Sources */,
@@ -1707,15 +1727,15 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Genti;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진첩에추가합니다";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩에접근합니다";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "생성된 사진을 앨범에 저장하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "‘나만의 AI사진 생성 기능’을 사용하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1725,7 +1745,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.iOS.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1736,7 +1756,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1749,15 +1769,15 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z225784MRD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Genti;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진첩에추가합니다";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진첩에접근합니다";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "생성된 사진을 앨범에 저장하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "‘나만의 AI사진 생성 기능’을 사용하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1767,7 +1787,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.iOS.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1778,7 +1798,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct GenerateRequestCompleteView: View {
     @Bindable var router: Router<MainRoute>
-
+    @State private var showPushAuthorizationPopUp: Bool = false
+    @State private var alertType: AlertType? = nil
     var body: some View {
         ZStack {
             
@@ -56,17 +57,33 @@ struct GenerateRequestCompleteView: View {
                 
                 GentiPrimaryButton(title: "피드로 돌아가기", isActive: true) {
                     EventLogManager.shared.logEvent(.clickButton(page: .requestCompleted, buttonName: "gomain"))
-                    router.dismissSheet()
+                    NotificationPermissionCheck.check(completion: { result in
+                        if result {
+                            self.router.dismissSheet()
+                        } else {
+                            self.showPushAuthorizationPopUp = true
+                        }
+                    })
                 }
                 .padding(.bottom, 30)
             } //:VSTACK
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)
+        .addCustomPopup(isPresented: $showPushAuthorizationPopUp, popupType: .pushAuthorization)
+        .customAlert(alertType: $alertType)
+        .onReceive(NotificationCenter.default.publisher(for: .init("PopupDismiss"))) { _ in
+            self.router.dismissSheet()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init("goToSetting"))) { _ in
+            self.alertType = .pushAuthorization(action: { self.router.dismissSheet() })
+        }
+        
     }
 }
 
 #Preview {
     GenerateRequestCompleteView(router: .init())
 }
+
 
 

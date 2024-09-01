@@ -13,7 +13,7 @@ final class APIRetryInterceptor: RequestInterceptor {
     let userdefaultRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        guard urlRequest.url?.absoluteString.hasPrefix("https://dev.genti.kr") == true,
+        guard urlRequest.url?.absoluteString.hasPrefix(Constants.baseURL) == true,
               let accessToken = userdefaultRepository.get(forKey: .accessToken) as? String else {
             completion(.success(urlRequest))
             return

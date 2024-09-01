@@ -11,8 +11,8 @@ import Alamofire
 
 enum AuthRouter: URLRequestConvertible {
     
-    case kakaoLogin(token: String)
-    case appleLogin(authorizationCode: String, identityToken: String)
+    case kakaoLogin(token: String, fcmToken: String)
+    case appleLogin(authorizationCode: String, identityToken: String, fcmToken: String)
     case signIn(sex: String, birthYear: String)
     case reissueToken(token: GentiTokenEntity)
     case logout
@@ -29,7 +29,7 @@ enum AuthRouter: URLRequestConvertible {
     }
     
     var baseURL: String {
-        return "https://dev.genti.kr"
+        return Constants.baseURL
     }
     
     var path: String {
@@ -55,14 +55,16 @@ enum AuthRouter: URLRequestConvertible {
         urlRequest.method = method
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         switch self {
-        case .kakaoLogin(let token):
+        case .kakaoLogin(let token, let fcmToken):
             var parameters: [String: Any] = [:]
             parameters["accessToken"] = token
+            parameters["fcmToken"] = fcmToken
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-        case .appleLogin(let authCode, let identityToken):
+        case .appleLogin(let authCode, let identityToken, let fcmToken):
             var parameters: [String: Any] = [:]
             parameters["authorizationCode"] = authCode
             parameters["identityToken"] = identityToken
+            parameters["fcmToken"] = fcmToken
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         case .reissueToken(let token):
             var parameters: [String: Any] = [:]

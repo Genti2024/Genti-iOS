@@ -19,13 +19,13 @@ final class AuthRepositoryImpl: AuthRepository {
         try await requestService.fetchResponse(for: AuthRouter.resign)
     }
     
-    func kakaoLogin(token: String) async throws -> SocialLoginEntity {
-        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.kakaoLogin(token: token))
+    func kakaoLogin(token: String, fcmToken: String) async throws -> SocialLoginEntity {
+        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.kakaoLogin(token: token, fcmToken: fcmToken))
         return dto.toEntity
     }
     
-    func appleLogin(authorizationCode: String, identityToken: String) async throws -> SocialLoginEntity {
-        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.appleLogin(authorizationCode: authorizationCode, identityToken: identityToken))
+    func appleLogin(authorizationCode: String, identityToken: String, fcmToken: String) async throws -> SocialLoginEntity {
+        let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.appleLogin(authorizationCode: authorizationCode, identityToken: identityToken, fcmToken: fcmToken))
         return dto.toEntity
     }
     

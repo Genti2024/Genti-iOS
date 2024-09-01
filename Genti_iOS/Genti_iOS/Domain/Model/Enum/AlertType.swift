@@ -20,6 +20,7 @@ enum AlertType {
     case albumAuthorization
     case photoCompleted(action: AlertAction?)
     case photoRequestCanceled(action: AlertAction?)
+    case pushAuthorization(action: AlertAction?)
     
     var data: Alert {
         switch self {
@@ -62,10 +63,16 @@ enum AlertType {
             return .init(title: "사진이 완성되었어요!",
                          message: "다른 사진을 만들기 전에\n완성된 사진을 확인할까요?",
                          actions: [.init(title: "사진 확인하기", action: action)])
-        case .photoRequestCanceled(action: let action):
+        case .photoRequestCanceled(let action):
             return .init(title: "정말 죄송합니다",
                          message: "서버에 오류가 발생해서\n사진이 만들어지지 않았어요",
                          actions: [.init(title: "사진 다시 생성하기", action: action)])
+        case .pushAuthorization(let action):
+            return .init(title: "알림접근이 필요해요",
+                         message: "나만의 사진을 만들기위해서는 알림권한이 필요해요",
+                         actions: [.init(title: "설정으로가기", action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { _ in
+                action!()
+            } }), .init(title: "괜찮아요", style: .cancel, action: action)])
         }
     }
 }

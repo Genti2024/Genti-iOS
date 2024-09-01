@@ -10,7 +10,9 @@ import Foundation
 protocol UserDefaultsRepository {
     var isFirstVisitApp: Bool { get }
     var isFirstGenerate: Bool { get }
-    func setToken(token: GentiTokenEntity)
+    func setAccessToken(token: String)
+    func setRefreshToken(token: String)
+    func setFcmToken(token: String)
     func getToken() -> GentiTokenEntity
     func removeToken()
     func setUserRole(userRole: LoginUserState)

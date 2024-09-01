@@ -57,14 +57,19 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         }
     }
     
+    
+
+    
     @MainActor
     func completeImageRequest() async {
         do {
             state.isLoading = true
             try await imageGenerateUseCase.requestImage(from: self.requestData())
             EventLogManager.shared.logEvent(.clickButton(page: .thirdGenerator, buttonName: "createpic"))
+            EventLogManager.shared.addUserPropertyCount(to: .createNewPhoto)
             state.isLoading = false
             router.routeTo(.requestCompleted)
+            
         } catch(let error) {
             state.isLoading = false
             guard let error = error as? GentiError else {

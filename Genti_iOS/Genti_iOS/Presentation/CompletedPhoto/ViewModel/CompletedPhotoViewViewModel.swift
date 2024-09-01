@@ -80,6 +80,7 @@ final class CompletedPhotoViewModel: ViewModel {
         do {
             let completedPhoto = await completedPhotoUseCase.loadImage(url: photoInfo.imageUrlString)
             state.image = completedPhoto
+            EventLogManager.shared.logEvent(.seeCompletePhoto)
         }
     }
 

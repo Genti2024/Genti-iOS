@@ -15,4 +15,5 @@ protocol UserRepository {
     func getUserState() async throws -> UserState
     func checkCompletedImage(responeId: Int) async throws
     func checkCanceledImage(requestId: Int) async throws
+    func checkUserHasCanceledOrAwaitedRequest() async throws -> Bool
 }

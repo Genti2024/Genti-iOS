@@ -12,13 +12,20 @@ struct SignInView: View {
     @State var viewModel: SignInViewModel
     
     var body: some View {
-        VStack(spacing: 62) {
+        VStack(spacing: 0) {
             headerView()
             
             VStack(spacing: 59) {
                 genderSelectView()
                 birthYearSelectView()
             }
+            .padding(.top, 62)
+
+            Spacer()
+            GentiPrimaryButton(title: "입력 완료", isActive: viewModel.isActive) {
+                viewModel.sendAction(.completeButtonTap)
+            }
+            .padding(.bottom, 18)
         } //:VSTACK
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(
@@ -80,12 +87,6 @@ struct SignInView: View {
 
             if self.viewModel.state.showPicker {
                 birthYearPicker()
-            }
-            
-            Spacer(minLength: 10)
-            
-            GentiPrimaryButton(title: "입력 완료", isActive: viewModel.isActive) {
-                viewModel.sendAction(.completeButtonTap)
             }
         } //:VSTACK
     }

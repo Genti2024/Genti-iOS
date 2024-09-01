@@ -23,7 +23,7 @@ enum GeneratorRouter: URLRequestConvertible {
     }
     
     var baseURL: String {
-        return "https://dev.genti.kr"
+        return Constants.baseURL
     }
     
     var path: String {

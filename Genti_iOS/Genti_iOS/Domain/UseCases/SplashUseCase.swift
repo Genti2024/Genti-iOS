@@ -30,7 +30,11 @@ final class SplashUseCaseImpl: SplashUseCase {
             guard let accessToken = token.accessToken, let refreshToken = token.refreshToken else { return false }
             do {
                 let reissuedToken = try await authRepository.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken))
-                userdefaultRepository.setToken(token: reissuedToken)
+                guard let accessToken = reissuedToken.accessToken, let refreshToken = reissuedToken.refreshToken else {
+                    return false
+                }
+                userdefaultRepository.setAccessToken(token: accessToken)
+                userdefaultRepository.setRefreshToken(token: refreshToken)
                 return true
             } catch {
                 return false

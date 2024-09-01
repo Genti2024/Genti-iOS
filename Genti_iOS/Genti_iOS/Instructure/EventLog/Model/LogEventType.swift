@@ -26,6 +26,8 @@ enum LogEventType {
     case skipPhotoRating
     case logout
     case resign
+    case seeCompletePhoto
+    case pushNotificationTap(Bool)
     
     var eventName: String {
         switch self {
@@ -65,6 +67,10 @@ enum LogEventType {
             return "log_out"
         case .resign:
             return "sign_out"
+        case .seeCompletePhoto:
+            return "view_picdone"
+        case .pushNotificationTap:
+            return "click_push_notification"
         }
     }
     
@@ -74,6 +80,8 @@ enum LogEventType {
             return ["signup_method": type.rawValue]
         case .clickButton(let page, let buttonName):
             return ["page_name": page.pageName, "button_name": buttonName]
+        case .pushNotificationTap(let success):
+            return ["push_type": success ? "creating_success" : "creating_fail"]
         default:
             return nil
         }

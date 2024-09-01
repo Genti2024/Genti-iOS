@@ -10,8 +10,7 @@ import Foundation
 protocol TabViewUseCase {
     func getUserState() async throws -> UserState
     func checkCanceledImage(requestId: Int) async throws
-    func hasCanceledCase() async throws -> UserRequestCancelState
-    func hasNonCheckCompletedImageFromPush() -> Bool
+    func showCompleteStateWhenUserInitalAccess() async throws -> Bool
 }
 
 final class TabViewUseCaseImpl: TabViewUseCase {
@@ -28,10 +27,10 @@ final class TabViewUseCaseImpl: TabViewUseCase {
         return try await userRepository.getUserState()
     }
     
-    func hasNonCheckCompletedImageFromPush() -> Bool {
-        guard let hasBackgroundNotification = userdefaultRepository.get(forKey: .showImage) as? Bool else { return false }
-        userdefaultRepository.remove(forKey: .showImage)
-        return hasBackgroundNotification
+    func showCompleteStateWhenUserInitalAccess() async throws -> Bool {
+        let hasCanceledOrAwaitedRequest = try await userRepository.checkUserHasCanceledOrAwaitedRequest()
+        let hasPushFromBackground = self.hasPushFromBackground()
+        return hasCanceledOrAwaitedRequest || hasPushFromBackground
     }
     
     @MainActor
@@ -40,14 +39,12 @@ final class TabViewUseCaseImpl: TabViewUseCase {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "profileReload"), object: nil)
     }
     
-    func hasCanceledCase() async throws -> UserRequestCancelState {
-        let userState = try await userRepository.getUserState()
-        switch userState {
-        case .canceled(let requestId):
-            return .init(canceled: true, requestId: requestId)
-        default:
-            return .init(canceled: false, requestId: nil)
+    private func hasPushFromBackground() -> Bool {
+        guard let hasPushFromBackground = userdefaultRepository.get(forKey: .getPushFromBackground) as? Bool else {
+            return false
         }
+        userdefaultRepository.remove(forKey: .getPushFromBackground)
+        return hasPushFromBackground
     }
 }
 
