@@ -1,159 +1,126 @@
 //
 //  ImagePickerViewModel.swift
-//  Genti
+//  Genti_iOS
 //
-//  Created by uiskim on 4/28/24.
+//  Created by uiskim on 9/2/24.
 //
 
 import SwiftUI
 import Combine
 import PhotosUI
 
-@Observable 
+@Observable
 final class ImagePickerViewModel: ViewModel {
-
+    
     struct State {
-        var fetchedImages: [ImageAsset] = []
-        var selectedImages: [ImageAsset] = []
-        var isReachLimit: Bool = false
-        var isLoading: Bool = false
-        var currentIndex: Int = 0
-        var contentSize: CGFloat = 0
+        var albums: [Album] = []
+        var selectedAlbum: Album? = nil
+        var showAlbumList: Bool = false
+        var fetchedImages: [PHAsset] = []
+        var selectedImages: [PHAsset] = []
     }
     
     enum Input {
-        case scroll(CGFloat)
-        case selectImage(ImageAsset)
-        case readContentHight(CGFloat)
-        case xmarkTap
+        case viewWillAppear
+        case selectAlbum(Album)
+        case selectImage(PHAsset)
         case addImageButtonTap
-        case viewDidAppear
+        case xmarkTap
+    }
+    
+    private let photoUseCase: PhotoUseCaseImpl
+    let limit: Int
+    private let generatorViewModel: GetImageFromImagePicker
+    
+    var reachImageLimit: Bool {
+        return state.selectedImages.count == limit
+    }
+    
+    var router: Router<MainRoute>
+    var state: State
+    
+    init(router: Router<MainRoute>, limit: Int, generatorViewModel: GetImageFromImagePicker, photoUseCase: PhotoUseCaseImpl) {
+        self.router = router
+        self.limit = limit
+        self.generatorViewModel = generatorViewModel
+        self.photoUseCase = photoUseCase
+        self.state = .init()
     }
     
     func sendAction(_ input: Input) {
         switch input {
-        case .selectImage(let imageAsset):
-            update(for: imageAsset)
-            state.isReachLimit = state.selectedImages.count == limit
-        case .readContentHight(let height):
-            if state.contentSize != height { state.contentSize = height }
-        case .scroll(let originY):
-            if isReachBottom(from: originY) { fetch() }
+        case .viewWillAppear:
+            handleViewWillAppear()
+        case .selectAlbum(let album):
+            handleSelectAlbum(album)
+        case .selectImage(let image):
+            handleSelectImage(image)
+        case .addImageButtonTap:
+            handleAddImageButtonTap()
         case .xmarkTap:
             router.dismissSheet()
-        case .addImageButtonTap:
-            generatorViewModel.setReferenceImageAssets(assets: state.selectedImages)
-            if limit == 3 { EventLogManager.shared.logEvent(.addThreeUserPickture) }
-            router.dismissSheet()
-        case .viewDidAppear:
-            state.selectedImages.removeAll()
         }
     }
     
-    var generatorViewModel: GetImageFromImagePicker
-    var router: Router<MainRoute>
-    var state: ImagePickerViewModel.State
-    let limit: Int
-
-    private let albumRepository: AlbumRepository
-    var scrollViewHeight: CGFloat = 0
-
-    init(generatorViewModel: GetImageFromImagePicker, router: Router<MainRoute>, limit: Int, albumRepository: AlbumRepository) {
-        self.generatorViewModel = generatorViewModel
-        self.router = router
-        self.limit = limit
-        self.albumRepository = albumRepository
-        self.state = .init()
-    }
     
-    /// 이미 선택된 이미지들중 인자로 들어온 이미지가 몇번째 이미지인지를 반환합니다
-    /// - Parameter imageAsset: 인덱스를 알고싶은 이미지
-    /// - Returns: 인덱스를반환합니다(없다면 nil을 반환합니다)
-    func index(of imageAsset: ImageAsset) -> Int? {
-        state.selectedImages.firstIndex { $0.id == imageAsset.id }
-    }
-    
-    /// 이미 선택된 이미지들중 인자로 들어온 이미지의 포함여부를 반환합니다
-    /// - Parameter imageAsset: 선택된이미지들중에 포함되어있는지를 알고싶은 이미지
-    /// - Returns: 포함여부를 반환합니다
-    func containsInSelectedImages(_ imageAsset: ImageAsset) -> Bool {
-        if let _ = state.selectedImages.firstIndex(where: { $0.id == imageAsset.id }) {
-            return true
-        }
-        return false
-    }
-    
-    /// pagination으로 인한 추가 이미지를 가져옵니다
-    /// 이미지를 가지고 오는 동안에는 이미지를 가져오는 동작을 block합니다(순식간에 여러번호출되는경우를 예방)
-    private func fetch() {
-        defer { state.isLoading = false }
-        guard !state.isLoading else { return }
-        state.isLoading = true
-        appendImages()
-    }
-    
-    /// 이미지를 추가합니다
-    /// 현재 이미지 pagination을 구현해놨기때문에 이미지가 계속해서 추가되어야합니다 UseCase에서 이미지를 받아와서 fetch된이미지에추가하고 인덱스값을 갱신해줍니다
-    private func appendImages() {
-        guard let newImages = self.getImageAsset(from: state.currentIndex) else { return }
-        state.fetchedImages.append(contentsOf: newImages)
-        state.currentIndex += newImages.count
-    }
-    
-    /// 앨범에서 Pagination을 구현하기위한 indexset을 구합니다
-    /// - Parameter currentIndex: 현재 이미지의 인덱스
-    /// - Returns:
-    func getImageAsset(from currentIndex: Int) -> [ImageAsset]? {
-        guard let indexSet = getNextIndexSet(currentIndex: currentIndex, quantity: 50) else { return nil }
-        return albumRepository.getImageAsset(from: indexSet)
-    }
-    
-    /// pagination으로 인해 추가로 가져올 이미지들의 IndexSet을 구합니다
-    /// - Parameters:
-    ///   - currentIndex: 현재까지 가져온 이미지의 갯수
-    ///   - quantity: 한번에 가져올 이미지의 갯수
-    /// - Returns: 추가적으로 가져올 이미지의 IndexSet
-    private func getNextIndexSet(currentIndex: Int, quantity: Int) -> IndexSet? {
-        let endIndex = min(currentIndex + quantity, albumRepository.numberOfImage)
-        guard currentIndex < endIndex else { return nil }
-        return IndexSet(currentIndex..<endIndex)
-    }
-    
-    /// 앨범이미지를 선택합니다
-    /// - Parameter imageAsset: 선택한 이미지에셋
-    /// 만약에 선택한 이미지가 이미 선택된이미지에 있는이미지라면 -> 선택해제(removeImage(at:_)))
-    /// 만약에 선택한 이미지가 선택되지 않은 이미지라면 -> 선택(addImage())
-    private func update(for imageAsset: ImageAsset) {
-        if let index = index(of: imageAsset) {
-            deSelect(at: index)
-        } else {
-            add(imageAsset)
+    /// view가 appear되면 실행되는 메서드
+    /// album목록을 가져오고 앨범이 1개라도 있으면 유저가 기본으로 보는 앨범을 해당 앨범으로 설정해둔다
+    private func handleViewWillAppear() {
+        state.albums = photoUseCase.getAlbums()
+        if let firstAlbum = state.albums.first {
+            setAlbum(album: firstAlbum)
         }
     }
-
-    /// 선택된 이미지를 선택해제합니다
-    /// - Parameter index: 이미선택된이미지들중에서 몇번째이미지지인지
-    /// 선택된이미지에는 몇번째 선택한이미지인지를 UI로 보여줘야하기때문에 123에서 2번째 이미지를 선택해제하면 3이 2가되야합니다
-    private func deSelect(at index: Int) {
-        state.selectedImages.remove(at: index)
-        for index in state.selectedImages.indices {
-            state.selectedImages[index].assetIndex = index
-        }
-    }
-
-    /// 이미지를 선택합니다
-    /// - Parameter imageAsset: 선택된 이미지
-    private func add(_ imageAsset: ImageAsset) {
-        guard !state.isReachLimit else { return }
-        var newAsset = imageAsset
-        newAsset.assetIndex = state.selectedImages.count
-        state.selectedImages.append(newAsset)
+    
+    /// 앨범list에서 하나의 앨범을 선택하면 실행되는 메서드
+    /// - Parameter album: 유저가 선택한 앨범
+    /// 선택한 앨범을 해당 앨범으로 설정해고
+    /// setAlbum(albume:_)을 실행해 해당앨범을 선택했을때 앨범에 있는 이미지들을 유저가 볼수있게 처리한다
+    /// 유저가 앨범을 선택했다면 앨범리스트를 보여줄필요가없으니 flag를 toggle로(false) 처리한다
+    private func handleSelectAlbum(_ album: Album) {
+        state.selectedAlbum = album
+        setAlbum(album: album)
+        state.showAlbumList.toggle()
     }
     
-    /// scrollview가 맨 아래에 도달했는지를 판단합니다
-    /// - Parameter originY: 현재 scrollview의 originY좌표
-    /// - Returns: 바닥에 도달했는지안했는지
-    private func isReachBottom(from originY: CGFloat) -> Bool {
-        return scrollViewHeight > state.contentSize + originY
+    /// 유저가 앨범의 이미지를 선택하면 실행되는 메서드
+    /// - Parameter image: 유저가 선택한 이미지의 meta data(PHAsset)
+    /// 이미 선택된 이미지를 다시선택했다면 -> 선택해제
+    /// 만약에 선택가능한 최대갯수(limit)에 도달하지 않았을때만 선택된 이미지에 유저가 선택한 이미지 추가
+    private func handleSelectImage(_ image: PHAsset) {
+        if let index = state.selectedImages.firstIndex(of: image) {
+            state.selectedImages.remove(at: index)
+        } else if state.selectedImages.count < limit {
+            state.selectedImages.append(image)
+        }
+    }
+    
+    // MARK: - 확인
+    /// 유저가 이미지 선택을 완료하면 실행되는 메서드
+    /// 데이터를 전달하는 방식을 reactorkit의 global state등으로 변경할 필요성을 느낌(추후작업)
+    /// PHAsset을 굳이 uuid가 있는 ImagAsset으로 바꿀필요가있을까...?
+    /// forEach때문에 설정하긴했는데 identifiable이 아니더라도 \.self로 해도 큰문제는 없을거같음
+    private func handleAddImageButtonTap() {
+        let imageAssets = state.selectedImages.map { ImageAsset(asset: $0) }
+        generatorViewModel.setReferenceImageAssets(assets: imageAssets)
+        logEvent()
+        router.dismissSheet()
+    }
+    
+    
+    /// 앨범 list에서 하나의 앨범을 선택하면 실행되는 메서드
+    /// - Parameter album: 유저가 선택한 앨범
+    /// 선택된 앨범에 해당앨범을 저장
+    /// 해당 앨범의 phasset을 usecase로부터 받아와서 fetchedImage(앨범의이미지)에 넣어줌
+    private func setAlbum(album: Album) {
+        state.selectedAlbum = album
+        state.fetchedImages = photoUseCase.getPhotos(at: album)
+    }
+    
+    /// 만약에 유저가 이미지를 3장선택하고 완료버튼을 눌렀는지에대한 데이터가 기획측에서 필요하다해서 넣은 log
+    private func logEvent() {
+        if limit == 3 {
+            EventLogManager.shared.logEvent(.addThreeUserPickture)
+        }
     }
 }

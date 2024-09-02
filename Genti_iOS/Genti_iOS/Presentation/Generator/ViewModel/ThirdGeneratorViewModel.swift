@@ -57,9 +57,6 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         }
     }
     
-    
-
-    
     @MainActor
     func completeImageRequest() async {
         do {
