@@ -23,7 +23,6 @@ final class ImageGenerateRepositoryImpl: ImageGenerateRepository {
     func getS3Key(from phAsset: PHAsset?) async throws -> String? {
         guard let phAsset = phAsset else { return nil }
         let fileName = phAsset.value(forKey: "filename") as! String
-//        let fileName = UUID().uuidString + ".JPG"
         let response: GetUploadImageUrlDTO = try await self.requsetService.fetchResponse(for: GeneratorRouter.getPresignedUrl(fileName: fileName))
         return try await uploadS3(dto: response, phAsset: phAsset)
     }

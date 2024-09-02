@@ -2,12 +2,13 @@
 //  AlbumRepository.swift
 //  Genti_iOS
 //
-//  Created by uiskim on 6/21/24.
+//  Created by uiskim on 9/2/24.
 //
 
 import Foundation
+import Photos
 
 protocol AlbumRepository {
-    var numberOfImage: Int { get }
-    func getImageAsset(from indexSet: IndexSet) -> [ImageAsset]
+    func getAlbums() -> [Album]
+    func convertAlbumToPHAssets(album: PHFetchResult<PHAsset>) -> [PHAsset]
 }
