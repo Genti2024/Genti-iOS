@@ -40,17 +40,20 @@ struct ImagePickerView: View {
                 ForEach(viewModel.state.albums, id: \.name) { album in
                     VStack {
                         Text("\(album.name)")
-                            .pretendard(.headline2)
+                            .pretendard(.tempHeadline)
                             .foregroundStyle(.black)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 5)
+                        
                         Text("\(album.count)")
                             .pretendard(.small)
                             .foregroundStyle(.black)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Rectangle()
-                            .fill(.gray3)
+                            .fill(.gray5)
                             .frame(height: 1)
                             .frame(maxWidth: .infinity)
+                            .padding(.bottom, 5)
                     }
                     .padding(.horizontal, 16)
                     .background(.black.opacity(0.01))
@@ -84,16 +87,9 @@ struct ImagePickerView: View {
         HStack {
             HStack {
                 Text("\(self.viewModel.state.selectedAlbum?.name ?? "Recents")")
-                    .pretendard(.headline2)
+                    .pretendard(.tempHeadline)
                     .foregroundStyle(.black)
-                if self.viewModel.state.showAlbumList {
-                    Image(systemName: "arrowtriangle.up.fill")
-                        .foregroundStyle(.black)
-                } else {
-                    Image(systemName: "arrowtriangle.down.fill")
-                        .foregroundStyle(.black)
-                }
-
+                Image(self.viewModel.state.showAlbumList ? .arrowDropUp : .arrowDropDown)
             }
             .onTapGesture {
                 withAnimation(.easeInOut) {

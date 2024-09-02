@@ -22,6 +22,8 @@ enum GentiFont {
 extension Font {
     
     enum PretendardType {
+        case tempHeadline
+        
         case headline1
         case headline2
         case headline3
@@ -56,6 +58,8 @@ extension Font {
                 return .custom(GentiFont.Pretendard.bold, size: 12)
             case .description:
                 return .custom(GentiFont.Pretendard.light, size: 12)
+            case .tempHeadline:
+                return .custom(GentiFont.Pretendard.bold, size: 18)
             }
         }
         
