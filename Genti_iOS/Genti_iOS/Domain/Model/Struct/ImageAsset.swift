@@ -11,5 +11,4 @@ import PhotosUI
 struct ImageAsset: Identifiable {
     var id: String = UUID().uuidString
     var asset: PHAsset
-//    var assetIndex: Int = -1
 }
