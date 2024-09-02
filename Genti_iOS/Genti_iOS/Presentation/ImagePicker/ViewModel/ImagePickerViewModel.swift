@@ -28,48 +28,13 @@ final class ImagePickerViewModel: ViewModel {
         case xmarkTap
     }
     
-    func sendAction(_ input: Input) {
-        switch input {
-        case .viewWillAppear:
-            let albums = photoUseCase.getAlbums()
-            self.state.albums = albums
-            if !albums.isEmpty {
-                setAlbum(album: self.state.albums[0])
-            }
-        case .selectAlbum(let album):
-            self.state.selectedAlbum = album
-            setAlbum(album: album)
-            self.state.showAlbumList.toggle()
-        case .selectImage(let image):
-            if self.state.selectedImages.contains(image) {
-                guard let index = self.state.selectedImages.firstIndex(of: image) else { return }
-                self.state.selectedImages.remove(at: index)
-            } else {
-                if state.selectedImages.count == limit {
-                    return
-                }
-                self.state.selectedImages.append(image)
-            }
-        case .addImageButtonTap:
-            generatorViewModel.setReferenceImageAssets(assets: state.selectedImages.map{ ImageAsset(asset: $0) })
-            if limit == 3 { EventLogManager.shared.logEvent(.addThreeUserPickture) }
-            router.dismissSheet()
-        case .xmarkTap:
-            router.dismissSheet()
-        }
-    }
-    
-    func setAlbum(album: Album) {
-        state.selectedAlbum = album
-        state.fetchedImages = self.photoUseCase.getPhotos(at: album)
-    }
-
-    var router: Router<MainRoute>
-    var state: ImagePickerViewModel.State
+    private let photoUseCase: PhotoUseCaseImpl
     let limit: Int
-    var generatorViewModel: GetImageFromImagePicker
-    var photoUseCase: PhotoUseCaseImpl = PhotoUseCaseImpl(albumRepository: AlbumRepositoryImpl())
-
+    private let generatorViewModel: GetImageFromImagePicker
+    
+    var router: Router<MainRoute>
+    var state: State
+    
     init(router: Router<MainRoute>, limit: Int, generatorViewModel: GetImageFromImagePicker, photoUseCase: PhotoUseCaseImpl) {
         self.router = router
         self.limit = limit
@@ -78,7 +43,61 @@ final class ImagePickerViewModel: ViewModel {
         self.state = .init()
     }
     
+    func sendAction(_ input: Input) {
+        switch input {
+        case .viewWillAppear:
+            handleViewWillAppear()
+        case .selectAlbum(let album):
+            handleSelectAlbum(album)
+        case .selectImage(let image):
+            handleSelectImage(image)
+        case .addImageButtonTap:
+            handleAddImageButtonTap()
+        case .xmarkTap:
+            router.dismissSheet()
+        }
+    }
+    
+    private func handleViewWillAppear() {
+        state.albums = photoUseCase.getAlbums()
+        if let firstAlbum = state.albums.first {
+            setAlbum(album: firstAlbum)
+        }
+    }
+    
+    private func handleSelectAlbum(_ album: Album) {
+        state.selectedAlbum = album
+        setAlbum(album: album)
+        state.showAlbumList.toggle()
+    }
+    
+    private func handleSelectImage(_ image: PHAsset) {
+        if let index = state.selectedImages.firstIndex(of: image) {
+            state.selectedImages.remove(at: index)
+        } else if state.selectedImages.count < limit {
+            state.selectedImages.append(image)
+        }
+    }
+    
+    private func handleAddImageButtonTap() {
+        let imageAssets = state.selectedImages.map { ImageAsset(asset: $0) }
+        generatorViewModel.setReferenceImageAssets(assets: imageAssets)
+        logEvent()
+        router.dismissSheet()
+    }
+    
+    private func setAlbum(album: Album) {
+        state.selectedAlbum = album
+        state.fetchedImages = photoUseCase.getPhotos(at: album)
+    }
+    
+    private func logEvent() {
+        if limit == 3 {
+            EventLogManager.shared.logEvent(.addThreeUserPickture)
+        }
+    }
+    
     var reachImageLimit: Bool {
-        return self.state.selectedImages.count == self.limit
+        return state.selectedImages.count == limit
     }
 }
