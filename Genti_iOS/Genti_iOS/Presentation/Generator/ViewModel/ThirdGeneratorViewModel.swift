@@ -70,10 +70,12 @@ final class ThirdGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         } catch(let error) {
             state.isLoading = false
             guard let error = error as? GentiError else {
-                state.showAlert = .reportUnknownedError(error: error, action: nil)
+                EventLogManager.shared.logEvent(.error(errorCode: "Unknowned", errorMessage: error.localizedDescription))
+                state.showAlert = .reportError(action: {self.router.popToRoot()})
                 return
             }
-            state.showAlert = .reportGentiError(error: error, action: nil)
+            EventLogManager.shared.logEvent(.error(errorCode: error.code, errorMessage: error.message))
+            state.showAlert = .reportError(action: {self.router.popToRoot()})
         }
     }
     

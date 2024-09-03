@@ -20,7 +20,6 @@ protocol UserDefaultsRepository {
     func removeUserRole()
     func setLoginType(type: GentiSocialLoginType)
     func getLoginType() -> GentiSocialLoginType?
-    
 }
 
 extension UserDefaultsRepository {

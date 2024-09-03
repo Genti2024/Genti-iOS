@@ -188,7 +188,6 @@ struct FirstGeneratorView: View {
                     의상과 배경을 포함해서 설명해 주세요!  * 헤어스타일을 변경하는 기능은 준비 중이에요 * 너무 특정한 배경과 의상은 구현이 어려울 수 있어요 (반포 한강 공원, 나이키 티셔츠 등)
                     """)
                 .withFont(font: .PretendardType.small.value, color: .gray7, minimumScaleFactor: 0.5)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 11)
                 .onTapGesture {

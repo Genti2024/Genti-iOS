@@ -44,7 +44,7 @@ final class APIEventInterceptor: RequestInterceptor {
                     do {
                         let result = try JSONDecoder().decode(APIResponse<ReissueTokenDTO>.self, from: data)
                         if !result.success {
-                            completion(.doNotRetryWithError(GentiError.tokenError(code: result.errorCode, message: result.errorMessage)))
+                            completion(.doNotRetryWithError(GentiError.tokenError(code: "reissue 성공했는데 success가 false임", message: result.errorMessage)))
                             return
                         }
                         guard let accessToken = result.response?.accessToken, let refreshToken = result.response?.refreshToken else {
@@ -53,7 +53,6 @@ final class APIEventInterceptor: RequestInterceptor {
                         }
                         self.userdefaultRepository.setAccessToken(token: accessToken)
                         self.userdefaultRepository.setRefreshToken(token: refreshToken)
-                        print(#fileID, #function, #line, "- 새로 받은 토큰으로 교체")
                         completion(.retry)
                         return
                     } catch {
