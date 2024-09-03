@@ -19,6 +19,6 @@ final class API {
     static let retrySession: Session = {
         let configuration = URLSessionConfiguration.af.default
         let apiLogger = APIEventLogger()
-        return Session(configuration: configuration, interceptor: APIRetryInterceptor(), eventMonitors: [apiLogger])
+        return Session(configuration: configuration, interceptor: nil, eventMonitors: [apiLogger])
     }()
 }

@@ -38,7 +38,7 @@ final class AuthRepositoryImpl: AuthRepository {
     }
     
     func reissueToken(token: GentiTokenEntity) async throws -> GentiTokenEntity {
-        let dto: ReissueTokenDTO = try await requestService.fetchResponse(for: AuthRouter.reissueToken(token: token))
+        let dto: ReissueTokenDTO = try await requestService.fetchResponseNonRetry(for: AuthRouter.reissueToken(token: token))
         return GentiTokenEntity(accessToken: dto.accessToken, refreshToken: dto.refreshToken)
     }
     
