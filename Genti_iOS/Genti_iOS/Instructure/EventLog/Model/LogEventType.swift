@@ -8,6 +8,7 @@
 import Foundation
 
 enum LogEventType {
+    case error(errorCode: String?, errorMessage: String?)
     case singIn(type: GentiSocialLoginType)
     case clickButton(page: PageType, buttonName: String)
     case viewInfoget
@@ -71,6 +72,8 @@ enum LogEventType {
             return "view_picdone"
         case .pushNotificationTap:
             return "click_push_notification"
+        case .error(errorCode: let errorCode, errorMessage: let errorMessage):
+            return "error"
         }
     }
     
@@ -82,6 +85,11 @@ enum LogEventType {
             return ["page_name": page.pageName, "button_name": buttonName]
         case .pushNotificationTap(let success):
             return ["push_type": success ? "creating_success" : "creating_fail"]
+        case .error(let errorCode, let errorMessage):
+            guard let errorCode = errorCode, let errorMessage = errorMessage else {
+                return ["errorCode": "nil입니다", "errorMessage": "nil입니다"]
+            }
+            return ["errorCode": errorCode, "errorMessage": errorMessage]
         default:
             return nil
         }

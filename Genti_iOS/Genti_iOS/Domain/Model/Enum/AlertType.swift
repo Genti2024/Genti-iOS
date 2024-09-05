@@ -15,6 +15,7 @@ enum AlertType {
     case reportComplete(action: AlertAction?)
     case logout(action: AlertAction?)
     case resign(action: AlertAction?)
+    case reportError(action: AlertAction?)
     case reportUnknownedError(error: Error, action: AlertAction?)
     case reportGentiError(error: GentiError, action: AlertAction?)
     case albumAuthorization
@@ -73,6 +74,8 @@ enum AlertType {
                          actions: [.init(title: "설정으로가기", action: { UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { _ in
                 action!()
             } }), .init(title: "괜찮아요", style: .cancel, action: action)])
+        case .reportError(action: let action):
+            return .init(title: "일시적인 오류 발생", message: "앱을 종료 후 다시 시도해주세요\n로그인화면으로 이동합니다", actions: [.init(title: "확인", action: action)])
         }
     }
 }
