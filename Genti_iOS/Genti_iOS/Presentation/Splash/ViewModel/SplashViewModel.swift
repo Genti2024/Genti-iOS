@@ -26,20 +26,33 @@ final class SplashViewModel: ViewModel {
         case splashAnimationFinished
     }
     
-    func sendAction(_ input: Input) {
-        switch input {
+    enum Outcome {
+        case authLogin(Bool)
+    }
+    
+    func sendAction(_ input: Input) {}
+    
+    @discardableResult
+    func execute(_ action: Input) -> Task<Void, Never> {
+        switch action {
         case .splashAnimationFinished:
-            Task { await autoLogin() }
+            return Task {
+                let canAutoLogin = await splashUseCase.canAutoLogin()
+                await perform(from: .authLogin(canAutoLogin))
+            }
         }
     }
     
     @MainActor
-    func autoLogin() async {
-        if await splashUseCase.canAutoLogin() {
-            router.routeTo(.login)
-            router.routeTo(.mainTab)
-        } else {
-            router.routeTo(.login)
+    func perform(from outcome: Outcome) {
+        switch outcome {
+        case .authLogin(let canAutoLogin):
+            if canAutoLogin {
+                router.routeTo(.login)
+                router.routeTo(.mainTab)
+            } else {
+                router.routeTo(.login)
+            }
         }
     }
 }

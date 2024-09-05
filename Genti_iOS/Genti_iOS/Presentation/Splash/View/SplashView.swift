@@ -16,7 +16,7 @@ struct SplashView: View {
         LottieView(type: .splash)
             .playing()
             .animationDidFinish { _ in
-                self.splashViewModel.sendAction(.splashAnimationFinished)
+                self.splashViewModel.execute(.splashAnimationFinished)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .ignoresSafeArea()
