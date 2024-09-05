@@ -26,7 +26,7 @@ protocol RequestService {
 final class RequestServiceImpl: RequestService {
     func fetchResponseNonRetry<T: Decodable>(for endpoint: URLRequestConvertible) async throws -> T  {
         return try await withCheckedThrowingContinuation { continuation in
-            API.retrySession.request(endpoint)
+            API.nonRetrySession.request(endpoint)
                 .validate(statusCode: 200..<300)
                 .responseDecodable(of: APIResponse<T>.self) { res in
                     switch res.result {

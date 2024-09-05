@@ -16,7 +16,7 @@ final class API {
         return Session(configuration: configuration, interceptor: APIEventInterceptor(), eventMonitors: [apiLogger])
     }()
     
-    static let retrySession: Session = {
+    static let nonRetrySession: Session = {
         let configuration = URLSessionConfiguration.af.default
         let apiLogger = APIEventLogger()
         return Session(configuration: configuration, interceptor: nil, eventMonitors: [apiLogger])

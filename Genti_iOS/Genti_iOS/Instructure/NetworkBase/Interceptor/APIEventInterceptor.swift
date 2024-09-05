@@ -37,7 +37,7 @@ final class APIEventInterceptor: RequestInterceptor {
             return
         }
 
-        API.retrySession.request(AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken)))
+        API.nonRetrySession.request(AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken)))
             .responseData { response in
                 switch response.result {
                 case .success(let data):
