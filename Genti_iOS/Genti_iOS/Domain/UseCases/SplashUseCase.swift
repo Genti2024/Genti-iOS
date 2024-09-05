@@ -21,26 +21,16 @@ final class SplashUseCaseImpl: SplashUseCase {
         self.userdefaultRepository = userdefaultRepository
     }
     
-    @MainActor
     func canAutoLogin() async -> Bool {
-        guard let userRole = userdefaultRepository.getUserRole() else { return false }
-        switch userRole {
-        case .signInComplete:
-            let token = userdefaultRepository.getToken()
-            guard let accessToken = token.accessToken, let refreshToken = token.refreshToken else { return false }
-            do {
-                let reissuedToken = try await authRepository.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken))
-                guard let accessToken = reissuedToken.accessToken, let refreshToken = reissuedToken.refreshToken else {
-                    return false
-                }
-                userdefaultRepository.setAccessToken(token: accessToken)
-                userdefaultRepository.setRefreshToken(token: refreshToken)
-                return true
-            } catch {
-                return false
-            }
-        case .signInNotComplete:
+        guard checkUserAlreadySignIn() else { return false }
+        if await authRepository.reissueTokenSuccess() {
+            return true
+        } else {
             return false
         }
+    }
+    
+    private func checkUserAlreadySignIn() -> Bool {
+        return userdefaultRepository.getUserRole() == .signInComplete
     }
 }

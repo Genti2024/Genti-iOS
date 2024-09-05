@@ -8,7 +8,7 @@
 import Foundation
 
 final class AuthRepositoryImpl: AuthRepository {
-
+    let userdefaultsRepository: UserDefaultsRepository = UserDefaultsRepositoryImpl()
     let requestService: RequestService
     
     init(requestService: RequestService) {
@@ -37,9 +37,17 @@ final class AuthRepositoryImpl: AuthRepository {
         return entity
     }
     
-    func reissueToken(token: GentiTokenEntity) async throws -> GentiTokenEntity {
-        let dto: ReissueTokenDTO = try await requestService.fetchResponseNonRetry(for: AuthRouter.reissueToken(token: token))
-        return GentiTokenEntity(accessToken: dto.accessToken, refreshToken: dto.refreshToken)
+    func reissueTokenSuccess() async -> Bool {
+        do {
+            let token = userdefaultsRepository.getToken()
+            guard let accessToken = token.accessToken, let refreshToken = token.refreshToken, let fcmToken = token.fcmToken else { return false }
+            let dto: ReissueTokenDTO = try await requestService.fetchResponseNonRetry(for: AuthRouter.reissueToken(token: .init(accessToken: accessToken, refreshToken: refreshToken, fcmToken: fcmToken)))
+            userdefaultsRepository.set(to: dto.accessToken, forKey: .accessToken)
+            userdefaultsRepository.set(to: dto.refreshToken, forKey: .refreshToken)
+            return true
+        } catch {
+            return false
+        }
     }
     
     func logout() async throws {
