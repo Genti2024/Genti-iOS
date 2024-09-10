@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AuthRepository {
-    func kakaoLogin(token: String, fcmToken: String) async throws -> SocialLoginEntity
+    func kakaoLogin(token: String, fcmToken: String) async throws -> LoginUserState
     func appleLogin(authorizationCode: String, identityToken: String, fcmToken: String) async throws -> SocialLoginEntity
     func reissueTokenSuccess() async -> Bool
     func signIn(sex: String, birthYear: String) async throws -> SignInUserEntity

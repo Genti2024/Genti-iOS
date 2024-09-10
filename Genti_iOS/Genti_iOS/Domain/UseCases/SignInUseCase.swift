@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SignInUseCase {
-    func signIn(gender: Gender?, birthYear: Int) async throws
+    func signIn(gender: Gender?, birthYear: Int) async throws //완
 }
 
 final class SignInUseCaseImpl: SignInUseCase {

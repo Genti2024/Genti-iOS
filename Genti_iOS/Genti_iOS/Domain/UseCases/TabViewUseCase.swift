@@ -8,9 +8,9 @@
 import Foundation
 
 protocol TabViewUseCase {
-    func getUserState() async throws -> UserState
-    func checkCanceledImage(requestId: Int) async throws
-    func showCompleteStateWhenUserInitalAccess() async throws -> Bool
+    func getUserState() async throws -> UserState //완
+    func checkCanceledImage(requestId: Int) async throws //완
+    func showCompleteStateWhenUserInitalAccess() async throws -> Bool //완
 }
 
 final class TabViewUseCaseImpl: TabViewUseCase {

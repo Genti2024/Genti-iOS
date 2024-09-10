@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol SplashUseCase {
-    func canAutoLogin() async -> Bool
+    func canAutoLogin() async -> Bool //완
 }
 
 final class SplashUseCaseImpl: SplashUseCase {

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ImageGenerateUseCase {
-    func requestImage(from userData: RequestImageData) async throws
+    func requestImage(from userData: RequestImageData) async throws //완
 }
 
 final class ImageGenerateUseCaseImpl: ImageGenerateUseCase {

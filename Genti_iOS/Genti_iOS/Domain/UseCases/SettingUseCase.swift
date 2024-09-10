@@ -10,8 +10,8 @@ import Combine
 import AuthenticationServices
 
 protocol SettingUseCase {
-    func logout() async throws
-    func resign() async throws
+    func logout() async throws //완
+    func resign() async throws //완
 }
 
 final class SettingUseCaseImpl: NSObject, SettingUseCase {

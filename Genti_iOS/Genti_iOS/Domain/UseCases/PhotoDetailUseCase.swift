@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PhotoDetailUseCase {
-    func downloadImage(to uiImage: UIImage) async -> Bool
+    func downloadImage(to uiImage: UIImage) async -> Bool //완
 }
 
 final class PhotoDetailUseCaseImpl: PhotoDetailUseCase {

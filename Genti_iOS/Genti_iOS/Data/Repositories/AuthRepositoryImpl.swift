@@ -19,9 +19,11 @@ final class AuthRepositoryImpl: AuthRepository {
         try await requestService.fetchResponse(for: AuthRouter.resign)
     }
     
-    func kakaoLogin(token: String, fcmToken: String) async throws -> SocialLoginEntity {
+    func kakaoLogin(token: String, fcmToken: String) async throws -> LoginUserState {
         let dto: SocialLoginDTO = try await requestService.fetchResponse(for: AuthRouter.kakaoLogin(token: token, fcmToken: fcmToken))
-        return dto.toEntity
+        let entity = dto.toEntity
+        setUserdefaults(from: entity, loginType: .kakao)
+        return entity.userStatus
     }
     
     func appleLogin(authorizationCode: String, identityToken: String, fcmToken: String) async throws -> SocialLoginEntity {
@@ -52,6 +54,13 @@ final class AuthRepositoryImpl: AuthRepository {
     
     func logout() async throws {
         try await requestService.fetchResponse(for: AuthRouter.logout)
+    }
+    
+    private func setUserdefaults(from result: SocialLoginEntity, loginType: GentiSocialLoginType) {
+        self.userdefaultsRepository.setLoginType(type: loginType)
+        self.userdefaultsRepository.setUserRole(userRole: result.userStatus)
+        self.userdefaultsRepository.setAccessToken(token: result.accessToken)
+        self.userdefaultsRepository.setRefreshToken(token: result.refreshToken)
     }
     
 }

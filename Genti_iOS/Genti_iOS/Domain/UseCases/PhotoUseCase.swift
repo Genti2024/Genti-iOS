@@ -10,8 +10,8 @@ import Foundation
 import Photos
 
 protocol PhotoUseCase {
-    func getAlbums() -> [Album]
-    func getPhotos(at album: Album) -> [PHAsset]
+    func getAlbums() -> [Album] //완
+    func getPhotos(at album: Album) -> [PHAsset] //완
 }
 
 final class PhotoUseCaseImpl: PhotoUseCase  {

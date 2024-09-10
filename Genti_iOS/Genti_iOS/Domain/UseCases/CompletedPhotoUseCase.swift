@@ -8,9 +8,9 @@
 import UIKit
 
 protocol CompletedPhotoUseCase {
-    func downloadImage(to uiImage: UIImage?) async -> Bool
-    func loadImage(url: String) async -> UIImage?
-    func reportPhoto(responseId: Int, content: String) async throws
+    func downloadImage(to uiImage: UIImage?) async -> Bool //완
+    func loadImage(url: String) async -> UIImage? //완
+    func reportPhoto(responseId: Int, content: String) async throws //완
 }
 
 final class CompletedPhotoUseCaseImpl: CompletedPhotoUseCase {

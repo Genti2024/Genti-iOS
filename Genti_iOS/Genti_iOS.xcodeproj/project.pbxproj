@@ -128,6 +128,7 @@
 		C049679A2C6480720097C732 /* CompletedPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967992C6480720097C732 /* CompletedPhotoUseCase.swift */; };
 		C04967CD2C6496FA0097C732 /* UserInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967CC2C6496FA0097C732 /* UserInfoEntity.swift */; };
 		C04967D32C64982A0097C732 /* UserRequestCancelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967D22C64982A0097C732 /* UserRequestCancelState.swift */; };
+		C08501012C89CBD2003F3A7A /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08501002C89CBD2003F3A7A /* AuthUseCase.swift */; };
 		C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */; };
 		C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D52C26567500F92320 /* PHAssetImageService.swift */; };
 		C088F2DA2C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */; };
@@ -337,6 +338,7 @@
 		C04967992C6480720097C732 /* CompletedPhotoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedPhotoUseCase.swift; sourceTree = "<group>"; };
 		C04967CC2C6496FA0097C732 /* UserInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEntity.swift; sourceTree = "<group>"; };
 		C04967D22C64982A0097C732 /* UserRequestCancelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestCancelState.swift; sourceTree = "<group>"; };
+		C08501002C89CBD2003F3A7A /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepository.swift; sourceTree = "<group>"; };
 		C088F2D52C26567500F92320 /* PHAssetImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageService.swift; sourceTree = "<group>"; };
 		C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 				C04967962C647B390097C732 /* PhotoDetailUseCase.swift */,
 				C04967932C647A5B0097C732 /* SignInUseCase.swift */,
 				C01423E82C6ED2EB00004683 /* SettingUseCase.swift */,
+				C08501002C89CBD2003F3A7A /* AuthUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1451,6 +1454,7 @@
 				C0113D812C3BEAA400071BF6 /* CustomAlertModifier.swift in Sources */,
 				C017C4A92C1C3AA3009924C9 /* SplashView.swift in Sources */,
 				C017C49A2C1C3AA3009924C9 /* APIEventLogger.swift in Sources */,
+				C08501012C89CBD2003F3A7A /* AuthUseCase.swift in Sources */,
 				C017C48C2C1C3AA3009924C9 /* WebView.swift in Sources */,
 				C017C41D2C1C3A35009924C9 /* Font+.swift in Sources */,
 				C017C4AB2C1C3AA3009924C9 /* FeedEntity.swift in Sources */,
