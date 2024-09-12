@@ -108,7 +108,7 @@ struct FirstGeneratorView: View {
                 .padding(.top, 13)
             
         } //:VSTACK
-        .padding(.top, 32)
+        .padding(.top, UIScreen.isWiderThan375pt ? 32 : 20)
     }
     private func addImageView() -> some View {
         VStack(spacing: 0) {
@@ -125,14 +125,14 @@ struct FirstGeneratorView: View {
             
             
             referenceImage()
-                .frame(width: 138, height: 138)
+                .frame(width: UIScreen.isWiderThan375pt ? 138 : 100, height: UIScreen.isWiderThan375pt ? 138 : 100)
             
             Text("(참고사진은 최대 1장 업로드 할 수 있어요)")
                 .pretendard(.description)
                 .foregroundStyle(.gray3)
                 .padding(.top, 5)
         } //:VSTACK
-        .padding(.top, 43)
+        .padding(.top, UIScreen.isWiderThan375pt ? 43 : 20)
     }
     @ViewBuilder
     private func referenceImage() -> some View {
