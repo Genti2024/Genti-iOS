@@ -20,7 +20,9 @@ final class SplashViewModel: ViewModel {
         self.state = .init()
     }
 
-    struct State {}
+    struct State {
+        var showAlert: AlertType? = nil
+    }
     
     enum Input {
         case splashAnimationFinished
@@ -35,11 +37,43 @@ final class SplashViewModel: ViewModel {
     
     @MainActor
     func autoLogin() async {
-        if await splashUseCase.canAutoLogin() {
-            router.routeTo(.login)
-            router.routeTo(.mainTab)
+        if await self.checkAndUpdateIfNeeded() {
+            self.state.showAlert = .update(action: {
+                AppStoreCheck().openAppStore()
+            })
         } else {
-            router.routeTo(.login)
+            if await splashUseCase.canAutoLogin() {
+                router.routeTo(.login)
+                router.routeTo(.mainTab)
+            } else {
+                router.routeTo(.login)
+            }
+        }
+    }
+}
+
+extension SplashViewModel {
+    func checkAndUpdateIfNeeded() async -> Bool {
+        return await withCheckedContinuation { continuation in
+            AppStoreCheck().latestVersion { marketingVersion in
+                DispatchQueue.main.async {
+                    guard let marketingVersion = marketingVersion else {
+                        continuation.resume(returning: false)
+                        return
+                    }
+
+                    let currentProjectVersion = AppStoreCheck.appVersion ?? ""
+                    let splitMarketingVersion = marketingVersion.split(separator: ".").map { $0 }
+                    let splitCurrentProjectVersion = currentProjectVersion.split(separator: ".").map { $0 }
+                    if splitCurrentProjectVersion.count > 0 && splitMarketingVersion.count > 0 {
+                        if splitCurrentProjectVersion[0] < splitMarketingVersion[0] || splitCurrentProjectVersion[1] < splitMarketingVersion[1] {
+                            continuation.resume(returning: true)
+                        } else {
+                            continuation.resume(returning: false)
+                        }
+                    }
+                }
+            }
         }
     }
 }

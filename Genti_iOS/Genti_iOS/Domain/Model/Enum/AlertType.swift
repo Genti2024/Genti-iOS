@@ -22,6 +22,7 @@ enum AlertType {
     case photoCompleted(action: AlertAction?)
     case photoRequestCanceled(action: AlertAction?)
     case pushAuthorization(action: AlertAction?)
+    case update(action: AlertAction?)
     
     var data: Alert {
         switch self {
@@ -76,6 +77,8 @@ enum AlertType {
             } }), .init(title: "괜찮아요", style: .cancel, action: action)])
         case .reportError(action: let action):
             return .init(title: "일시적인 오류 발생", message: "앱을 종료 후 다시 시도해주세요\n로그인화면으로 이동합니다", actions: [.init(title: "확인", action: action)])
+        case .update(action: let action):
+            return .init(title: "업데이트 알림", message: "더 나은 서비스를 위해 필요한 업데이트가 있습니다!\n업데이트해주시겠어요?", actions: [.init(title: "업데이트하러 가기", action: action)])
         }
     }
 }

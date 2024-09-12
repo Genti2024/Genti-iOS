@@ -11,7 +11,7 @@ struct GentiApp: View {
 
     var body: some View {
         RoutingView(Router<MainRoute>()) { router in
-            SplashView(splashViewModel: SplashViewModel(router: router, splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
+            SplashView(viewModel: SplashViewModel(router: router, splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
         }
     }
 }
