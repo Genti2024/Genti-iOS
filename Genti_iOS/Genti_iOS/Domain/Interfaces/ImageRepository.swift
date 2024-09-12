@@ -8,6 +8,5 @@
 import UIKit
 
 protocol ImageRepository {
-    func load(from urlString: String) async -> UIImage?
     func writeToPhotoAlbum(image: UIImage?) async -> Bool
 }
