@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SDWebImageSwiftUI
+
 struct PhotoDetailWithShareView: View {
     @State var viewModel: PhotoDetailViewModel
 
@@ -16,15 +18,21 @@ struct PhotoDetailWithShareView: View {
                 .fill(.clear)
                 .aspectRatio(1/1.5, contentMode: .fit)
                 .overlay(alignment: .center) {
-                    Image(uiImage: viewModel.state.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .addDownloadButton {
-                            viewModel.sendAction(.downloadButtonTap(from: .detailWithShare)) }
+                    WebImage(url: URL(string: viewModel.state.imageUrl)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap(from: .detailWithShare)) }
+                    } placeholder: {
+                        Image(uiImage: UIImage(resource: .camera))
+                    }
+                    .onSuccess { image, _, _ in
+                        self.viewModel.sendAction(.imageLoad(image))
+                    }
                 }
                 .padding(.horizontal, 30)
             
-            ShareLink(item: Image(uiImage: viewModel.state.image), preview: .init("내 사진", image: Image(uiImage: viewModel.state.image))) {
+            ShareLink(item: viewModel.getImage, preview: .init("내 사진", image: viewModel.getImage)) {
                 Text("공유하기")
                     .shareStyle()
             }

@@ -7,36 +7,34 @@
 
 import SwiftUI
 
+import SDWebImageSwiftUI
+
 struct PhotoDetailView: View {
 
     @State var viewModel: PhotoDetailViewModel
     
     var body: some View {
-        Image(uiImage: viewModel.state.image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .overlay(alignment: .bottomTrailing) {
-                Image("Download")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 44, height: 44)
-                    .padding(.trailing, 10)
-                    .padding(.bottom, 10)
-                    .asButton {
-                        self.viewModel.sendAction(.downloadButtonTap(from: .detail))
-                    }
-            }
-            .padding(.horizontal, 28)
-            .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
-            .customToast(toastType: $viewModel.state.showToast)
-            .presentationBackground {
-                BlurView(style: .systemUltraThinMaterialDark)
-                    .onTapGesture {
-                        viewModel.sendAction(.backgroundTap)
-                    }
-            }
-
         
+        WebImage(url: URL(string: viewModel.state.imageUrl)) { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap(from: .detail)) }
+        } placeholder: {
+            Image(uiImage: UIImage(resource: .camera))
+        }
+        .onSuccess { image, _, _ in
+            self.viewModel.sendAction(.imageLoad(image))
+        }
+        .padding(.horizontal, 28)
+        .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
+        .customToast(toastType: $viewModel.state.showToast)
+        .presentationBackground {
+            BlurView(style: .systemUltraThinMaterialDark)
+                .onTapGesture {
+                    viewModel.sendAction(.backgroundTap)
+                }
+        }
     }
 }
 

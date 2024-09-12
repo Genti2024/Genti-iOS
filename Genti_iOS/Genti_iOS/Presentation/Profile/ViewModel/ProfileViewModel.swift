@@ -37,7 +37,7 @@ final class ProfileViewModel: ViewModel {
         switch input {
         case .imageTap(let url):
             EventLogManager.shared.logEvent(.enlargePhoto)
-            Task { await showMyImage(url: url) }
+            router.routeTo(.photoDetailWithShare(imageUrl: url))
         case .gearButtonTap:
             router.routeTo(.setting)
         case .reload, .viewWillAppear:
@@ -52,14 +52,6 @@ final class ProfileViewModel: ViewModel {
             setState(entity)
         } catch(let error) {
             handleError(error)
-        }
-    }
-    
-    @MainActor
-    func showMyImage(url: String) async {
-        do {
-            guard let image = await profileUseCase.showPhotoDetail(from: url) else { return }
-            router.routeTo(.photoDetailWithShare(image: image))
         }
     }
     

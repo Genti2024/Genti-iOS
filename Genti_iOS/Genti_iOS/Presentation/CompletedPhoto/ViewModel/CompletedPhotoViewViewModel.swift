@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 @Observable
 final class CompletedPhotoViewModel: ViewModel {
@@ -20,10 +21,11 @@ final class CompletedPhotoViewModel: ViewModel {
         self.photoInfo = photoInfo
         self.router = router
         self.completedPhotoUseCase = completedPhotoUseCase
-        self.state = .init()
+        self.state = .init(imageUrl: photoInfo.imageUrlString)
     }
 
     struct State {
+        var imageUrl: String
         var image: UIImage? = nil
         var reportContent: String = ""
         var isLoading: Bool = false
@@ -40,6 +42,7 @@ final class CompletedPhotoViewModel: ViewModel {
         case downloadButtonTap
         case ratingActionIsDone
         case shareButtonTap
+        case imageLoad(UIImage)
     }
 
     func sendAction(_ input: Input) {
@@ -50,37 +53,36 @@ final class CompletedPhotoViewModel: ViewModel {
         case .reportButtonTap:
             presentReportAlert()
         case .imageTap:
-            navigateToPhotoExpandView()
-        case .viewWillAppear:
-            Task { await setImage() }
+            EventLogManager.shared.logEvent(.enlargePhoto)
+            self.router.routeTo(.photoDetail(imageUrl: self.state.imageUrl))
         case .downloadButtonTap:
             Task { await downloadImage() }
         case .ratingActionIsDone:
-            self.router.dismissSheet()
+            if true {
+                self.router.dismissSheet()
+            } else {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "openChat"), object: nil)
+            }
         case .shareButtonTap:
             EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)
             EventLogManager.shared.logEvent(.clickButton(page: .compltedPhoto, buttonName: "picshare"))
+        case .imageLoad(let image):
+            self.state.image = image
+        case .viewWillAppear:
+            EventLogManager.shared.logEvent(.seeCompletePhoto)
         }
     }
     
     @MainActor
     func downloadImage() async {
         do {
+            
             if await completedPhotoUseCase.downloadImage(to: state.image) {
                 EventLogManager.shared.logEvent(.clickButton(page: .compltedPhoto, buttonName: "picdownload"))
                 state.showToast = .success
             } else {
                 state.showToast = .failure
             }
-        }
-    }
-    
-    @MainActor
-    func setImage() async {
-        do {
-            let completedPhoto = await completedPhotoUseCase.loadImage(url: photoInfo.imageUrlString)
-            state.image = completedPhoto
-            EventLogManager.shared.logEvent(.seeCompletePhoto)
         }
     }
 
@@ -114,12 +116,6 @@ final class CompletedPhotoViewModel: ViewModel {
             }
             state.showAlert = .reportGentiError(error: error, action: { self.router.dismissSheet() })
         }
-    }
-
-    private func navigateToPhotoExpandView() {
-        guard let image = state.image else { return }
-        EventLogManager.shared.logEvent(.enlargePhoto)
-        self.router.routeTo(.photoDetail(image: image))
     }
     
     var getImage: Image {
