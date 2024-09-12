@@ -20,7 +20,7 @@ struct ExampleWithPictureFindResponseDTO: Codable {
 
 extension ExampleWithPictureFindResponseDTO {
     var toEntity: FeedEntity {
-        return .init(id: self.picture.id, mainImage: self.picture.url, description: self.prompt, ratio: self.ratio)
+        return .init(id: self.picture.id, imageUrl: self.picture.url, description: self.prompt, ratio: self.ratio)
     }
     
     var ratio: PhotoRatio {

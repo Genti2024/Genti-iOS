@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FeedComponent: View {
     
-    var mainImage: String
+    var imageUrl: String
     var description: String
     var ratio: PhotoRatio
     
@@ -26,7 +26,7 @@ struct FeedComponent: View {
     }
     
     private func mainImageView() -> some View {
-        ImageLoaderView(urlString: mainImage, ratio: ratio)
+        ImageLoaderView(urlString: imageUrl, ratio: ratio)
             .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 15, lineWidth: 1)
     }
     private func photoDescriptionView() -> some View {
