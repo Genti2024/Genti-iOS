@@ -26,7 +26,7 @@ struct GenerateRequestCompleteView: View {
                     Image("Genti_LOGO")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 60)
+                        .frame(height: UIScreen.isWiderThan375pt ? 60 : 40)
                         .padding(.top, 44)
                     
                     
@@ -38,7 +38,7 @@ struct GenerateRequestCompleteView: View {
                     Image("Complete_charactor")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 275)
+                        .frame(height: UIScreen.isWiderThan375pt ? 275 : 200)
 
                 } //:VSTACK
                 

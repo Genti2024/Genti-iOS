@@ -10,22 +10,24 @@ import SwiftUI
 import Lottie
 
 struct SplashView: View {
-    @State var splashViewModel: SplashViewModel
+    @State var viewModel: SplashViewModel
     
     var body: some View {
         LottieView(type: .splash)
             .playing()
             .animationDidFinish { _ in
-                self.splashViewModel.sendAction(.splashAnimationFinished)
+                self.viewModel.sendAction(.splashAnimationFinished)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .ignoresSafeArea()
             .background {
-                Color.backgroundWhite
+                Color.white
+                    .ignoresSafeArea()
             }
+            .customAlert(alertType: $viewModel.state.showAlert)
     }
 }
 
 #Preview {
-    SplashView(splashViewModel: .init(router: .init(), splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
+    SplashView(viewModel: .init(router: .init(), splashUseCase: SplashUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl())))
 }

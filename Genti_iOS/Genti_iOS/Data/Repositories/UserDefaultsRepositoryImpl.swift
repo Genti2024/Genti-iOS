@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserDefaultsRepositoryImpl: UserDefaultsRepository {
+    
     func setLoginType(type: GentiSocialLoginType) {
         self.set(to: type.rawValue, forKey: .loginType)
     }

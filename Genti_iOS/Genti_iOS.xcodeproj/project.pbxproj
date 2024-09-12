@@ -128,6 +128,8 @@
 		C049679A2C6480720097C732 /* CompletedPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967992C6480720097C732 /* CompletedPhotoUseCase.swift */; };
 		C04967CD2C6496FA0097C732 /* UserInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967CC2C6496FA0097C732 /* UserInfoEntity.swift */; };
 		C04967D32C64982A0097C732 /* UserRequestCancelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967D22C64982A0097C732 /* UserRequestCancelState.swift */; };
+		C06F28F62C92D01C00A69575 /* AppStoreCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28F52C92D01C00A69575 /* AppStoreCheck.swift */; };
+		C06F28F82C92FE4800A69575 /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28F72C92FE4800A69575 /* UIScreen+Ext.swift */; };
 		C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */; };
 		C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D52C26567500F92320 /* PHAssetImageService.swift */; };
 		C088F2DA2C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */; };
@@ -337,6 +339,8 @@
 		C04967992C6480720097C732 /* CompletedPhotoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedPhotoUseCase.swift; sourceTree = "<group>"; };
 		C04967CC2C6496FA0097C732 /* UserInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEntity.swift; sourceTree = "<group>"; };
 		C04967D22C64982A0097C732 /* UserRequestCancelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestCancelState.swift; sourceTree = "<group>"; };
+		C06F28F52C92D01C00A69575 /* AppStoreCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCheck.swift; sourceTree = "<group>"; };
+		C06F28F72C92FE4800A69575 /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
 		C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepository.swift; sourceTree = "<group>"; };
 		C088F2D52C26567500F92320 /* PHAssetImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageService.swift; sourceTree = "<group>"; };
 		C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 				C0113D882C3BED0400071BF6 /* LinearGradient+Ext.swift */,
 				C08BB5B92C3E8B3E00D4CFA9 /* LottieView+Ext.swift */,
 				C048A9052C51BA1500026C80 /* Int+Ext.swift */,
+				C06F28F72C92FE4800A69575 /* UIScreen+Ext.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -1193,6 +1198,7 @@
 			isa = PBXGroup;
 			children = (
 				C0B192612C7857F200D198A2 /* NotificationPermissionCheck.swift */,
+				C06F28F52C92D01C00A69575 /* AppStoreCheck.swift */,
 			);
 			path = SharedStruct;
 			sourceTree = "<group>";
@@ -1423,6 +1429,7 @@
 				C017C49C2C1C3AA3009924C9 /* RequestService.swift in Sources */,
 				C0A7C64C2C68533400FAA7F1 /* GentiBorderButton.swift in Sources */,
 				C0D74A462C1EA6B500A45371 /* Route.swift in Sources */,
+				C06F28F62C92D01C00A69575 /* AppStoreCheck.swift in Sources */,
 				C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */,
 				C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */,
 				C0113D6F2C3A21B100071BF6 /* CompletedPhotoViewViewModel.swift in Sources */,
@@ -1516,6 +1523,7 @@
 				C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
 				C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */,
+				C06F28F82C92FE4800A69575 /* UIScreen+Ext.swift in Sources */,
 				C049674D2C5C87FE0097C732 /* TabViewUseCase.swift in Sources */,
 				C0ADA6012C851C6C00A583B8 /* ImagePickerViewModel.swift in Sources */,
 				C0A7C6482C68415D00FAA7F1 /* RequestWaitingView.swift in Sources */,

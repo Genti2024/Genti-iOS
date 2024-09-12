@@ -19,7 +19,7 @@ struct SeroImageContentView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 44)
-                .padding(.top, 80)
+                .padding(.top, UIScreen.isWiderThan375pt ? 80 : 40)
             
             
             VStack {
@@ -44,7 +44,7 @@ struct SeroImageContentView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 360)
+                    .frame(height: UIScreen.isWiderThan375pt ? 360 : 260)
                     .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap) }
                     .cornerRadiusWithBorder(style: LinearGradient.borderGreen, radius: 15, lineWidth: 2)
                     .onTapGesture {
@@ -66,7 +66,7 @@ struct SeroImageContentView: View {
                 .pretendard(.small)
                 .foregroundStyle(.gray3)
         }
-        .frame(height: 640)
+        .frame(height: UIScreen.isWiderThan375pt ? 640 : 520)
         .frame(maxWidth: .infinity)
         .background(alignment: .top) {
             Rectangle()

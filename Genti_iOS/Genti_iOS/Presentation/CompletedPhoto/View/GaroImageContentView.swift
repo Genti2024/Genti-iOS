@@ -19,13 +19,13 @@ struct GaroImageContentView: View {
             Image(.gentiLOGO)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 44)
-                .padding(.top, 80)
+                .frame(height: UIScreen.isWiderThan375pt ? 44 : 24)
+                .padding(.top, UIScreen.isWiderThan375pt ? 80 : 40)
             
             Image(.charactor)
                 .resizable( )
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 162)
+                .frame(height: UIScreen.isWiderThan375pt ? 162 : 100)
                 .padding(.top, 12)
             
             VStack {
@@ -50,7 +50,7 @@ struct GaroImageContentView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 212)
+                    .frame(height: UIScreen.isWiderThan375pt ? 212 : 180)
                     .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap) }
                     .cornerRadiusWithBorder(style: LinearGradient.borderGreen, radius: 15, lineWidth: 2)
                     .onTapGesture {
@@ -71,7 +71,7 @@ struct GaroImageContentView: View {
                 .pretendard(.small)
                 .foregroundStyle(.gray3)
         }
-        .frame(height: 640)
+        .frame(height: UIScreen.isWiderThan375pt ? 640 : 520)
         .frame(maxWidth: .infinity)
         .background(alignment: .top) {
             Rectangle()
