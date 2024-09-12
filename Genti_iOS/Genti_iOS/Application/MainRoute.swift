@@ -14,7 +14,7 @@ enum MainRoute: Route {
     case onboarding
     case mainTab
     case setting
-    case photoDetailWithShare(image: UIImage)
+    case photoDetailWithShare(imageUrl: String)
     case firstGen
     case secondGen(data: RequestImageData)
     case thirdGen(data: RequestImageData)
@@ -22,7 +22,7 @@ enum MainRoute: Route {
     case waiting
     case imagePicker(limitCount: Int, viewModel: GetImageFromImagePicker)
     case webView(url: String)
-    case photoDetail(image: UIImage)
+    case photoDetail(imageUrl: String)
     case completeMakePhoto(photoInfo: CompletedPhotoEntity)
 
     
@@ -35,8 +35,8 @@ enum MainRoute: Route {
             GentiTabView(viewModel: TabViewModel(tabViewUseCase: TabViewUseCaseImpl(userRepository: UserRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
         case .setting:
             SettingView(viewModel: SettingViewModel(router: router))
-        case .photoDetailWithShare(let image):
-            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, image: image))
+        case .photoDetailWithShare(let imageUrl):
+            PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, imageUrl: imageUrl))
         case .firstGen:
             RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
@@ -49,8 +49,8 @@ enum MainRoute: Route {
             GenerateRequestCompleteView(router: router)
         case .webView(url: let url):
             GentiWebView(router: router, urlString: url)
-        case .photoDetail(let image):
-            PhotoDetailView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, image: image))
+        case .photoDetail(let imageUrl):
+            PhotoDetailView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, imageUrl: imageUrl))
         case .completeMakePhoto(let photoInfo):
             RoutingView(router) { CompletedPhotoView(viewModel: CompletedPhotoViewModel(photoInfo: photoInfo, router: $0, completedPhotoUseCase: CompletedPhotoUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl(), userRepository: UserRepositoryImpl(requestService: RequestServiceImpl())))) }
         case .onboarding:

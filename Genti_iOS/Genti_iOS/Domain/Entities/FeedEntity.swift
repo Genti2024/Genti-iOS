@@ -9,7 +9,7 @@ import Foundation
 
 struct FeedEntity: Identifiable {
     var id: Int
-    let mainImage: String
+    let imageUrl: String
     let description: String
     var ratio: PhotoRatio
 }

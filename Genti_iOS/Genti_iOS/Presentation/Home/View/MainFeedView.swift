@@ -41,7 +41,7 @@ struct MainFeedView: View {
     private func feedsView() -> some View {
         LazyVStack(spacing: 0) {
             ForEach(viewModel.state.feeds, id: \.id) { feed in
-                FeedComponent(mainImage: feed.mainImage, description: feed.description, ratio: feed.ratio)
+                FeedComponent(imageUrl: feed.imageUrl, description: feed.description, ratio: feed.ratio)
             }
         }
         .readingFrame { frame in

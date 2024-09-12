@@ -56,7 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        
+//        let userInfo = response.notification.request.content.userInfo
         NotificationCenter.default.post(
             name: NSNotification.Name(rawValue: "PushNotificationReceived"),
             object: nil,

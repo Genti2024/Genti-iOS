@@ -27,6 +27,7 @@ final class TabViewModel: ViewModel {
         case cameraIconTap
         case viewWillAppear
         case pushReceived
+        case openChat
     }
     func sendAction(_ input: Input) {
         switch input {
@@ -44,6 +45,10 @@ final class TabViewModel: ViewModel {
         case .pushReceived:
             // 유저가 푸시를 누른 경우
             Task { await handleUserStateFromPush() }
+        case .openChat:
+            self.router.dismissSheet {
+                self.router.routeTo(.firstGen)
+            }
         }
     }
     

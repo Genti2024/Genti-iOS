@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+import SDWebImageSwiftUI
+import Lottie
+
 struct SeroImageContentView: View {
     @Bindable var viewModel: CompletedPhotoViewModel
     
@@ -37,20 +40,25 @@ struct SeroImageContentView: View {
             Spacer()
                 .frame(height: 16)
             
-            viewModel.getImage
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 360)
-                .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap) }
-                .cornerRadiusWithBorder(style: LinearGradient.borderGreen, radius: 15, lineWidth: 2)
-                .onTapGesture {
-                    print(#fileID, #function, #line, "- imagetap")
-                    self.viewModel.sendAction(.imageTap)
-                }
-                .onAppear {
-                    self.viewModel.sendAction(.viewWillAppear)
-                }
-            
+            WebImage(url: URL(string: viewModel.state.imageUrl)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 360)
+                    .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap) }
+                    .cornerRadiusWithBorder(style: LinearGradient.borderGreen, radius: 15, lineWidth: 2)
+                    .onTapGesture {
+                        print(#fileID, #function, #line, "- imagetap")
+                        self.viewModel.sendAction(.imageTap)
+                    }
+            } placeholder: {
+                LottieView(type: .imageLoading)
+                    .looping()
+                    .frame(width: 80, height: 80)
+            }
+            .onSuccess { image, _, _ in
+                self.viewModel.sendAction(.imageLoad(image))
+            }
             
             Spacer()
                 .frame(height: 18)
@@ -60,7 +68,6 @@ struct SeroImageContentView: View {
         }
         .frame(height: 640)
         .frame(maxWidth: .infinity)
-        
         .background(alignment: .top) {
             Rectangle()
                 .fill(.backgroundWhite)

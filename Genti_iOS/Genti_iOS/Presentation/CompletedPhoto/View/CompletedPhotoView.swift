@@ -70,6 +70,9 @@ struct CompletedPhotoView: View {
                 }
             }
         }
+        .onAppear {
+            self.viewModel.sendAction(.viewWillAppear)
+        }
         .addCustomPopup(isPresented: $viewModel.state.showRatingView, popupType: .rating(viewModel.photoInfo))
         .onReceive(NotificationCenter.default.publisher(for: .init("ratingCompleted"))) { _ in
             self.viewModel.sendAction(.ratingActionIsDone)

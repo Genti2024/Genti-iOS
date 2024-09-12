@@ -12,15 +12,6 @@ import SDWebImageSwiftUI
 final class ImageRepositoryImpl: NSObject, ImageRepository {
     
     private var continuation: CheckedContinuation<Bool, Never>?
-    
-    func load(from urlString: String) async -> UIImage? {
-        return await withCheckedContinuation { continuation in
-            guard let url = URL(string: urlString) else { return continuation.resume(returning: nil) }
-            SDWebImageManager.shared.loadImage(with: url, options: [], progress: nil) { (image, _, _, _, _, _) in
-                continuation.resume(returning: image)
-                }
-        }
-    }
 
     func writeToPhotoAlbum(image: UIImage?) async -> Bool {
         await withCheckedContinuation { continuation in

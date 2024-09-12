@@ -9,7 +9,6 @@ import UIKit
 
 protocol CompletedPhotoUseCase {
     func downloadImage(to uiImage: UIImage?) async -> Bool
-    func loadImage(url: String) async -> UIImage?
     func reportPhoto(responseId: Int, content: String) async throws
 }
 
@@ -31,10 +30,6 @@ final class CompletedPhotoUseCaseImpl: CompletedPhotoUseCase {
         let writeSuccess = await imageRepository.writeToPhotoAlbum(image: uiImage)
         hapticRepository.notification(type: writeSuccess ? .success : .error)
         return writeSuccess
-    }
-    
-    func loadImage(url: String) async -> UIImage? {
-        return await imageRepository.load(from: url)
     }
     
     func reportPhoto(responseId: Int, content: String) async throws {
