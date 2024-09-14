@@ -41,7 +41,9 @@ struct PhotoDetailWithShareView: View {
             }
             
         }
-        .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
+        .addXmark(top: 3, trailing: 20) {
+            viewModel.sendAction(.xmarkTap)
+        }
         .customToast(toastType: $viewModel.state.showToast)
         .presentationBackground {
             BlurView(style: .systemThinMaterialDark)

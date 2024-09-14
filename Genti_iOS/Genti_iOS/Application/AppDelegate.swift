@@ -56,12 +56,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-//        let userInfo = response.notification.request.content.userInfo
-        NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: "PushNotificationReceived"),
-            object: nil,
-            userInfo: nil
-        )
+        if response.notification.request.content.userInfo["notificationType"] as? String == "OPENCHAT" {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: "openChat"),
+                object: false,
+                userInfo: nil
+            )
+        } else {
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: "PushNotificationReceived"),
+                object: nil,
+                userInfo: nil
+            )
+        }
     }
 
     func application(_ application: UIApplication,

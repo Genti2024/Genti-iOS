@@ -43,6 +43,17 @@ final class Router<Destination: Route> {
     }
     
     public func dismissSheet(_ handler: @escaping () -> Void) {
+        if let _ = self.isPresented.wrappedValue {
+            self.isPresented.wrappedValue = nil
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+                handler()
+            }
+            return
+        }
+        handler()
+    }
+    
+    public func dismissFullScreenCover(_ handler: @escaping () -> Void) {
         if let _ = self.presentingFullScreenCover {
             self.presentingFullScreenCover = nil
             DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
