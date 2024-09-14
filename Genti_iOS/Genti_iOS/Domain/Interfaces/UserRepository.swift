@@ -16,4 +16,5 @@ protocol UserRepository {
     func checkCompletedImage(responeId: Int) async throws
     func checkCanceledImage(requestId: Int) async throws
     func checkUserHasCanceledOrAwaitedRequest() async throws -> Bool
+    func getOpenChatInfo() async throws -> GentiOpenChatAgreementType
 }

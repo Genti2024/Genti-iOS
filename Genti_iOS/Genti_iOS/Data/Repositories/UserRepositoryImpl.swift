@@ -8,11 +8,21 @@
 import Foundation
 
 final class UserRepositoryImpl: UserRepository {
-
+    
     let requestService: RequestService
     
     init(requestService: RequestService) {
         self.requestService = requestService
+    }
+    
+    func getOpenChatInfo() async throws -> GentiOpenChatAgreementType {
+        let dto: OpenChatDTO = try await requestService.fetchResponse(for: UserRouter.fetchOpenChatInfo)
+        if dto.accessible {
+            guard let openChapUrl = dto.url, let count = dto.count else { throw GentiError.serverError(code: "Empty", message: "url과 count가 null입니다") }
+            return .agree(.init(openChatUrl: openChapUrl, numberOfPeople: count))
+        } else {
+            return .disagree
+        }
     }
     
     func fetchPhotos() async throws -> [MyImagesEntitiy] {

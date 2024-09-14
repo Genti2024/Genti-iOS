@@ -12,7 +12,7 @@ final class TabViewModel: ViewModel {
     
     var tabViewUseCase: TabViewUseCase
     var router: Router<MainRoute>
-    
+    var userdefaultRepository = UserDefaultsRepositoryImpl()
     var state: State
     
     struct State {
@@ -27,7 +27,7 @@ final class TabViewModel: ViewModel {
         case cameraIconTap
         case viewWillAppear
         case pushReceived
-        case openChat
+        case openChat(fromComplete: Bool)
     }
     func sendAction(_ input: Input) {
         switch input {
@@ -38,17 +38,11 @@ final class TabViewModel: ViewModel {
         case .cameraIconTap:
             Task { await handleUserState() }
         case .viewWillAppear:
-            // 만약에 유저가 백그라운드에서 push를 안누른 경우
-            // 앱에진입했을때 userdefault에 background푸시 flag가 false인데(push가 왔는데 확인X) 유저상태가 await 혹은 canceled인 경우
-            // -> 자동으로 앱실행시 완료뷰 혹은 취소뷰를 보여줘야한다
             Task { await showRequestResult() }
         case .pushReceived:
-            // 유저가 푸시를 누른 경우
             Task { await handleUserStateFromPush() }
-        case .openChat:
-            self.router.dismissSheet {
-                self.router.routeTo(.firstGen)
-            }
+        case .openChat(let isFromComplete):
+            Task { await handleOpenChat(isFromComplete) }
         }
     }
     
@@ -56,6 +50,28 @@ final class TabViewModel: ViewModel {
         self.tabViewUseCase = tabViewUseCase
         self.router = router
         self.state = .init()
+    }
+
+    @MainActor
+    func handleOpenChat(_ isFromComplete: Bool) async {
+        do {
+            if userdefaultRepository.getOpenChatAgreement() {
+                switch try await tabViewUseCase.checkOpenChat() {
+                case .agree(let openChatInfo):
+                    if isFromComplete {
+                        self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
+                    } else {
+                        self.router.dismissFullScreenCover {
+                            self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
+                        }
+                    }
+                case .disagree:
+                    userdefaultRepository.setOpenChatAgreement(isAgree: false)
+                }
+            }
+        } catch(let error) {
+            self.handleError(error)
+        }
     }
     
     @MainActor
@@ -102,7 +118,7 @@ final class TabViewModel: ViewModel {
                 router.routeTo(.firstGen)
             case .awaitUserVerification(let completePhotoEntity):
                 EventLogManager.shared.logEvent(.pushNotificationTap(true))
-                self.router.dismissSheet {
+                self.router.dismissFullScreenCover {
                     self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))
                 }
             case .canceled(let requestId):
