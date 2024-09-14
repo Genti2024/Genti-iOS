@@ -25,10 +25,11 @@ enum UserRouter: URLRequestConvertible {
     case getUserState
     case checkCompletedImage(responeId: Int)
     case checkCanceledImage(requestId: Int)
+    case fetchOpenChatInfo
     
     var method: HTTPMethod {
         switch self {
-        case .fetchMyPictures, .getUserState, .checkCanceledImage:
+        case .fetchMyPictures, .getUserState, .checkCanceledImage, .fetchOpenChatInfo:
             return .get
         case .reportPicture, .ratePicture, .checkCompletedImage:
             return .post
@@ -37,7 +38,7 @@ enum UserRouter: URLRequestConvertible {
     
     var headers: HTTPHeaders {
         switch self {
-        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage:
+        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchOpenChatInfo:
             return []
         }
     }
@@ -61,6 +62,8 @@ enum UserRouter: URLRequestConvertible {
             return "/api/v1/users/picture-generate-responses/\(responseId)/verify"
         case .checkCanceledImage(let requestId):
             return "/api/v1/users/picture-generate-requests/\(requestId)/confirm-cancel-status"
+        case .fetchOpenChatInfo:
+            return "/api/v1/open-chat"
         }
     }
     
@@ -82,7 +85,7 @@ enum UserRouter: URLRequestConvertible {
             var parameters: [String: Any] = [:]
             parameters["star"] = rate
             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
-        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures:
+        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures, .fetchOpenChatInfo:
             return urlRequest
         }
         return urlRequest

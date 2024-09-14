@@ -34,8 +34,9 @@ struct GentiTabView: View {
         .onNotificationRecieved(name: Notification.Name(rawValue: "PushNotificationReceived")) { _ in
             self.viewModel.sendAction(.pushReceived)
         }
-        .onNotificationRecieved(name: Notification.Name(rawValue: "openChat")) { _ in
-            self.viewModel.sendAction(.openChat)
+        .onNotificationRecieved(name: Notification.Name(rawValue: "openChat")) { noti in
+            guard let isFromComplete = noti.object as? Bool else { return }
+            self.viewModel.sendAction(.openChat(fromComplete: isFromComplete))
         }
         .ignoresSafeArea(.keyboard)
         .toolbar(.hidden, for: .navigationBar)

@@ -72,7 +72,7 @@ enum LogEventType {
             return "view_picdone"
         case .pushNotificationTap:
             return "click_push_notification"
-        case .error(errorCode: let errorCode, errorMessage: let errorMessage):
+        case .error:
             return "error"
         }
     }

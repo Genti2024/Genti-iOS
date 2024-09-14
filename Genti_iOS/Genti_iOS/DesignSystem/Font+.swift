@@ -22,6 +22,12 @@ enum GentiFont {
 extension Font {
     
     enum PretendardType {
+        case openChatHeadline
+        case openChatSubtitle
+        case openChatDescription
+        case openChatTitle1
+        case openChatTitle2
+        
         case tempHeadline
         
         case headline1
@@ -60,6 +66,16 @@ extension Font {
                 return .custom(GentiFont.Pretendard.light, size: 12)
             case .tempHeadline:
                 return .custom(GentiFont.Pretendard.bold, size: 18)
+            case .openChatHeadline:
+                return .custom(GentiFont.Pretendard.bold, size: 24)
+            case .openChatSubtitle:
+                return .custom(GentiFont.Pretendard.regular, size: 14)
+            case .openChatDescription:
+                return .custom(GentiFont.Pretendard.semiBold, size: 13)
+            case .openChatTitle1:
+                return .custom(GentiFont.Pretendard.bold, size: 16)
+            case .openChatTitle2:
+                return .custom(GentiFont.Pretendard.medium, size: 16)
             }
         }
         

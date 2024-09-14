@@ -16,7 +16,6 @@ final class CompletedPhotoViewModel: ViewModel {
     var state: State
     
     let completedPhotoUseCase: CompletedPhotoUseCase
-    
     init(photoInfo: CompletedPhotoEntity, router: Router<MainRoute>, completedPhotoUseCase: CompletedPhotoUseCase) {
         self.photoInfo = photoInfo
         self.router = router
@@ -58,10 +57,8 @@ final class CompletedPhotoViewModel: ViewModel {
         case .downloadButtonTap:
             Task { await downloadImage() }
         case .ratingActionIsDone:
-            if true {
-                self.router.dismissSheet()
-            } else {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "openChat"), object: nil)
+            self.router.dismissSheet {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "openChat"), object: true)
             }
         case .shareButtonTap:
             EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)

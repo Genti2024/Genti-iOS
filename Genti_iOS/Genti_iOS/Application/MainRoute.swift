@@ -24,6 +24,7 @@ enum MainRoute: Route {
     case webView(url: String)
     case photoDetail(imageUrl: String)
     case completeMakePhoto(photoInfo: CompletedPhotoEntity)
+    case recommendOpenChat(openChatInfo: OpenChatEntity)
 
     
     @ViewBuilder
@@ -57,6 +58,8 @@ enum MainRoute: Route {
             OnboardingView(viewModel: OnboardingViewModel(router: router))
         case .signIn:
             SignInView(viewModel: SignInViewModel(signInUseCase: SignInUseCaseImpl(authRepository: AuthRepositoryImpl(requestService: RequestServiceImpl()), userdefaultRepository: UserDefaultsRepositoryImpl()), router: router))
+        case .recommendOpenChat(let openChatInfo):
+            OpenChatInfoView(router: router, openChatUrl: openChatInfo.openChatUrl, numberOfPeople: openChatInfo.numberOfPeople)
         }
     }
         
@@ -64,7 +67,7 @@ enum MainRoute: Route {
         switch self {
         case .login, .mainTab, .setting, .secondGen, .thirdGen, .requestCompleted, .webView, .signIn:
             return .push
-        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakePhoto, .onboarding, .waiting:
+        case .photoDetailWithShare, .firstGen, .imagePicker, .photoDetail, .completeMakePhoto, .onboarding, .waiting, .recommendOpenChat:
             return .fullScreenCover
         }
     }

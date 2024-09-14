@@ -8,6 +8,15 @@
 import Foundation
 
 struct UserDefaultsRepositoryImpl: UserDefaultsRepository {
+    func getOpenChatAgreement() -> Bool {
+        guard let isAgree = self.get(forKey: .openChat) as? Bool else { return true }
+        return isAgree
+    }
+    
+    func setOpenChatAgreement(isAgree: Bool) {
+        self.set(to: isAgree, forKey: .openChat)
+    }
+    
     
     func setLoginType(type: GentiSocialLoginType) {
         self.set(to: type.rawValue, forKey: .loginType)

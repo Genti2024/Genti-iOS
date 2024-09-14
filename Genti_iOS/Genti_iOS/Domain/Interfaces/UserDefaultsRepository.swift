@@ -20,6 +20,8 @@ protocol UserDefaultsRepository {
     func removeUserRole()
     func setLoginType(type: GentiSocialLoginType)
     func getLoginType() -> GentiSocialLoginType?
+    func getOpenChatAgreement() -> Bool
+    func setOpenChatAgreement(isAgree: Bool) 
 }
 
 extension UserDefaultsRepository {

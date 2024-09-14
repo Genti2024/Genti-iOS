@@ -130,6 +130,10 @@
 		C04967D32C64982A0097C732 /* UserRequestCancelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04967D22C64982A0097C732 /* UserRequestCancelState.swift */; };
 		C06F28F62C92D01C00A69575 /* AppStoreCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28F52C92D01C00A69575 /* AppStoreCheck.swift */; };
 		C06F28F82C92FE4800A69575 /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28F72C92FE4800A69575 /* UIScreen+Ext.swift */; };
+		C06F28FB2C9419B800A69575 /* OpenChatInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28FA2C9419B800A69575 /* OpenChatInfoView.swift */; };
+		C06F28FD2C9525F900A69575 /* OpenChatEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28FC2C9525F900A69575 /* OpenChatEntity.swift */; };
+		C06F28FF2C95261B00A69575 /* OpenChatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F28FE2C95261B00A69575 /* OpenChatDTO.swift */; };
+		C06F29012C95263A00A69575 /* GentiOpenChatAgreementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F29002C95263A00A69575 /* GentiOpenChatAgreementType.swift */; };
 		C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */; };
 		C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D52C26567500F92320 /* PHAssetImageService.swift */; };
 		C088F2DA2C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */; };
@@ -341,6 +345,10 @@
 		C04967D22C64982A0097C732 /* UserRequestCancelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestCancelState.swift; sourceTree = "<group>"; };
 		C06F28F52C92D01C00A69575 /* AppStoreCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCheck.swift; sourceTree = "<group>"; };
 		C06F28F72C92FE4800A69575 /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
+		C06F28FA2C9419B800A69575 /* OpenChatInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatInfoView.swift; sourceTree = "<group>"; };
+		C06F28FC2C9525F900A69575 /* OpenChatEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatEntity.swift; sourceTree = "<group>"; };
+		C06F28FE2C95261B00A69575 /* OpenChatDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatDTO.swift; sourceTree = "<group>"; };
+		C06F29002C95263A00A69575 /* GentiOpenChatAgreementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GentiOpenChatAgreementType.swift; sourceTree = "<group>"; };
 		C088F2D32C26564A00F92320 /* PHAssetImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepository.swift; sourceTree = "<group>"; };
 		C088F2D52C26567500F92320 /* PHAssetImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageService.swift; sourceTree = "<group>"; };
 		C088F2D92C2656BA00F92320 /* PHAssetImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -590,6 +598,7 @@
 		C049679C2C648F6D0097C732 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C06F28F92C9419A200A69575 /* OpenChat */,
 				C04967CF2C6497DE0097C732 /* Splash */,
 				C04967BF2C6493E40097C732 /* Login */,
 				C049679D2C648F8A0097C732 /* SignIn */,
@@ -654,6 +663,7 @@
 				C017C43B2C1C3AA3009924C9 /* MyImagesEntitiy.swift */,
 				C04967CC2C6496FA0097C732 /* UserInfoEntity.swift */,
 				C01423E62C6D9B9800004683 /* SignInUserEntity.swift */,
+				C06F28FC2C9525F900A69575 /* OpenChatEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -990,6 +1000,7 @@
 				C02843562C314E7200B84566 /* ExampleWithPictureFindResponseDTO.swift */,
 				C017C4552C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift */,
 				C01423E42C6D9B4900004683 /* SignInUserDTO.swift */,
+				C06F28FE2C95261B00A69575 /* OpenChatDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1148,6 +1159,7 @@
 				C017C46D2C1C3AA3009924C9 /* Tab.swift */,
 				C0113D6B2C3A219300071BF6 /* AlertType.swift */,
 				C0DE62712C6C61C0005937B0 /* DetailViewType.swift */,
+				C06F29002C95263A00A69575 /* GentiOpenChatAgreementType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1164,6 +1176,14 @@
 				C0ADA6022C85402200A583B8 /* Album.swift */,
 			);
 			path = Struct;
+			sourceTree = "<group>";
+		};
+		C06F28F92C9419A200A69575 /* OpenChat */ = {
+			isa = PBXGroup;
+			children = (
+				C06F28FA2C9419B800A69575 /* OpenChatInfoView.swift */,
+			);
+			path = OpenChat;
 			sourceTree = "<group>";
 		};
 		C095967C2C4DECBC00FC5ECC /* CustomPopUpModifier */ = {
@@ -1410,6 +1430,7 @@
 				C048A9042C51B64E00026C80 /* SignInViewModel.swift in Sources */,
 				C0113D6A2C3A217600071BF6 /* Alert.swift in Sources */,
 				C017C4882C1C3AA3009924C9 /* ThirdGeneratorView.swift in Sources */,
+				C06F28FB2C9419B800A69575 /* OpenChatInfoView.swift in Sources */,
 				C017C4972C1C3AA3009924C9 /* PHAssetImageView.swift in Sources */,
 				C0113D572C37C17400071BF6 /* ImageRepositoryImpl.swift in Sources */,
 				C04967D32C64982A0097C732 /* UserRequestCancelState.swift in Sources */,
@@ -1469,12 +1490,15 @@
 				C04967CD2C6496FA0097C732 /* UserInfoEntity.swift in Sources */,
 				C03B74C22C57445E00582BD2 /* LoginViewModel.swift in Sources */,
 				C048A8FE2C50DABC00026C80 /* SignInView.swift in Sources */,
+				C06F28FD2C9525F900A69575 /* OpenChatEntity.swift in Sources */,
 				C0113D842C3BEAA400071BF6 /* CornerRadiusWithBorderModifier.swift in Sources */,
+				C06F29012C95263A00A69575 /* GentiOpenChatAgreementType.swift in Sources */,
 				C0BCC4A62C58788F009C89C4 /* APIEventInterceptor.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
 				C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */,
 				C017C4AC2C1C3AA3009924C9 /* MainFeedView.swift in Sources */,
 				C088F2E22C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift in Sources */,
+				C06F28FF2C95261B00A69575 /* OpenChatDTO.swift in Sources */,
 				C048A9012C51B63300026C80 /* Gender.swift in Sources */,
 				C0B80E652C23C5C60071C3CD /* ThirdGeneratorViewModel.swift in Sources */,
 				C0113D892C3BED0400071BF6 /* LinearGradient+Ext.swift in Sources */,
