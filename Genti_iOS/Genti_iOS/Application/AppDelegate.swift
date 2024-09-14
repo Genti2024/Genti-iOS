@@ -56,7 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        if response.notification.request.content.userInfo["notificationType"] as? String == "OPENCHAT" {
+        if response.notification.request.content.userInfo["type"] as? String == "OPENCHAT" {
             NotificationCenter.default.post(
                 name: NSNotification.Name(rawValue: "openChat"),
                 object: false,

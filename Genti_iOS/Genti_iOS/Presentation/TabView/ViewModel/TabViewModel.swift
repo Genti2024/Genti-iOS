@@ -121,6 +121,7 @@ final class TabViewModel: ViewModel {
                 self.router.dismissFullScreenCover {
                     self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))
                 }
+                
             case .canceled(let requestId):
                 EventLogManager.shared.logEvent(.pushNotificationTap(false))
                 await handleCanceledState(requestId: requestId)
