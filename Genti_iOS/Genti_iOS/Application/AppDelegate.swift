@@ -56,18 +56,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        if response.notification.request.content.userInfo["type"] as? String == "OPENCHAT" {
+        let userInfo = response.notification.request.content.userInfo
+        if userInfo["type"] as? String == "OPENCHAT" {
             NotificationCenter.default.post(
                 name: NSNotification.Name(rawValue: "openChat"),
                 object: false,
                 userInfo: nil
             )
-        } else {
+            print(#fileID, #function, #line, "- 오픈챗푸시")
+        } else if userInfo["type"] as? String == "SUCCESS" || userInfo["type"] as? String == "CANCELED" {
             NotificationCenter.default.post(
                 name: NSNotification.Name(rawValue: "PushNotificationReceived"),
                 object: nil,
                 userInfo: nil
             )
+            print(#fileID, #function, #line, "- 성공실패푸시")
+        } else {
+            print(#fileID, #function, #line, "- 아무기능없는푸시")
         }
     }
 

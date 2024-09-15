@@ -31,8 +31,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         
-        if let _ = connectionOptions.notificationResponse {
-            userdefultRepository.set(to: true, forKey: .getPushFromBackground)
+        if let userInfo = connectionOptions.notificationResponse?.notification.request.content.userInfo {
+            if userInfo["type"] as? String == "OPENCHAT" {
+                userdefultRepository.set(to: true, forKey: .getOpenChatPushFromBackground)
+            } else if userInfo["type"] as? String == "SUCCESS" || userInfo["type"] as? String == "CANCELDED"  {
+                userdefultRepository.set(to: true, forKey: .getPushFromBackground)
+            }
         }
         return
         

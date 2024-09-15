@@ -17,6 +17,7 @@ enum UserDefaultsKey: String {
     case getPushFromBackground
     case loginType
     case openChat
+    case getOpenChatPushFromBackground
 }
 
 
