@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C00C3BE82CA7A6F1000C471B /* MaintenanceInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BE72CA7A6F1000C471B /* MaintenanceInfoResponseDTO.swift */; };
+		C00C3BEA2CA7A7AF000C471B /* CheckInspectionTimeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BE92CA7A7AF000C471B /* CheckInspectionTimeEntity.swift */; };
+		C00C3BEC2CA7E033000C471B /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BEB2CA7E033000C471B /* UserState.swift */; };
+		C00C3BEE2CA7E04D000C471B /* InspectionTimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BED2CA7E04D000C471B /* InspectionTimeType.swift */; };
 		C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D542C37C15200071BF6 /* ImageRepository.swift */; };
 		C0113D572C37C17400071BF6 /* ImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */; };
 		C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D582C37C19800071BF6 /* HapticRepository.swift */; };
@@ -223,6 +227,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C00C3BE72CA7A6F1000C471B /* MaintenanceInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceInfoResponseDTO.swift; sourceTree = "<group>"; };
+		C00C3BE92CA7A7AF000C471B /* CheckInspectionTimeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInspectionTimeEntity.swift; sourceTree = "<group>"; };
+		C00C3BEB2CA7E033000C471B /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		C00C3BED2CA7E04D000C471B /* InspectionTimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionTimeType.swift; sourceTree = "<group>"; };
 		C0113D542C37C15200071BF6 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImpl.swift; sourceTree = "<group>"; };
 		C0113D582C37C19800071BF6 /* HapticRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticRepository.swift; sourceTree = "<group>"; };
@@ -658,6 +666,7 @@
 		C04967A12C6490160097C732 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				C00C3BE92CA7A7AF000C471B /* CheckInspectionTimeEntity.swift */,
 				C0BCC4AC2C58842C009C89C4 /* SocialLoginEntity.swift */,
 				C0BCC4B02C58849E009C89C4 /* GentiTokenEntity.swift */,
 				C017C4662C1C3AA3009924C9 /* FeedEntity.swift */,
@@ -1003,6 +1012,7 @@
 				C017C4552C1C3AA3009924C9 /* GetUploadImageUrlDTO.swift */,
 				C01423E42C6D9B4900004683 /* SignInUserDTO.swift */,
 				C06F28FE2C95261B00A69575 /* OpenChatDTO.swift */,
+				C00C3BE72CA7A6F1000C471B /* MaintenanceInfoResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1147,6 +1157,8 @@
 		C04967D72C649A5F0097C732 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				C00C3BED2CA7E04D000C471B /* InspectionTimeType.swift */,
+				C00C3BEB2CA7E033000C471B /* UserState.swift */,
 				C048A9002C51B63300026C80 /* Gender.swift */,
 				C095967F2C4DECEE00FC5ECC /* PopUpType.swift */,
 				C0113D8F2C3D3A0900071BF6 /* OnboardingStep.swift */,
@@ -1473,10 +1485,12 @@
 				C088F2F22C28D76500F92320 /* SeroImageContentView.swift in Sources */,
 				C028435E2C326CAE00B84566 /* UserRouter.swift in Sources */,
 				C017C4962C1C3AA3009924C9 /* PHAssetImageViewModel.swift in Sources */,
+				C00C3BEA2CA7A7AF000C471B /* CheckInspectionTimeEntity.swift in Sources */,
 				C0113D832C3BEAA400071BF6 /* LimitLengthModifier.swift in Sources */,
 				C017C4832C1C3AA3009924C9 /* PhotoRatio.swift in Sources */,
 				C0BCC4BA2C5885CC009C89C4 /* AuthRepositoryImpl.swift in Sources */,
 				C017C48D2C1C3AA3009924C9 /* MyImagesEntitiy.swift in Sources */,
+				C00C3BE82CA7A6F1000C471B /* MaintenanceInfoResponseDTO.swift in Sources */,
 				C0ADA6052C85409F00A583B8 /* AlbumRepository.swift in Sources */,
 				C0ADA6072C8540C200A583B8 /* AlbumRepositoryImpl.swift in Sources */,
 				C0113D812C3BEAA400071BF6 /* CustomAlertModifier.swift in Sources */,
@@ -1551,6 +1565,7 @@
 				C0113D862C3BEAA400071BF6 /* AddXmarkModifier.swift in Sources */,
 				C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */,
 				C0113D902C3D3A0900071BF6 /* OnboardingStep.swift in Sources */,
+				C00C3BEE2CA7E04D000C471B /* InspectionTimeType.swift in Sources */,
 				C06F28F82C92FE4800A69575 /* UIScreen+Ext.swift in Sources */,
 				C049674D2C5C87FE0097C732 /* TabViewUseCase.swift in Sources */,
 				C0ADA6012C851C6C00A583B8 /* ImagePickerViewModel.swift in Sources */,
@@ -1579,6 +1594,7 @@
 				C0DE62702C6C4576005937B0 /* EventLogManager.swift in Sources */,
 				C017C3E02C1C39CE009924C9 /* SceneDelegate.swift in Sources */,
 				C0B192662C7C073800D198A2 /* PushAuthorizationPopup.swift in Sources */,
+				C00C3BEC2CA7E033000C471B /* UserState.swift in Sources */,
 				C0113D5B2C37C1A700071BF6 /* HapticRepositoryImpl.swift in Sources */,
 				C017C4202C1C3A62009924C9 /* GentiApp.swift in Sources */,
 				C0BCC4AD2C58842C009C89C4 /* SocialLoginEntity.swift in Sources */,
@@ -1781,7 +1797,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.iOS.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1823,7 +1839,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Genti.iOS.2024;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

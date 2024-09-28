@@ -8,12 +8,18 @@
 import Foundation
 
 final class UserRepositoryImpl: UserRepository {
-    
+
     let requestService: RequestService
     
     init(requestService: RequestService) {
         self.requestService = requestService
     }
+    
+    func checkInspectionTime() async throws -> CheckInspectionTimeEntity {
+        let dto: MaintenanceInfoResponseDTO = try await requestService.fetchResponse(for: UserRouter.getInspectionTimeInfo)
+        return dto.toEntitiy
+    }
+    
     
     func getOpenChatInfo() async throws -> GentiOpenChatAgreementType {
         let dto: OpenChatDTO = try await requestService.fetchResponse(for: UserRouter.fetchOpenChatInfo)

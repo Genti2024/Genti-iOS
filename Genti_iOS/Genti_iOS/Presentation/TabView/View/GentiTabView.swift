@@ -25,11 +25,6 @@ struct GentiTabView: View {
         .onAppear {
             self.viewModel.sendAction(.viewWillAppear)
         }
-        .overlay(alignment: .center) {
-            if viewModel.state.isLoading {
-                LoadingView()
-            }
-        }
         .customAlert(alertType: $viewModel.state.showAlert)
         .onNotificationRecieved(name: Notification.Name(rawValue: "PushNotificationReceived")) { _ in
             self.viewModel.sendAction(.pushReceived)

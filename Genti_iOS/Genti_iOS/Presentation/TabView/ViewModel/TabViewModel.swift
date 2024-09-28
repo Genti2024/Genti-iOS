@@ -17,7 +17,6 @@ final class TabViewModel: ViewModel {
     
     struct State {
         var currentTab: Tab = .feed
-        var isLoading: Bool = false
         var showAlert: AlertType? = nil
     }
     
@@ -35,14 +34,12 @@ final class TabViewModel: ViewModel {
             state.currentTab = .feed
         case .profileIconTap:
             state.currentTab = .profile
-        case .cameraIconTap:
+        case .cameraIconTap, .pushReceived:
             Task { await handleUserState() }
         case .viewWillAppear:
             Task { await handleBackgroundPush() }
-        case .pushReceived:
-            Task { await handleUserStateFromPush() }
-        case .openChat(let isFromComplete):
-            Task { await handleOpenChat(isFromComplete) }
+        case .openChat:
+            Task { await handleOpenChat() }
         }
     }
     
@@ -53,19 +50,13 @@ final class TabViewModel: ViewModel {
     }
 
     @MainActor
-    func handleOpenChat(_ isFromComplete: Bool) async {
+    func handleOpenChat() async {
         do {
             if userdefaultRepository.getOpenChatAgreement() {
                 switch try await tabViewUseCase.checkOpenChat() {
                 case .agree(let openChatInfo):
-                    if isFromComplete {
-                        self.router.dismissFullScreenCover {
-                            self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
-                        }
-                    } else {
-                        self.router.dismissFullScreenCover {
-                            self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
-                        }
+                    self.router.dismissFullScreenCover {
+                        self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
                     }
                 case .disagree:
                     userdefaultRepository.setOpenChatAgreement(isAgree: false)
@@ -84,7 +75,7 @@ final class TabViewModel: ViewModel {
             case .requestComplete:
                 self.sendAction(.cameraIconTap)
             case .openChat:
-                await self.handleOpenChat(false)
+                await self.handleOpenChat()
             case .none:
                 return
             }
@@ -96,52 +87,26 @@ final class TabViewModel: ViewModel {
     @MainActor
     func handleUserState() async {
         do {
-            state.isLoading = true
-            switch try await tabViewUseCase.getUserState() {
-            case .inProgress:
-                router.routeTo(.waiting)
+            switch try await tabViewUseCase.checkInspectionTime() {
             case .canMake:
-                router.routeTo(.firstGen)
-            case .awaitUserVerification(let completePhotoEntity):
-                state.showAlert = .photoCompleted(action: { self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))})
-            case .canceled(let requestId):
-                await handleCanceledState(requestId: requestId)
-            case .error:
-                state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
+                switch try await tabViewUseCase.getUserState() {
+                case .inProgress:
+                    self.router.dismissFullScreenCover { self.router.routeTo(.waiting) }
+                case .canMake:
+                    self.router.dismissFullScreenCover { self.router.routeTo(.firstGen) }
+                case .awaitUserVerification(let completePhotoEntity):
+                    EventLogManager.shared.logEvent(.pushNotificationTap(true))
+                    self.router.dismissFullScreenCover { self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity)) }
+                case .canceled(let requestId):
+                    EventLogManager.shared.logEvent(.pushNotificationTap(false))
+                    await handleCanceledState(requestId: requestId)
+                case .error:
+                    state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
+                }
+            case .cantMake(let title):
+                self.state.showAlert = .InspectionTime(title: title)
             }
-            state.isLoading = false
-        } catch(let error) {
-            handleError(error)
-        }
-    }
-    
-    @MainActor
-    func handleUserStateFromPush() async {
-        do {
-            state.isLoading = true
-            switch try await tabViewUseCase.getUserState() {
-            case .inProgress:
-                self.router.dismissFullScreenCover {
-                    self.router.routeTo(.waiting)
-                }
-                
-            case .canMake:
-                self.router.dismissFullScreenCover {
-                    self.router.routeTo(.firstGen)
-                }
-                
-            case .awaitUserVerification(let completePhotoEntity):
-                EventLogManager.shared.logEvent(.pushNotificationTap(true))
-                self.router.dismissFullScreenCover {
-                    self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))
-                }
-            case .canceled(let requestId):
-                EventLogManager.shared.logEvent(.pushNotificationTap(false))
-                await handleCanceledState(requestId: requestId)
-            case .error:
-                state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
-            }
-            state.isLoading = false
+
         } catch(let error) {
             handleError(error)
         }
@@ -158,7 +123,6 @@ final class TabViewModel: ViewModel {
     }
     
     private func handleError(_ error: Error) {
-        state.isLoading = false
         guard let error = error as? GentiError else {
             EventLogManager.shared.logEvent(.error(errorCode: "Unknowned", errorMessage: error.localizedDescription))
             state.showAlert = .reportError(action: {self.router.popToRoot()})

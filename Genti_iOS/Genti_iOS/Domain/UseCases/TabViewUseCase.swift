@@ -12,6 +12,7 @@ protocol TabViewUseCase {
     func checkCanceledImage(requestId: Int) async throws
     func getSavedBackgroundPush() async throws -> BackgroundPushType?
     func checkOpenChat() async throws -> GentiOpenChatAgreementType
+    func checkInspectionTime() async throws -> InspectionTimeType
 }
 
 final class TabViewUseCaseImpl: TabViewUseCase {
@@ -22,6 +23,11 @@ final class TabViewUseCaseImpl: TabViewUseCase {
     init(userRepository: UserRepository, userdefaultRepository: UserDefaultsRepository) {
         self.userRepository = userRepository
         self.userdefaultRepository = userdefaultRepository
+    }
+    
+    func checkInspectionTime() async throws -> InspectionTimeType {
+        let inspectionTimeInfo = try await userRepository.checkInspectionTime()
+        return inspectionTimeInfo.canMake ? .canMake : .cantMake(title: inspectionTimeInfo.message)
     }
     
     func getUserState() async throws -> UserState {
