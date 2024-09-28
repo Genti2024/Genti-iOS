@@ -62,7 +62,6 @@ final class TabViewModel: ViewModel {
                         self.router.dismissFullScreenCover {
                             self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
                         }
-                        
                     } else {
                         self.router.dismissFullScreenCover {
                             self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
