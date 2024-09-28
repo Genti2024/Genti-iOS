@@ -10,7 +10,7 @@ import Foundation
 protocol TabViewUseCase {
     func getUserState() async throws -> UserState
     func checkCanceledImage(requestId: Int) async throws
-    func showCompleteStateWhenUserInitalAccess() async throws -> Bool
+    func getSavedBackgroundPush() async throws -> BackgroundPushType?
     func checkOpenChat() async throws -> GentiOpenChatAgreementType
 }
 
@@ -28,10 +28,16 @@ final class TabViewUseCaseImpl: TabViewUseCase {
         return try await userRepository.getUserState()
     }
     
-    func showCompleteStateWhenUserInitalAccess() async throws -> Bool {
+    func getSavedBackgroundPush() async throws -> BackgroundPushType? {
         let hasCanceledOrAwaitedRequest = try await userRepository.checkUserHasCanceledOrAwaitedRequest()
         let hasPushFromBackground = self.hasPushFromBackground()
-        return hasCanceledOrAwaitedRequest || hasPushFromBackground
+        if hasCanceledOrAwaitedRequest || hasPushFromBackground {
+            return .requestComplete
+        } else if let _ = userdefaultRepository.get(forKey: .getOpenChatPushFromBackground) as? Bool {
+            userdefaultRepository.remove(forKey: .getOpenChatPushFromBackground)
+            return .openChat
+        }
+        return nil
     }
     
     func checkOpenChat() async throws -> GentiOpenChatAgreementType {

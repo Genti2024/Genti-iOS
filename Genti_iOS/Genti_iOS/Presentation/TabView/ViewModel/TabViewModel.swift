@@ -38,7 +38,7 @@ final class TabViewModel: ViewModel {
         case .cameraIconTap:
             Task { await handleUserState() }
         case .viewWillAppear:
-            Task { await showRequestResult() }
+            Task { await handleBackgroundPush() }
         case .pushReceived:
             Task { await handleUserStateFromPush() }
         case .openChat(let isFromComplete):
@@ -59,7 +59,9 @@ final class TabViewModel: ViewModel {
                 switch try await tabViewUseCase.checkOpenChat() {
                 case .agree(let openChatInfo):
                     if isFromComplete {
-                        self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
+                        self.router.dismissFullScreenCover {
+                            self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
+                        }
                     } else {
                         self.router.dismissFullScreenCover {
                             self.router.routeTo(.recommendOpenChat(openChatInfo: openChatInfo))
@@ -74,11 +76,17 @@ final class TabViewModel: ViewModel {
         }
     }
     
+    // 백그라운드에서 푸시가 왔는지를 판단
     @MainActor
-    func showRequestResult() async {
+    func handleBackgroundPush() async {
         do {
-            if try await tabViewUseCase.showCompleteStateWhenUserInitalAccess() {
+            switch try await tabViewUseCase.getSavedBackgroundPush() {
+            case .requestComplete:
                 self.sendAction(.cameraIconTap)
+            case .openChat:
+                await self.handleOpenChat(false)
+            case .none:
+                return
             }
         } catch(let error) {
             self.handleError(error)
@@ -113,15 +121,20 @@ final class TabViewModel: ViewModel {
             state.isLoading = true
             switch try await tabViewUseCase.getUserState() {
             case .inProgress:
-                router.routeTo(.waiting)
+                self.router.dismissFullScreenCover {
+                    self.router.routeTo(.waiting)
+                }
+                
             case .canMake:
-                router.routeTo(.firstGen)
+                self.router.dismissFullScreenCover {
+                    self.router.routeTo(.firstGen)
+                }
+                
             case .awaitUserVerification(let completePhotoEntity):
                 EventLogManager.shared.logEvent(.pushNotificationTap(true))
                 self.router.dismissFullScreenCover {
                     self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity))
                 }
-                
             case .canceled(let requestId):
                 EventLogManager.shared.logEvent(.pushNotificationTap(false))
                 await handleCanceledState(requestId: requestId)

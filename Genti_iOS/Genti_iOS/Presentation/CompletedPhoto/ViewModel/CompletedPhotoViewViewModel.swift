@@ -57,9 +57,9 @@ final class CompletedPhotoViewModel: ViewModel {
         case .downloadButtonTap:
             Task { await downloadImage() }
         case .ratingActionIsDone:
-            self.router.dismissSheet {
+//            self.router.dismissSheet {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "openChat"), object: true)
-            }
+//            }
         case .shareButtonTap:
             EventLogManager.shared.addUserPropertyCount(to: .shareButtonTap)
             EventLogManager.shared.logEvent(.clickButton(page: .compltedPhoto, buttonName: "picshare"))

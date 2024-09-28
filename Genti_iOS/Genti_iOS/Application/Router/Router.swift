@@ -12,7 +12,7 @@ final class Router<Destination: Route> {
 
     public var path: NavigationPath = NavigationPath()
     public var presentingFullScreenCover: Destination?
-    var isPresented: Binding<Destination?> = .constant(.none)
+    private var isPresented: Binding<Destination?> = .constant(.none)
     
     @ViewBuilder
     public func view(from route: Destination) -> some View {
@@ -42,19 +42,6 @@ final class Router<Destination: Route> {
         isPresented.wrappedValue = nil
     }
     
-    // sheet입장에서 자기자신(sheet)을 닫음
-    public func dismissSheet(_ handler: @escaping () -> Void) {
-        if let _ = self.isPresented.wrappedValue {
-            self.isPresented.wrappedValue = nil
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
-                handler()
-            }
-            return
-        }
-        handler()
-    }
-    
-    // 특정뷰가 그 위에있는 sheet를 닫음
     public func dismissFullScreenCover(_ handler: @escaping () -> Void) {
         if let _ = self.presentingFullScreenCover {
             self.presentingFullScreenCover = nil
