@@ -9,14 +9,6 @@ import Foundation
 
 import Alamofire
 
-enum UserState {
-    case inProgress
-    case canMake
-    case awaitUserVerification(CompletedPhotoEntity)
-    case canceled(requestId: Int)
-    case error
-}
-
 enum UserRouter: URLRequestConvertible {
     
     case fetchMyPictures
@@ -26,10 +18,11 @@ enum UserRouter: URLRequestConvertible {
     case checkCompletedImage(responeId: Int)
     case checkCanceledImage(requestId: Int)
     case fetchOpenChatInfo
+    case getInspectionTimeInfo
     
     var method: HTTPMethod {
         switch self {
-        case .fetchMyPictures, .getUserState, .checkCanceledImage, .fetchOpenChatInfo:
+        case .fetchMyPictures, .getUserState, .checkCanceledImage, .fetchOpenChatInfo, .getInspectionTimeInfo:
             return .get
         case .reportPicture, .ratePicture, .checkCompletedImage:
             return .post
@@ -38,7 +31,7 @@ enum UserRouter: URLRequestConvertible {
     
     var headers: HTTPHeaders {
         switch self {
-        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchOpenChatInfo:
+        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchOpenChatInfo, .getInspectionTimeInfo:
             return []
         }
     }
@@ -64,6 +57,8 @@ enum UserRouter: URLRequestConvertible {
             return "/api/v1/users/picture-generate-requests/\(requestId)/confirm-cancel-status"
         case .fetchOpenChatInfo:
             return "/api/v1/open-chat"
+        case .getInspectionTimeInfo:
+            return "/api/v1/maintenance"
         }
     }
     
@@ -85,7 +80,7 @@ enum UserRouter: URLRequestConvertible {
             var parameters: [String: Any] = [:]
             parameters["star"] = rate
             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
-        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures, .fetchOpenChatInfo:
+        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures, .fetchOpenChatInfo, .getInspectionTimeInfo:
             return urlRequest
         }
         return urlRequest
