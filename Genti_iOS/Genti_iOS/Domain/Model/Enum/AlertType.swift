@@ -81,7 +81,7 @@ enum AlertType {
         case .update(action: let action):
             return .init(title: "업데이트 알림", message: "더 나은 서비스를 위해 필요한 업데이트가 있습니다!\n업데이트해주시겠어요?", actions: [.init(title: "업데이트하러 가기", action: action)])
         case .InspectionTime(let title):
-            return .init(title: "서비스 점검 중", message: "더 나은 서비스를 위해 점검중입니다\n\(title ?? "하루 후에 이용해주세요")", actions: [.init(title: "확인", action: nil)])
+            return .init(title: "서비스 점검 중", message: "\(title ?? "하루 후에 이용해주세요")", actions: [.init(title: "확인", action: nil)])
         }
     }
 }
