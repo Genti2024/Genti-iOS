@@ -9,11 +9,17 @@ import Foundation
 
 final class UserRepositoryImpl: UserRepository {
 
+
     let requestService: RequestService
     
     init(requestService: RequestService) {
         self.requestService = requestService
     }
+    
+    func checkUserIsVerfied() async throws -> Bool {
+        return try await requestService.fetchResponse(for: UserRouter.getUserIsVerified)
+    }
+    
     
     func checkInspectionTime() async throws -> CheckInspectionTimeEntity {
         let dto: MaintenanceInfoResponseDTO = try await requestService.fetchResponse(for: UserRouter.getInspectionTimeInfo)
