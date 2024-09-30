@@ -11,6 +11,11 @@
 		C00C3BEA2CA7A7AF000C471B /* CheckInspectionTimeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BE92CA7A7AF000C471B /* CheckInspectionTimeEntity.swift */; };
 		C00C3BEC2CA7E033000C471B /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BEB2CA7E033000C471B /* UserState.swift */; };
 		C00C3BEE2CA7E04D000C471B /* InspectionTimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BED2CA7E04D000C471B /* InspectionTimeType.swift */; };
+		C00C3BF02CA80E58000C471B /* FaceCertificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BEF2CA80E58000C471B /* FaceCertificationView.swift */; };
+		C00C3BF22CA90F1C000C471B /* VerificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BF12CA90F1B000C471B /* VerificationUseCase.swift */; };
+		C00C3BF42CA96278000C471B /* ImageGenerateState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BF32CA96278000C471B /* ImageGenerateState.swift */; };
+		C00C3BF62CA96289000C471B /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BF52CA96289000C471B /* CameraView.swift */; };
+		C00C3BFA2CAABC92000C471B /* UploadImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00C3BF92CAABC92000C471B /* UploadImageType.swift */; };
 		C0113D552C37C15200071BF6 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D542C37C15200071BF6 /* ImageRepository.swift */; };
 		C0113D572C37C17400071BF6 /* ImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */; };
 		C0113D592C37C19800071BF6 /* HapticRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0113D582C37C19800071BF6 /* HapticRepository.swift */; };
@@ -231,6 +236,11 @@
 		C00C3BE92CA7A7AF000C471B /* CheckInspectionTimeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInspectionTimeEntity.swift; sourceTree = "<group>"; };
 		C00C3BEB2CA7E033000C471B /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
 		C00C3BED2CA7E04D000C471B /* InspectionTimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionTimeType.swift; sourceTree = "<group>"; };
+		C00C3BEF2CA80E58000C471B /* FaceCertificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCertificationView.swift; sourceTree = "<group>"; };
+		C00C3BF12CA90F1B000C471B /* VerificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationUseCase.swift; sourceTree = "<group>"; };
+		C00C3BF32CA96278000C471B /* ImageGenerateState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerateState.swift; sourceTree = "<group>"; };
+		C00C3BF52CA96289000C471B /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		C00C3BF92CAABC92000C471B /* UploadImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageType.swift; sourceTree = "<group>"; };
 		C0113D542C37C15200071BF6 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		C0113D562C37C17400071BF6 /* ImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImpl.swift; sourceTree = "<group>"; };
 		C0113D582C37C19800071BF6 /* HapticRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticRepository.swift; sourceTree = "<group>"; };
@@ -459,6 +469,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C00C3BF82CA962B8000C471B /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				C00C3BEF2CA80E58000C471B /* FaceCertificationView.swift */,
+				C00C3BF52CA96289000C471B /* CameraView.swift */,
+			);
+			path = Certification;
+			sourceTree = "<group>";
+		};
 		C01423EA2C6ED59E00004683 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,6 +627,7 @@
 		C049679C2C648F6D0097C732 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C00C3BF82CA962B8000C471B /* Certification */,
 				C06F28F92C9419A200A69575 /* OpenChat */,
 				C04967CF2C6497DE0097C732 /* Splash */,
 				C04967BF2C6493E40097C732 /* Login */,
@@ -692,6 +712,7 @@
 				C04967962C647B390097C732 /* PhotoDetailUseCase.swift */,
 				C04967932C647A5B0097C732 /* SignInUseCase.swift */,
 				C01423E82C6ED2EB00004683 /* SettingUseCase.swift */,
+				C00C3BF12CA90F1B000C471B /* VerificationUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1157,6 +1178,8 @@
 		C04967D72C649A5F0097C732 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				C00C3BF92CAABC92000C471B /* UploadImageType.swift */,
+				C00C3BF32CA96278000C471B /* ImageGenerateState.swift */,
 				C00C3BED2CA7E04D000C471B /* InspectionTimeType.swift */,
 				C00C3BEB2CA7E033000C471B /* UserState.swift */,
 				C048A9002C51B63300026C80 /* Gender.swift */,
@@ -1465,6 +1488,7 @@
 				C017C49C2C1C3AA3009924C9 /* RequestService.swift in Sources */,
 				C0A7C64C2C68533400FAA7F1 /* GentiBorderButton.swift in Sources */,
 				C0D74A462C1EA6B500A45371 /* Route.swift in Sources */,
+				C00C3BF42CA96278000C471B /* ImageGenerateState.swift in Sources */,
 				C06F28F62C92D01C00A69575 /* AppStoreCheck.swift in Sources */,
 				C017C4852C1C3AA3009924C9 /* FirstGeneratorView.swift in Sources */,
 				C088F2D62C26567500F92320 /* PHAssetImageService.swift in Sources */,
@@ -1514,6 +1538,7 @@
 				C0BCC4A62C58788F009C89C4 /* APIEventInterceptor.swift in Sources */,
 				C017C4A22C1C3AA3009924C9 /* BlurView.swift in Sources */,
 				C0113D622C37C25400071BF6 /* PhotoDetailView.swift in Sources */,
+				C00C3BF02CA80E58000C471B /* FaceCertificationView.swift in Sources */,
 				C017C4AC2C1C3AA3009924C9 /* MainFeedView.swift in Sources */,
 				C088F2E22C26F10D00F92320 /* ImageGenerateRepositoryImpl.swift in Sources */,
 				C06F28FF2C95261B00A69575 /* OpenChatDTO.swift in Sources */,
@@ -1546,6 +1571,7 @@
 				C0B80E5E2C23C57C0071C3CD /* RequestImageData.swift in Sources */,
 				C0DE62772C6C6338005937B0 /* LogUserPropertyType.swift in Sources */,
 				C09596822C4DED1C00FC5ECC /* CustomPopupModifier.swift in Sources */,
+				C00C3BF62CA96289000C471B /* CameraView.swift in Sources */,
 				C017C4822C1C3AA3009924C9 /* PhotoFrame.swift in Sources */,
 				C0BCC4BE2C5885F8009C89C4 /* TokenRepositoryImpl.swift in Sources */,
 				C028436E2C32BB6D00B84566 /* FeedRepositoryImpl.swift in Sources */,
@@ -1568,6 +1594,7 @@
 				C00C3BEE2CA7E04D000C471B /* InspectionTimeType.swift in Sources */,
 				C06F28F82C92FE4800A69575 /* UIScreen+Ext.swift in Sources */,
 				C049674D2C5C87FE0097C732 /* TabViewUseCase.swift in Sources */,
+				C00C3BF22CA90F1C000C471B /* VerificationUseCase.swift in Sources */,
 				C0ADA6012C851C6C00A583B8 /* ImagePickerViewModel.swift in Sources */,
 				C0A7C6482C68415D00FAA7F1 /* RequestWaitingView.swift in Sources */,
 				C017C4862C1C3AA3009924C9 /* GenerateRequestCompleteView.swift in Sources */,
@@ -1583,6 +1610,7 @@
 				C0D74A442C1EA6A200A45371 /* RoutingView.swift in Sources */,
 				C048A90A2C5227CF00026C80 /* AuthRouter.swift in Sources */,
 				C0ADA5FF2C851C5100A583B8 /* ImagePickerView.swift in Sources */,
+				C00C3BFA2CAABC92000C471B /* UploadImageType.swift in Sources */,
 				C017C47A2C1C3AA3009924C9 /* CompletedPhotoView.swift in Sources */,
 				C0BCC4BC2C5885E8009C89C4 /* TokenRepository.swift in Sources */,
 				C088F2D42C26564A00F92320 /* PHAssetImageRepository.swift in Sources */,
@@ -1786,6 +1814,7 @@
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Genti;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSCameraUsageDescription = "'얼굴인증'기능을 사용하기 위해 카메라에 접근";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "생성된 사진을 앨범에 저장하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "‘나만의 AI사진 생성 기능’을 사용하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1828,6 +1857,7 @@
 				INFOPLIST_FILE = Genti_iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Genti;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSCameraUsageDescription = "'얼굴인증'기능을 사용하기 위해 카메라에 접근";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "생성된 사진을 앨범에 저장하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "‘나만의 AI사진 생성 기능’을 사용하기 위해 사진 라이브러리 접근권한 동의가 필요합니다. 설정에서 이를 변경할 수 있습니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
