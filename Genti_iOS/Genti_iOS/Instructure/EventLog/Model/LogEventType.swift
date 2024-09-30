@@ -29,6 +29,7 @@ enum LogEventType {
     case resign
     case seeCompletePhoto
     case pushNotificationTap(Bool)
+    case verifyAppear
     
     var eventName: String {
         switch self {
@@ -74,6 +75,8 @@ enum LogEventType {
             return "click_push_notification"
         case .error:
             return "error"
+        case .verifyAppear:
+            return "view_verifyme1"
         }
     }
     

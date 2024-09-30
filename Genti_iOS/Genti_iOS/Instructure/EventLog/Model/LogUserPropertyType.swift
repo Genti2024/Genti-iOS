@@ -19,6 +19,7 @@ enum LogUserPropertyType {
     case refreshMainView
     case createNewPhoto
     case agreePushNotification(isAgree: Bool)
+    case verify(isDone: Bool)
     
     var propertyName: String {
         switch self {
@@ -44,6 +45,8 @@ enum LogUserPropertyType {
             return "user_piccreate"
         case .agreePushNotification:
             return "user_alarm"
+        case .verify:
+            return "user_verify"
         }
     }
     
