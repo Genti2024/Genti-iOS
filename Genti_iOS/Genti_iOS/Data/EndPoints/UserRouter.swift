@@ -19,10 +19,11 @@ enum UserRouter: URLRequestConvertible {
     case checkCanceledImage(requestId: Int)
     case fetchOpenChatInfo
     case getInspectionTimeInfo
+    case getUserIsVerified
     
     var method: HTTPMethod {
         switch self {
-        case .fetchMyPictures, .getUserState, .checkCanceledImage, .fetchOpenChatInfo, .getInspectionTimeInfo:
+        case .fetchMyPictures, .getUserState, .checkCanceledImage, .fetchOpenChatInfo, .getInspectionTimeInfo, .getUserIsVerified:
             return .get
         case .reportPicture, .ratePicture, .checkCompletedImage:
             return .post
@@ -31,7 +32,7 @@ enum UserRouter: URLRequestConvertible {
     
     var headers: HTTPHeaders {
         switch self {
-        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchOpenChatInfo, .getInspectionTimeInfo:
+        case .fetchMyPictures, .reportPicture, .ratePicture, .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchOpenChatInfo, .getInspectionTimeInfo, .getUserIsVerified:
             return []
         }
     }
@@ -59,6 +60,8 @@ enum UserRouter: URLRequestConvertible {
             return "/api/v1/open-chat"
         case .getInspectionTimeInfo:
             return "/api/v1/maintenance"
+        case .getUserIsVerified:
+            return "/api/v1/user-verification"
         }
     }
     
@@ -80,7 +83,7 @@ enum UserRouter: URLRequestConvertible {
             var parameters: [String: Any] = [:]
             parameters["star"] = rate
             urlRequest = try URLEncoding(destination: .queryString).encode(urlRequest, with: parameters)
-        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures, .fetchOpenChatInfo, .getInspectionTimeInfo:
+        case .getUserState, .checkCompletedImage, .checkCanceledImage, .fetchMyPictures, .fetchOpenChatInfo, .getInspectionTimeInfo, .getUserIsVerified:
             return urlRequest
         }
         return urlRequest
