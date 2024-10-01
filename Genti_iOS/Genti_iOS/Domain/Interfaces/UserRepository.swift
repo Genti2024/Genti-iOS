@@ -18,4 +18,5 @@ protocol UserRepository {
     func checkUserHasCanceledOrAwaitedRequest() async throws -> Bool
     func getOpenChatInfo() async throws -> GentiOpenChatAgreementType
     func checkInspectionTime() async throws -> CheckInspectionTimeEntity
+    func checkUserIsVerfied() async throws -> Bool
 }

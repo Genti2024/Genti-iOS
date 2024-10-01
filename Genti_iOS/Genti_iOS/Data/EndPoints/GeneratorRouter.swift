@@ -11,13 +11,14 @@ import Alamofire
 
 enum GeneratorRouter: URLRequestConvertible {
     
-    case getPresignedUrl(fileName: String)
+    case getPresignedUrl(fileName: String, imageType: UploadImageType)
     case getPresignedUrls(fileNames: [String])
     case requestImage(prompt: String, poseURL: String?, faceURLs: [String], angle: PhotoAngle, coverage: PhotoFrame, ratio: PhotoRatio)
+    case verificationUser(faceURL: String)
     
     var method: HTTPMethod {
         switch self {
-        case .getPresignedUrl, .getPresignedUrls, .requestImage:
+        case .getPresignedUrl, .getPresignedUrls, .requestImage, .verificationUser:
             return .post
         }
     }
@@ -34,6 +35,8 @@ enum GeneratorRouter: URLRequestConvertible {
             return "/api/v1/presigned-url/many"
         case .requestImage:
             return "/api/v1/users/picture-generate-requests"
+        case .verificationUser:
+            return "/api/v1/user-verification"
         }
     }
     
@@ -45,8 +48,8 @@ enum GeneratorRouter: URLRequestConvertible {
         
         
         switch self {
-        case .getPresignedUrl(let fileName):
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["fileName": fileName, "fileType": "USER_UPLOADED_IMAGE"])
+        case .getPresignedUrl(let fileName, let type):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: ["fileName": fileName, "fileType": type.bodyValue])
             
         case .getPresignedUrls(let fileNames):
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: fileNames.reduce(into: [Parameters](), {$0.append(["fileName": $1, "fileType": "USER_UPLOADED_IMAGE"])}))
@@ -60,6 +63,10 @@ enum GeneratorRouter: URLRequestConvertible {
                 "pictureRatio": ratio.requsetString,
                 "posePicture": ["key": poseURL]
             ])
+        case .verificationUser(faceURL: let faceURL):
+            var parameters: [String: Any] = [:]
+            parameters["key"] = faceURL
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         }
         
         return urlRequest

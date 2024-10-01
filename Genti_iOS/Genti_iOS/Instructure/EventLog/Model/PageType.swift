@@ -17,6 +17,8 @@ enum PageType {
     case profile
     case compltedPhoto
     case pushAuthorizationAlert
+    case verify1
+    case verify2
     
     var pageName: String {
         switch self {
@@ -38,6 +40,10 @@ enum PageType {
             return "picdone"
         case .pushAuthorizationAlert:
             return "alarmagree"
+        case .verify1:
+            return "verifyme1"
+        case .verify2:
+            return "verifyme2"
         }
     }
 }

@@ -86,7 +86,7 @@ struct SettingView: View {
                 .frame(height: 40)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .overlay(alignment: .trailing) {
-                    Text("1.0.0")
+                    Text(AppStoreCheck.appVersion ?? "1.0.0")
                         .pretendard(.normal)
                         .foregroundStyle(.gray3)
                 }

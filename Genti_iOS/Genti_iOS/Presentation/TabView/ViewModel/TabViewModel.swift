@@ -84,29 +84,26 @@ final class TabViewModel: ViewModel {
         }
     }
     
+
     @MainActor
     func handleUserState() async {
         do {
-            switch try await tabViewUseCase.checkInspectionTime() {
+            switch try await tabViewUseCase.getUserState() {
+            case .Inspection(let timeInfo):
+                self.state.showAlert = .InspectionTime(title: timeInfo)
+            case .needCertification:
+                self.router.routeTo(.userVerification)
             case .canMake:
-                switch try await tabViewUseCase.getUserState() {
-                case .inProgress:
-                    self.router.dismissFullScreenCover { self.router.routeTo(.waiting) }
-                case .canMake:
-                    self.router.dismissFullScreenCover { self.router.routeTo(.firstGen) }
-                case .awaitUserVerification(let completePhotoEntity):
-                    EventLogManager.shared.logEvent(.pushNotificationTap(true))
-                    self.router.dismissFullScreenCover { self.router.routeTo(.completeMakePhoto(photoInfo: completePhotoEntity)) }
-                case .canceled(let requestId):
-                    EventLogManager.shared.logEvent(.pushNotificationTap(false))
-                    await handleCanceledState(requestId: requestId)
-                case .error:
-                    state.showAlert = .reportGentiError(error: GentiError.serverError(code: "오류", message: "예상치못한 유저상태입니다"), action: nil)
-                }
-            case .cantMake(let title):
-                self.state.showAlert = .InspectionTime(title: title)
+                self.router.dismissFullScreenCover { self.router.routeTo(.firstGen) }
+            case .waitComplete:
+                self.router.dismissFullScreenCover { self.router.routeTo(.waiting) }
+            case .canceledBeforeRequest(let requestId):
+                EventLogManager.shared.logEvent(.pushNotificationTap(false))
+                await handleCanceledState(requestId: requestId)
+            case .waitForWatchingCompletedImage(let imageInfo):
+                EventLogManager.shared.logEvent(.pushNotificationTap(true))
+                self.router.dismissFullScreenCover { self.router.routeTo(.completeMakePhoto(photoInfo: imageInfo)) }
             }
-
         } catch(let error) {
             handleError(error)
         }
@@ -116,7 +113,7 @@ final class TabViewModel: ViewModel {
     func handleCanceledState(requestId: Int) async {
         do {
             try await tabViewUseCase.checkCanceledImage(requestId: requestId)
-            state.showAlert = .photoRequestCanceled(action: { self.router.routeTo(.firstGen) })
+            state.showAlert = .photoRequestCanceled(action: { self.sendAction(.cameraIconTap) })
         } catch(let error) {
             handleError(error)
         }
@@ -132,3 +129,5 @@ final class TabViewModel: ViewModel {
         state.showAlert = .reportError(action: {self.router.popToRoot()})
     }
 }
+
+

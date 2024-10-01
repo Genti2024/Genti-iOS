@@ -8,15 +8,16 @@
 import Foundation
 
 protocol TabViewUseCase {
-    func getUserState() async throws -> UserState
+    func getUserState() async throws -> ImageGenerateState
     func checkCanceledImage(requestId: Int) async throws
     func getSavedBackgroundPush() async throws -> BackgroundPushType?
     func checkOpenChat() async throws -> GentiOpenChatAgreementType
     func checkInspectionTime() async throws -> InspectionTimeType
+    func checkUserIsVerfied() async throws -> Bool
 }
 
 final class TabViewUseCaseImpl: TabViewUseCase {
-
+    
     let userRepository: UserRepository
     let userdefaultRepository: UserDefaultsRepository
     
@@ -25,13 +26,34 @@ final class TabViewUseCaseImpl: TabViewUseCase {
         self.userdefaultRepository = userdefaultRepository
     }
     
+    func checkUserIsVerfied() async throws -> Bool {
+        return try await userRepository.checkUserIsVerfied()
+    }
+    
     func checkInspectionTime() async throws -> InspectionTimeType {
         let inspectionTimeInfo = try await userRepository.checkInspectionTime()
         return inspectionTimeInfo.canMake ? .canMake : .cantMake(title: inspectionTimeInfo.message)
     }
     
-    func getUserState() async throws -> UserState {
-        return try await userRepository.getUserState()
+    func getUserState() async throws -> ImageGenerateState {
+        let userState = try await userRepository.getUserState()
+        switch userState {
+        case .inProgress:
+            return .waitComplete
+        case .canMake:
+            switch try await self.checkInspectionTime() {
+            case .canMake:
+                return try await self.checkUserIsVerfied() ? .canMake : .needCertification
+            case .cantMake(let timeInfo):
+                return .Inspection(time: timeInfo)
+            }
+        case .awaitUserVerification(let completedPhotoEntity):
+            return .waitForWatchingCompletedImage(imageInfo: completedPhotoEntity)
+        case .canceled(let requestId):
+            return .canceledBeforeRequest(requestID: requestId)
+        case .error:
+            throw GentiError.serverError(code: "SERVER", message: "유저상태가 error")
+        }
     }
     
     func getSavedBackgroundPush() async throws -> BackgroundPushType? {
