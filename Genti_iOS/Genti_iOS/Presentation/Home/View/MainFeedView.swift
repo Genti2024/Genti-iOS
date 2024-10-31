@@ -12,24 +12,17 @@ struct MainFeedView: View {
     @State var viewModel: MainFeedViewModel
     
     var body: some View {
-        ZStack {
-            VStack {
-                headerView()
-                ScrollView {
-                    scrollHederView()
-                    feedsView()
-                }
-                .refreshable {
-                    viewModel.sendAction(.refresh)
-                }
-            }.zIndex(0)
-            
-            if !viewModel.state.isLogoHidden {
-                logoView().zIndex(1)
+        VStack {
+            ScrollView {
+                scrollHederView()
+                feedsView()
             }
-        } //:ZSTACK
+            .refreshable {
+                viewModel.sendAction(.refresh)
+            }
+        }
         .background {
-            Color.backgroundWhite
+            Color.geintiBackground
                 .ignoresSafeArea()
         }
         .onFirstAppear {
@@ -51,49 +44,44 @@ struct MainFeedView: View {
         }
     }
     private func scrollHederView() -> some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Image(.gentiLogoGreen)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 77, height: 23)
+                
+                Spacer()
+                
+                Image(.infoIcon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20, height: 20)
+                    .onTapGesture {
+                        self.viewModel.sendAction(.genfluencerExplainTap)
+                    }
+            }
+            .frame(height: 44)
+            
             Spacer()
-                .frame(height: 12)
-            Text("젠플루엔서들이 만든 사진이에요")
-                .pretendard(.normal)
-                .foregroundStyle(.black)
-                .frame(height: 22)
-            Text("젠플루언서란?")
-                .pretendard(.number)
-                .foregroundStyle(.gentiGreen)
-                .underline()
-                .frame(height: 25)
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    viewModel.sendAction(.genfluencerExplainTap)
-                }
+                .frame(height: 6)
+            
+            Text("젠플루언서들이 만든 사진을 둘러보세요.")
+                .pretendard(.subtitle1_18_bold)
+                .foregroundStyle(.white)
+                .frame(height: 26)
+            
             Spacer()
-                .frame(height: 11)
-            Text("*여러분이 만든 사진은 자동으로 업로드 되지 않아요")
-                .foregroundStyle(.gray2)
-                .pretendard(.description)
-                .frame(maxWidth: .infinity)
-                .frame(height: 16)
-                .padding(.bottom, 13)
-                .background {
-                    LinearGradient.backgroundGreen1
-                }
-                .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+                .frame(height: 2)
+            
+            Text("여러분들이 만든 사진은 자동으로 업로드되지 않습니다.")
+                .pretendard(.body_14_medium)
+                .foregroundStyle(.white.opacity(0.4))
+                .frame(height: 20)
         }
-    }
-    private func headerView() -> some View {
-        VStack {
-            Spacer()
-            Image("Genti_logo_green")
-                .frame(height: 23)
-                .aspectRatio(contentMode: .fill)
-        }
-        .frame(height: 37)
-    }
-    private func logoView() -> some View {
-        Image("Sparks")
-            .padding(.leading, 15)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
     }
 }
 //

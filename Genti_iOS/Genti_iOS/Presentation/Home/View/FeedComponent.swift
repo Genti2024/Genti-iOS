@@ -17,37 +17,36 @@ struct FeedComponent: View {
         VStack {
             mainImageView()
             photoDescriptionView()
-            detailedDescriptionView()
         }
-        .background(Color.green4)
-        .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 15, lineWidth: 1)
+        .background(Color.buttonBackground)
+        .cornerRadius(10, corners: .allCorners)
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
     
     private func mainImageView() -> some View {
         ImageLoaderView(urlString: imageUrl, ratio: ratio)
-            .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 15, lineWidth: 1)
+            .cornerRadius(6, corners: .allCorners)
     }
     private func photoDescriptionView() -> some View {
-        HStack {
-            Text("사진 설명")
-                .pretendard(.number)
-                .foregroundColor(.black)
-            Spacer()
+        VStack(spacing: 10) {
+            HStack {
+                Text("사진 설명")
+                    .pretendard(.body_14_medium)
+                    .foregroundStyle(.white.opacity(0.4))
+                
+                Spacer()
+            }
+
+            HStack {
+                Text(description)
+                    .multilineTextAlignment(.leading)
+                    .pretendard(.body_14_medium)
+                    .foregroundStyle(.white.opacity(0.8))
+                Spacer()
+            }
+
         }
-        .padding(.horizontal, 10)
-    }
-    private func detailedDescriptionView() -> some View {
-        Text(description)
-            .pretendard(.normal)
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity, minHeight: 80, alignment: .topLeading)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 8)
-            .background(Color.white)
-            .cornerRadiusWithBorder(style: Color.gentiGreen, radius: 10, lineWidth: 1)
-            .padding(.horizontal, 10)
-            .padding(.bottom, 10)
+        .padding(16)
     }
 }

@@ -13,11 +13,13 @@ struct CustomTabView: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Image(viewModel.state.currentTab == .feed ? "Feed_fill" : "Feed_empty")
+            Image(.feedIcon)
+                
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
+                .opacity(viewModel.state.currentTab == .feed ? 0.8 : 0.4)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
                     EventLogManager.shared.logEvent(.clickMainTab)
@@ -25,7 +27,7 @@ struct CustomTabView: View {
                 }
             Spacer()
             
-            Image("Camera")
+            Image(.cameraIcon)
                 .frame(width: 60, height: 60)
                 .padding(3)
                 .background(.black.opacity(0.001))
@@ -36,11 +38,12 @@ struct CustomTabView: View {
 
 
             Spacer()
-            Image(viewModel.state.currentTab == .profile ? "User_fill" : "User_empty")
+            Image(.profileIcon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26, height: 26)
                 .padding(3)
+                .opacity(viewModel.state.currentTab == .profile ? 0.8 : 0.4)
                 .background(.black.opacity(0.001))
                 .onTapGesture {
                     EventLogManager.shared.logEvent(.clickMyPageTab)
@@ -52,12 +55,9 @@ struct CustomTabView: View {
         .background(
             ZStack(alignment: .top) {
                 // Background Color
-                Color.backgroundWhite
+                Color.geintiBackground
                     .ignoresSafeArea()
-                // Content
-                Rectangle()
-                    .fill(.gray6)
-                    .frame(height: 1)
+                
             } //:ZSTACK
         )
         .shadow(type: .strong)
