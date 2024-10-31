@@ -30,21 +30,18 @@ struct FeedComponent: View {
     }
     private func photoDescriptionView() -> some View {
         VStack(spacing: 10) {
-            HStack {
-                Text("사진 설명")
-                    .pretendard(.body_14_medium)
-                    .foregroundStyle(.white.opacity(0.4))
-                
-                Spacer()
-            }
 
-            HStack {
-                Text(description)
-                    .multilineTextAlignment(.leading)
-                    .pretendard(.body_14_medium)
-                    .foregroundStyle(.white.opacity(0.8))
-                Spacer()
-            }
+            Text("사진 설명")
+                .pretendard(.body_14_medium)
+                .foregroundStyle(.white.opacity(0.4))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Text(description)
+                .multilineTextAlignment(.leading)
+                .pretendard(.body_14_medium)
+                .foregroundStyle(.white.opacity(0.8))
+                .frame(maxWidth: .infinity, alignment: .leading)
+
 
         }
         .padding(16)
