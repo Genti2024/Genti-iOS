@@ -10,23 +10,21 @@ import AuthenticationServices
 
 struct LoginView: View {
     @State var viewModel: LoginViewModel
-
-    let request = RequestServiceImpl()
     var body: some View {
-        GeometryReader(content: {
-            geometry in
-            VStack(spacing: 55) {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            
+            VStack {
+                backgroundView()
+                Spacer()
+            }
+            
+            VStack {
                 mainHeaderView()
+                Spacer()
                 socialLoginButtonsView()
-            } //:VSTACK
-            .position(
-                x: geometry.size.width*0.5,
-                y: geometry.size.height*0.58
-            )
-            .frame(width: geometry.size.width, height: geometry.size.height)
-        })
-        .background {
-            backgroundView()
+            }
         }
         .toolbar(.hidden, for: .navigationBar)
         .customAlert(alertType: $viewModel.state.showAlert)
@@ -39,19 +37,19 @@ struct LoginView: View {
         } //:VSTACK
     }
     private func kakaoLoginButton() -> some View {
-        Image("Kakao_Login")
+        Image(.kakaoLoginNew)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(height: 45)
+            .frame(height: 48)
             .asButton {
                 viewModel.sendAction(.kakaoLoginTap)
             }
     }
     private func appleLoginButton() -> some View {
-        Image("Apple_Login")
+        Image(.appleLoginNew)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(height: 44)
+            .frame(height: 48)
             .overlay {
                 SignInWithAppleButton { request in
                     request.requestedScopes = [.fullName, .email]
@@ -62,24 +60,25 @@ struct LoginView: View {
             }
     }
     private func backgroundView() -> some View {
-        Image("Login_Asset")
+        Image(.imgBack)
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .ignoresSafeArea()
     }
     private func mainHeaderView() -> some View {
-        VStack(spacing: 30) {
-            Image("Genti_LOGO")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 94)
+        
+        VStack(alignment: .leading, spacing: 8) {
+            Text("내 마음대로 세상에 하나뿐인\n나의 AI 사진을 찍어 보세요.")
+                .multilineTextAlignment(.leading)
+                .pretendard(.title1_24_bold)
+                .foregroundStyle(.white)
             
-            Text("내 마음대로 표현하는\n하나뿐인 AI사진")
-                .multilineTextAlignment(.center)
-                .bold()
-                .font(.system(size: 20))
+            Text("5초만에 가입해서 바로 시작할 수 있어요.")
+                .pretendard(.body_14_medium)
+                .foregroundStyle(.white)
             
         } //:VSTACK
+        .padding(.top, 76)
     }
 }
 
