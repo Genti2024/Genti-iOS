@@ -23,9 +23,18 @@ enum Gender: String, CaseIterable {
     var rawValue: String {
         switch self {
         case .boy:
-            return "남자"
+            return "남성"
         case .girl:
-            return "여자"
+            return "여성"
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .boy:
+            return "man_icon"
+        case .girl:
+            return "women_icon"
         }
     }
 }

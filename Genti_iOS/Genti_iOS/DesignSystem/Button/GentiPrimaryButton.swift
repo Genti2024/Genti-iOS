@@ -21,13 +21,13 @@ struct GentiPrimaryButton: View {
     
     var body: some View {
         Text(title)
-            .pretendard(.headline1)
-            .foregroundStyle(isActive ? .white : .gray3)
-            .frame(height: 50)
+            .pretendard(.subtitle2_16_bold)
+            .foregroundStyle(.black)
+            .frame(height: 48)
             .frame(maxWidth: .infinity)
-            .background(isActive ? .green1 : .gray6)
+            .background(isActive ? .gentiGreenNew : .gentiDisabled)
             .clipShape(.rect(cornerRadius: 10))
-            .padding(.horizontal, 28)
+            .padding(.horizontal, 16)
             .asButton(.press) {
                 action()
             }

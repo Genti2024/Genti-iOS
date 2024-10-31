@@ -20,5 +20,7 @@ extension LinearGradient {
     
     static let buttonGreen = LinearGradient(colors: [.buttonGreen1, .buttonGreen2], startPoint: .leading, endPoint: .bottomTrailing)
     
-//    static let gentiGradation = Line
+    static let gentiGradation = LinearGradient(colors: [.gentiGradationStart, .gentiGradationEnd], startPoint: .topLeading, endPoint: .bottomTrailing)
+    
+    static let gentiGradationOpacity = LinearGradient(colors: [.gentiGradationStart, .gentiGradationEnd.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
 }
