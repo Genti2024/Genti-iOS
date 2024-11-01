@@ -17,10 +17,10 @@ struct AddXmarkModifier: ViewModifier {
         content
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay(alignment: .topTrailing) {
-                Image(.xmarkEmpty)
+                Image(.xmarkNew)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 29, height: 29)
+                    .frame(width: 14, height: 14)
                     .padding(7)
                     .onTapGesture {
                         xmarkTap?()

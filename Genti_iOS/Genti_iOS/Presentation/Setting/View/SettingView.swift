@@ -17,13 +17,22 @@ struct SettingView: View {
     var body: some View {
         
         ZStack(alignment: .top) {
-            backgroundView()
+            Color.geintiBackground
+                .ignoresSafeArea()
             VStack(spacing: 4) {
                 headerView()
+                    
                 infoView()
+                
+                Rectangle()
+                    .fill(.white.opacity(0.3))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 1)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 18)
+                
                 userView()
                 Spacer()
-                footerView()
             } //:VSTACK
             if viewModel.state.isLoading {
                 LoadingView()
@@ -34,32 +43,29 @@ struct SettingView: View {
         .toolbar(.hidden, for: .tabBar)
     }
     
-    private func backgroundView() -> some View {
-        Color.geintiBackground
-            .ignoresSafeArea()
-    }
-    
     private func headerView() -> some View {
-        RoundedRectangle(cornerRadius: 15)
-            .fill(.green3)
-            .frame(height: 100)
-            .overlay(alignment: .bottomLeading) {
-                Text("설정 및 개인정보")
-                    .pretendard(.normal)
-                    .foregroundStyle(.gray3)
-                    .padding(.bottom, 17)
-                    .padding(.leading, 40)
+        
+        Text("설정")
+            .pretendard(.subtitle1_18_bold)
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 44)
+            .overlay(alignment: .center) {
+                HStack(alignment: .center) {
+                    Image(.backNew)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                        .onTapGesture {
+                            self.viewModel.sendAction(.backButtonTap)
+                        }
+                    
+                    Spacer()
+                }
+
             }
-            .overlay(alignment: .topLeading) {
-                Image("Back_fill")
-                    .resizable()
-                    .frame(width: 29, height: 29)
-                    .padding(.leading, 30)
-                    .padding(.top, 16)
-                    .onTapGesture {
-                        self.viewModel.sendAction(.backButtonTap)
-                    }
-            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
     }
     private func infoView() -> some View {
         VStack(spacing: 0) {
@@ -76,49 +82,40 @@ struct SettingView: View {
             }
             
             Text("앱 버전 정보")
-                .pretendard(.normal)
-                .foregroundStyle(.black)
-                .frame(height: 40)
+                .pretendard(.subtitle2_16_bold)
+                .foregroundStyle(.white)
+                .frame(height: 48)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .overlay(alignment: .trailing) {
                     Text(AppStoreCheck.appVersion ?? "1.0.0")
                         .pretendard(.normal)
                         .foregroundStyle(.gray3)
                 }
-                .padding(.leading, 20)
+                .padding(.horizontal, 16)
             
         }
-        .padding(20)
-        .background(.gray6)
-        .clipShape(.rect(cornerRadius: 15))
     }
     private func userView() -> some View {
         VStack(spacing: 0) {
-            SettingRow(title: "로그아웃") {
-                self.viewModel.sendAction(.logoutRowTap)
-            }
-            
-            Text("회원탈퇴")
-                .pretendard(.normal)
-                .foregroundStyle(.gray3)
-                .frame(height: 40)
+            Text("로그아웃")
+                .pretendard(.subtitle2_16_bold)
+                .foregroundStyle(.gentiGreenNew)
+                .frame(height: 48)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 20)
-                .background(.gray6)
+                .padding(.horizontal, 16)
+                .onTapGesture {
+                    self.viewModel.sendAction(.logoutRowTap)
+                }
+            Text("회원탈퇴")
+                .pretendard(.subtitle2_16_bold)
+                .foregroundStyle(.white.opacity(0.6))
+                .frame(height: 48)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
                 .onTapGesture {
                     self.viewModel.sendAction(.resignRowTap)
                 }
         }
-        .padding(20)
-        .background(.gray6)
-        .clipShape(.rect(cornerRadius: 15))
-    }
-    private func footerView() -> some View {
-        Image("Genti_LOGO")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: 38)
-            .padding(.bottom, 10)
     }
 }
 

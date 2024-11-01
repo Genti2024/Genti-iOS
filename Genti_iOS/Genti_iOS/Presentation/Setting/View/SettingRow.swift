@@ -14,11 +14,17 @@ struct SettingRow: View {
     
     var body: some View {
         Text(title)
-            .pretendard(.normal)
-            .foregroundStyle(.black)
-            .frame(height: 40)
+            .pretendard(.subtitle2_16_bold)
+            .foregroundStyle(.white)
+            .frame(height: 48)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 20)
+            .overlay(alignment: .trailing) {
+                Image(.rightShavronNew)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 9, height: 15)
+            }
+            .padding(.horizontal, 16)
             .background(.black.opacity(0.001))
             .onTapGesture {
                 rowTapped?()
