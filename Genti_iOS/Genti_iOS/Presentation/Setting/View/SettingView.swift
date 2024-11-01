@@ -15,6 +15,7 @@ struct SettingView: View {
     @State var viewModel: SettingViewModel
     
     var body: some View {
+        
         ZStack(alignment: .top) {
             backgroundView()
             VStack(spacing: 4) {
@@ -34,14 +35,8 @@ struct SettingView: View {
     }
     
     private func backgroundView() -> some View {
-        ZStack(alignment: .top) {
-            Color.backgroundWhite
-                .ignoresSafeArea()
-            
-            Color.green3
-                .frame(height: 100)
-                .ignoresSafeArea()
-        }
+        Color.geintiBackground
+            .ignoresSafeArea()
     }
     
     private func headerView() -> some View {

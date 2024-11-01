@@ -17,6 +17,7 @@ struct MainFeedView: View {
                 scrollHederView()
                 feedsView()
             }
+            .scrollIndicators(.hidden)
             .refreshable {
                 viewModel.sendAction(.refresh)
             }
