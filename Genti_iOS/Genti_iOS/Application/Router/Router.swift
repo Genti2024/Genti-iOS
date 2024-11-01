@@ -42,6 +42,10 @@ final class Router<Destination: Route> {
         isPresented.wrappedValue = nil
     }
     
+    public func dismissFullScreenCover() {
+        self.presentingFullScreenCover = nil
+    }
+    
     public func dismissFullScreenCover(_ handler: @escaping () -> Void) {
         if let _ = self.presentingFullScreenCover {
             self.presentingFullScreenCover = nil
