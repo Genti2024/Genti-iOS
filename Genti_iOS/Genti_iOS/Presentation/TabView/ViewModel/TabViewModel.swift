@@ -60,7 +60,10 @@ final class TabViewModel: ViewModel {
                     }
                 case .disagree:
                     userdefaultRepository.setOpenChatAgreement(isAgree: false)
+                    self.router.dismissFullScreenCover()
                 }
+            } else {
+                self.router.dismissFullScreenCover()
             }
         } catch(let error) {
             self.handleError(error)
