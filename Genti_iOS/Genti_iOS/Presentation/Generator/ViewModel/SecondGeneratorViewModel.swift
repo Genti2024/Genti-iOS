@@ -76,12 +76,10 @@ final class SecondGeneratorViewModel: ViewModel {
 
     func requestData() -> RequestImageData {
         if self.state.selectedRatio == .garo {
-            return requestImageData.set(angle: self.state.selectedAngle,
-                                        frame: self.state.selectedFrame,
+            return requestImageData.set(
                                         ratio: .garo)
         } else {
-            return requestImageData.set(angle: self.state.selectedAngle,
-                                        frame: self.state.selectedFrame,
+            return requestImageData.set(
                                         ratio: .sero)
         }
     }

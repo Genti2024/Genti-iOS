@@ -82,21 +82,35 @@ struct CompletedPhotoView: View {
                 .frame(height: 47)
             
             ShareLink(item: viewModel.getImage, preview: .init("내 사진", image: viewModel.getImage)) {
-                GentiPrimaryButton(title: "공유하기", isActive: true) {}
+                Text("공유하기")
+                    .pretendard(.subtitle2_16_bold)
+                    .foregroundStyle(.black)
+                    .frame(height: 48)
+                    .frame(maxWidth: .infinity)
+                    .background(.gentiGreenNew)
+                    .clipShape(.rect(cornerRadius: 10))
+                    .padding(.horizontal, 16)
             }
             .disabled(viewModel.disabled)
             .onTapGesture {
                 self.viewModel.sendAction(.shareButtonTap)
             }
             
-            
-            Text("사진이 잘못 나왔나요?")
-                .pretendard(.body_14_bold)
-                .foregroundStyle(.white.opacity(0.6))
-                .safeAreaPadding(.bottom, 8)
-                .onTapGesture {
-                    self.viewModel.sendAction(.reportButtonTap)
-                }
+            HStack(spacing: 4) {
+                Image(.reportIconNew)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20, height: 20)
+                    .opacity(0.6)
+                Text("사진이 잘못 나왔나요?")
+                    .pretendard(.body_14_bold)
+                    .foregroundStyle(.white.opacity(0.6))
+            }
+            .safeAreaPadding(.bottom, 8)
+            .background(.black.opacity(0.001))
+            .onTapGesture {
+                self.viewModel.sendAction(.reportButtonTap)
+            }
             
 
         }
@@ -176,6 +190,7 @@ struct CompletedPhotoView: View {
 //        .ignoresSafeArea()
         .ignoresSafeArea(.keyboard)
         .customAlert(alertType: $viewModel.state.showAlert)
+        .customToast(toastType: $viewModel.state.showToast)
     }
 }
 

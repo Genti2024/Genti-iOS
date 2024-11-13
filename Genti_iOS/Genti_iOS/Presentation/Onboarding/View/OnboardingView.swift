@@ -12,64 +12,104 @@ struct OnboardingView: View {
     @State var viewModel: OnboardingViewModel
     
     var body: some View {
-        VStack {
-            Image(.gentiLOGO)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: viewModel.state.step.setLogoWidth, height: viewModel.state.step.setLogoHight)
-                .padding(.top, viewModel.state.step.setLogoTopPadding)
-            
-            Spacer()
-            
-            if viewModel.isFirstStep {
-                VStack(spacing: 16) {
-                    ForEach(viewModel.state.onboardingImage, id: \.self) {
-                        Image($0)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 178)
-                    }
-                } //:VSTACK
-                .transition(.move(edge: .leading))
-            } else {
-                Image(.onboardingSample)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 535)
-                    .transition(.move(edge: .trailing))
+        ZStack {
+            if viewModel.state.step != .third {
+                Color.geintiBackground
+                    .ignoresSafeArea()
             }
-
             
-            Spacer()
-            
-            HStack(spacing: 15) {
-                ForEach(OnboardingStep.allCases, id: \.self) { step in
-                    Circle()
-                        .fill(viewModel.setPageControl(from: step))
-                        .frame(width: 9, height: 9)
+            VStack {
+                Spacer()
+                    .frame(height: 40)
+                
+                if viewModel.state.step == .first {
+                    Image(.onboardingOne)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 424)
+                } else if viewModel.state.step == .second {
+                    Image(.onboardingTwo)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 424)
                 }
             }
             
-            GentiPrimaryButton(title: viewModel.state.step.setButtonTitle, isActive: true) {
-                viewModel.sendAction(.nextButtonTap)
-            }
-            .padding(.vertical, 18)
+
+            
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .animation(.snappy, value: viewModel.state.step)
-        .background(alignment: .topTrailing) {
+        .background {
             ZStack {
-                // Background Color
-                Color.backgroundWhite
+                Color.geintiBackground
                     .ignoresSafeArea()
-                // Content
-                if viewModel.isFirstStep {
-                    Color.black.opacity(0.01)
-                        .addXmark(top: 3, trailing: 20){
-                            viewModel.sendAction(.xmarkTap)
+                if viewModel.state.step == .third {
+                    Image(.aNew)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
+
+        }
+        .overlay {
+            VStack(spacing: 0) {
+                HStack {
+                    Spacer()
+                    Image(.xmarkNew)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .opacity(0.6)
+                        .frame(width: 14, height: 14)
+                        .padding(7)
+                        .padding(.trailing, 16)
+                        .onTapGesture {
+                            self.viewModel.sendAction(.xmarkTap)
                         }
                 }
-            } //:ZSTACK
+                
+                VStack(spacing: 0) {
+                    
+                    Spacer()
+                        .frame(height: 34)
+                    
+                    Text(viewModel.state.step.title)
+                        .pretendard(.body_14_bold)
+                        .foregroundStyle(.gentiGreenNew)
+                    
+                    Spacer()
+                        .frame(height: 16)
+                    
+                    Text(viewModel.state.step.subtitle)
+                        .pretendard(.title1_24_bold)
+                        .foregroundStyle(.white)
+                    
+                    Spacer()
+                        .frame(height: 8)
+                    
+                    Text(viewModel.state.step.description)
+                        .pretendard(.body_14_medium)
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+                
+                Spacer()
+                
+                HStack(spacing: 12) {
+                    ForEach(OnboardingStep.allCases, id: \.self) { step in
+                        Circle()
+                            .fill(viewModel.setPageControl(from: step))
+                            .frame(width: viewModel.set(from: step), height: viewModel.set(from: step))
+                    }
+                }
+                
+                Spacer()
+                    .frame(height: 48)
+                
+                GentiPrimaryButton(title: viewModel.state.step.setButtonTitle, isActive: true) {
+                    viewModel.sendAction(.nextButtonTap)
+                }
+            }
         }
     }
 }

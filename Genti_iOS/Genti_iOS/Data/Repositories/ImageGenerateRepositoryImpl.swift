@@ -51,8 +51,8 @@ final class ImageGenerateRepositoryImpl: ImageGenerateRepository {
         return try await self.uploadService.upload(s3Key: dto.s3Key, imageData: imageData, presignedURLString: dto.url)
     }
     
-    func requestGenerateImage(prompt: String, poseURL: String?, faceURLs: [String], angle: PhotoAngle, coverage: PhotoFrame, ratio: PhotoRatio) async throws {
-        try await requsetService.fetchResponse(for: GeneratorRouter.requestImage(prompt: prompt, poseURL: poseURL, faceURLs: faceURLs, angle: angle, coverage: coverage, ratio: ratio))
+    func requestGenerateImage(prompt: String, faceURLs: [String], ratio: PhotoRatio) async throws {
+        try await requsetService.fetchResponse(for: GeneratorRouter.requestImage(prompt: prompt, faceURLs: faceURLs, ratio: ratio))
     }
     
     func verificationImage(faceURL: String) async throws {

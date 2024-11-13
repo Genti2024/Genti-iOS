@@ -64,7 +64,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
             self.removeReferenceImage()
         case .nextButton(let text):
             var requestImageData = RequestImageData()
-            self.router.routeTo(.secondGen(data: requestImageData.set(description: text, reference: nil)))
+            self.router.routeTo(.secondGen(data: requestImageData.set(description: text)))
         }
     }
     
@@ -84,11 +84,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
     
     func requestData() -> RequestImageData {
         var requestImageData = RequestImageData()
-        if state.referenceImages.isEmpty {
-            return requestImageData.set(description: self.state.photoDescription, reference: nil)
-        } else {
-            return requestImageData.set(description: self.state.photoDescription, reference: state.referenceImages[0])
-        }
+        return requestImageData.set(description: self.state.photoDescription)
     }
     
     func showImagePicker() {

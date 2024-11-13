@@ -12,6 +12,6 @@ protocol ImageGenerateRepository {
     func getS3Key(from phAsset: PHAsset?) async throws -> String?
     func getS3Key(from phAssets: [PHAsset]) async throws -> [String]
     func getS3Key(from uiImage: UIImage) async throws -> String
-    func requestGenerateImage(prompt: String, poseURL: String?, faceURLs: [String], angle: PhotoAngle, coverage: PhotoFrame, ratio: PhotoRatio) async throws
+    func requestGenerateImage(prompt: String, faceURLs: [String], ratio: PhotoRatio) async throws
     func verificationImage(faceURL: String) async throws
 }

@@ -19,22 +19,42 @@ struct PhotoDetailView: View {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap(from: .detail)) }
+//                .addDownloadButton { self.viewModel.sendAction(.downloadButtonTap(from: .detail)) }
         } placeholder: {
             Image(uiImage: UIImage(resource: .camera))
         }
         .onSuccess { image, _, _ in
             self.viewModel.sendAction(.imageLoad(image))
         }
-        .padding(.horizontal, 28)
         .addXmark(top: 3, trailing: 20) { viewModel.sendAction(.xmarkTap) }
-        .customToast(toastType: $viewModel.state.showToast)
+        
         .presentationBackground {
             BlurView(style: .systemUltraThinMaterialDark)
                 .onTapGesture {
                     viewModel.sendAction(.backgroundTap)
                 }
         }
+        .overlay(alignment: .bottom) {
+            HStack(spacing: 10) {
+                Image(.downloadButtonNew)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20, height: 20)
+                
+                Text("저장하기")
+                    .pretendard(.subtitle2_16_bold)
+            }
+            .frame(height: 48)
+            .frame(maxWidth: .infinity)
+            .foregroundStyle(.geintiBackground)
+            .background(.gentiGreenNew)
+            .cornerRadius(10, corners: .allCorners)
+            .padding(.horizontal, 16)
+            .onTapGesture {
+                self.viewModel.sendAction(.downloadButtonTap(from: .detail))
+            }
+        }
+        .customToast(toastType: $viewModel.state.showToast)
     }
 }
 

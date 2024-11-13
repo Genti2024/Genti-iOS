@@ -20,6 +20,7 @@ struct AddXmarkModifier: ViewModifier {
                 Image(.xmarkNew)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .opacity(0.6)
                     .frame(width: 14, height: 14)
                     .padding(7)
                     .onTapGesture {

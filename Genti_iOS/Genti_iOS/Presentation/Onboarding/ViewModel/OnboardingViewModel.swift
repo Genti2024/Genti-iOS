@@ -25,6 +25,8 @@ final class OnboardingViewModel: ViewModel {
                 EventLogManager.shared.logEvent(.clickButton(page: .onboarding1, buttonName: "next"))
                 state.step = .second
             case .second:
+                state.step = .third
+            case .third:
                 EventLogManager.shared.logEvent(.clickButton(page: .onboarding2, buttonName: "gogenti"))
                 self.router.dismissSheet()
             }
@@ -46,9 +48,16 @@ final class OnboardingViewModel: ViewModel {
     
     func setPageControl(from step: OnboardingStep) -> Color {
         if step == state.step {
-            return .gentiGreen
+            return .gentiGreenNew
         }
-        return .gray5
+        return .white.opacity(0.3)
+    }
+    
+    func set(from step: OnboardingStep) -> CGFloat {
+        if step == state.step {
+            return 8
+        }
+        return 6
     }
     
     var isFirstStep: Bool {

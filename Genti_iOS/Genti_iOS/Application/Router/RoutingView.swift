@@ -56,15 +56,15 @@ struct RoutingView<Content: View, Destination: Route>: View {
                                 .pretendard(.subtitle1_18_bold)
                                 .foregroundStyle(.gentiGreenNew)
                         }
-                        .frame(height: 44)
+                        .frame(height: 50)
                         .padding(.horizontal, 16)
                         .background(.geintiBackground)
                         
                         ProgressView(value: Float(self.router.path.count+1), total: Float(self.totalPage))
                             .frame(maxWidth: .infinity)
                             .frame(height: 3)
-                            .background(.gray5)
-                            .tint(.gentiGreen)
+                            .background(.white.opacity(0.2))
+                            .tint(.gentiGreenNew)
                         
                     }
 

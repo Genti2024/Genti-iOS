@@ -9,21 +9,18 @@ import Foundation
 
 struct RequestImageData {
     var description: String = ""
-    var referenceImageAsset: ImageAsset? = nil
-    var selectedAngle: PhotoAngle? = nil
-    var selectedFrame: PhotoFrame? = nil
+//    var referenceImageAsset: ImageAsset? = nil
+//    var selectedAngle: PhotoAngle? = nil
+//    var selectedFrame: PhotoFrame? = nil
     var selectedRatio: PhotoRatio? = nil
     var faceImageAssets: [ImageAsset] = []
     
-    mutating func set(description: String, reference: ImageAsset?) -> Self {
+    mutating func set(description: String) -> Self {
         self.description = description
-        self.referenceImageAsset = reference
         return self
     }
     
-    mutating func set(angle: PhotoAngle?, frame: PhotoFrame?, ratio: PhotoRatio?) -> Self {
-        self.selectedAngle = angle
-        self.selectedFrame = frame
+    mutating func set(ratio: PhotoRatio?) -> Self {
         self.selectedRatio = ratio
         return self
     }

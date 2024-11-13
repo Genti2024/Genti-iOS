@@ -17,7 +17,7 @@ struct ImagePickerView: View {
     var body: some View {
         ZStack {
             // Background Color
-            Color.backgroundWhite
+            Color.geintiBackground
                 .ignoresSafeArea()
             // Content
             VStack(spacing: 0) {
@@ -78,18 +78,26 @@ struct ImagePickerView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .overlay {
+        .overlay(alignment: .bottom, content: {
+            Rectangle()
+                .fill(LinearGradient(colors: [Color.geintiBackground.opacity(0), Color.geintiBackground], startPoint: .top, endPoint: .center))
+                .frame(height: 120)
+        })
+        .ignoresSafeArea()
+        .overlay(alignment: .bottom, content: {
             selectButton()
-        }
+        })
+
     }
     
     func headerView() -> some View {
         HStack {
             HStack {
                 Text("\(self.viewModel.state.selectedAlbum?.name ?? "Recents")")
-                    .pretendard(.tempHeadline)
-                    .foregroundStyle(.black)
-                Image(self.viewModel.state.showAlbumList ? .arrowDropUp : .arrowDropDown)
+                    .pretendard(.subtitle1_18_bold)
+                    .foregroundStyle(.white)
+                Image(self.viewModel.state.showAlbumList ? .arrowDropUpNew : .arrowDropDownNew)
+                    .foregroundStyle(.white)
             }
             .onTapGesture {
                 withAnimation(.easeInOut) {
@@ -100,8 +108,8 @@ struct ImagePickerView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Image(systemName: "xmark")
-                .font(.title2)
-                .foregroundStyle(.black)
+                .font(.title3)
+                .foregroundStyle(.gray)
                 .asButton {
                     viewModel.sendAction(.xmarkTap)
                 }
@@ -117,24 +125,6 @@ struct ImagePickerView: View {
                     Rectangle()
                         .strokeBorder(.gentiGreen, style: .init(lineWidth: 2))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .overlay(alignment: .topTrailing) {
-                            Circle()
-                                .fill(.gentiGreen)
-                                .frame(width: 15, height: 15)
-                                .padding(6)
-                        }
-                } else {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(.black.opacity(0.1))
-                        Circle()
-                            .fill(.white.opacity(0.2))
-                        Circle()
-                            .stroke(.white, lineWidth: 1)
-                    }
-                    .frame(width: 15, height: 15)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                    .padding(6)
                 }
             }
             .onTapGesture {
@@ -145,16 +135,14 @@ struct ImagePickerView: View {
     }
     
     func selectButton() -> some View {
-        Capsule()
-            .fill(viewModel.reachImageLimit ? .green1 : .gray3)
-            .frame(width: 216, height: 50)
-            .overlay(alignment: .center) {
-                Text("\(viewModel.state.selectedImages.count) / \(viewModel.limit) 장의 사진 추가하기")
-                    .pretendard(.headline4)
-                    .foregroundStyle(.white)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            .padding(.bottom, 41)
+        Text("\(viewModel.state.selectedImages.count) / \(viewModel.limit) 장의 사진 추가하기")
+            .pretendard(.headline4)
+            .foregroundStyle(.black)
+            .frame(maxWidth: .infinity)
+            .frame(height: 48)
+            .background(viewModel.reachImageLimit ? .gentiGreenNew : .gentiDisabled)
+            .cornerRadius(10, corners: .allCorners)
+            .padding(.horizontal, 16)
             .asButton {
                 print(#fileID, #function, #line, "- 사진선택완료")
                 viewModel.sendAction(.addImageButtonTap)

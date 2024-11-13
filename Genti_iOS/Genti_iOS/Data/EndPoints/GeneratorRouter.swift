@@ -13,7 +13,7 @@ enum GeneratorRouter: URLRequestConvertible {
     
     case getPresignedUrl(fileName: String, imageType: UploadImageType)
     case getPresignedUrls(fileNames: [String])
-    case requestImage(prompt: String, poseURL: String?, faceURLs: [String], angle: PhotoAngle, coverage: PhotoFrame, ratio: PhotoRatio)
+    case requestImage(prompt: String, faceURLs: [String], ratio: PhotoRatio)
     case verificationUser(faceURL: String)
     
     var method: HTTPMethod {
@@ -54,14 +54,11 @@ enum GeneratorRouter: URLRequestConvertible {
         case .getPresignedUrls(let fileNames):
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: fileNames.reduce(into: [Parameters](), {$0.append(["fileName": $1, "fileType": "USER_UPLOADED_IMAGE"])}))
             
-        case .requestImage(prompt: let prompt, poseURL: let poseURL, faceURLs: let faceURLs, angle: let angle, coverage: let coverage, ratio: let ratio):
+        case .requestImage(prompt: let prompt, faceURLs: let faceURLs, ratio: let ratio):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: [
                 "prompt": prompt,
                 "facePictureList": faceURLs.reduce(into: [Parameters](), {$0.append(["key":$1])}),
-                "cameraAngle": angle.requsetString,
-                "shotCoverage": coverage.requsetString,
                 "pictureRatio": ratio.requsetString,
-                "posePicture": ["key": poseURL]
             ])
         case .verificationUser(faceURL: let faceURL):
             var parameters: [String: Any] = [:]

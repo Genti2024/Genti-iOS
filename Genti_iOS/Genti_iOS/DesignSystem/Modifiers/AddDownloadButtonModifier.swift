@@ -13,7 +13,7 @@ struct AddDownloadButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlay(alignment: .bottomTrailing) {
-                Image("Download")
+                Image(.downloadNew)
                     .resizable()
                     .frame(width: 44, height: 44)
                     .padding(.bottom, 6)
