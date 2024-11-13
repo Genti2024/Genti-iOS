@@ -8,36 +8,109 @@
 import SwiftUI
 import Combine
 
+struct ExampleEntity {
+    var imageUrl: String
+    var description: String
+}
+
 struct FirstGeneratorView: View {
     @State var viewModel: FirstGeneratorViewModel
     @FocusState var isFocused: Bool
-    
+    @State private var currentPage: Int = 0
+    @State private var examples: [ExampleEntity] = [
+        .init(imageUrl: Constants.randomImage, description: "11111"),
+        .init(imageUrl: Constants.randomImage, description: "22222"),
+        .init(imageUrl: Constants.randomImage, description: "3333333"),
+        .init(imageUrl: Constants.randomImage, description: "4444444")
+    ]
     var body: some View {
-        GeometryReader { _ in
-            VStack(spacing: 0) {
-                headerView()
-                inpuTextView()
-                randomDescriptionView()
-                addImageView()
-                Spacer()
-                nextButtonView()
-            } //:VSTACK
-            .background {
-                Color.backgroundWhite
-                    .ignoresSafeArea()
+        VStack {
+            Text("어떤 사진을 만들고 싶나요?")
+                .pretendard(.title2_20_bold)
+                .foregroundStyle(.white)
+            
+            VStack {
+                HStack(spacing: 4) {
+                    Image(.checkNew)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 14, height: 14)
+                    Text("AI가 이해하지 못하는 장소나 의상은 생성이 어려울 수 있어요.")
+                        .pretendard(.caption_12_regular)
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+                HStack(spacing: 4) {
+                    Image(.checkNew)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 14, height: 14)
+                    Text("성적이거나 폭력적인 사진은 생성되지 않아요.")
+                        .pretendard(.caption_12_regular)
+                        .foregroundStyle(.white.opacity(0.6))
+                }
             }
+            
+            Text("이런 사진은 어때요?")
+                .pretendard(.body_14_bold)
+                .foregroundStyle(.gentiGreenNew)
+            
+            TabView(selection: $currentPage) {
+                ForEach(examples, id: \.imageUrl) { example in
+                    HStack(spacing: 0) {
+                        AsyncImage(url: URL(string: example.imageUrl)!) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 92)
+                                .background(.blue)
+                        } placeholder: {
+                            ProgressView()
+                                .tint(Color.red)
+                        }
+                        Text(example.description)
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(.white)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 100)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
+                        
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // 내장 인디케이터 숨기기
+            .frame(height: 200)
         }
-        .ignoresSafeArea(.keyboard)
-        .focused($isFocused)
-        .toolbar(.hidden, for: .navigationBar)
-        .onTapGesture {
-            isFocused = false
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Color.geintiBackground
+                .ignoresSafeArea()
         }
-        .onAppear {
-            isFocused = true
-            self.viewModel.sendAction(.viewWillAppear)
-        }
-        .customAlert(alertType: $viewModel.state.showAlert)
+//        GeometryReader { _ in
+//            VStack(spacing: 0) {
+//                headerView()
+//                inpuTextView()
+//                randomDescriptionView()
+//                addImageView()
+//                Spacer()
+//                nextButtonView()
+//            } //:VSTACK
+//            .background {
+//                Color.backgroundWhite
+//                    .ignoresSafeArea()
+//            }
+//        }
+//        .ignoresSafeArea(.keyboard)
+//        .focused($isFocused)
+//        .toolbar(.hidden, for: .navigationBar)
+//        .onTapGesture {
+//            isFocused = false
+//        }
+//        .onAppear {
+//            isFocused = true
+//            self.viewModel.sendAction(.viewWillAppear)
+//        }
+//        .customAlert(alertType: $viewModel.state.showAlert)
     }
     
     private func nextButtonView() -> some View {

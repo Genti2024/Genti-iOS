@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Lottie
+
 struct GenerateRequestCompleteView: View {
     @Bindable var router: Router<MainRoute>
     @State private var showPushAuthorizationPopUp: Bool = false
@@ -14,46 +16,63 @@ struct GenerateRequestCompleteView: View {
     var body: some View {
         ZStack {
             
-            Color.backgroundWhite
+            Color.geintiBackground
                 .ignoresSafeArea()
             
-            LinearGradient.backgroundPurple2
-                .ignoresSafeArea()
-            
+            VStack {
+                Spacer()
+                Image(.glowNew)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    
+            }
+            .ignoresSafeArea()
+
+
             // Content
             VStack(spacing: 0) {
-                VStack(spacing: 30) {
-                    Image("Genti_LOGO")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: UIScreen.isWiderThan375pt ? 60 : 40)
-                        .padding(.top, 44)
+                Spacer()
+                    .frame(height: 32)
+                VStack(spacing: 10) {
+                    Text("사진 생성 중")
+                        .pretendard(.body_14_bold)
+                        .foregroundStyle(.gentiGreenNew)
                     
-                    
-                    Image("CompleteLabel")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 55)
-                    
-                    Image("Complete_charactor")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: UIScreen.isWiderThan375pt ? 275 : 200)
+                    Text("세상에 없던\n나만의 사진을 찍고 있어요!")
+                        .multilineTextAlignment(.center)
+                        .pretendard(.title1_24_bold)
+                        .foregroundStyle(.white)
+                    Text("사진이 완성되면, 완료 알림을 보내드려요.")
+                        .pretendard(.body_14_medium)
+                        .foregroundStyle(.white.opacity(0.8))
 
                 } //:VSTACK
                 
-                Text("예상 소요시간은 2시간입니다")
-                    .pretendard(.normal)
-                    .foregroundStyle(.black)
-                    .padding(.top, 15)
+                Spacer()
                 
-                Text("미리 만들어놓은 컨셉에 얼굴만 바꾸는게 아니라\n’나만의 하나뿐인 사진’을 찍어드리기 위해  \n배경부터 의상, 구도까지 꼼꼼하게 준비하고 있어요")
-                    .pretendard(.small)
-                    .foregroundStyle(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 25)
+                LottieView(type: .loading)
+                    .looping()
+                    .frame(width: 250, height: 250)
+                Spacer()
                 
-                Spacer(minLength: 0)
+                VStack(spacing: 10) {
+                    Text("예상 소요시간")
+                        .pretendard(.body_14_bold)
+                        .foregroundStyle(.white.opacity(0.4))
+                    
+                    Text("2시간 정도 걸릴 예정이에요.")
+                        .pretendard(.subtitle1_18_bold)
+                        .foregroundStyle(.white)
+                    
+                    Text("세상에 하나뿐인 사진을 만들어 드리기 위해\n배경부터 의상까지 꼼꼼하게 준비하고 있어요.")
+                        .pretendard(.body_14_bold)
+                        .foregroundStyle(.white.opacity(0.6))
+                        .multilineTextAlignment(.center)
+                }
+
+                
+                Spacer()
+                    .frame(height: 30)
                 
                 GentiPrimaryButton(title: "피드로 돌아가기", isActive: true) {
                     EventLogManager.shared.logEvent(.clickButton(page: .requestCompleted, buttonName: "gomain"))
@@ -65,7 +84,6 @@ struct GenerateRequestCompleteView: View {
                         }
                     })
                 }
-                .padding(.bottom, 30)
             } //:VSTACK
         } //:ZSTACK
         .toolbar(.hidden, for: .navigationBar)

@@ -15,6 +15,7 @@ struct PhotoDetailWithShareView: View {
     var body: some View {
         VStack(spacing: 20) {
             Rectangle()
+                .fill(.black.opacity(0.001))
                 .aspectRatio(1/1.5, contentMode: .fit)
                 .overlay(alignment: .center) {
                     WebImage(url: URL(string: viewModel.state.imageUrl)) { image in

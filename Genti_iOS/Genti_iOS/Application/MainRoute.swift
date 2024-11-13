@@ -40,7 +40,7 @@ enum MainRoute: Route {
         case .photoDetailWithShare(let imageUrl):
             PhotoDetailWithShareView(viewModel: PhotoDetailViewModel(photoDetailUseCase: PhotoDetailUseCaseImpl(imageRepository: ImageRepositoryImpl(), hapticRepository: HapticRepositoryImpl()), router: router, imageUrl: imageUrl))
         case .firstGen:
-            RoutingView(router) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
+            RoutingView(router, hasProgress: true) { FirstGeneratorView(viewModel: FirstGeneratorViewModel(router: $0)) }
         case .secondGen(let data):
             SecondGeneratorView(viewModel: SecondGeneratorViewModel(requestImageData: data, router: router, userdefaultRepository: UserDefaultsRepositoryImpl()))
         case .thirdGen(let data):

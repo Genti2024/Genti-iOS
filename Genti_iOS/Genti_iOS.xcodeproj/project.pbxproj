@@ -103,7 +103,6 @@
 		C017C4B32C1C3AA3009924C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C017C4762C1C3AA3009924C9 /* LoginView.swift */; };
 		C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */; };
 		C0192F232C7C17AC00EB9D7D /* imageLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = C0192F222C7C17AC00EB9D7D /* imageLoading.json */; };
-		C0192F252C7C180F00EB9D7D /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0192F242C7C180F00EB9D7D /* ProgressLottie.json */; };
 		C0275D832C59EA8A00A68D31 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */; };
 		C0275D862C59F0B500A68D31 /* SplashUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0275D852C59F0B500A68D31 /* SplashUseCase.swift */; };
 		C02843552C314C1E00B84566 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02843542C314C1E00B84566 /* FeedRouter.swift */; };
@@ -212,6 +211,7 @@
 		C0DE62752C6C631C005937B0 /* LogEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62742C6C631C005937B0 /* LogEventType.swift */; };
 		C0DE62772C6C6338005937B0 /* LogUserPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */; };
 		C0DE62792C6C882D005937B0 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE62782C6C882D005937B0 /* PageType.swift */; };
+		C0E6290C2CD8B385001687BA /* ProgressLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = C0E6290B2CD8B385001687BA /* ProgressLottie.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -332,7 +332,6 @@
 		C017C4762C1C3AA3009924C9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C017C4782C1C3AA3009924C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C0192F222C7C17AC00EB9D7D /* imageLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = imageLoading.json; sourceTree = "<group>"; };
-		C0192F242C7C180F00EB9D7D /* ProgressLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 		C0275D822C59EA8A00A68D31 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		C0275D852C59F0B500A68D31 /* SplashUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUseCase.swift; sourceTree = "<group>"; };
 		C02843542C314C1E00B84566 /* FeedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
@@ -431,6 +430,7 @@
 		C0DE62742C6C631C005937B0 /* LogEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventType.swift; sourceTree = "<group>"; };
 		C0DE62762C6C6338005937B0 /* LogUserPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUserPropertyType.swift; sourceTree = "<group>"; };
 		C0DE62782C6C882D005937B0 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
+		C0E6290B2CD8B385001687BA /* ProgressLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ProgressLottie.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1236,9 +1236,9 @@
 			isa = PBXGroup;
 			children = (
 				C0192F222C7C17AC00EB9D7D /* imageLoading.json */,
+				C0E6290B2CD8B385001687BA /* ProgressLottie.json */,
 				C0A7C6432C683F8E00FAA7F1 /* SplashLottie.json */,
 				C0A7C6452C68413200FAA7F1 /* RequestWaitingLottie.json */,
-				C0192F242C7C180F00EB9D7D /* ProgressLottie.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1417,7 +1417,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0192F252C7C180F00EB9D7D /* ProgressLottie.json in Resources */,
 				C017C4B42C1C3AA3009924C9 /* Preview Assets.xcassets in Resources */,
 				C017C4182C1C3A35009924C9 /* Pretendard-Bold.otf in Resources */,
 				C0A7C6442C683F8F00FAA7F1 /* SplashLottie.json in Resources */,
@@ -1428,6 +1427,7 @@
 				C0192F232C7C17AC00EB9D7D /* imageLoading.json in Resources */,
 				C017C41B2C1C3A35009924C9 /* Pretendard-Regular.otf in Resources */,
 				C017C3EA2C1C39D0009924C9 /* Base in Resources */,
+				C0E6290C2CD8B385001687BA /* ProgressLottie.json in Resources */,
 				C0A7C6462C68413200FAA7F1 /* RequestWaitingLottie.json in Resources */,
 				C017C41A2C1C3A35009924C9 /* Pretendard-Medium.otf in Resources */,
 			);
