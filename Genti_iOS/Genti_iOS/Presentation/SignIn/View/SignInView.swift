@@ -70,7 +70,11 @@ struct SignInView: View {
             
             HStack(spacing: 8) {
                 ForEach(Gender.allCases, id: \.self) { gender in
-                    GentiBorderButton(title: gender.rawValue, isActive: gender == viewModel.state.gender, imageAssetName: gender.image, subtitle: nil) {
+                    GentiBorderButton(title: gender.rawValue,
+                                      isActive: gender == viewModel.state.gender,
+                                      selectedImageAssetName: gender.selectedImage,
+                                      nonSelectedImageAssetName: gender.image, smallImage: true,
+                                      subtitle: nil) {
                         viewModel.sendAction(.genderSelect(gender))
                     }
                 }

@@ -37,4 +37,13 @@ enum Gender: String, CaseIterable {
             return "women_icon"
         }
     }
+    
+    var selectedImage: String {
+        switch self {
+        case .boy:
+            return "man_selected"
+        case .girl:
+            return "girl_selected"
+        }
+    }
 }

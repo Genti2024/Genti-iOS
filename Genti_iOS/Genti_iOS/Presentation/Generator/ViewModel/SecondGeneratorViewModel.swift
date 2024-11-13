@@ -25,14 +25,14 @@ final class SecondGeneratorViewModel: ViewModel {
     struct State {
         var selectedAngle: PhotoAngle? = nil
         var selectedFrame: PhotoFrame? = nil
-        var selectedRatio: PhotoRatio? = nil
+        var selectedRatio: Ratio? = nil
         var showOnboarding: Bool = false
     }
     
     enum Input {
         case angleTap(PhotoAngle)
         case frameTap(PhotoFrame)
-        case ratioTap(PhotoRatio)
+        case ratioTap(Ratio)
         case nextButtonTap
         case xmarkTap
         case backButtonTap
@@ -71,12 +71,18 @@ final class SecondGeneratorViewModel: ViewModel {
     }
     
     var isActive: Bool {
-        return !(state.selectedAngle == nil || state.selectedFrame == nil || state.selectedRatio == nil)
+        return !(state.selectedRatio == nil)
     }
 
     func requestData() -> RequestImageData {
-        return requestImageData.set(angle: self.state.selectedAngle,
-                                    frame: self.state.selectedFrame,
-                                    ratio: self.state.selectedRatio)
+        if self.state.selectedRatio == .garo {
+            return requestImageData.set(angle: self.state.selectedAngle,
+                                        frame: self.state.selectedFrame,
+                                        ratio: .garo)
+        } else {
+            return requestImageData.set(angle: self.state.selectedAngle,
+                                        frame: self.state.selectedFrame,
+                                        ratio: .sero)
+        }
     }
 }

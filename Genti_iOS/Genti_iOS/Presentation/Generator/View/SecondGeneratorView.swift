@@ -9,23 +9,65 @@ import SwiftUI
 
 import PopupView
 
+enum Ratio: CaseIterable {
+    case garo, sero
+    
+    var title: String {
+        switch self {
+        case .garo:
+            return "가로 사진"
+        case .sero:
+            return "세로 사진"
+        }
+    }
+    
+    var subtitle: String {
+        switch self {
+        case .garo:
+            return "2:3 비율"
+        case .sero:
+            return "3:2 비율"
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .garo:
+            return "garo"
+        case .sero:
+            return "sero"
+        }
+    }
+}
+
 struct SecondGeneratorView: View {
     @State var viewModel: SecondGeneratorViewModel
     
     var body: some View {
         ZStack {
             // Background Color
-            Color.backgroundWhite
+            Color.geintiBackground
                 .ignoresSafeArea()
             // Content
-            VStack(spacing: 0) {
-                headerView()
-                selectViews()
-                Spacer()
-                nextButtonView()
+            VStack(spacing: 30) {
+                
+                Text("사진 비율을 선택해주세요.")
+                    .pretendard(.title2_20_bold)
+                    .foregroundStyle(.white)
+                
+                HStack(spacing: 8) {
+                    ForEach(Ratio.allCases, id: \.self) { ratio in
+                        GentiBorderButton(title: ratio.title, isActive: self.viewModel.state.selectedRatio == ratio, selectedImageAssetName: ratio.image, nonSelectedImageAssetName: ratio.image, smallImage: false, subtitle: ratio.subtitle) {
+                            viewModel.sendAction(.ratioTap(ratio))
+                        }
+                    }
+                }
+                
             } //:VSTACK
         } //:ZSTACK
-        .addCustomPopup(isPresented: $viewModel.state.showOnboarding, popupType: .selectOnboarding)
+        .overlay(alignment: .bottom) {
+            nextButtonView()
+        }
         .onAppear {
             self.viewModel.sendAction(.viewWillAppear)
         }
@@ -42,162 +84,6 @@ struct SecondGeneratorView: View {
                 viewModel.sendAction(.disabledButtonTap)
             }
         }
-        .padding(.bottom, 32)
-    }
-    
-    private func selectViews() -> some View {
-        VStack(spacing: 20) {
-            ratioSelectView()
-            angleSelectView()
-            frameSelectView()
-        } //:VSTACK
-        .padding(.horizontal, 16)
-        .padding(.top, 19)
-    }
-    
-    private func headerView() -> some View {
-        GeneratorHeaderView(backButtonTapped: { viewModel.sendAction(.backButtonTap) },
-                            xmarkTapped: { viewModel.sendAction(.xmarkTap) },
-                            step: 2,
-                            headerType: .backAndDismiss)
-            .padding(.top, 40)
-    }
-    
-    private func ratioSelectView() -> some View {
-        VStack(spacing: 8) {
-            Text("사진의 비율을 선택해주세요📷")
-                .pretendard(.normal)
-                .foregroundStyle(.black)
-                .frame(height: 22)
-            
-            VStack(spacing: 5) {
-                HStack(spacing: 9) {
-                    ForEach(PhotoRatio.selections, id: \.self) { ratio in
-                        Image(ratio.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: (UIScreen.main.bounds.width-32-16)/3)
-                            .frame(height: (UIScreen.main.bounds.width-32-16)/3)
-                            .overlay {
-                                if viewModel.state.selectedRatio == ratio {
-                                    Rectangle()
-                                        .fill(.black.opacity(0.5))
-                                        .strokeBorder(.green1, style: .init(lineWidth:2))
-                                        .overlay {
-                                            Text(ratio.description)
-                                                .pretendard(.small)
-                                                .foregroundStyle(.gentiGreen)
-                                                .multilineTextAlignment(.center)
-                                        }
-                                }
-
-                            }
-                            .onTapGesture {
-                                print(ratio)
-                                viewModel.sendAction(.ratioTap(ratio))
-                            }
-                    }
-                } //:HSTACK
-            } //:VSTACK
-
-        } //:VSTACK
-        .frame(maxWidth: .infinity, alignment: .center)
-    }
-    
-    private func angleSelectView() -> some View {
-        VStack(spacing: 0) {
-            Text("카메라 앵글을 선택해주세요📷")
-                .foregroundStyle(.black)
-                .pretendard(.normal)
-            
-            VStack(spacing: 5) {
-                HStack(spacing: 4) {
-                    Text("앵글은 자유롭게 맡길래요")
-                        .pretendard(.description)
-                        .foregroundStyle(viewModel.state.selectedAngle == .any ? .green1 : .gray3)
-                    Image(viewModel.state.selectedAngle == .any ? PhotoAngle.freeSelectedImage : PhotoAngle.any.image)
-                } //:HSTACK
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    viewModel.sendAction(.angleTap(.any))
-                }
-                
-                HStack(spacing: 9) {
-                    ForEach(PhotoAngle.selections, id: \.self) { angle in
-                        Image(angle.image)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(maxWidth: .infinity)
-                            .overlay {
-                                if viewModel.state.selectedAngle == angle {
-                                    Rectangle()
-                                        .fill(.black.opacity(0.5))
-                                        .strokeBorder(.green1, style: .init(lineWidth:2))
-                                        .overlay {
-                                            Text(angle.description)
-                                                .pretendard(.small)
-                                                .foregroundStyle(.gentiGreen)
-                                                .multilineTextAlignment(.center)
-                                        }
-                                }
-
-                            }
-                            .onTapGesture {
-                                viewModel.sendAction(.angleTap(angle))
-                            }
-                    }
-                } //:HSTACK
-            } //:VSTACK
-        } //:VSTACK
-    }
-    
-    private func frameSelectView() -> some View {
-        VStack(spacing: 0) {
-            Text("원하는 프레임을 선택해주세요📷")
-                .pretendard(.normal)
-                .foregroundStyle(.black)
-            
-            VStack(spacing: 5) {
-                
-                HStack(spacing: 4) {
-                    Text("프레임은 자유롭게 맡길래요")
-                        .pretendard(.description)
-                        .foregroundStyle(viewModel.state.selectedFrame == .any ? .green1 : .gray3)
-                    Image(viewModel.state.selectedFrame == .any ? PhotoFrame.freeSelectedImage : PhotoAngle.any.image)
-                } //:HSTACK
-                .background(.black.opacity(0.001))
-                .onTapGesture {
-                    viewModel.sendAction(.frameTap(.any))
-                }
-                
-                HStack(spacing: 9) {
-                    ForEach(PhotoFrame.selections, id: \.self) { frame in
-                        Image(frame.image)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(maxWidth: .infinity)
-                            .overlay {
-                                if viewModel.state.selectedFrame == frame {
-                                    Rectangle()
-                                        .fill(.black.opacity(0.5))
-                                        .strokeBorder(.green1, style: .init(lineWidth:2))
-                                        .overlay {
-                                            Text(frame.description)
-                                                .pretendard(.small)
-                                                .foregroundStyle(.gentiGreen)
-                                                .multilineTextAlignment(.center)
-                                        }
-                                }
-
-                            }
-                            .onTapGesture {
-                                viewModel.sendAction(.frameTap(frame))
-                            }
-                    }
-                } //:HSTACK
-
-            } //:VSTACK
-        } //:VSTACK
     }
 }
 

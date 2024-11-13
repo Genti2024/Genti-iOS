@@ -13,14 +13,18 @@ struct GentiBorderButton: View {
     let isActive: Bool
     let title: String
     let subtitle: String?
-    let imageAssetName: String
+    let selectedImageAssetName: String
+    let nonSelectedImageAssetName: String
+    let isSmall: Bool
     
-    init(title: String, isActive: Bool, imageAssetName: String, subtitle: String?, _ action: @escaping () -> Void) {
+    init(title: String, isActive: Bool, selectedImageAssetName: String, nonSelectedImageAssetName: String, smallImage: Bool, subtitle: String?, _ action: @escaping () -> Void) {
         self.action = action
         self.isActive = isActive
         self.title = title
         self.subtitle = subtitle
-        self.imageAssetName = imageAssetName
+        self.selectedImageAssetName = selectedImageAssetName
+        self.nonSelectedImageAssetName = nonSelectedImageAssetName
+        self.isSmall = smallImage
     }
     
     var body: some View {
@@ -36,10 +40,10 @@ struct GentiBorderButton: View {
             .cornerRadius(6, corners: .allCorners)
             .overlay {
                 VStack(spacing: 14) {
-                    Image(imageAssetName)
+                    Image(isActive ? selectedImageAssetName : nonSelectedImageAssetName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
+                        .frame(width: isSmall ? 32 : 60, height: isSmall ? 32 : 60)
                     
                     VStack(spacing: 4) {
                         Text(title)

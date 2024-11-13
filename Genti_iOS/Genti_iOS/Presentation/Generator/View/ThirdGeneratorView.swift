@@ -13,18 +13,114 @@ struct ThirdGeneratorView: View {
     var body: some View {
             ZStack {
                 // Background Color
-                Color.backgroundWhite
+                Color.geintiBackground
                     .ignoresSafeArea()
                 // Content
                 VStack(spacing: 0) {
-                    headerView()
-                    imageUploadView()
-                    cautionScrollView()
-                    completeButtonView()
+                    Text("사진 생성에 사용할\n얼굴 사진 3장을 선택해주세요.")
+                        .multilineTextAlignment(.center)
+                        .pretendard(.title2_20_bold)
+                        .foregroundStyle(.white)
+                    
+                    Spacer()
+                        .frame(height: 16)
+                    
+                    VStack(spacing: 4) {
+                        HStack(spacing: 4) {
+                            Image(.checkNew)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 14, height: 14)
+                            Text("정면을 포함하여 사진의 각도가 다양할수록 좋아요.")
+                                .pretendard(.caption_12_regular)
+                                .foregroundStyle(.white.opacity(0.6))
+                        }
+                        HStack(spacing: 4) {
+                            Image(.checkNew)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 14, height: 14)
+                            Text("모자, 악세사리 등으로 얼굴이 가려진 사진은 안돼요.")
+                                .pretendard(.caption_12_regular)
+                                .foregroundStyle(.white.opacity(0.6))
+                        }
+                        HStack(spacing: 4) {
+                            Image(.checkNew)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 14, height: 14)
+                            Text("얼굴 표정이 다양할 수록 더 실감나는 사진을 만들 수 있어요.")
+                                .pretendard(.caption_12_regular)
+                                .foregroundStyle(.white.opacity(0.6))
+                        }
+                        
+                        Text("타인의 사진을 도용하면 서비스 이용이 정지되고,\n법적인 처벌을 받을 수 있습니다.")
+                            .multilineTextAlignment(.center)
+                            .pretendard(.caption_12_regular)
+                            .foregroundStyle(.white.opacity(0.3))
+                    }
+                    
+                    Spacer()
+                        .frame(height: 32)
+                    
+                    if viewModel.state.referenceImages.isEmpty {
+                        Text("이런 사진이 좋아요")
+                            .pretendard(.body_14_bold)
+                            .foregroundStyle(.gentiGreenNew)
+                        
+                        Spacer()
+                            .frame(height: 16)
+                        
+                        HStack(spacing: 6) {
+                            ForEach(Caution.exampleImages, id: \.self) { imageName in
+                                Image(imageName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 96)
+                                    .frame(height: 96)
+                                    .clipped()
+                            }
+                        }
+                        .frame(height: 96)
+                        
+                    } else {
+                        HStack(spacing: 8) {
+                            ForEach(viewModel.state.referenceImages) { imageAsset in
+                                PHAssetImageView(viewModel: PHAssetImageViewModel(phassetImageRepository: PHAssetImageRepositoryImpl(service: PHAssetImageServiceImpl())), asset: imageAsset.asset)
+                                    .frame(width: 118)
+                                    .padding(1)
+                                    .background(.gentiGreen)
+                                    
+                            }
+                        } //:HSTACK
+                        .frame(height: 118)
+                    }
+                    
                 } //:VSTACK
                 if viewModel.state.isLoading {
                     RequestWaitingView()
                 }
+                
+                VStack {
+                    Spacer()
+                    
+                    Text("사진 선택하기")
+                        .pretendard(.subtitle2_16_bold)
+                        .foregroundStyle(.black)
+                        .frame(height: 48)
+                        .frame(maxWidth: .infinity)
+                        .background(.white)
+                        .clipShape(.rect(cornerRadius: 10))
+                        .padding(.horizontal, 16)
+                        .onTapGesture {
+                            self.viewModel.sendAction(.addImageButtonTap)
+                        }
+                    
+                    GentiPrimaryButton(title: "사진 생성하기", isActive: viewModel.isActive) {
+                        viewModel.sendAction(.nextButtonTap)
+                    }
+                }
+                
             } //:ZSTACK
             .toolbar(.hidden, for: .navigationBar)
             .customAlert(alertType: $viewModel.state.showAlert)

@@ -31,6 +31,7 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
         case nextButtonTap
         case xmarkTap
         case removeButtonTap
+        case nextButton(String)
     }
     
     
@@ -61,6 +62,9 @@ final class FirstGeneratorViewModel: ViewModel, GetImageFromImagePicker {
             self.router.dismissSheet()
         case .removeButtonTap:
             self.removeReferenceImage()
+        case .nextButton(let text):
+            var requestImageData = RequestImageData()
+            self.router.routeTo(.secondGen(data: requestImageData.set(description: text, reference: nil)))
         }
     }
     
